@@ -8,7 +8,7 @@
     <!--Navigation Bar-->
     <div class=" content-center mx-auto  font-inter font-bold text-white text-center flex flex-row">
       
-        <button class=" mx-8">About</button>
+        <button class=" mx-12">About</button>
       
       
         <button class=" mx-8">Products</button>
