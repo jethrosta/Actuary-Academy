@@ -26,7 +26,7 @@
     </div>
     <section class=" border-4 border-green-300 w-full h-60">
       <div class=" ">
-      <p class="text-xl font-medium text-black "> decoration</p>
+      <p class=" text-4xl font-medium text-amber-500"> decoration</p>
     </div>
     </section>
     
