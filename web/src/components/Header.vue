@@ -3,7 +3,7 @@
   <div class="bg-[#0066CC] columns-3 flex">
     <div class="  inline-flex">
         <img :src="logo" class=" h-28 w-28 m-auto" />
-        <div class="  text-2xl font-inter text-white flex"><span class=" m-auto">Actuary academy</span> </div>
+        <div class="  text-2xl font-inter text-white flex"><span class=" m-auto">Actuary Academy</span> </div>
     </div>
     <!--Navigation Bar-->
     <div class=" content-center mx-auto  font-inter font-bold text-white text-center flex flex-row">
