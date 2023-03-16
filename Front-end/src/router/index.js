@@ -5,6 +5,11 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: '/',
+      name: 'LandingPage',
+      component:() => import('../views/LandingPage.vue')
+    },
+    {
       path: '/TentangKami',
       name: 'TentangKami',
       component: () => import('../views/TentangKami.vue')
@@ -38,9 +43,24 @@ const router = createRouter({
       name: 'daftar',
       component: () => import('../views/Daftar.vue')
     },
+    {
+      path: '/Materi',
+      name: 'Materi',
+      component: () => import('../views/Materi.vue')
+    },
     
     
   ]
 })
 
 export default router
+/*Sebuah Navigatian Guard sebelum masuk ke fitur2 utama
+terdapat 3 parameter*/
+
+// const isAuthenticated = true;
+
+// router.beforeEach((to, from, next) => {
+//   if(to.name !== 'masuk' && !isAuthenticated) next({name : "masuk"});
+//   if(to.name === 'masuk' && isAuthenticated) next({name : "TentangKami"});
+//   else next();
+// });
