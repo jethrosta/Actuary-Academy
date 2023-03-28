@@ -26,11 +26,11 @@
                         </div>
                         <div class=" flex text-xl space-x-2">
                             <div class=" center regBut w-1/2 h-14 space-x-3">
-                                <img src="../assets/icon/google-color-svgrepo-com.svg" class=" p-3"/>
+                                <img src="src/assets/icon/google-color-svgrepo-com.svg" class=" p-3"/>
                                 <button class=" ">Google</button>
                             </div>
                             <div class="center regBut w-1/2 h-14 space-x-3">
-                                <img src="../assets/icon/facebook-svgrepo-com.svg" class=" p-1"/>
+                                <img src="src/assets/icon/facebook-svgrepo-com.svg" class=" p-1"/>
                                 <button class=" ">Facebook</button>
                             </div>
                         </div>
@@ -43,7 +43,7 @@
             </div>
             <div class=" mt-8">
                 <div class=" h-[40rem] w-[30rem] relative  ">
-                    <img src="../assets/Vector 3.jpg" class=" w-full h-full object-cover rounded-[2.5rem] absolute "/>
+                    <img src="src/assets/Vector 3.jpg" class=" w-full h-full object-cover rounded-[2.5rem] absolute "/>
                     <div  class=" absolute bottom-20 mx-20 z-20 ">
                         <p class=" text-white font-inter text-xl">Jadilah bagian Actuary Academy</p>
                         <p class=" text-5xl font-bold text-white">From Zero to Fellow</p>

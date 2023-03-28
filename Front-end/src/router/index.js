@@ -5,51 +5,56 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'LandingPage',
-      component:() => import('../views/LandingPage.vue')
-    },
-    {
-      path: '/TentangKami',
-      name: 'TentangKami',
-      component: () => import('../views/TentangKami.vue')
-
-    },
-    {
-      path: '/Produk',
-      name: 'Produk',
-      component: () => import('../views/Produk.vue')
-
-    },
-    {
-      path: '/Testimoni',
-      name: 'Testimoni',
-      component: () => import('../views/Testimoni.vue')
-
-    },
-    {
-      path: '/Karir',
-      name: 'Karir',
-      component: () => import('../views/Karir.vue')
-
-    },
-    {
       path: '/masuk',
       name: 'masuk',
-      component: Masuk => import('../views/Masuk.vue')
+      component: () => import('../components/Layouts/login.vue')
     },
     {
       path: '/daftar',
       name: 'daftar',
-      component: () => import('../views/Daftar.vue')
+      component: () => import('../components/Layouts/register.vue')
     },
     {
-      path: '/Materi',
-      name: 'Materi',
-      component: () => import('../views/Materi.vue')
-    },
+      path:'/',
+      name:'dashboard',
+      component: () => import('../components/Layouts/dashboard.vue'),
+      children:[
+        {
+          path: "tentangkami",
+          name: 'TentangKami',
+          component: () => import('../components/Pages/About.vue')
     
+        },
+        {
+          path: 'Produk',
+          name: 'Produk',
+          component: () => import('../components/Pages/Product.vue')
     
+        },
+        {
+          path: 'Testimoni',
+          name: 'Testimoni',
+          component: () => import('../components/Pages/Testimone.vue')
+    
+        },
+        {
+          path: 'Karir',
+          name: 'Karir',
+          component: () => import('../components/Pages/Career.vue')
+    
+        },
+        {
+          path: 'Materi',
+          name: 'Materi',
+          component: () => import('../components/Pages/material.vue')
+        },
+        {
+          path:'',
+          name:'Landingpage',
+          component:() => import('../components/Pages/landingPage.vue')
+        },
+      ]
+    }
   ]
 })
 

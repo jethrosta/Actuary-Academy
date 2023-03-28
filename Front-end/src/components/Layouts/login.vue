@@ -13,18 +13,18 @@
                             <input class=" text-black pl-8 shadow-2xl rounded-md w-[585px] h-[62px]" type="password" placeholder="Masukkan kata sandi Anda" />
                         </label>
                         <div>
-                            <button class="bg-[#0D1C9F] text-white w-[585px] h-[59px] rounded-[10px] mt-10">Masuk</button>
+                            <button  class="bg-[#0D1C9F] text-white w-[585px] h-[59px] rounded-[10px] mt-10">Masuk</button>
                         </div>
                         <div class=" center my-5">
                             <p class=" text-main_blue font-inter text-lg">atau daftar dengan</p>
                         </div>
                         <div class=" flex text-xl space-x-2">
                             <div class=" center regBut w-1/2 h-14 space-x-3">
-                                <img src="../assets/icon/google-color-svgrepo-com.svg" class=" p-3"/>
+                                <img src="src/assets/icon/google-color-svgrepo-com.svg" class=" p-3"/>
                                 <button class=" ">Google</button>
                             </div>
                             <div class="center regBut w-1/2 h-14 space-x-3">
-                                <img src="../assets/icon/facebook-svgrepo-com.svg" class=" p-1"/>
+                                <img src="src/assets/icon/facebook-svgrepo-com.svg" class=" p-1"/>
                                 <button class=" ">Facebook</button>
                             </div>
                         </div>
@@ -35,8 +35,17 @@
                     </form>
                 </div>
             </div>            
-            <div class=" mt-16 ">
-                <img src="../assets/Vector 4.jpg" class=" rounded-[2.5rem] w-/4"/>
+            <div class=" mt-8">
+                <div class=" h-[40rem] w-[30rem] relative  ">
+                    <img src="src/assets/Vector 4.jpg" class=" w-full h-full object-cover rounded-[2.5rem] absolute "/>
+                    <div  class=" absolute bottom-20 mx-20 z-20 ">
+                        <p class=" text-white font-inter text-xl">Jadilah bagian Actuary Academy</p>
+                        <p class=" text-5xl font-bold text-white">From Zero to Fellow</p>
+                    </div>
+                    <div class=" bg-gradient-to-t from-main_blue to-transparent w-full h-full absolute z-10 rounded-[2.5rem]">
+
+                    </div>
+                </div>
             </div>
         </div>
     </body>
