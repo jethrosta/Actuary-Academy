@@ -35,6 +35,7 @@
                     </form>
                 </div>
             </div>            
+
             <div class=" mt-8">
                 <div class=" h-[40rem] w-[30rem] relative  ">
                     <img src="src/assets/Vector 4.jpg" class=" w-full h-full object-cover rounded-[2.5rem] absolute "/>
