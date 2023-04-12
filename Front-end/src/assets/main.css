@@ -38,3 +38,34 @@ a,
     padding: 0 2rem;
   } */
 }
+
+/* .text span{
+  position:absolute;
+  left:50%;
+  transform-origin: top center;
+  padding-top: 3rem;
+  padding-left: 2px;
+  padding-right: 2pxx;
+}
+.circle{
+  position: relative;
+  display: flex;
+  rotate: -10deg;
+}
+.text{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  padding-top: 4rem;
+
+} */
+
+/* svg{
+  border: green solid;
+  height: 150px;
+  width: 150px;
+} */
+/* 
+.oke{
+  clip-path: circle();
+} */

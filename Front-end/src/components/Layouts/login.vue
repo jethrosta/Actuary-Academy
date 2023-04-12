@@ -29,14 +29,14 @@
                             </div>
                         </div>
                         <div class=" center space-x-2 font-bold mt-5">
-                            <p class=" text-main_blue">Sudah Memiliki akun?</p>
-                            <p class=" text-sec_blue underline underline-offset-2 ">Masuk</p>
+                            <p class=" text-main_blue">Belum Memiliki akun?</p>
+                            <p class=" text-sec_blue underline underline-offset-2 ">Daftar Sekarang</p>
                         </div>
                     </form>
                 </div>
             </div>            
 
-            <div class=" mt-8">
+            <div class=" pt-16">
                 <div class=" h-[40rem] w-[30rem] relative  ">
                     <img src="src/assets/Vector 4.jpg" class=" w-full h-full object-cover rounded-[2.5rem] absolute "/>
                     <div  class=" absolute bottom-20 mx-20 z-20 ">

@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily:{
-        inter: "'Inter'",
+        inter: "'Inter', sans-serif",
         roboto: "'Roboto', sans-serif"
       },
       backgroundImage:{
@@ -26,5 +26,7 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar')({ nocompatible: true}),
+  ],
 }
