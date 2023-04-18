@@ -1,5 +1,8 @@
+<script setup>
+import {RouterLink} from 'vue-router'
+</script>
 <template>
-   <body class=" w-auto h-screen bg-[#0066CC]" style="background-image: url('src/assets/Background.png');">
+   <body class=" w-auto h-screen bg-[#0066CC]" style="background-image: url('src/assets/Background.png')">
         <div class=" container mx-auto flex">
             <div class=" w-auto rounded-xl mx-auto overflow-hidden">
                 <div class=" mt-16 px-12 font-roboto text-white mr-10">
@@ -13,7 +16,9 @@
                             <input class=" text-black pl-8 shadow-2xl rounded-md w-[585px] h-[62px]" type="password" placeholder="Masukkan kata sandi Anda" />
                         </label>
                         <div>
-                            <button  class="bg-[#0D1C9F] text-white w-[585px] h-[59px] rounded-[10px] mt-10">Masuk</button>
+                            <RouterLink to="/user">
+                                <button class="bg-[#0D1C9F] text-white w-[585px] h-[59px] rounded-[10px] mt-10">Masuk</button>
+                            </RouterLink>
                         </div>
                         <div class=" center my-5">
                             <p class=" text-main_blue font-inter text-lg">atau daftar dengan</p>
@@ -51,3 +56,4 @@
         </div>
     </body>
 </template>
+

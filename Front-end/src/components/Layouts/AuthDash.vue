@@ -1,13 +1,12 @@
-<script setup>
-    const router = useRouter();
-    const study = () => {
-        router.push({ name : 'Materi'})
-    }
-</script>
 <script>
-import {RouterLink, useRouter} from 'vue-router';
-const router = useRouter();
-
+import landingPage from '../Pages/landingPage.vue';
+import Testimone from '../Pages/Testimone.vue';
+export default{
+    components:{
+        landingPage,
+        Testimone,
+    }
+}
 </script>
 <template>
     <header class=" bg-main_blue top-0 sticky shadow-xl z-30 px-2">
@@ -18,9 +17,9 @@ const router = useRouter();
         <img src="/src/assets/Vector 23.svg" class=" w-screen"/>
       </div>
       <!-- Navbar -->
-      <nav class=" flex justify-between text-white font-inter font-bold mx-auto px-10 xl:px-20 h-10">
+      <nav class=" flex items-center justify-between text-white font-inter font-bold mx-auto px-10 xl:px-20 h-10 pb-4">
         <!-- Search Bar -->
-        <div class=" -mt-2">
+        <div class=" ">
           <div class=" relative ">
             <input
               class=" text-black block w-full pl-2 py-2 pr-10 leading-tight bg-[#0D1C9F] opacity-[0.4] border border-gray-400 rounded-md shadow-sm focus:outline-none focus:bg-white focus:border-gray-500  "
@@ -50,29 +49,32 @@ const router = useRouter();
           </div>
         </div>
         <!-- Button Navigation -->
-        <div id="navbar" class=" space-x-20 pl-[10%] md:block hidden">
-          <RouterLink to="TentangKami" class=" ">Tentang Kami</RouterLink>
-          <select class=" bg-transparent hover:text-sec_blue" @change="study">
-            <option>
-              <RouterLink to="Produk" class=" hover:text">Produk</RouterLink>
-            </option>
-            <option>
-                <RouterLink to="Materi" class="">Materi</RouterLink>
-            </option>
-          </select>
-          <RouterLink to="Testimoni" class="">Testimoni</RouterLink>
-          <RouterLink to="Karir" class="">Karir</RouterLink>
-        </div>
-        <div id="UserButton" class=" flex space-x-6">
+        <div id="navbar" class=" space-x-20 pl-[10%] flex">
           <div>
-            <RouterLink to="/masuk"  class=" bg-main_blue border-black border-[1px] rounded-md py-[0.625rem] px-[1.25rem]">Masuk</RouterLink>
+              <RouterLink to="user/TentangKami" class=" ">Tentang Kami</RouterLink>
+          </div>
+          <div class=" flex">
+              <RouterLink to="user/Produk" class=" ">Produk</RouterLink>
+              <select class=" bg-transparent"></select>
           </div>
           <div>
-            <RouterLink to="/daftar" class=" bg-sec_blue rounded-md py-[0.625rem] px-[1.25rem] ">Daftar</RouterLink>
+              <RouterLink to="user/Testimoni" class="">Testimoni</RouterLink>
+          </div>
+          <div class=" flex">
+              <RouterLink to="user/Karir" class="">Karir</RouterLink>
+              <select class=" bg-transparent"></select>
+          </div>
+        </div>
+        <div id="User Authenticated" class=" flex items-center space-x-6">
+          <div>
+            <p>Hello, Barbara!</p>
+          </div>
+          <div class=" flex">
+            <div class=" h-10 w-10 rounded-full bg-[#D9D9D9]"></div>
+            <select class=" bg-transparent"></select>
           </div>
         </div>
       </nav>
   </header>
-  
-  <RouterView/>
+  <landingPage></landingPage>
 </template>

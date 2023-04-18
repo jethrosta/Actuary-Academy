@@ -10,7 +10,7 @@
         </div>
         <!-- Tutor Privat -->
         <div class=" h-[400px] w-[90%] mx-auto px-20 flex mb-32">
-            <div class=" w-1/2 relative ml-10">
+            <div class=" w-1/2 relative ml-10" >
                 <!-- Blob Pertama -->
                 <div class="  z-0 mt-10 " >
                     <svg 
@@ -68,33 +68,33 @@
                         </svg>
                     </div>
                 <!-- 100% professional approved -->
-                <div class="absolute text-center font-bold w-40 h-40 font-inter -mt-[45%] flex ml-[49%] z-10" style="props.style">
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[30.84%] right-[62.2%] top-[-88.83%] bottom-[167.92%] text-[rgba(0,102,204,1)] [rotate:160.94deg]">1</p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[25.33%] right-[64.81%] top-[-87.22%] bottom-[166.32%] text-[rgba(0,102,204,1)] [rotate:147.41deg]">0</p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[18.69%] right-[71.45%] top-[-83.2%] bottom-[162.3%] text-[rgba(0,102,204,1)] [rotate:132.12deg]">0</p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[13.34%] right-[74.48%] top-[-77.9%] bottom-[157%] text-[rgba(0,102,204,1)] [rotate:115.44deg]">%</p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[9.15%] right-[87.37%] top-[-68.39%] bottom-[147.48%] text-[rgba(0,102,204,1)] [rotate:102.39deg]"></p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[8.15%] right-[82.57%] top-[-65.33%] bottom-[144.43%] [rotate:90.98deg]">p</p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[8.09%] right-[86.11%] top-[-57.18%] bottom-[136.28%] [rotate:78.24deg]">r</p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[8.85%] right-[82.45%] top-[-52.31%] bottom-[131.41%] [rotate:65.89deg]">o</p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[12.01%] right-[82.2%] top-[-45.36%] bottom-[124.45%] [rotate:53.55deg]">f</p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[14.65%] right-[76.65%] top-[-41.35%] bottom-[120.45%] [rotate:41.49deg]">e</p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[19.67%] right-[72.21%] top-[-36.64%] bottom-[115.74%] [rotate:27.94deg]">s</p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[25.25%] right-[66.63%] top-[-33.4%] bottom-[112.5%] [rotate:15.36deg]">s</p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[32.4%] right-[63.54%] top-[-31.53%] bottom-[110.63%] [rotate:5.32deg]">i</p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[35.63%] right-[55.67%] top-[-30.93%] bottom-[110.03%] [rotate:-5.81deg]">o</p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[43.01%] right-[48.29%] top-[-31.52%] bottom-[110.62%] [rotate:-20.16deg]">n</p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[49.92%] right-[41.96%] top-[-33.91%] bottom-[113%] [rotate:-34.1deg]">a</p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[55.98%] right-[39.96%] top-[-38.14%] bottom-[117.24%] [rotate:-44.73deg]">l</p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[58.71%] right-[37.81%] top-[-40.82%] bottom-[119.92%] text-[rgba(0,102,204,1)] [rotate:-52.27deg]"></p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[60.93%] right-[30.95%] top-[-43.25%] bottom-[122.35%] text-[rgba(0,102,204,1)] [rotate:-62.69deg]">a</p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[64.33%] right-[26.4%] top-[-49.32%] bottom-[128.41%] text-[rgba(0,102,204,1)] [rotate:-77.19deg]">p</p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[66.24%] right-[24.48%] top-[-56.63%] bottom-[135.73%] text-[rgba(0,102,204,1)] [rotate:-92.3deg]">p</p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[65.84%] right-[28.36%] top-[-64.94%] bottom-[144.03%] text-[rgba(0,102,204,1)] [rotate:-105.08deg]">r</p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[64.82%] right-[26.48%] top-[-69.75%] bottom-[148.85%] text-[rgba(0,102,204,1)] [rotate:-117.39deg]">o</p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[61.58%] right-[29.72%] top-[-76.34%] bottom-[155.43%] text-[rgba(0,102,204,1)] [rotate:-131.35deg]">v</p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[57.25%] right-[34.05%] top-[-81.57%] bottom-[160.67%] text-[rgba(0,102,204,1)] [rotate:-145.19deg]">e</p>
-                    <p class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[51.47%] right-[39.25%] top-[-85.9%] bottom-[165%] text-[rgba(0,102,204,1)] [rotate:-159.8deg]">d</p>
+                <div id="text" class="absolute text-center font-bold w-40 h-40 font-inter -mt-[45%] flex ml-[49%] z-10" style="props.style">
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[30.84%] right-[62.2%] top-[-88.83%] bottom-[167.92%] text-[rgba(0,102,204,1)] [rotate:160.94deg]">1</p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[25.33%] right-[64.81%] top-[-87.22%] bottom-[166.32%] text-[rgba(0,102,204,1)] [rotate:147.41deg]">0</p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[18.69%] right-[71.45%] top-[-83.2%] bottom-[162.3%] text-[rgba(0,102,204,1)] [rotate:132.12deg]">0</p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[13.34%] right-[74.48%] top-[-77.9%] bottom-[157%] text-[rgba(0,102,204,1)] [rotate:115.44deg]">%</p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[9.15%] right-[87.37%] top-[-68.39%] bottom-[147.48%] text-[rgba(0,102,204,1)] [rotate:102.39deg]"></p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[8.15%] right-[82.57%] top-[-65.33%] bottom-[144.43%] [rotate:90.98deg]">p</p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[8.09%] right-[86.11%] top-[-57.18%] bottom-[136.28%] [rotate:78.24deg]">r</p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[8.85%] right-[82.45%] top-[-52.31%] bottom-[131.41%] [rotate:65.89deg]">o</p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[12.01%] right-[82.2%] top-[-45.36%] bottom-[124.45%] [rotate:53.55deg]">f</p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[14.65%] right-[76.65%] top-[-41.35%] bottom-[120.45%] [rotate:41.49deg]">e</p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[19.67%] right-[72.21%] top-[-36.64%] bottom-[115.74%] [rotate:27.94deg]">s</p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[25.25%] right-[66.63%] top-[-33.4%] bottom-[112.5%] [rotate:15.36deg]">s</p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[32.4%] right-[63.54%] top-[-31.53%] bottom-[110.63%] [rotate:5.32deg]">i</p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[35.63%] right-[55.67%] top-[-30.93%] bottom-[110.03%] [rotate:-5.81deg]">o</p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[43.01%] right-[48.29%] top-[-31.52%] bottom-[110.62%] [rotate:-20.16deg]">n</p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[49.92%] right-[41.96%] top-[-33.91%] bottom-[113%] [rotate:-34.1deg]">a</p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal text-white inline m-0 left-[55.98%] right-[39.96%] top-[-38.14%] bottom-[117.24%] [rotate:-44.73deg]">l</p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[58.71%] right-[37.81%] top-[-40.82%] bottom-[119.92%] text-[rgba(0,102,204,1)] [rotate:-52.27deg]"></p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[60.93%] right-[30.95%] top-[-43.25%] bottom-[122.35%] text-[rgba(0,102,204,1)] [rotate:-62.69deg]">a</p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[64.33%] right-[26.4%] top-[-49.32%] bottom-[128.41%] text-[rgba(0,102,204,1)] [rotate:-77.19deg]">p</p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[66.24%] right-[24.48%] top-[-56.63%] bottom-[135.73%] text-[rgba(0,102,204,1)] [rotate:-92.3deg]">p</p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[65.84%] right-[28.36%] top-[-64.94%] bottom-[144.03%] text-[rgba(0,102,204,1)] [rotate:-105.08deg]">r</p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[64.82%] right-[26.48%] top-[-69.75%] bottom-[148.85%] text-[rgba(0,102,204,1)] [rotate:-117.39deg]">o</p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[61.58%] right-[29.72%] top-[-76.34%] bottom-[155.43%] text-[rgba(0,102,204,1)] [rotate:-131.35deg]">v</p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[57.25%] right-[34.05%] top-[-81.57%] bottom-[160.67%] text-[rgba(0,102,204,1)] [rotate:-145.19deg]">e</p>
+                    <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[51.47%] right-[39.25%] top-[-85.9%] bottom-[165%] text-[rgba(0,102,204,1)] [rotate:-159.8deg]">d</p>
                 </div>
             </div>
             <div class=" w-1/2 my-auto relative ">
@@ -689,6 +689,18 @@ export default{
     }
 }
 </script> -->
-
-
+<!-- Animasi Muter -->
+<!-- <style>
+#text{
+    animation: animate 5s linear infinite;
+}
+@keyframes animate {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+</style> -->
 
