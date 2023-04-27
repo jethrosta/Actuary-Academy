@@ -5,6 +5,14 @@ export default{
     components:{
         landingPage,
         Testimone,
+    },
+    data() {
+      return {
+        user: JSON,
+      }
+    },
+    mounted() {
+      this.user = JSON.parse(localStorage.getItem('user'));
     }
 }
 </script>
@@ -67,7 +75,7 @@ export default{
         </div>
         <div id="User Authenticated" class=" flex items-center space-x-6">
           <div>
-            <p>Hello, Barbara!</p>
+            <p>Hello, {{user.username}}!</p>
           </div>
           <div class=" flex">
             <div class=" h-10 w-10 rounded-full bg-[#D9D9D9]"></div>
