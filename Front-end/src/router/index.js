@@ -103,6 +103,16 @@ const router = createRouter({
           path: 'Materi',
           name: 'Materi',
           component: () => import('../components/Pages/Materi.vue')
+        },
+        {
+          path: 'Upload',
+          name: 'Upload',
+          component: () => import('../components/Pages/Upload.vue')
+        },
+        {
+          path: 'Video',
+          name: 'Video',
+          component: () => import('../components/Pages/Video.vue')
         }
       ]
     }
@@ -120,6 +130,8 @@ router.beforeEach((to, from, next) => {
     '/profil',
     '/Landingpage',
     '/Materi',
+    '/Upload',
+    '/Video',
     '/']
   const authRequired = !publicPages.includes(to.path)
   const loggedIn = localStorage.getItem('user')

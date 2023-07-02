@@ -1,0 +1,7 @@
+python-dotenv
+requests
+boto3>=1.15.0
+botcore
+fastapi
+uvicorn[standard]
+python-multipart
