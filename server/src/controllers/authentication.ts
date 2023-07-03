@@ -5,9 +5,9 @@ import { authentication, createSalt, createSessionToken, createJWT } from '../he
 
 export const register = async (req: express.Request, res: express.Response) => {
   try {
-    const { email, password, username } = req.body;
+    const { email, password, name } = req.body;
 
-    if (!email || !password || !username) {
+    if (!email || !password || !name) {
       return res.sendStatus(400);
     }
 
@@ -24,7 +24,7 @@ export const register = async (req: express.Request, res: express.Response) => {
 
     const user = await createUser({
       email,
-      username,
+      name,
       authentication: {
         salt: salt,
         password: authentication(salt, password),
