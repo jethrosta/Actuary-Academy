@@ -1,10 +1,10 @@
 <template>
-    <section id="footer">
-        <div class="  bg-main_blue pt-12 pb-3 px-20">
-            <div class=" flex justify-between text-white font-inter font-bold ">
-                <div class=" font-normal mr-6 ">
+    <section class="footer relative">
+        <div class="bg-main_blue px-20 divide-y divide-gray-300">
+            <div class=" flex justify-between text-white font-inter font-bold py-10">
+                <div class="font-normal ">
                     <div class=" flex items-center">
-                        <img src="src/assets/icon/AAlogo.png" class=" w-20"/>
+                        <img src="src/assets/icon/AAlogo.png" class="w-16 mr-2"/>
                         <p class=" text-white align-bottom text-2xl ">Actuary Academy</p>
                     </div>
                     <p class=" text-xs text-justify w-72">Actuary Academy merupakan platform edukasi aktuaria PERTAMA DI INDONESIA. Berdiri sejak 2019, Actuary Academy sudah melayani dan membimbing mahasiswa, dosen, maupun praktisi dari berbagai instansi dan negara melalui konten berkualitas dan tutor terpercaya.</p>
@@ -54,10 +54,7 @@
                     </ul>
                 </div>
             </div>
-            <div class=" center mt-10">
-                <hr class=" bg-gray-900 w-[100%] h-[2%]">  
-            </div>
-            <div class=" center text-gray-300 mt-4 font-inter font-light">
+            <div class="center text-gray-300 font-inter font-light py-4">
                 <p>Copyright © 2023 Actuary Academy. All rights reserved</p>
             </div>
         </div>

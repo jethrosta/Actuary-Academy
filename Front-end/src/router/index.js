@@ -3,6 +3,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  scrollBehavior() {
+    return { top: 0 }
+  },
   routes: [
     {
       path: '/masuk',
@@ -46,7 +49,7 @@ const router = createRouter({
         {
           path: 'Materi',
           name: 'Materi',
-          component: () => import('../components/Pages/material.vue')
+          component: () => import('../components/Pages/Materi.vue')
         },
         {
           path: '',
@@ -87,7 +90,7 @@ const router = createRouter({
         {
           path: 'Materi',
           name: 'Materi',
-          component: () => import('../components/Pages/material.vue')
+          component: () => import('../components/Pages/Materi.vue')
         },
         {
           path: '',

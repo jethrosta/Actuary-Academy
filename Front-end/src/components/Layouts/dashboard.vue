@@ -1,124 +1,81 @@
 <script setup>
-    import {ref} from 'vue';
-    import {RouterLink, useRouter} from 'vue-router';
-    import Dropdown from '../Dropdown.vue';
-    const router = useRouter();
-    const study = () => {
-        router.push({ name : 'Materi'})
-    }
-    const sidenavbar = ref(false);
-</script>
+import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
 
+import Dropdown from '../Dropdown.vue';
+
+const isLoggedIn = ref(false)
+
+const productSubmenus = [
+  { title: 'Produk', link: 'Produk' },
+  { title: 'Tutor Privat', link: 'Produk' },
+  { title: 'Akademi', link: 'Produk' },
+  { title: 'Company Training', link: 'Produk' },
+  { title: 'Jasa Aktuaria', link: 'Produk' }
+]
+
+</script>
 <template>
-    <header class=" bg-main_blue top-0 sticky shadow-xl z-30 px-2">
-      <div class=" flex justify-center">
-        <RouterLink to="/"><img src="/src/assets/icon/AAlogo.png" class="lg:h-16 h-14 lg:-mb-9 -mb-8"/></RouterLink>
+    <header class="bg-main_blue top-0 sticky shadow-xl z-30 px-4 py-3">
+      <div class="flex justify-center relative">
+        <RouterLink to="/">
+          <div class="mx-auto text-center font-inter">
+            <img src="/src/assets/icon/AAlogo-cropped.png" class="mx-auto w-20"/>
+            <div class="text-lg text-white">Actuary Academy</div>
+          </div>
+        </RouterLink>
+        <div class="absolute right-0 my-2 mr-10 text-white cursor-pointer">
+          <span class="mr-1">Bahasa Indonesia</span>
+          <svg class="inline-block w-4 h-4 align-middle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
       </div>
-      <div>
-        <h1 class=" lg:text-md text-white font-inter text-center mt-4 text-sm">Actuary Academy</h1>
-      </div>
-      <div class="">
-        <img src="/src/assets/Vector 23.svg" class=" w-screen -mb-4 lg:-mt-6 -mt-4"/>
+      <div class="-mx-4 -mt-7 -mb-1">
+        <img src="/src/assets/Vector 23.svg" class="w-screen"/>
       </div>
       <!-- Navbar -->
-      <nav class=" flex justify-between text-white font-inter text-sm font-medium mx-auto px-10 xl:px-20 ">
+      <nav class="flex justify-between items-center text-white font-inter font-bold mx-auto px-10 xl:px-20">
         <!-- Search Bar -->
-        <div class="pb-3 hidden md:block">
-          <div class="relative">
+        <div class="font-normal">
+          <div class="relative w-72">
             <input
-              class=" text-black block w-full pl-2 py-2 pr-12 leading-tight bg-[#0D1C9F] opacity-[0.4] rounded-md shadow-sm focus:outline-none focus:bg-white focus:border-gray-500  "
+              class="text-sec_blue block w-full pl-4 py-2.5 pr-10 leading-tight bg-sec_blue bg-opacity-40 rounded-md shadow-sm focus:outline-none focus:bg-white placeholder:text-white placeholder:text-opacity-50"
               type="search"
               placeholder="Cari di Actuary Academy"
             >
             <div class="absolute inset-y-0 right-0 flex items-center pr-3 bg-white rounded-tr-md rounded-br-md pl-3">
-              <svg class=" h-5 w-5"
-                  preserve-aspect-ratio="none"
-                  viewBox="0 0 20 18"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M 15.814 8.684 C 15.814 12.526 12.699 15.641 8.857 15.641 C 5.014 15.641 1.899 12.526 1.899 8.684 C 1.899 4.842 5.014 1.727 8.857 1.727 C 12.699 1.727 15.814 4.842 15.814 8.684 Z"
-                    stroke="#0D1C9F"
-                    stroke-width="2"
-                  ></path>
-                  <path
-                    d="M 14.708 13.063 L 18.101 16.022"
-                    stroke="#0D1C9F"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  ></path>
-                </svg>
+              <svg class="h-5 w-5" preserve-aspect-ratio="none" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 15.814 8.684 C 15.814 12.526 12.699 15.641 8.857 15.641 C 5.014 15.641 1.899 12.526 1.899 8.684 C 1.899 4.842 5.014 1.727 8.857 1.727 C 12.699 1.727 15.814 4.842 15.814 8.684 Z" stroke="#0D1C9F" stroke-width="2"></path>
+                <path d="M 14.708 13.063 L 18.101 16.022" stroke="#0D1C9F" stroke-width="2" stroke-linecap="round"></path>
+              </svg>
             </div>
           </div>
-        </div>
-        <!-- Side Nav Dropdown -->
-        <div class="navdropdown md:hidden">
-          <svg @click="sidenavbar = !sidenavbar" class="hover:cursor-pointer hover:scale-110 transform transition duration-100"
-            width="22"
-            height="35"
-            viewBox="0 0 30 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect width="25" height="2" rx="1.5" fill="white" />
-            <rect y="8" width="25" height="2" rx="1.5" fill="white" />
-            <rect y="16" width="25" height="2" rx="1.5" fill="white" />
-          </svg>
-          <div v-if="sidenavbar" class="navside absolute left-0 py-6 px-5 bg-main_blue shadow-lg shadow-neutral-500 rounded-r-xl">
-            <!-- Search Bar -->
-            <div class="pb-3">
-              <div class="relative">
-                <input
-                  class=" text-black block w-full pl-2 py-2 pr-12 leading-tight bg-[#0D1C9F] opacity-[0.4] rounded-md shadow-sm focus:outline-none focus:bg-white focus:border-gray-500  "
-                  type="search"
-                  placeholder="Cari di Actuary Academy"
-                >
-                <div class="absolute inset-y-0 right-0 flex items-center pr-3 bg-white rounded-tr-md rounded-br-md pl-3">
-                  <svg class=" h-5 w-5"
-                      preserve-aspect-ratio="none"
-                      viewBox="0 0 20 18"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M 15.814 8.684 C 15.814 12.526 12.699 15.641 8.857 15.641 C 5.014 15.641 1.899 12.526 1.899 8.684 C 1.899 4.842 5.014 1.727 8.857 1.727 C 12.699 1.727 15.814 4.842 15.814 8.684 Z"
-                        stroke="#0D1C9F"
-                        stroke-width="2"
-                      ></path>
-                      <path
-                        d="M 14.708 13.063 L 18.101 16.022"
-                        stroke="#0D1C9F"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                      ></path>
-                    </svg>
-                </div>
-              </div>
-            </div>
-            aslkdjaslkdj <br> aslkdjaslkdj <br>aslkdjaslkdj <br>aslkdjaslkdj <br>aslkdjaslkdj <br>
-          </div>
-
         </div>
         <!-- Button Navigation -->
-        <div id="navbar" class="space-x-10 pl-[7%] lg:flex hidden pt-3 font-semibold">
+        <div id="navbar" class="space-x-20 md:flex hidden">
           <RouterLink to="TentangKami" class="hover:text-sec_blue">Tentang Kami</RouterLink>
-          <Dropdown title="Produk" mainlink="Produk" :items="[
-              {title: 'Produk', link: 'Produk'},
-              {title: 'Tutor Privat', link: 'Produk'},
-              {title: 'Akademi', link: 'Produk'},
-              {title: 'Company Training', link: 'Produk'},
-              {title: 'Jasa Aktuaria', link: 'Produk'}
-            ]" class="">
-          </Dropdown>
+          <Dropdown title="Produk" mainlink="Produk" :items="productSubmenus" class="hover:text-sec_blue" />
           <RouterLink to="Testimoni" class="hover:text-sec_blue">Testimoni</RouterLink>
           <RouterLink to="Karir" class="hover:text-sec_blue">Karir</RouterLink>
         </div>
-        <div id="UserButton" class="flex space-x-4 pt-2 py-3">
+        <div v-if="isLoggedIn" id="UserButton" class="flex space-x-4">
           <div>
-            <RouterLink to="/masuk"  class=" bg-main_blue border-black border-[1px] rounded-lg py-2 px-4">Masuk</RouterLink>
+            <RouterLink to="/masuk"  class="bg-main_blue border-sec_blue border rounded-md py-[0.625rem] px-[1.25rem]">Masuk</RouterLink>
           </div>
           <div>
-            <RouterLink to="/daftar" class=" bg-sec_blue rounded-lg py-2 px-4 ">Daftar</RouterLink>
+            <RouterLink to="/daftar" class="bg-sec_blue rounded-md py-[0.625rem] px-[1.25rem] ">Daftar</RouterLink>
+          </div>
+        </div>
+        <div v-else class="flex items-center font-normal">
+          <div class="mr-3">Hello, <span class="font-semibold">Barbara!</span></div>
+          <div class="flex space-x-2 items-center cursor-pointer">
+            <div class="w-10 h-10 rounded-full bg-gray-300 ">
+              <img src="">
+            </div>
+            <svg class="inline-block w-4 h-4 align-middle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
           </div>
         </div>
       </nav>
