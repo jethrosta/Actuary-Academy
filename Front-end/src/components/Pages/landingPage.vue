@@ -23,7 +23,7 @@ export default defineComponent({
 
 </script>
 <template>
-    <main class="oke bg-[url('../assets/LandingPageBG.jpg')] h-[100%] w-[100%] bg-no-repeat -mt-24">
+    <main class="oke bg-[url('../assets/LandingPageBG.jpg')] bg-center h-[100%] w-[100%] bg-no-repeat -mt-24">
         <div class=" pt-60 ">
             <section id="greet">
                 <div class=" center">
@@ -48,47 +48,67 @@ export default defineComponent({
                 <div class=" text-white font-inter font-bold center mt-10 text-5xl">
                     Produk Kami
                 </div>
-                <div class=" w-full px-40 flex flex-wrap justify-center  text-white font-inter mt-10">
-                    <div class=" mb-6 px-3 md:w-1/2 ">
-                        <div class="bg-sec_blue w-full h-full p-12 rounded-[20px]">
-                            <div class=" float-left flex flex-wrap w-1/3 justify-center mr-8">
-                                <img class=" mx-auto mb-11" src="src/assets/Iconbook.png"/>
-                                <h3 class=" text-2xl text font-bold font-inter" >Tutor Privat</h3>
+                <div class=" px-[120px] flex flex-wrap justify-center text-white font-inter mt-10">
+                    <!--Tutor Privat-->
+                    <div class="mb-6 px-3 md:w-1/2">
+                        <div class="bg-sec_blue w-full h-full pl-2 pr-8 py-12 rounded-[20px]">
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="w-[90%]">
+                                    <img class="mx-auto mb-8" src="src/assets/Iconbook.png" alt="Book Icon" />
+                                    <h3 class="text-2xl font-bold font-inter text-center leading-tight">Tutor Privat</h3>
+                                </div>
+                                <div class="w-[110%] -ml-[10%]">
+                                    <p class="pb-5 text-justify text-[90%]">Actuary Academy menyediakan Tutor Privat untuk mata kuliah aktuaria dan mata ujian PAI.</p>
+                                    <button class="detail">Lihat Detail</button>
+                                </div>
                             </div>
-                            <p class=" pb-8 text-justify">Actuary Academy menyediakan Tutor Privat untuk mata kuliah aktuaria dan mata ujian PAI.</p>
-                            <button class=" detail">Lihat Detail</button>
                         </div>
-                    </div> 
-                    <div class=" mb-6 px-3 md:w-1/2 ">
-                        <div class="bg-sec_blue w-full h-full p-12 rounded-[20px]">
-                            <div class=" float-left flex flex-wrap w-1/3 justify-center mr-8">
-                                <img class=" mx-auto mb-8" src="src/assets/IconToga.png"/>
-                                <h3 class=" text-2xl text font-bold font-inter pb-10" >Akademi</h3>
+                    </div>
+
+                    <div class="mb-6 px-3 md:w-1/2">
+                        <div class="bg-sec_blue w-full h-full pl-2 pr-8 py-12 rounded-[20px]">
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="w-[90%]">
+                                    <img class=" mx-auto mb-5" src="src/assets/IconToga.png" alt="Toga Icon"/>
+                                    <h3 class="text-2xl font-bold font-inter text-center leading-tight">Akademi</h3>
+                                </div>
+                                <div class="w-[110%] -ml-[10%]">
+                                    <p class="pb-5 text-justify text-[90%]">Actuary Academy menyediakan video pembelajaran, pembahasan soal, dan pelaksanaan try out.</p>
+                                    <button class="detail">Lihat Detail</button>
+                                </div>
                             </div>
-                            <p class=" pb-8 text-justify">Actuary Academy menyediakan video pembelajaran, pembahasan soal, dan pelaksanaan try out.</p>
-                            <button class=" detail">Lihat Detail</button>
                         </div>
-                    </div> 
-                    <div class=" mb-6 px-3 md:w-1/2 ">
-                        <div class="bg-sec_blue w-full h-full p-12 rounded-[20px]">
-                            <div class=" float-left flex flex-wrap w-1/3 justify-center mr-8">
-                                <img class=" mx-auto mb-5 w-20" src="src/assets/Iconsuitcase.png"/>
-                                <h3 class=" text-2xl text font-bold font-inter w-4/5 text-center pb-10" >Company Training</h3>
+                    </div>
+                    
+                    <div class="mb-6 px-3 md:w-1/2">
+                        <div class="bg-sec_blue w-full h-full pl-2 pr-8 py-12 rounded-[20px]">
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="w-[90%]">
+                                    <img class=" mx-auto mb-5 w-20" src="src/assets/Iconsuitcase.png"/>
+                                    <h3 class="text-2xl font-bold font-inter text-center leading-tight">Company Training</h3>
+                                </div>
+                                <div class="w-[110%] -ml-[10%]">
+                                    <p class="pb-5 text-justify text-[90%]">Actuary Academy menyediakan Tutor Privat pembelajaran mata ujian PAI untuk perusahaan.</p>
+                                    <button class="detail">Lihat Detail</button>
+                                </div>
                             </div>
-                            <p class=" pb-8 text-justify">Actuary Academy menyediakan Tutor Privat pembelajaran mata ujian PAI untuk perusahaan.</p>
-                            <button class=" detail">Lihat Detail</button>
                         </div>
-                    </div> 
-                    <div class=" mb-6 px-3 md:w-1/2 ">
-                        <div class="bg-sec_blue w-full h-full p-12 rounded-[20px]">
-                            <div class=" float-left flex flex-wrap w-1/3 justify-center mr-8">
-                                <img class=" mx-auto mb-5 w-20" src="src/assets/Presentation.png"/>
-                                <h3 class=" text-2xl text font-bold font-inter w-4/5 text-center pb-10" >Jasa Aktuaria</h3>
+                    </div>
+
+                    <div class="mb-6 px-3 md:w-1/2">
+                        <div class="bg-sec_blue w-full h-full pl-2 pr-8 py-12 rounded-[20px]">
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="w-[90%]">
+                                    <img class=" mx-auto mb-5 w-20" src="src/assets/Presentation.png"/>
+                                    <h3 class="text-2xl font-bold font-inter text-center leading-tight">Jasa<br>Aktuaria</h3>
+                                </div>
+                                <div class="w-[110%] -ml-[10%]">
+                                    <p class="pb-5 text-justify text-[90%]">Actuary Academy menyediakan jasa yang membantu proyek-proyek seputar aktuaria.</p>
+                                    <button class="detail">Lihat Detail</button>
+                                </div>
                             </div>
-                            <p class=" pb-8 text-justify">Actuary Academy menyediakan jasa yang membantu proyek-proyek seputar aktuaria.</p>
-                            <button class=" detail">Lihat Detail</button>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </section>
             <section id="testimoni">

@@ -302,16 +302,10 @@
     </body>
     <Footer></Footer>
 </template>
-<script>
-import Footer from '../Footer.vue';
-import { useRouter } from 'vue-router';
-export default{
-    components: {
-        Footer
-    },
-}
-</script>
+
 <script setup>
+    import { useRouter } from 'vue-router';
+    import Footer from '../Footer.vue';
     const router = useRouter();
 
     const profil = () => {

@@ -1,53 +1,73 @@
 <template>
-    <body class=" p- w-auto h-screen bg-[#0066CC]" style="background-image: url('src/assets/Background.png');">
-        <div class=" container mx-auto flex ">
-            <div class=" mx-auto">
-                <div class=" py-8 font-roboto text-white ">
-                    <h1 class="text-3xl font-semibold">Siap untuk bergabung?</h1>
+    <body class=" w-auto flex justify-center bg-scroll bg-[#0066CC]" style="background-image: url('src/assets/Background.png');">
+        <div class=" container flex flex-row justify-center align-middle p-4 ">
+            <div class="py-10 px-8">
+                <div class="w-[30rem] font-roboto text-white">
+                    <button class="flex flex-row py-2 text-sm" @click="goBack">
+                        <svg class="translate-x-[-5px]" width="20" height="20"  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" >
+                            <path d="M15.7071 18.7071C16.0976 18.3166 16.0976 17.6834 15.7071 17.2929L10.4142 12L15.7071 6.70711C16.0976 6.31658 16.0976 5.68342 15.7071 5.29289C15.3166 4.90237 14.6834 4.90237 14.2929 5.29289L8.29289 11.2929C7.90237 11.6834 7.90237 12.3166 8.29289 12.7071L14.2929 18.7071C14.6834 19.0976 15.3166 19.0976 15.7071 18.7071Z"  fill="white" />
+                        </svg>
+                        Kembali
+                    </button>
+                    <h1 class="lg:text-4xl md:text-3xl font-semibold">Siap untuk bergabung?</h1>
                     <p class="pt-0">Silahkan masukkan identitas Anda</p>
-                    <form action="#" class="pt-4">
-                        <label class="block">
-                            <span class=" my-2 block font-inter after:content-['*'] after:ml-0.5 after:text-white text-sm font-medium text-white">Nama</span>
-                            <input class=" text-black pl-8 shadow-2xl rounded-md w-[585px] h-[50px]" type="text" placeholder="Masukkan nama Anda" />
-                            <span class=" mt-3 my-2 block font-inter  after:content-['*'] after:ml-0.5 after:text-white text-sm font-medium text-white">Email</span>
-                            <input class=" text-black pl-8 shadow-2xl rounded-md w-[585px] h-[50px]" type="email" placeholder="Masukkan email Anda" />
-                            <span class=" mt-3 my-2 block font-inter  after:content-['*'] after:ml-0.5 after:text-white text-sm font-medium text-white">Kata Sandi</span>
-                            <input class=" text-black pl-8 shadow-2xl rounded-md w-[585px] h-[50px]" type="password" placeholder="Buat kata sandi Anda" />
-                            <input class=" mt-3 block text-black pl-8 shadow-2xl rounded-md w-[585px] h-[50px]" type="password" placeholder="Buat kata sandi Anda" />
+                    <Form @submit="handleRegister" :validation-schema="schema" class="pt-4">
+                        <label class="flex flex-col">
+                            <span class=" mt-4 my-2 block font-inter  after:content-['*'] after:ml-0.5 after:text-white text-sm font-medium text-white">Nama</span>
+                            <Field name="name" class=" text-black pl-8 shadow-2xl rounded-md h-14"
+                                type="text" placeholder="Masukkan nama Anda" />
+                            <ErrorMessage name="name" component="div" className="text-red-500" />
+
+                            <span class=" mt-4 my-2 block font-inter  after:content-['*'] after:ml-0.5 after:text-white text-sm font-medium text-white">Email</span>
+                            <Field name="email" class=" text-black pl-8 shadow-2xl rounded-md h-14" 
+                                type="email" placeholder="Masukkan email Anda" />
+                            <ErrorMessage name="email" component="div" className="text-red-500" />
+
+                            <span class=" mt-4 my-2 block font-inter  after:content-['*'] after:ml-0.5 after:text-white text-sm font-medium text-white">Kata Sandi</span>
+                            <Field name="password" class=" text-black pl-8 shadow-2xl rounded-md h-14"
+                                type="password" v-model="password" placeholder="Masukkan kata sandi Anda" />
+                            <ErrorMessage name="password" component="div" className="text-red-500" />
+
+                            <Field name="confirm" class=" text-black pl-8 mt-4 shadow-2xl rounded-md h-14"
+                                type="password" placeholder="Konfirmasi Kata Sandi" />
+                            <ErrorMessage name="confirm" component="div" className="text-red-500" />
                         </label>
-                        <div class="mt-5">
-                            <input type="checkbox" class="border-gray-400">
-                            <span class="text-zinc-400 ml-4">Saya menyetujui Ketentuan & Kebijakan Privasi</span>
+                        <div class="mt-5 flex pl-1">
+                            <input type="checkbox" class="border-gray-400 scale-125 ">
+                            <div class=" text-slate-600 px-3 flex gap-1">
+                                <span>Saya menyetujui</span>
+                                <a href="" class=" hover:cursor-pointer underline ">Ketentuan & Kebijakan Privasi</a>
+                            </div>
                         </div>
-                        <div class=" mt-5">
-                            <button class="bg-[#0D1C9F] text-white w-[585px] h-[59px] rounded-[10px] font-inter font-bold text-xl">Daftar</button>
+                        <div>
+                            <button type="submit" class="bg-[#0D1C9F] text-white font-bold w-full h-[59px] rounded-[10px] mt-6">Daftar</button>
                         </div>
                         <div class=" center my-5 items-center space-x-3">
-                            <hr class=" bg-main_blue w-[33.3%] h-[2px] ">
-                            <p class=" text-main_blue font-inter text-lg">atau daftar dengan</p>
-                            <hr class=" bg-main_blue w-[33.3%] h-[2px] ">
+                            <hr class=" bg-main_blue w-full h-[2px]  ">
+                            <p class=" w-full text-center text-main_blue font-inter text-md">atau daftar dengan</p>
+                            <hr class=" bg-main_blue w-full h-[2px]  ">
                         </div>
-                        <div class=" flex text-xl space-x-2">
-                            <div class=" center regBut w-1/2 h-14 space-x-3">
-                                <img src="src/assets/icon/google-color-svgrepo-com.svg" class=" p-3"/>
+                        <div class="flex text-xl space-x-2 " >
+                            <div class=" center regBut w-1/2 h-14 space-x-2 justify-center flex hover:cursor-pointer">
+                                <img src="src/assets/icon/google-color-svgrepo-com.svg" class="py-4"/>
                                 <button class=" ">Google</button>
                             </div>
-                            <div class="center regBut w-1/2 h-14 space-x-3">
-                                <img src="src/assets/icon/facebook-svgrepo-com.svg" class=" p-1"/>
+                            <div class="center regBut w-1/2 h-14 space-x-2 justify-center flex hover:cursor-pointer">
+                                <img src="src/assets/icon/facebook-svgrepo-com.svg" class="py-3"/>
                                 <button class=" ">Facebook</button>
                             </div>
                         </div>
                         <div class=" center space-x-2 font-bold mt-5">
                             <p class=" text-main_blue">Sudah Memiliki akun?</p>
-                            <p class=" text-sec_blue underline underline-offset-2 ">Masuk</p>
+                            <a to="./masuk" class=" text-sec_blue underline underline-offset-2 ">Masuk</a>
                         </div>
-                    </form>
+                    </Form>
                 </div>
             </div>
-            <div class=" pt-20">
-                <div class=" h-[40rem] w-[30rem] relative  ">
+            <div class="py-10 px-8 hidden xl:block">
+                <div class=" h-[50rem] w-[30rem] relative">
                     <img src="src/assets/Vector 3.jpg" class=" w-full h-full object-cover rounded-[2.5rem] absolute "/>
-                    <div  class=" absolute bottom-20 mx-20 z-20 ">
+                    <div  class=" absolute bottom-16 mx-16 z-20 ">
                         <p class=" text-white font-inter text-xl">Jadilah bagian Actuary Academy</p>
                         <p class=" text-5xl font-bold text-white">From Zero to Fellow</p>
                     </div>
@@ -59,4 +79,63 @@
         </div>
     </body>
 </template>
+
+<script>
+import { Form, Field, ErrorMessage } from "vee-validate";
+import * as yup from "yup"
+
+export default {
+    name: "Register",
+    components: {
+        Form,
+        Field,
+        ErrorMessage,
+    },
+    data() {
+        const schema = yup.object().shape({
+            name: yup.string().required("Name is required"),
+            email: yup.string().required("Email is required").email("Email is invalid!"),
+            password: yup.string().required("Password is required!")
+        });
+
+        return {
+            loading: false,
+            message: "",
+            password: "",
+            schema,
+        };
+    },
+    computed: {
+        loggedIn() {
+            return this.$store.state.auth.status.loggedIn;
+        },
+    },
+    created() {
+        if (this.loggedIn) {
+            this.$router.push("/user");
+        }
+    },
+    methods: {
+        handleRegister(user) {
+            console.log('Registering');
+            this.loading = true;
+            this.$store.dispatch("auth/register", user).then(
+                () => {
+                    this.$router.push("/user");
+                },
+                (error) => {
+                    this.loading = false;
+                    this.message =
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
+                        error.message ||
+                        error.toString();
+                }
+            );
+        },
+    }
+}
+</script>
+
 

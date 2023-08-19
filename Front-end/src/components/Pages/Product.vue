@@ -9,10 +9,10 @@
             </div>
         </div>
         <!-- Tutor Privat -->
-        <div class=" h-[400px] w-[90%] mx-auto px-20 flex mb-32">
-            <div class=" w-1/2 relative ml-10" >
+        <div class=" h-[400px] w-[90%] mx-auto px-20 flex mb-32 justify-center flex-row flex-wrap max-w-7xl">
+            <div class=" w-1/2 relative ml-10 flex-1" >
                 <!-- Blob Pertama -->
-                <div class="  z-0 mt-10 " >
+                <div class="  z-0 mt-10  " >
                     <svg 
                         class=" w-96 h-96" viewBox="0 0 470 412"
                         xmlns="http://www.w3.org/2000/svg">
@@ -97,7 +97,7 @@
                     <p  class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[51.47%] right-[39.25%] top-[-85.9%] bottom-[165%] text-[rgba(0,102,204,1)] [rotate:-159.8deg]">d</p>
                 </div>
             </div>
-            <div class=" w-1/2 my-auto relative ">
+            <div class=" w-1/2 my-auto relative flex-1 ">
                 <!-- icon bulat bulat tutor privat -->
                 <div class=" flex rounded-full h-12 w-12 space-x-5 mb-5">
                     <img class=" rounded-full object-cover" src="../../assets/Tutor Privat/Rectangle 63.png"/>
@@ -130,16 +130,16 @@
                 <div class=" my-5">
                 <hr class=" bg-main_blue w-[52%] h-[2px]">    
                 </div>
-                <div class=" mb-5  pr-32">
+                <div class=" mb-5 pr-10">
                     <p class=" text-main_blue text-xl  ">Actuary Academy menyediakan Tutor Privat untuk mata kuliah aktuaria dan mata ujian PAI.</p>
                 </div>
                 <button class=" bg-sec_blue text-white font-inter font-bold text-sm rounded-lg p-2 px-8 shadow-xl">Lihat Detail</button>
             </div>
         </div>
         <!-- Akademi -->
-        <div class=" h-[400px] w-[90%] mx-auto px-20 flex mb-32">
+        <div class=" h-[400px] w-[90%] mx-auto px-20 flex mb-32 justify-center flex-row flex-wrap max-w-7xl">
             <!-- Captions -->
-            <div class=" w-1/2 my-auto justify-end grid-cols-1 ">
+            <div class=" w-1/2 my-auto justify-end grid-cols-1 flex-1">
                 <!-- icon bulat bulat akademi -->
                 <div class=" justify-end flex rounded-full  space-x-5 mb-5">
                     <div>
@@ -185,7 +185,7 @@
                 </div>
             </div>
             <!-- Blob icons -->
-            <div class=" w-1/2 relative ml-40 pl-20">
+            <div class=" w-1/2 relative ml-40 pl-20 flex-1">
                 <!-- Blob Pertama -->
                 <div class=" z-0 mt-10 " >
                     <svg 
@@ -273,8 +273,8 @@
             
         </div>
         <!-- Company Training -->
-        <div class=" h-[400px] w-[90%] mx-auto px-20 flex mb-32">
-            <div class=" w-1/2 relative ml-10">
+        <div class=" h-[400px] w-[90%] mx-auto px-20 flex mb-32 justify-center flex-row flex-wrap max-w-7xl">
+            <div class=" w-1/2 relative ml-10 flex-1">
                 <!-- Blob Pertama -->
                 <div class="  z-0 mt-10 " >
                     <svg 
@@ -359,7 +359,7 @@
                     <p class="origin-top-left absolute text-2xl tracking-widest leading-normal inline m-0 left-[51.47%] right-[39.25%] top-[-85.9%] bottom-[165%] text-[rgba(0,102,204,1)] [rotate:-159.8deg]">d</p>
                 </div>
             </div>
-            <div class=" w-1/2 my-auto relative ">
+            <div class=" w-1/2 my-auto relative flex-1 ">
                 <!-- icon bulat bulat Company Training-->
                 <div class=" flex  rounded-full h-12 w-12 space-x-5 mb-5">
                     <img class=" rounded-full object-cover" src="../../assets/Tutor Privat/Rectangle 63.png"/>
@@ -397,9 +397,9 @@
             </div>
         </div>
         <!-- Akademi -->
-        <div class=" h-[400px] w-[90%] mx-auto px-20 flex mb-32">
+        <div class=" h-[400px] w-[90%] mx-auto px-20 flex mb-32 justify-center flex-row flex-wrap max-w-7xl">
             <!-- Captions -->
-            <div class=" w-1/2 my-auto justify-end grid-cols-1 ">
+            <div class=" w-1/2 my-auto justify-end grid-cols-1 flex-1">
                 <!-- icon bulat bulat akademi -->
                 <div class=" justify-end flex rounded-full  space-x-5 mb-5">
                     <div>
@@ -479,14 +479,14 @@
                     <div class=" bg-main_blue w-[52%] h-[1px]"></div>
                 </div>
                 <div class=" mb-5">
-                        <p class=" text-right text-main_blue text-xl  ">Actuary Academy menyediakan jasa yang<br> membantu proyek-proyek seputar aktuaria.</p>
+                        <p class=" text-right text-main_blue text-xl  ">Actuary Academy menyediakan jasa yang membantu proyek-proyek seputar aktuaria.</p>
                 </div>
                 <div class=" flex justify-end">
                     <button class=" bg-sec_blue text-white font-inter font-bold text-sm rounded-lg p-2 px-8 shadow-xl">Lihat Detail</button>
                 </div>
             </div>
             <!-- Blob icons -->
-            <div class=" w-1/2 relative ml-40 pl-20">
+            <div class=" w-1/2 relative ml-40 pl-20 flex-1">
                 <!-- Blob Pertama -->
                 <div class=" z-0 mt-10 " >
                     <svg 
@@ -614,93 +614,12 @@
             </div>
         </div>
     </div>
-    <section id="footer">
-                <div class="  bg-main_blue pt-8 pb-3 px-20">
-                    <div class=" flex justify-between text-white font-inter font-bold ">
-                        <div class=" font-normal ">
-                            <div class=" flex items-center">
-                                <img src="src/assets/icon/AAlogo.png" class=" w-20"/>
-                                <p class=" text-white align-bottom text-2xl ">Actuary Academy</p>
-                            </div>
-                            <p class=" text-xs text-justify w-72">Actuary Academy merupakan platform edukasi aktuaria PERTAMA DI INDONESIA. Berdiri sejak 2019, Actuary Academy sudah melayani dan membimbing mahasiswa, dosen, maupun praktisi dari berbagai instansi dan negara melalui konten berkualitas dan tutor terpercaya.</p>
-                        </div>
-                        <div>
-                            <p class=" mb-5">Tentang Kami</p>
-                            <ul class=" font-normal">
-                                <li>Actuary Academy</li>
-                                <li>Hak Cipta</li>
-                                <li>Privacy Policy</li>
-                                <li>Syarat & Ketentuan</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <p class=" mb-5">Produk</p>
-                            <ul class=" font-normal">
-                                <li>Tutor Privat</li>
-                                <li>Akademi</li>
-                                <li>Company Training</li>
-                                <li>Jasa Aktuaria</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <p class=" mb-5">Fitur</p>
-                            <ul class=" font-normal">
-                                <li>Fitur 1</li>
-                                <li>Fitur 2</li>
-                                <li>Fitur 3</li>
-                                <li>Fitur 4</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <p class=" mb-5">Hubungi Kami</p>
-                            <ul class=" font-normal">
-                                <div class=" flex">
-                                    <img src="src/assets/icon/WhatsApp 1.png" class=" h-full mr-2 pt-1"/>
-                                    <p clas>+62 812 1756 4720</p>
-                                </div>
-                                <div class=" flex">
-                                    <img src="src/assets/icon/Instagram_logo_2016.svg.png" class=" h-full mr-2 pt-1"/>
-                                    <p clas>actuary_academy</p>
-                                </div>
-                                <div class=" flex">
-                                    <img src="src/assets/icon/Gmail_icon_(2020).svg.png" class=" h-full mr-2 pt-1"/>
-                                    <p clas>actuaryacademy1st@gmail.com</p>
-                                </div>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class=" center mt-10">
-                        <hr class=" bg-gray-900 w-[100%] h-[2%]">  
-                    </div>
-                    <div class=" center text-gray-300 mt-4 font-inter font-light">
-                        <p>Copyright © 2023 Actuary Academy. All rights reserved</p>
-                    </div>
-                </div>
-            </section>
+    <Footer></Footer>
 </template>
-<!-- <script>
-export default{
-    mounted(){
-        const text = document.querySelector('.text p');
-        text.innerHTML = text.innerText.split("").map(
-            (char, i) => 
-            `<span style=" transform:rotate(${(156.3-(i*12.34))}deg)">${char}</span>`
-        ).join("")
-    }
-}
-</script> -->
-<!-- Animasi Muter -->
-<!-- <style>
-#text{
-    animation: animate 5s linear infinite;
-}
-@keyframes animate {
-    from{
-        transform: rotate(0deg);
-    }
-    to{
-        transform: rotate(360deg);
-    }
-}
-</style> -->
+
+<script setup>
+import Footer from '@/components/Footer.vue'
+
+</script>
+
 
