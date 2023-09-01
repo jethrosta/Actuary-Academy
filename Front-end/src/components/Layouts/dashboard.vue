@@ -7,11 +7,11 @@ import Dropdown from '../Dropdown.vue';
 const isLoggedIn = ref(false)
 
 const productSubmenus = [
-  { title: 'Produk', link: 'Produk' },
-  { title: 'Tutor Privat', link: 'Produk' },
-  { title: 'Akademi', link: 'Produk' },
-  { title: 'Company Training', link: 'Produk' },
-  { title: 'Jasa Aktuaria', link: 'Produk' }
+  { title: 'Produk', link: 'products' },
+  { title: 'Tutor Privat', link: 'private-tutor' },
+  { title: 'Akademi', link: '#' },
+  { title: 'Company Training', link: 'company-training' },
+  { title: 'Jasa Aktuaria', link: '#' }
 ]
 
 </script>
@@ -54,10 +54,10 @@ const productSubmenus = [
         </div>
         <!-- Button Navigation -->
         <div id="navbar" class="space-x-20 md:flex hidden">
-          <RouterLink to="TentangKami" class="hover:text-sec_blue">Tentang Kami</RouterLink>
-          <Dropdown title="Produk" mainlink="Produk" :items="productSubmenus" class="hover:text-sec_blue" />
-          <RouterLink to="Testimoni" class="hover:text-sec_blue">Testimoni</RouterLink>
-          <RouterLink to="Karir" class="hover:text-sec_blue">Karir</RouterLink>
+          <RouterLink to="about" class="hover:text-sec_blue">Tentang Kami</RouterLink>
+          <Dropdown title="Produk" :items="productSubmenus" class="hover:text-sec_blue" />
+          <RouterLink to="testimonies" class="hover:text-sec_blue">Testimoni</RouterLink>
+          <RouterLink to="career" class="hover:text-sec_blue">Karir</RouterLink>
         </div>
         <div v-if="isLoggedIn" id="UserButton" class="flex space-x-4">
           <div>

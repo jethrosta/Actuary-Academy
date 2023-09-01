@@ -23,31 +23,31 @@ const router = createRouter({
       component: () => import('../components/Layouts/AuthUser.vue'),
       children: [
         {
-          path: "tentangkami",
-          name: 'TentangKami',
+          path: "about",
+          name: 'Tentang Kami',
           component: () => import('../components/Pages/About.vue')
 
         },
         {
-          path: 'Produk',
+          path: 'products',
           name: 'Produk',
           component: () => import('../components/Pages/Product.vue')
 
         },
         {
-          path: 'Testimoni',
+          path: 'testimonies',
           name: 'Testimoni',
           component: () => import('../components/Pages/Testimone.vue')
 
         },
         {
-          path: 'Karir',
+          path: 'career',
           name: 'Karir',
           component: () => import('../components/Pages/Career.vue')
 
         },
         {
-          path: 'Materi',
+          path: 'materials',
           name: 'Materi',
           component: () => import('../components/Pages/Materi.vue')
         },
@@ -64,31 +64,37 @@ const router = createRouter({
       component: () => import('../components/Layouts/dashboard.vue'),
       children: [
         {
-          path: "tentangkami",
-          name: 'TentangKami',
+          path: "about",
+          name: 'Tentang Kami',
           component: () => import('../components/Pages/About.vue')
-
         },
         {
-          path: 'Produk',
+          path: 'products',
           name: 'Produk',
           component: () => import('../components/Pages/Product.vue')
-
         },
         {
-          path: 'Testimoni',
+          path: 'testimonies',
           name: 'Testimoni',
           component: () => import('../components/Pages/Testimone.vue')
-
         },
         {
-          path: 'Karir',
+          path: 'career',
           name: 'Karir',
           component: () => import('../components/Pages/Career.vue')
-
         },
         {
-          path: 'Materi',
+          path: 'private-tutor',
+          name: 'Tutor Privat',
+          component: () => import('../components/Pages/PrivateTutor.vue')
+        },
+        {
+          path: 'company-training',
+          name: 'Company Training',
+          component: () => import('../components/Pages/CompanyTraining.vue')
+        },
+        {
+          path: 'materials',
           name: 'Materi',
           component: () => import('../components/Pages/Materi.vue')
         },
@@ -98,14 +104,9 @@ const router = createRouter({
           component: () => import('../components/Pages/landingPage.vue')
         },
         {
-          path: 'profil',
+          path: 'profile',
           name: 'profil',
           component: () => import('../components/Pages/Profil.vue')
-        },
-        {
-          path: 'Materi',
-          name: 'Materi',
-          component: () => import('../components/Pages/Materi.vue')
         }
       ]
     }
@@ -116,13 +117,14 @@ router.beforeEach((to, from, next) => {
   const publicPages = [
     '/masuk',
     '/daftar',
-    '/Testimoni',
-    '/TentangKami',
-    '/Produk',
-    '/Karir',
-    '/profil',
-    '/Landingpage',
-    '/Materi',
+    '/testimonies',
+    '/about',
+    '/products',
+    '/career',
+    '/private-tutor',
+    '/company-training',
+    '/profile',
+    '/materials',
     '/']
   const authRequired = !publicPages.includes(to.path)
   const loggedIn = localStorage.getItem('user')

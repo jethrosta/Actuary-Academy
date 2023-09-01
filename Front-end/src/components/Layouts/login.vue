@@ -1,5 +1,5 @@
 <template>
-   <body class=" w-auto flex justify-center bg-[#0066CC]" style="background-image: url('src/assets/Background.png')">
+   <div class=" w-auto flex justify-center bg-[#0066CC]" style="background-image: url('src/assets/Background.png')">
         <div class="container flex flex-row justify-center align-middle p-4">
             <div class="py-10 px-8">
                 <div class="w-[30rem] font-roboto text-white">
@@ -62,7 +62,7 @@
                 </div>
             </div>
         </div>
-    </body>
+    </div>
 </template>
 
 <script>

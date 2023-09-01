@@ -7,7 +7,7 @@ const name = ref('Nama')
 const occupation = ref('Jabatan Jabatan Jabatan Jabatan Jabatan Jabatan Jabatan Jabatan')
 const comment = ref('Actuary Academy membantu saya dalam menentukan pricing dalam dunia asuransi. Materi pricing disajikan dengan video pembelajaran yang sangat mudah dipahami serta harga yang terjangkau. Saya menantikan Actuary Academy yang lebih baik untuk kedepannya')
 const stars = ref(5)
-const imgUrl = ref('src/assets/Testimone/profile.png')
+const imgUrl = ref('src/assets/testimonies/profile.png')
 
 </script>
 <template>
@@ -15,7 +15,7 @@ const imgUrl = ref('src/assets/Testimone/profile.png')
         <div class="">
             <div class="text-white bg-main_blue px-32">
                 <div class="w-3/5 pt-14 pb-16">
-                    <RouterLink to="/Testimoni" class="flex items-center text-lg mb-2">
+                    <RouterLink to="/testimonies" class="flex items-center text-lg mb-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left">
                             <polyline points="15 18 9 12 15 6"></polyline>
                         </svg>

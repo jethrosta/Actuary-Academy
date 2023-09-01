@@ -152,7 +152,7 @@ const testimonies = [
                 </Splide>
             </div>
             <div class="flex justify-center mt-6">
-                <RouterLink to="/Testimoni" class="text-white font-inter font-bold text-2xl">Testimoni Lainnya</RouterLink>
+                <RouterLink to="/testimonies" class="text-white font-inter font-bold text-2xl">Testimoni Lainnya</RouterLink>
             </div>
         </section>
         <section id="details" class="bg-white">

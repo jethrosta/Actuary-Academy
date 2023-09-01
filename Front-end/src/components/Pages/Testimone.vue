@@ -14,19 +14,19 @@ const splideOptions = {
 }
 
 const testimonies = [
-    { name: 'Person 1', image: '/src/assets/testimone/Rectangle 64.png', stars: 5 },
-    { name: 'Person 2', image: '/src/assets/testimone/Rectangle 63.png', stars: 5 },
-    { name: 'Person 3', image: '/src/assets/testimone/Rectangle 57.png', stars: 5 },
-    { name: 'Person 4', image: '/src/assets/testimone/Rectangle 62.png', stars: 5 },
-    { name: 'Person 5', image: '/src/assets/testimone/Rectangle 61.png', stars: 5 },
-    { name: 'Person 6', image: '/src/assets/testimone/Rectangle 60.png', stars: 5 },
-    { name: 'Person 7', image: '/src/assets/testimone/Rectangle 59.png', stars: 5 },
-    { name: 'Person 8', image: '/src/assets/testimone/Rectangle 58.png', stars: 5 }
+    { name: 'Person 1', image: '/src/assets/testimonies/Rectangle 64.png', stars: 5 },
+    { name: 'Person 2', image: '/src/assets/testimonies/Rectangle 63.png', stars: 5 },
+    { name: 'Person 3', image: '/src/assets/testimonies/Rectangle 57.png', stars: 5 },
+    { name: 'Person 4', image: '/src/assets/testimonies/Rectangle 62.png', stars: 5 },
+    { name: 'Person 5', image: '/src/assets/testimonies/Rectangle 61.png', stars: 5 },
+    { name: 'Person 6', image: '/src/assets/testimonies/Rectangle 60.png', stars: 5 },
+    { name: 'Person 7', image: '/src/assets/testimonies/Rectangle 59.png', stars: 5 },
+    { name: 'Person 8', image: '/src/assets/testimonies/Rectangle 58.png', stars: 5 }
 ]
 
 </script>
 <template>
-    <body class="mb-20">
+    <div class="mb-20">
         <div class="mt-[4.5rem]">
             <div class="center my-5">
                 <h1 class="text-sec_blue font-inter font-bold text-5xl">Lebih dari 1000 orang mempercayai kami</h1>
@@ -49,7 +49,7 @@ const testimonies = [
                                 <p class="text-white font-bold font-inter text-base">{{ testi.name }}</p>
                                 <p class="text-lg text-white">Jabatan Jabatan Jabatan<br>Jabatan Jabatan</p>
                             </div>
-                            <RouterLink to="/profil" class="hover:transition-transform hover:scale-125">
+                            <RouterLink to="/profile" class="hover:transition-transform hover:scale-125">
                                 <svg class="h-full w-6" preserve-aspect-ratio="none" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M 10.667 1.667 H 5 C 3.435 1.667 2.167 2.935 2.167 4.5 V 21.5 C 2.167 23.065 3.435 24.333 5 24.333 H 22 C 23.565 24.333 24.833 23.065 24.833 21.5 V 15.833 M 12.083 14.417 L 24.833 1.667 M 24.833 1.667 V 8.75 M 24.833 1.667 H 17.75" stroke="white" stroke-width="2.83333" stroke-linecap="round" stroke-linejoin="round"></path>
                                 </svg>
@@ -59,6 +59,6 @@ const testimonies = [
                 </SplideSlide>
             </Splide>
         </div>
-    </body>
+    </div>
     <Footer></Footer>
 </template>

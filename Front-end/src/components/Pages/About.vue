@@ -1,5 +1,5 @@
 <template>
-    <main class=" w-screen content-center items-center font-inter">
+    <main class=" w-full content-center items-center font-inter">
         
         <div class="bg-scroll bg-contain bg-repeat-x bg-sec_blue" style="background-image: url('src/assets/Tentang Kami/1.png');">
             <div class=" bg-gradient-to-r from-blue-600 to-transparent bg-repeat-x">
@@ -104,7 +104,7 @@
             <h1 class=" text-center text-white font-bold text-4xl pt-4 pb-20">Alumni Kami Tersebar <br> di Berbagai Perusahaan dan Universitas</h1>
         </div>
         <div class="items-center flex justify-center">
-            <img src="src/assets/Alumni.png" alt="" class="-mt-60 -mb-40">
+            <img src="src/assets/Alumni.png" alt="" class="w-full -mt-[18rem] -mb-[14rem]">
         </div>
     </main>
     <Footer></Footer>

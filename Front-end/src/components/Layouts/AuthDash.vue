@@ -59,17 +59,17 @@ export default{
         <!-- Button Navigation -->
         <div id="navbar" class=" space-x-20 pl-[10%] flex">
           <div>
-              <RouterLink to="user/TentangKami" class=" ">Tentang Kami</RouterLink>
+              <RouterLink to="user/about" class=" ">Tentang Kami</RouterLink>
           </div>
           <div class=" flex">
-              <RouterLink to="user/Produk" class=" ">Produk</RouterLink>
+              <RouterLink to="user/products" class=" ">Produk</RouterLink>
               <select class=" bg-transparent"></select>
           </div>
           <div>
-              <RouterLink to="user/Testimoni" class="">Testimoni</RouterLink>
+              <RouterLink to="user/testimonies" class="">Testimoni</RouterLink>
           </div>
           <div class=" flex">
-              <RouterLink to="user/Karir" class="">Karir</RouterLink>
+              <RouterLink to="user/career" class="">Karir</RouterLink>
               <select class=" bg-transparent"></select>
           </div>
         </div>
