@@ -3,29 +3,64 @@ import Footer from '../Footer.vue';
 
 </script>
 <template>
-    <main class="bg-career bg-cover font-inter">
-        <div class="flex flex-col items-center pt-14 pb-20 px-28">
-            <div class="-mb-14">
-                <img src='data:image/svg+xml,<svg width="377" height="181" viewBox="0 0 377 181" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M368 172L197.766 38.2785C192.327 34.0064 184.673 34.0064 179.234 38.2785L9 172" stroke="white" stroke-width="17" stroke-linecap="round"/><g filter="url(%23filter0_d_1_697)"><circle cx="188.5" cy="51.5" r="26.5" fill="%230D1C9F"/></g><defs><filter id="filter0_d_1_697" x="132" y="0" width="113" height="113" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/><feOffset dy="5"/><feGaussianBlur stdDeviation="15"/><feComposite in2="hardAlpha" operator="out"/><feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_697"/><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_697" result="shape"/></filter></defs></svg>'>
+    <main class="bg-academy bg-cover font-inter">
+        <div class="flex flex-col pt-14 pb-20 px-36">
+            <div class="self-center">
+                <img class="w-[25rem]" src="src/assets/academy/image.png"/>
             </div>
-            <div class="bg-sec_blue border-white border-4 px-10 py-6 text-center font-bold rounded-[3rem]">
-                <div class="text-xl text-white mb-3">Halaman ini</div>
-                <div class="text-4xl bg-white px-10 py-4 text-main_blue rounded-full">SEGERA HADIR!</div>
+            <div class="bg-sec_blue px-10 py-6 rounded-2xl">
+                <div class="text-3xl font-bold text-white flex items-center mb-3">
+                    <div class="w-12 h-12 mr-4">
+                        <svg viewBox="0 0 29 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M25.5947 8.77906L13.8473 2.25275L2.09998 8.77906L6.01577 10.9545M25.5947 8.77906L21.6789 10.9545M25.5947 8.77906V8.77906C26.3947 9.17904 26.9 9.99665 26.9 10.891V17.9157M6.01577 10.9545L13.8473 15.3054L21.6789 10.9545M6.01577 10.9545V18.7861L13.8473 23.137L21.6789 18.7861L21.6789 10.9545" stroke="white" stroke-width="2.76" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div>Akademi</div>
+                </div>
+                <div class="text-white">
+                    Ini isinya deskripsi tentang akademi. Ini isinya deskripsi tentang akademi. Ini isinya deskripsi tentang akademi. Ini isinya deskripsi tentang akademi. Ini isinya deskripsi tentang akademi. Ini isinya deskripsi tentang akademi. Ini isinya deskripsi tentang akademi. Ini isinya deskripsi tentang akademi. Ini isinya deskripsi tentang akademi. Ini isinya deskripsi tentang akademi. Ini isinya deskripsi tentang akademi.
+                </div>
             </div>
-            <div class="bg-main_blue w-64 h-[2px] mt-9 mb-6"></div>
-            <div class="text-main_blue max-w-lg text-center">
-                Kami sedang dalam tahap pengembangan halaman ini untuk memberikan pengalaman yang lebih baik kepada Anda!
-            </div>
-            <div class="bg-sec_blue text-white font-bold px-6 py-2 rounded-full mt-8">
-                Kembali ke Halaman Utama
+            <div class="flex mt-20 justify-between">
+                <div class="text-main_blue text-4xl font-semibold">Produk Lainnya</div>
+                <div class="flex space-x-4">
+                    <div class="flex items-center bg-main_blue text-white font-semibold px-4 py-2 rounded-xl cursor-pointer">
+                        <div class="inline-block w-4 h-4 mr-3">
+                            <svg viewBox="0 0 30 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.53802 2.17804H27.6619" stroke="white" stroke-width="2.75112" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M1.53802 18.5001H27.6619" stroke="white" stroke-width="2.75112" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M25.4929 2.17834H3.71921V18.5114H25.4929V2.17834Z" stroke="white" stroke-width="2.75112" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14.5998 19.5904V27.2118" stroke="white" stroke-width="2.75112" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M10.2497 27.2116V26.1212L14.5999 22.8614" stroke="white" stroke-width="2.75112" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M18.95 27.2116V26.1212L14.5998 22.8614" stroke="white" stroke-width="2.75112" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div>Jasa Aktuaria</div>
+                    </div>
+                    <div class="flex items-center bg-main_blue text-white font-semibold px-4 py-2 rounded-xl cursor-pointer">
+                        <div class="inline-block w-4 h-4 mr-3">
+                            <svg viewBox="0 0 29 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.475 7.50739H4.97498C3.45619 7.50739 2.22498 8.7386 2.22498 10.2574V22.6324C2.22498 24.1512 3.45619 25.3824 4.97498 25.3824H24.225C25.7438 25.3824 26.975 24.1512 26.975 22.6324V10.2574C26.975 8.7386 25.7438 7.50739 24.225 7.50739H18.725M10.475 7.50739V4.75739C10.475 3.2386 11.7062 2.00739 13.225 2.00739H15.975C17.4938 2.00739 18.725 3.2386 18.725 4.75739V7.50739M10.475 7.50739H18.725" stroke="white" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div>Company Training</div>
+                    </div>
+                    <div class="flex items-center bg-main_blue text-white font-semibold px-4 py-2 rounded-xl cursor-pointer">
+                        <div class="inline-block w-4 h-4 mr-3">
+                            <svg viewBox="0 0 29 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14.5 4.07395V20.6073M14.5 4.07395L16.888 2.88005C18.0357 2.30626 19.3012 2.00753 20.5844 2.00749L24.1441 2.0074C25.666 2.00736 26.8997 3.24105 26.8997 4.76289V15.7848C26.8997 17.3066 25.666 18.5403 24.1442 18.5403H20.5849C19.3014 18.5403 18.0355 18.8392 16.8876 19.4133L14.5 20.6073M14.5 4.07395L12.1119 2.88013C10.9642 2.30636 9.69869 2.00765 8.41553 2.00765H4.85572C3.3339 2.00765 2.10022 3.24133 2.10022 4.76315V15.7851C2.10022 17.307 3.3339 18.5406 4.85572 18.5406H8.41526C9.69859 18.5406 10.9643 18.8394 12.1121 19.4133L14.5 20.6073" stroke="#F2F2F2" stroke-width="2.7555" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div>Tutor Privat</div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
     <Footer></Footer>
 </template>
 <style>
-    .bg-career {
-        background-image: url('data:image/svg+xml,<svg width="1440" height="625" viewBox="0 0 1440 625" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(%23clip0_23_1249)"><rect width="1440" height="625" fill="white"/><path opacity="0.2" d="M82.0896 480.312C82.0896 480.312 573.593 695.431 801.121 442.987C1028.65 190.542 1520.15 405.661 1520.15 405.661L1459.69 -759.07L21.6276 -684.419L82.0896 480.312Z" fill="%230066CC"/><path opacity="0.5" d="M2551.82 380.976C2551.82 380.976 1876.03 841.753 1372.41 442.2C868.795 42.6466 192.999 503.424 192.999 503.424L93.8243 -1407.06L2452.65 -1529.51L2551.82 380.976Z" fill="%230066CC"/><path d="M-641.601 455.626C-641.601 455.626 78.2734 843.953 537.811 394.402C997.349 -55.1494 1717.22 333.178 1717.22 333.178L1506.82 -3719.92L-852 -3597.47L-641.601 455.626Z" fill="%230066CC"/><path opacity="0.2" d="M1528.12 667.028C1528.12 667.028 878.001 938.664 371.934 426.225C-134.132 -86.2136 -647.666 887.166 -647.666 887.166L-647.666 2872.67L999.713 3204.14L1528.12 667.028Z" fill="white"/><path opacity="0.5" d="M-661.515 586.205C-661.515 586.205 51.7065 302.238 516.809 665.663C981.912 1029.09 1740.06 783.6 1740.06 783.6L1520.77 3302.67L-835.874 3143.75L-661.515 586.205Z" fill="white"/></g><defs><clipPath id="clip0_23_1249"><rect width="1440" height="625" fill="white"/></clipPath></defs></svg>');
+    .bg-academy {
         background-color: #fff;
         background-size: 100% auto;
         background-position: top -150px left 0px;
