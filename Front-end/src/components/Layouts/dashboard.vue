@@ -30,8 +30,6 @@ function toggleProfileMenu() {
     isProfileMenuOpen.value = false;
   } else {
     isProfileMenuOpen.value = true;
-    
-    
   } 
 }
 
@@ -98,10 +96,10 @@ function toggleProfileMenu() {
 
         <div v-else id="UserButton" class="flex space-x-4 pb-3">
           <div>
-            <RouterLink to="/masuk"  class="bg-main_blue hover:bg-[#1a4ab3] border-sec_blue border rounded-md py-[0.625rem] px-[1.25rem]">Masuk</RouterLink>
+            <RouterLink to="/login"  class="bg-main_blue hover:bg-[#1a4ab3] border-sec_blue border rounded-md py-[0.625rem] px-[1.25rem]">Masuk</RouterLink>
           </div>
           <div>
-            <RouterLink to="/daftar" class="bg-sec_blue hover:bg-[#15419f] rounded-md py-[0.625rem] px-[1.25rem] ">Daftar</RouterLink>
+            <RouterLink to="/register" class="bg-sec_blue hover:bg-[#15419f] rounded-md py-[0.625rem] px-[1.25rem] ">Daftar</RouterLink>
           </div>
         </div>
 

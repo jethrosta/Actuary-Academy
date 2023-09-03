@@ -1,9 +1,11 @@
 <template>
   <div class="menu-item scrollbar-none" @mouseover="openDropdown" @mouseleave="closeDropdown">
-    <RouterLink :to="{ name:`${mainLink}` }">{{ title }}</RouterLink>
-    <svg class="h-2 w-7 inline-block " preserve-aspect-ratio="none" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M 11 1 L 5.804 6.909 L 1 1" :stroke=" isOpen ? '#0D1C9F' : 'white' " stroke-width="1.57025"></path>
-    </svg>
+    <div class="cursor-pointer">
+      <RouterLink :to="{ name:`${mainLink}` }">{{ title }}</RouterLink>
+      <svg class="h-2 w-7 inline-block " preserve-aspect-ratio="none" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 11 1 L 5.804 6.909 L 1 1" :stroke=" isOpen ? '#0D1C9F' : 'white' " stroke-width="1.57025"></path>
+      </svg>
+    </div>
 
     <transition name="fade" appear>
       <div class="relative translate-y-3 font-medium" v-if="isOpen">

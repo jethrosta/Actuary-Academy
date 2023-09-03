@@ -13,21 +13,25 @@ const splideOptions = {
 const products = [
     {
         name: 'Tutor Privat',
+        url: '/private-tutor',
         desc: 'Actuary Academy menyediakan Tutor Privat untuk mata kuliah aktuaria dan mata ujian PAI.',
         icon: 'src/assets/Iconbook.png'
     },
     {
         name: 'Akademi',
+        url: '/academy',
         desc: 'Actuary Academy menyediakan video pembelajaran, pembahasan soal, dan pelaksanaan try out.',
         icon: 'src/assets/IconToga.png'
     },
     {
         name: 'Company Training',
+        url: '/company-training',
         desc: 'Actuary Academy menyediakan Tutor Privat pembelajaran mata ujian PAI untuk perusahaan.',
         icon: 'src/assets/Iconsuitcase.png'
     },
     {
         name: 'Jasa Aktuaria',
+        url: '/actuarial-services',
         desc: 'Actuary Academy menyediakan jasa yang membantu proyek-proyek seputar aktuaria.',
         icon: 'src/assets/Presentation.png'
     }
@@ -71,9 +75,9 @@ const testimonies = [
                 <p class="text-xl text-white font-inter font-bold">A head start to your Indonesian Actuarial profession certification</p>
             </div>
             <div class="center mt-10">
-                <div class="bg-[#F26D0F] px-6 py-3 mb-10 rounded-md shadow-2xl">
-                    <p class="text-white text-2xl font-bold ">REGISTER NOW</p>
-                </div>
+                <RouterLink to="register" class="bg-[#F26D0F] px-6 py-3 mb-10 rounded-md shadow-2xl text-white text-2xl font-bold">
+                    REGISTER NOW
+                </RouterLink>
             </div>
             <div class="center">
                 <hr class="bg-white w-[50%] h-[1%]">  
@@ -92,7 +96,7 @@ const testimonies = [
                         </div>
                         <div class="flex flex-col items-start">
                             <p class="pb-8 text-justify">{{ product.desc }}</p>
-                            <button class="detail">Lihat Detail</button>
+                            <RouterLink :to="product.url" class="detail">Lihat Detail</RouterLink>
                         </div>
                     </div>
                 </div> 
@@ -161,10 +165,14 @@ const testimonies = [
                     <div class="mr-16">
                         <img class="w-[30rem]" src="src/assets/testimoni2.png"/>
                     </div>
-                    <div class="pt-16">
-                        <p class="mb-1 text-5xl font-inter font-bold text-[#0066CC]"> Daftar Menjadi Tutor!</p>
-                        <p class="text-justify text-2xl font-inter text-main_blue mb-8">Mari bergabung dan berkontribusi bersama Actuary Academy untuk melahirkan calon Aktuaris hebat di seluruh Indonesia dan dunia. </p>
-                        <button class="bg-main_blue text-white font-inter font-bold text-2xl rounded-lg px-4 py-3 shadow-xl">Detail Karir Lebih Lanjut</button>
+                    <div class="pt-16 font-inter">
+                        <p class="mb-1 text-5xl font-bold text-[#0066CC]"> Daftar Menjadi Tutor!</p>
+                        <p class="text-justify text-2xl text-main_blue mb-8">Mari bergabung dan berkontribusi bersama Actuary Academy untuk melahirkan calon Aktuaris hebat di seluruh Indonesia dan dunia. </p>
+                        <div class="font-bold text-2xl">
+                            <RouterLink to="career" class="inline-block bg-main_blue text-white rounded-lg px-4 py-3 shadow-xl">
+                                Detail Karir Lebih Lanjut
+                            </RouterLink>
+                        </div>
                     </div>
                 </div>
             </div>

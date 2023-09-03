@@ -1,3 +1,64 @@
+<script setup>
+import { useStore } from "../../store/index.js";
+import router from "../../router/index.js";
+import { ref, computed, onBeforeMount } from 'vue';
+import { Form, Field, ErrorMessage } from "vee-validate";
+import * as yup from "yup"
+import { RouterLink } from 'vue-router';
+
+//Validations
+const schema = yup.object().shape({
+  name: yup.string().required("Name is required"),
+  email: yup.string().required("Email is required").email("Email is invalid!"),
+  password: yup.string().required("Password is required!").min(6, "Password is too short - should be 6 chars minimum!"),
+  confirm: yup.string().required("Konfirmasi password anda!").oneOf([yup.ref('password'), null], 'Passwords must match')
+});
+
+//Constants
+const store = useStore()
+const loading = ref(false)
+const message = ref("")
+
+const user = ref({
+  name: "",
+  email: "",
+  password: ""
+});
+
+const loginStatus = computed(() => store.loginState.status.loggedIn);
+
+onBeforeMount(() => {
+    if (loginStatus.value) {
+        router.push("/");
+    }
+});
+
+function handleRegister() {
+    console.log('Registering!');
+    loading.value = true;
+
+    store.register(user.value)
+        .then(() => {
+            loading.value = false;
+            router.push({name:"login"}).then(() => {
+                router.go(0);
+            });
+        })
+        .catch(error => {
+            loading.value = false;
+            message.value =
+                (error.response && error.response.data && error.response.data.message) ||
+                error.message ||
+                error.toString();
+            }
+        );
+}
+
+function goBack() {
+    router.go(-1);
+}
+
+</script>
 <template>
     <body class=" w-auto flex justify-center bg-scroll bg-[#0066CC]" style="background-image: url('src/assets/Background.png');">
         <div class=" container flex flex-row justify-center align-middle p-4 ">
@@ -37,7 +98,7 @@
                             <input type="checkbox" class="border-gray-400 scale-125 ">
                             <div class=" text-slate-600 px-3 flex gap-1">
                                 <span>Saya menyetujui</span>
-                                <a href="" class=" hover:cursor-pointer underline ">Ketentuan & Kebijakan Privasi</a>
+                                <a href="javascript:void(0)" class="hover:cursor-pointer underline">Ketentuan & Kebijakan Privasi</a>
                             </div>
                         </div>
                         <div>
@@ -60,7 +121,7 @@
                         </div>
                         <div class=" center space-x-2 font-bold mt-5">
                             <p class=" text-main_blue">Sudah Memiliki akun?</p>
-                            <RouterLink to="/masuk" class=" text-sec_blue underline underline-offset-2 ">Masuk</RouterLink>
+                            <RouterLink to="/login" class=" text-sec_blue underline underline-offset-2 ">Masuk</RouterLink>
                         </div>
                     </Form>
                 </div>
@@ -80,64 +141,3 @@
         </div>
     </body>
 </template>
-
-<script setup>
-import { useStore } from "../../store/index.js";
-import router from "../../router/index.js";
-import { ref, computed, onBeforeMount } from 'vue';
-import { Form, Field, ErrorMessage } from "vee-validate";
-import * as yup from "yup"
-
-//Validations
-const schema = yup.object().shape({
-  name: yup.string().required("Name is required"),
-  email: yup.string().required("Email is required").email("Email is invalid!"),
-  password: yup.string().required("Password is required!").min(6, "Password is too short - should be 6 chars minimum!"),
-  confirm: yup.string().required("Konfirmasi password anda!").oneOf([yup.ref('password'), null], 'Passwords must match')
-});
-
-//Constants
-const store = useStore()
-const loading = ref(false)
-const message = ref("")
-
-const user = ref({
-  name: "",
-  email: "",
-  password: ""
-});
-
-const loginStatus = computed(() => store.loginState.status.loggedIn);
-
-onBeforeMount(() => {
-    if (loginStatus.value) {
-        router.push("/");
-    }
-});
-
-function handleRegister() {
-    console.log('Registering!');
-    loading.value = true;
-
-    store.register(user.value)
-        .then(() => {
-            loading.value = false;
-            router.push({name:"masuk"}).then(() => {
-                router.go(0);
-            });
-        })
-        .catch(error => {
-            loading.value = false;
-            message.value =
-                (error.response && error.response.data && error.response.data.message) ||
-                error.message ||
-                error.toString();
-            }
-        );
-}
-
-function goBack() {
-    router.go(-1);
-}
-
-</script>

@@ -1,3 +1,61 @@
+<script setup>
+import { useStore } from "../../store/index.js";
+import router from "../../router/index.js";
+import { RouterLink } from 'vue-router';
+import { ref, computed, onBeforeMount } from 'vue';
+import { Form, Field, ErrorMessage } from "vee-validate";
+import * as yup from "yup"
+
+//Validations
+const schema = yup.object().shape({
+  email: yup.string().required("Email diperlukan!").email("Email tidak valid!"),
+  password: yup.string().required("Password is required!")
+});
+
+//Constants
+const store = useStore()
+const loading = ref(false)
+const message = ref("")
+
+const user = ref({
+  email: "",
+  password: ""
+});
+
+const loginStatus = computed(() => store.loginState.status.loggedIn);
+
+onBeforeMount(() => {
+    if (loginStatus.value) {
+        router.push("/");
+    }
+});
+
+function handleLogin() {
+    console.log('Logging In!');
+    loading.value = true;
+
+    store.login(user.value)
+       .then(() => {
+           router.push("/").then(() => {
+               router.go();
+           });
+           loading.value = false;
+       })
+       .catch(error => {
+           loading.value = false;
+           message.value =
+               (error.response && error.response.data && error.response.data.message) ||
+               error.message ||
+               error.toString();
+           }
+       );
+}
+
+function goBack() {
+    router.go(-1);
+}
+
+</script>
 <template>
     <body class=" w-auto flex justify-center bg-[#0066CC]" style="background-image: url('src/assets/Background.png')">
          <div class="container flex flex-row justify-center align-middle p-4">
@@ -43,7 +101,7 @@
                          </div>
                          <div class=" center space-x-2 font-bold mt-5">
                              <p class=" text-main_blue">Belum Memiliki akun?</p>
-                             <RouterLink to="/daftar" class=" text-sec_blue underline underline-offset-2 ">Daftar Sekarang</RouterLink>
+                             <RouterLink to="/register" class=" text-sec_blue underline underline-offset-2 ">Daftar Sekarang</RouterLink>
                          </div>
                      </form>
                  </div>
@@ -64,62 +122,3 @@
          </div>
      </body>
  </template>
- 
- <script setup>
- import { useStore } from "../../store/index.js";
- import router from "../../router/index.js";
- import { RouterLink } from 'vue-router';
- import { ref, computed, onBeforeMount } from 'vue';
- import { Form, Field, ErrorMessage } from "vee-validate";
- import * as yup from "yup"
- 
- //Validations
- const schema = yup.object().shape({
-   email: yup.string().required("Email diperlukan!").email("Email tidak valid!"),
-   password: yup.string().required("Password is required!")
- });
- 
- //Constants
- const store = useStore()
- const loading = ref(false)
- const message = ref("")
- 
- const user = ref({
-   email: "",
-   password: ""
- });
- 
- const loginStatus = computed(() => store.loginState.status.loggedIn);
- 
- onBeforeMount(() => {
-     if (loginStatus.value) {
-         router.push("/");
-     }
- });
- 
- function handleLogin() {
-     console.log('Logging In!');
-     loading.value = true;
- 
-     store.login(user.value)
-        .then(() => {
-            router.push("/").then(() => {
-                router.go();
-            });
-            loading.value = false;
-        })
-        .catch(error => {
-            loading.value = false;
-            message.value =
-                (error.response && error.response.data && error.response.data.message) ||
-                error.message ||
-                error.toString();
-            }
-        );
- }
- 
- function goBack() {
-     router.go(-1);
- }
- 
- </script>

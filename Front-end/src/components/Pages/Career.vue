@@ -1,4 +1,5 @@
 <script setup>
+import { RouterLink } from 'vue-router';
 import Footer from '../Footer.vue';
 
 </script>
@@ -16,9 +17,9 @@ import Footer from '../Footer.vue';
             <div class="text-main_blue max-w-lg text-center">
                 Kami sedang dalam tahap pengembangan halaman ini untuk memberikan pengalaman yang lebih baik kepada Anda!
             </div>
-            <div class="bg-sec_blue text-white font-bold px-6 py-2 rounded-full mt-8">
+            <RouterLink to="/" class="bg-sec_blue text-white font-bold px-6 py-2 rounded-full mt-8">
                 Kembali ke Halaman Utama
-            </div>
+            </RouterLink>
         </div>
     </main>
     <Footer></Footer>

@@ -7,12 +7,12 @@ const router = createRouter({
   },
   routes: [
     {
-      path: '/masuk',
+      path: '/login',
       name: 'masuk',
       component: () => import('../components/Layouts/login.vue')
     },
     {
-      path: '/daftar',
+      path: '/register',
       name: 'daftar',
       component: () => import('../components/Layouts/register.vue')
     },
@@ -32,19 +32,24 @@ const router = createRouter({
           component: () => import('../components/Pages/About.vue')
         },
         {
-          path: '/products',
-          name: 'Produk',
-          component: () => import('../components/Pages/Product.vue')
-        },
-        {
           path: '/testimonies',
           name: 'Testimoni',
           component: () => import('../components/Pages/Testimone.vue')
         },
         {
+          path: '/profile',
+          name: 'profil',
+          component: () => import('../components/Pages/Profil.vue')
+        },
+        {
           path: '/career',
           name: 'Karir',
           component: () => import('../components/Pages/Career.vue')
+        },
+        {
+          path: '/products',
+          name: 'Produk',
+          component: () => import('../components/Pages/Product.vue')
         },
         {
           path: '/private-tutor',
@@ -62,21 +67,15 @@ const router = createRouter({
           component: () => import('../components/Pages/CompanyTraining.vue')
         },
         {
-          path: '/actuary-service',
+          path: '/actuarial-services',
           name: 'Jasa Aktuaria',
           component: () => import('../components/Pages/JasaAktuaria.vue')
-        },
-        {
-          path: '/profile',
-          name: 'profil',
-          component: () => import('../components/Pages/Profil.vue')
         },
         {
           path: '/A10',
           name: 'A10',
           component: () => import('../components/Pages/A10.vue')
         },
-
         {
           path: '/user',
           name: 'user',
@@ -115,32 +114,31 @@ const router = createRouter({
           name: 'Materi',
           component: () => import('../components/Pages/Materi.vue')
         },
-          ]
-        },
+      ]
+    },
   ]
 })
 
 router.beforeEach((to, from, next) => {
-  
   const publicPages = [
-    '/masuk',
-    '/daftar',
-    '/testimonies',
+    '/',
+    '/login',
+    '/register',
     '/about',
-    '/products',
+    '/testimonies',
+    '/profile',
     '/career',
+    '/products',
     '/private-tutor',
     '/academy',
     '/company-training',
-    '/actuary-service',
-    '/profile',
-    '/']
-
+    '/actuarial-services'
+  ]
   const authRequired = !publicPages.includes(to.path)
   const loggedIn = localStorage.getItem('user')
 
   if (authRequired && !loggedIn) {
-    next('/masuk')
+    next('/login')
   }
   else {
     next()
