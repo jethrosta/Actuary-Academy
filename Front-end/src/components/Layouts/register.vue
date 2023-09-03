@@ -1,5 +1,5 @@
 <template>
-    <div class=" w-auto flex justify-center bg-scroll bg-[#0066CC]" style="background-image: url('src/assets/Background.png');">
+    <body class=" w-auto flex justify-center bg-scroll bg-[#0066CC]" style="background-image: url('src/assets/Background.png');">
         <div class=" container flex flex-row justify-center align-middle p-4 ">
             <div class="py-10 px-8">
                 <div class="w-[30rem] font-roboto text-white">
@@ -11,21 +11,22 @@
                     </button>
                     <h1 class="lg:text-4xl md:text-3xl font-semibold">Siap untuk bergabung?</h1>
                     <p class="pt-0">Silahkan masukkan identitas Anda</p>
+
                     <Form @submit="handleRegister" :validation-schema="schema" class="pt-4">
                         <label class="flex flex-col">
                             <span class=" mt-4 my-2 block font-inter  after:content-['*'] after:ml-0.5 after:text-white text-sm font-medium text-white">Nama</span>
-                            <Field name="name" class=" text-black pl-8 shadow-2xl rounded-md h-14"
+                            <Field name="name" v-model="user.name" class=" text-black pl-8 shadow-2xl rounded-md h-14"
                                 type="text" placeholder="Masukkan nama Anda" />
                             <ErrorMessage name="name" component="div" className="text-red-500" />
 
                             <span class=" mt-4 my-2 block font-inter  after:content-['*'] after:ml-0.5 after:text-white text-sm font-medium text-white">Email</span>
-                            <Field name="email" class=" text-black pl-8 shadow-2xl rounded-md h-14" 
+                            <Field name="email" v-model="user.email" class=" text-black pl-8 shadow-2xl rounded-md h-14" 
                                 type="email" placeholder="Masukkan email Anda" />
                             <ErrorMessage name="email" component="div" className="text-red-500" />
 
                             <span class=" mt-4 my-2 block font-inter  after:content-['*'] after:ml-0.5 after:text-white text-sm font-medium text-white">Kata Sandi</span>
-                            <Field name="password" class=" text-black pl-8 shadow-2xl rounded-md h-14"
-                                type="password" v-model="password" placeholder="Masukkan kata sandi Anda" />
+                            <Field name="password" v-model="user.password" class=" text-black pl-8 shadow-2xl rounded-md h-14"
+                                type="password" placeholder="Masukkan kata sandi Anda" />
                             <ErrorMessage name="password" component="div" className="text-red-500" />
 
                             <Field name="confirm" class=" text-black pl-8 mt-4 shadow-2xl rounded-md h-14"
@@ -59,7 +60,7 @@
                         </div>
                         <div class=" center space-x-2 font-bold mt-5">
                             <p class=" text-main_blue">Sudah Memiliki akun?</p>
-                            <a to="./masuk" class=" text-sec_blue underline underline-offset-2 ">Masuk</a>
+                            <RouterLink to="/masuk" class=" text-sec_blue underline underline-offset-2 ">Masuk</RouterLink>
                         </div>
                     </Form>
                 </div>
@@ -77,65 +78,66 @@
                 </div>
             </div>
         </div>
-    </div>
+    </body>
 </template>
 
-<script>
+<script setup>
+import { useStore } from "../../store/index.js";
+import router from "../../router/index.js";
+import { ref, computed, onBeforeMount } from 'vue';
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup"
 
-export default {
-    name: "Register",
-    components: {
-        Form,
-        Field,
-        ErrorMessage,
-    },
-    data() {
-        const schema = yup.object().shape({
-            name: yup.string().required("Name is required"),
-            email: yup.string().required("Email is required").email("Email is invalid!"),
-            password: yup.string().required("Password is required!")
-        });
+//Validations
+const schema = yup.object().shape({
+  name: yup.string().required("Name is required"),
+  email: yup.string().required("Email is required").email("Email is invalid!"),
+  password: yup.string().required("Password is required!").min(6, "Password is too short - should be 6 chars minimum!"),
+  confirm: yup.string().required("Konfirmasi password anda!").oneOf([yup.ref('password'), null], 'Passwords must match')
+});
 
-        return {
-            loading: false,
-            message: "",
-            password: "",
-            schema,
-        };
-    },
-    computed: {
-        loggedIn() {
-            return this.$store.state.auth.status.loggedIn;
-        },
-    },
-    created() {
-        if (this.loggedIn) {
-            this.$router.push("/user");
-        }
-    },
-    methods: {
-        handleRegister(user) {
-            console.log('Registering');
-            this.loading = true;
-            this.$store.dispatch("auth/register", user).then(
-                () => {
-                    this.$router.push("/user");
-                },
-                (error) => {
-                    this.loading = false;
-                    this.message =
-                        (error.response &&
-                            error.response.data &&
-                            error.response.data.message) ||
-                        error.message ||
-                        error.toString();
-                }
-            );
-        },
+//Constants
+const store = useStore()
+const loading = ref(false)
+const message = ref("")
+
+const user = ref({
+  name: "",
+  email: "",
+  password: ""
+});
+
+const loginStatus = computed(() => store.loginState.status.loggedIn);
+
+onBeforeMount(() => {
+    if (loginStatus.value) {
+        router.push("/");
     }
+});
+
+function handleRegister() {
+    console.log('Registering!');
+    loading.value = true;
+
+    store.register(user.value)
+        .then(() => {
+            loading.value = false;
+            router.push({name:"masuk"}).then(() => {
+                router.go(0);
+            });
+        })
+        .catch(error => {
+            loading.value = false;
+            message.value =
+                (error.response && error.response.data && error.response.data.message) ||
+                error.message ||
+                error.toString();
+            }
+        );
 }
+
+function goBack() {
+    router.go(-1);
+}
+
 </script>
-
-

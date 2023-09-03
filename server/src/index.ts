@@ -20,13 +20,12 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 
 const server = http.createServer(app);
- 
+
 server.listen(8080, () => {
   console.log('Server running on http://localhost:8080');
 });
 
-const MONGO_URL = 'mongodb+srv://dandyzicky1:1morenight@actuary-academy.mfdok0k.mongodb.net/?retryWrites=true&w=majority'
-
+const MONGO_URL = 'mongodb+srv://tonisyd:0pplMhQIB4hWbvoA@aacluster1.vxyg1tc.mongodb.net/?retryWrites=true&w=majority'
 mongoose.Promise = Promise;
 mongoose.connect(MONGO_URL);
 

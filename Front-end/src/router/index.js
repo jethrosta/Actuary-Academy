@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   scrollBehavior() {
@@ -18,102 +17,111 @@ const router = createRouter({
       component: () => import('../components/Layouts/register.vue')
     },
     {
-      path: '/user',
-      name: 'user',
-      component: () => import('../components/Layouts/AuthUser.vue'),
-      children: [
-        {
-          path: "about",
-          name: 'Tentang Kami',
-          component: () => import('../components/Pages/About.vue')
-
-        },
-        {
-          path: 'products',
-          name: 'Produk',
-          component: () => import('../components/Pages/Product.vue')
-
-        },
-        {
-          path: 'testimonies',
-          name: 'Testimoni',
-          component: () => import('../components/Pages/Testimone.vue')
-
-        },
-        {
-          path: 'career',
-          name: 'Karir',
-          component: () => import('../components/Pages/Career.vue')
-
-        },
-        {
-          path: 'materials',
-          name: 'Materi',
-          component: () => import('../components/Pages/Materi.vue')
-        },
-        {
-          path: '',
-          name: 'Landingpage',
-          component: () => import('../components/Pages/landingPage.vue')
-        },
-      ]
-    },
-    {
       path: '/',
       name: 'dashboard',
       component: () => import('../components/Layouts/dashboard.vue'),
       children: [
         {
-          path: "about",
+          path: '',
+          name: 'Landingpage',
+          component: () => import('../components/Pages/landingPage.vue')
+        },
+        {
+          path: "/about",
           name: 'Tentang Kami',
           component: () => import('../components/Pages/About.vue')
         },
         {
-          path: 'products',
+          path: '/products',
           name: 'Produk',
           component: () => import('../components/Pages/Product.vue')
         },
         {
-          path: 'testimonies',
+          path: '/testimonies',
           name: 'Testimoni',
           component: () => import('../components/Pages/Testimone.vue')
         },
         {
-          path: 'career',
+          path: '/career',
           name: 'Karir',
           component: () => import('../components/Pages/Career.vue')
         },
         {
-          path: 'private-tutor',
+          path: '/private-tutor',
           name: 'Tutor Privat',
           component: () => import('../components/Pages/PrivateTutor.vue')
         },
         {
-          path: 'company-training',
+          path: '/academy',
+          name: 'Akademi',
+          component: () => import('../components/Pages/Academy.vue')
+        },
+        {
+          path: '/company-training',
           name: 'Company Training',
           component: () => import('../components/Pages/CompanyTraining.vue')
+        },
+        {
+          path: '/actuary-service',
+          name: 'Jasa Aktuaria',
+          component: () => import('../components/Pages/JasaAktuaria.vue')
+        },
+        {
+          path: '/profile',
+          name: 'profil',
+          component: () => import('../components/Pages/Profil.vue')
+        },
+        {
+          path: '/A10',
+          name: 'A10',
+          component: () => import('../components/Pages/A10.vue')
+        },
+
+        {
+          path: '/user',
+          name: 'user',
+          component: () => import('../components/UserPages/UserPage.vue'),
+          redirect: { name: 'Akun' },
+          children: [
+            {
+              path: 'account',
+              name: 'Akun',
+              component: () => import('../components/UserPages/Account.vue')
+            },
+            {
+              path: 'notification',
+              name: 'Notifikasi',
+              component: () => import('../components/UserPages/Notification.vue')
+            },
+            {
+              path: 'my-class',
+              name: 'Kelas Saya',
+              component: () => import('../components/UserPages/MyClass.vue')
+            },
+            {
+              path: 'my-cart',
+              name: 'Keranjang Saya',
+              component: () => import('../components/UserPages/MyCart.vue')
+            },
+            {
+              path: 'settings',
+              name: 'Pengaturan',
+              component: () => import('../components/UserPages/Settings.vue')
+            },
+          ]
         },
         {
           path: 'materials',
           name: 'Materi',
           component: () => import('../components/Pages/Materi.vue')
         },
-        {
-          path: '',
-          name: 'Landingpage',
-          component: () => import('../components/Pages/landingPage.vue')
+          ]
         },
-        {
-          path: 'profile',
-          name: 'profil',
-          component: () => import('../components/Pages/Profil.vue')
-        }
-      ]
-    }
   ]
 })
 
 router.beforeEach((to, from, next) => {
+  
   const publicPages = [
     '/masuk',
     '/daftar',
@@ -122,10 +130,12 @@ router.beforeEach((to, from, next) => {
     '/products',
     '/career',
     '/private-tutor',
+    '/academy',
     '/company-training',
+    '/actuary-service',
     '/profile',
-    '/materials',
     '/']
+
   const authRequired = !publicPages.includes(to.path)
   const loggedIn = localStorage.getItem('user')
 
