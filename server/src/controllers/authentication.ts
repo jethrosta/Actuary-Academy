@@ -14,7 +14,7 @@ export const register = async (req: express.Request, res: express.Response) => {
     const existingUser = await getUserByEmail(email);
 
     if (existingUser) {
-      return res.sendStatus(400);
+      return res.status(400).json({notification: "Email already registered"});
     }
 
 
