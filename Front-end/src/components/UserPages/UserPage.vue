@@ -1,6 +1,5 @@
 <template>
-    <div class="container">
-
+    <div class="container items-center justify-center mx-auto">
         <div class="flex flex-row px-10">
             <aside class="hidden lg:flex left-0 top-40 sticky h-fit">
                 <div class="flex flex-row min-w-[280px] pl-10 pb-20 items-center justify-between text-xl">
@@ -91,10 +90,9 @@
             </aside>
             <RouterView class="pr-20 pl-16"></RouterView>
         </div>
-
-        <Footer class="" ></Footer>
-
     </div>
+
+    <Footer class="w-screen"></Footer>
 </template>
 
 <script setup>
