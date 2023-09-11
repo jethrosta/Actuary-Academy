@@ -46,7 +46,7 @@ export const register = async (req: express.Request, res: express.Response) => {
       JWT,
       {
         httpOnly: true,
-        domain: 'localhost',
+        domain: '139.59.228.10',
         sameSite: 'lax',
         path: '/'
       });
@@ -55,7 +55,7 @@ export const register = async (req: express.Request, res: express.Response) => {
     res.cookie(
       'A@ACADEMY-SESSION',
       sessionToken,
-      { httpOnly: true, domain: 'localhost', path: '/', secure: false });
+      { httpOnly: true, domain: '139.59.228.10', path: '/', secure: false });
 
     user.authentication = undefined;
 
@@ -108,13 +108,13 @@ export const login = async (req: express.Request, res: express.Response) => {
     res.cookie(
       'A@ACADEMY-JWT',
       JWT,
-      { httpOnly: true, domain: 'localhost', path: '/', secure: false, sameSite: 'lax', maxAge: 60 * 60 * 1000 });
+      { httpOnly: true, domain: '139.59.228.10', path: '/', secure: false, sameSite: 'lax', maxAge: 60 * 60 * 1000 });
 
     // TODO: Change secure to true when production ready
     res.cookie(
       'A@ACADEMY-SESSION',
       user.authentication.sessionToken,
-      { httpOnly: true, domain: 'localhost', path: '/', secure: false, sameSite: 'lax', maxAge: 60 * 60 * 1000 });
+      { httpOnly: true, domain: '139.59.228.10', path: '/', secure: false, sameSite: 'lax', maxAge: 60 * 60 * 1000 });
 
     user.authentication = undefined;
 

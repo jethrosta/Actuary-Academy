@@ -83,7 +83,7 @@ export const isAuthenticated = async (
       )
       res.cookie('A@ACADEMY-JWT',
         newJWT,
-        { domain: 'localhost', path: '/' });
+        { domain: '139.59.228.10', path: '/' });
       decodedJWT = jwt.verify(newJWT.toString(), SECRET) as JwtPayload;
     }
 
