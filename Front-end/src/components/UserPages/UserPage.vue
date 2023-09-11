@@ -92,7 +92,7 @@
             <RouterView class="pr-20 pl-16"></RouterView>
         </div>
 
-        <Footer ></Footer>
+        <Footer class="" ></Footer>
 
     </div>
 </template>

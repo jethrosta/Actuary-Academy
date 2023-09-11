@@ -57,6 +57,15 @@
             <div class="center text-gray-300 font-inter font-light py-4">
                 <p>Copyright © 2023 Actuary Academy. All rights reserved</p>
             </div>
+            <svg class="w-full " width="" height="" viewBox="0 0 1513 204" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M32 129H580.159C589.308 129 597.726 133.997 602.107 142.029L608.893 154.471C613.274 162.503 621.692 167.5 630.841 167.5H877.159C886.308 167.5 894.726 162.503 899.107 154.471L905.894 142.029C910.274 133.997 918.692 129 927.841 129H1481.5V27H32V129Z"
+          fill="#0066CC" />
+        <path
+          d="M32 129H580.159C589.308 129 597.726 133.997 602.107 142.029L608.893 154.471C613.274 162.503 621.692 167.5 630.841 167.5H877.159C886.308 167.5 894.726 162.503 899.107 154.471L905.894 142.029C910.274 133.997 918.692 129 927.841 129H1481.5V27H32V129Z"
+          stroke="#0D1C9F" stroke-width="3" stroke-linecap="round" />
+      </svg>
         </div>
+        
     </section>
 </template>
