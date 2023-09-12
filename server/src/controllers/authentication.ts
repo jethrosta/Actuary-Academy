@@ -14,7 +14,7 @@ export const register = async (req: express.Request, res: express.Response) => {
     const existingUser = await getUserByEmail(email);
 
     if (existingUser) {
-      return res.status(400).json({notification: "Email already registered"});
+      return res.status(400).json({ notification: "Email already registered" });
     }
 
 
@@ -47,15 +47,16 @@ export const register = async (req: express.Request, res: express.Response) => {
       {
         httpOnly: true,
         domain: '139.59.228.10',
-        sameSite: 'lax',
-        path: '/'
+        sameSite: 'none',
+	secure: false,
+        path: '/',
       });
 
     // TODO: Change secure to true when production ready
     res.cookie(
       'A@ACADEMY-SESSION',
       sessionToken,
-      { httpOnly: true, domain: '139.59.228.10', path: '/', secure: false });
+      { httpOnly: true, domain: '139.59.228.10', path: '/', sameSite: 'none', secure: false });
 
     user.authentication = undefined;
 
@@ -108,13 +109,13 @@ export const login = async (req: express.Request, res: express.Response) => {
     res.cookie(
       'A@ACADEMY-JWT',
       JWT,
-      { httpOnly: true, domain: '139.59.228.10', path: '/', secure: false, sameSite: 'lax', maxAge: 60 * 60 * 1000 });
+      { httpOnly: true, secure: false, domain: '139.59.228.10', path: '/', sameSite: 'none', maxAge: 60 * 60 * 1000 });
 
     // TODO: Change secure to true when production ready
     res.cookie(
       'A@ACADEMY-SESSION',
       user.authentication.sessionToken,
-      { httpOnly: true, domain: '139.59.228.10', path: '/', secure: false, sameSite: 'lax', maxAge: 60 * 60 * 1000 });
+      { httpOnly: true, secure: false, domain: '139.59.228.10', path: '/', sameSite: 'none', maxAge: 60 * 60 * 1000 });
 
     user.authentication = undefined;
 

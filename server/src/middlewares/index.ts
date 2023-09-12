@@ -57,7 +57,7 @@ export const isAuthenticated = async (
       decodedJWT = jwt.verify(JWT, SECRET) as JwtPayload;
     } catch (error) {
       console.log(error);
-      return res.sendStatus(400);
+      return res.status(400).send({message: "Cookies not set"});
     }
 
 
