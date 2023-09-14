@@ -1,5 +1,5 @@
 // importing modules
-import { Schema, model }  from "mongoose";
+import mongoose from "mongoose";
 import Joi from "joi";
 
 // validation schema
@@ -10,29 +10,32 @@ export const courseSchemaValidate = Joi.object({
 });
 
 // creating an interface
-
-// interface courseDocument extends mongoose.Document
-interface courseInterface {
+interface courseDocument extends mongoose.Document {
     title: string,
     description: string,
     published: boolean
 };
 
 // course schema
-const courseSchema = new Schema<courseInterface>({
-    title: {
-        type: String,
-        required: true
-    },
-    description: {
-        type: String
-    },
-    published: {
-        type: Boolean,
-        required: true,
-        default: false
-    }
+const courseSchema = new mongoose.Schema<courseDocument>({
+    title: { type: String, required: true},
+    description: { type: String },
+    published: { type: Boolean }
 });
 
 // creating a model
-export const Course = model<courseInterface>("Course", courseSchema)
+export const Course = mongoose.model<courseDocument>("Course", courseSchema);
+
+// GET all course
+export const getCourses = () => Course.find();
+
+// GET course by Id
+export const getCourseById = (id: string) => Course.findById(id);
+
+// PATCH subscribe
+export const subCourseById = (id: string, values: Record<string, any>) => 
+    Course.findByIdAndUpdate(id, values);
+
+// PATCH unsubscribe
+export const unsubCourseById = (id: string, values: Record<string, any>) => 
+    Course.findByIdAndUpdate(id, values);
