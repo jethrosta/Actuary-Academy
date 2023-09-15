@@ -15,7 +15,6 @@ const testimoniSchema = new mongoose.Schema({
 });
 
 export const testiModel = mongoose.model("Testimonies", testimoniSchema);
-
 export const getTestimoni = () => testiModel.find();
 export const getTestiBySessionToken = (sessionToken: string) =>
   testiModel.findOne({
