@@ -1,14 +1,42 @@
 <script setup>
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
 import { RouterLink, RouterView } from 'vue-router';
 import NavDropdown from '../Modules/NavDropdown.vue';
 import UserDropdown from '../Modules/UserDropdown.vue';
 import NavSideMenu from '../Modules/NavSideMenu.vue';
 import { useStore } from "../../store/index.js";
 
-const store = useStore();
+const store = useStore()
 const isLoggedIn = computed(() => store.loginState.status.loggedIn)
-const user = JSON.parse(localStorage.getItem('user'));
+const user = JSON.parse(localStorage.getItem('user'))
+
+const langSetting = ref({ long: "Bahasa Indonesia", short: "INA" })
+
+const switchLang = (index) => {
+  langSetting.value = languageList[index]
+}
+const languageList = [
+  { long: "Bahasa Indonesia", short: "INA" },
+  { long: "English", short: "EN" }
+]
+
+const langMenuOpen = ref(false);
+const toggle = () => {
+  if (langMenuOpen.value) {
+    langMenuOpen.value = false;
+    document.removeEventListener('click', close);
+    return;
+  }
+  else {
+    langMenuOpen.value = true;
+    document.addEventListener('click', close);
+  }
+};
+const close = (e) => {
+  if (e.target.closest('.menu-item')) return;
+  isOpen.value = false;
+  document.removeEventListener('click', close);
+};
 
 const productSubmenu = [
   { title: 'Tutor Privat', name: 'Tutor Privat' },
@@ -27,10 +55,9 @@ const accountMenu = [
 
 </script>
 <template>
-  <header class="top-0 sticky z-30">
+  <header class="top-0 sticky z-30 select-none">
     <!--Big Screen Dashboard-->
-    <div
-      class="full-size bg-main_blue lg:block hidden shadow-xl lg:text-lg md:text-md text-xs lg:px-4 px-1 pt-3">
+    <div class="full-size bg-main_blue lg:block hidden shadow-xl lg:text-lg md:text-md text-xs lg:px-4 px-1 pt-3">
       <div class="flex justify-center relative">
         <RouterLink :to="{ name: 'Landingpage' }">
           <div class="main-logo flex flex-col mx-auto">
@@ -38,13 +65,32 @@ const accountMenu = [
             <div class="font-inter lg:text-md md:text-xs text-[8px] text-white md:py-1 py-0">Actuary Academy</div>
           </div>
         </RouterLink>
-        <div class="absolute right-0 my-2 mr-10 text-white cursor-pointer">
-          <span class="mr-1">Bahasa Indonesia</span>
-          <svg class="inline-block w-4 h-4 align-middle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
-        </div>
+        <langMenu class="language-button absolute right-0 my-2 mr-8 text-sm cursor-pointer" @click="toggle">
+          <div class="flex flex-row items-center cursor-pointer" :class="langMenuOpen ? 'text-sec_blue' : 'text-white'">
+            <div>{{ langSetting.long }}</div>
+            <svg class="h-2 w-7 mt-1 inline-block" preserve-aspect-ratio="none" viewBox="0 0 12 9" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path d="M 11 1 L 5.804 6.909 L 1 1" :stroke="langMenuOpen ? '#0D1C9F' : 'white'" stroke-width="1.57025">
+              </path>
+            </svg>
+          </div>
+          <div class="relative translate-y-3 font-medium" v-if="langMenuOpen">
+            <svg class="h-3 w-9 absolute -translate-y-1.5 right-0 text-white" viewBox="0 0 12 9" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 6L7 1L1 6" stroke="currentColor" stroke-width="1.5"></path>
+            </svg>
+            <div class="sub-menu py-2 rounded-b-xl bg-white hover:text-sec_blue drop-shadow-lg absolute right-0 ">
+              <div @click="switchLang(0)"
+                class="menu-item py-1 px-4 text-gray-400 bg-white hover:text-sec_blue whitespace-nowrap">
+                Bahasa Indonesia
+              </div>
+              <div @click="switchLang(1)"
+                class="menu-item py-1 px-4 text-gray-400 bg-white hover:text-sec_blue whitespace-nowrap">
+                English
+              </div>
+            </div>
+          </div>
+        </langMenu>
       </div>
       <div class="-mx-4 lg:-mt-6 md:-mt-5 -mt-4 -mb-5 ">
         <img src="/src/assets/Vector 23.svg" class="w-screen" />
@@ -92,7 +138,7 @@ const accountMenu = [
               class="bg-main_blue hover:bg-[#1a4ab3] border-sec_blue border rounded-md py-[0.625rem] px-[1.25rem]">Masuk
             </RouterLink>
           </div>
-          <div>
+          <div class="">
             <RouterLink to="/register" class="bg-sec_blue hover:bg-[#15419f] rounded-md py-[0.625rem] px-[1.25rem] ">
               Daftar
             </RouterLink>
@@ -116,18 +162,39 @@ const accountMenu = [
         <div class="font-inter text-center text-sm text-white md:py-1">Actuary Academy</div>
       </RouterLink>
 
-      <div class="flex flex-row flex-1 justify-end gap-x-2 pr-3 pt-3">
+      <div class="flex flex-row flex-1 justify-end md:gap-x-2 pr- pt-3">
         <div class="flex flex-row items-center cursor-pointer py-1">
-          <span class="mr-1">INA</span>
-          <svg class="inline-block w-4 h-4 align-middle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
+          <langMenu class="language-button flex cursor-pointer" @click="toggle">
+            <div class="flex flex-row items-center cursor-pointer" :class="langMenuOpen ? 'text-sec_blue' : 'text-white'">
+              <div>{{ langSetting.short }}</div>
+              <svg class="h-2 w-7 mt-1 inline-block" preserve-aspect-ratio="none" viewBox="0 0 12 9" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M 11 1 L 5.804 6.909 L 1 1" :stroke="langMenuOpen ? '#0D1C9F' : 'white'" stroke-width="1.57025">
+                </path>
+              </svg>
+            </div>
+            <div class="relative translate-y-8 font-medium" v-if="langMenuOpen">
+              <svg class="h-3 w-9 absolute -translate-y-1.5 right-0 text-white" viewBox="0 0 12 9" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 6L7 1L1 6" stroke="currentColor" stroke-width="1.5"></path>
+              </svg>
+              <div class="sub-menu py-2 rounded-b-xl bg-white hover:text-sec_blue drop-shadow-lg absolute right-0 ">
+                <div @click="switchLang(0)"
+                  class="menu-item py-1 px-4 text-gray-400 bg-white hover:text-sec_blue whitespace-nowrap">
+                  Bahasa Indonesia
+                </div>
+                <div @click="switchLang(1)"
+                  class="menu-item py-1 px-4 text-gray-400 bg-white hover:text-sec_blue whitespace-nowrap">
+                  English
+                </div>
+              </div>
+            </div>
+          </langMenu>
         </div>
 
         <div v-if="isLoggedIn" id="userButton" class="flex items-center font-normal">
-          <div class="flex space-x-2 px-2 select-none items-center rounded-full cursor-pointer">
-            <div class="pl-2">Hello, <span class="font-semibold">{{ user.username }}</span></div>
+          <div class="flex space-x-2 select-none items-center rounded-full cursor-pointer">
+            <div class="hidden sm:flex px-2">Hello, <span class="font-semibold">{{ user.username }}</span></div>
             <UserDropdown :items="accountMenu" class="hover:text-sec_blue -my-2" />
           </div>
         </div>
@@ -138,7 +205,7 @@ const accountMenu = [
               Masuk
             </RouterLink>
           </div>
-          <div>
+          <div class="hidden lg:flex">
             <RouterLink to="/register" class="bg-sec_blue hover:bg-[#15419f] rounded-md py-1 px-2">
               Daftar
             </RouterLink>

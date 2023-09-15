@@ -1,5 +1,5 @@
 <template>
-    <section class="footer w-full bg-main_blue px-20 py-10">
+    <section class="footer w-full bg-main_blue px-10 sm:px-20 py-10">
         <div class="container max-w-[1400px] mx-auto divide-y divide-gray-300">
             <div class="flex gap-10 flex-wrap lg:justify-center justify-start items-center text-white font-inter font-bold py-10">
                 <div class="flex flex-col font-normal items-start">
@@ -24,12 +24,13 @@
                     </div>
                     <div class="flex shrink-0 flex-col">
                         <p class=" mb-5">Produk</p>
-                        <ul class=" font-normal text-sm">
-                            <li>Tutor Privat</li>
-                            <li>Akademi</li>
-                            <li>Company Training</li>
-                            <li>Jasa Aktuaria</li>
-                        </ul>
+                        <div class="flex flex-col font-normal text-sm">
+                            <RouterLink :to="{ name: 'Tutor Privat' }"> Tutor Privat </RouterLink>
+                            <RouterLink :to="{ name: 'Akademi' }"> Akademi </RouterLink>
+                            <RouterLink :to="{ name: 'Company Training' }"> Company Training </RouterLink>
+                            <RouterLink :to="{ name: 'Jasa Aktuaria' }"> Jasa Aktuaria </RouterLink>
+                            
+                        </div>
                     </div>
                 </div>
                 <div class="flex gap-10">
@@ -69,3 +70,8 @@
 
     </section>
 </template>
+
+<script setup>
+import { RouterLink } from 'vue-router';
+
+</script>
