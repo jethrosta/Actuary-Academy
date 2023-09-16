@@ -100,9 +100,9 @@
             <div class=" w-1/2 my-auto relative flex-1 ">
                 <!-- icon bulat bulat tutor privat -->
                 <div class=" flex rounded-full h-12 w-12 space-x-5 mb-5">
-                    <img class=" rounded-full object-cover" src="../../assets/Tutor Privat/Rectangle 63.png"/>
-                    <img class=" rounded-full object-cover" src="../../assets/Tutor Privat/Rectangle 64.png"/>
-                    <img class=" rounded-full object-cover" src="../../assets/Tutor Privat/Rectangle 65.png"/>
+                    <img class=" rounded-full object-cover" src="src/assets/Tutor Privat/Rectangle 63.png"/>
+                    <img class=" rounded-full object-cover" src="src/assets/Tutor Privat/Rectangle 64.png"/>
+                    <img class=" rounded-full object-cover" src="src/assets/Tutor Privat/Rectangle 65.png"/>
                 </div>
                 <!-- Tutor Privat -->
                 <div class=" flex items-center space-x-5">
@@ -143,13 +143,13 @@
                 <!-- icon bulat bulat akademi -->
                 <div class=" justify-end flex rounded-full  space-x-5 mb-5">
                     <div>
-                        <img class=" rounded-full object-cover h-12 w-12" src="../../assets/Akademi/Frame 301.png"/>
+                        <img class=" rounded-full object-cover h-12 w-12" src="src/assets/Akademi/Frame 301.png"/>
                     </div>
                     <div>
-                        <img class=" rounded-full object-cover h-12 w-12" src="../../assets/Akademi/Frame 302.png"/>
+                        <img class=" rounded-full object-cover h-12 w-12" src="src/assets/Akademi/Frame 302.png"/>
                     </div>
                     <div>
-                        <img class=" rounded-full object-cover h-12 w-12" src="../../assets/Akademi/Frame 303.png"/>
+                        <img class=" rounded-full object-cover h-12 w-12" src="src/assets/Akademi/Frame 303.png"/>
                     </div>
                 </div>
                 <!-- Icon Toga 2 -->
@@ -362,9 +362,9 @@
             <div class=" w-1/2 my-auto relative flex-1 ">
                 <!-- icon bulat bulat Company Training-->
                 <div class=" flex  rounded-full h-12 w-12 space-x-5 mb-5">
-                    <img class=" rounded-full object-cover" src="../../assets/Tutor Privat/Rectangle 63.png"/>
-                    <img class=" rounded-full object-cover" src="../../assets/Tutor Privat/Rectangle 64.png"/>
-                    <img class=" rounded-full object-cover" src="../../assets/Tutor Privat/Rectangle 65.png"/>
+                    <img class=" rounded-full object-cover" src="src/assets/Tutor Privat/Rectangle 63.png"/>
+                    <img class=" rounded-full object-cover" src="src/assets/Tutor Privat/Rectangle 64.png"/>
+                    <img class=" rounded-full object-cover" src="src/assets/Tutor Privat/Rectangle 65.png"/>
                 </div>
                 <!-- Company Training Caption -->
                 <div class=" flex items-center space-x-5">
@@ -403,13 +403,13 @@
                 <!-- icon bulat bulat akademi -->
                 <div class=" justify-end flex rounded-full  space-x-5 mb-5">
                     <div>
-                        <img class=" rounded-full object-cover h-12 w-12" src="../../assets/Akademi/Frame 301.png"/>
+                        <img class=" rounded-full object-cover h-12 w-12" src="src/assets/Akademi/Frame 301.png"/>
                     </div>
                     <div>
-                        <img class=" rounded-full object-cover h-12 w-12" src="../../assets/Akademi/Frame 302.png"/>
+                        <img class=" rounded-full object-cover h-12 w-12" src="src/assets/Akademi/Frame 302.png"/>
                     </div>
                     <div>
-                        <img class=" rounded-full object-cover h-12 w-12" src="../../assets/Akademi/Frame 303.png"/>
+                        <img class=" rounded-full object-cover h-12 w-12" src="src/assets/Akademi/Frame 303.png"/>
                     </div>
                 </div>
                 <!-- Icon Presentasi 2 -->
