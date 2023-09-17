@@ -1,8 +1,10 @@
 <script setup>
 import { Splide } from '@splidejs/vue-splide'
 import { SplideSlide } from '@splidejs/vue-splide'
+import { RouterLink } from 'vue-router';
 import Footer from '../Footer.vue';
 import OtherProducts from '../OtherProducts.vue';
+import { ref, computed } from 'vue';
 
 const splideOptions = {
     rewind: true,
@@ -62,6 +64,26 @@ const packages = [
     }
 ]
 
+const currentSplideIndex = ref(0)
+
+function onSplideMove (_, newIndex) {
+    currentSplideIndex.value = newIndex
+}
+
+const prevModuleSlide = computed(() => {
+    const prevIndex = currentSplideIndex.value > 0
+        ? currentSplideIndex.value - 1
+        : modules.length - 1
+    return modules[prevIndex]
+})
+
+const nextModuleSlide = computed(() => {
+    const nextIndex = currentSplideIndex.value < modules.length - 1
+        ? currentSplideIndex.value + 1
+        : 0
+    return modules[nextIndex]
+})
+
 </script>
 <template>
     <main class="bg-academy bg-cover font-inter">
@@ -73,7 +95,7 @@ const packages = [
                 <div class="absolute top-[6rem] left-[16rem] w-10 h-10 bg-neutral-300 rounded-[100%]"></div>
                 <div class="absolute top-[12rem] right-0 w-10 h-10 bg-neutral-300 rounded-[100%]"></div>
                 <div class="absolute top-[12rem] left-0 w-10 h-10 bg-neutral-300 rounded-[100%]"></div>
-                <div class="mx-auto w-[29rem]">
+                <div class="mx-auto w-[28rem]">
                     <img src="src/assets/academy/image.png"/>
                 </div>
             </div>
@@ -92,17 +114,35 @@ const packages = [
             </div>
             <div class="mt-16">
                 <div class="text-4xl text-white font-bold center">Modul</div>
-                <div class="w-full max-w-[33rem] mx-auto mt-10">
-                    <Splide :options="splideOptions">
+                <div class="w-full max-w-[33rem] mx-auto mt-10 relative">
+                    <Splide :options="splideOptions" @splide:move="onSplideMove">
                         <SplideSlide v-for="mdl in modules">
-                            <div class="bg-sec_blue text-white text-4xl font-bold mx-[6.5rem] px-8 py-6 rounded-t-2xl text-center">
-                                {{ mdl.code }}
-                            </div>
-                            <div class="bg-white text-sec_blue text-xl font-bold px-10 py-5 rounded-2xl text-center">
-                                {{ mdl.title }}
-                            </div> 
+                            <RouterLink to="/A10">
+                                <div class="bg-sec_blue text-white text-4xl font-bold mx-[6.5rem] px-8 py-6 rounded-t-2xl text-center">
+                                    {{ mdl.code }}
+                                </div>
+                                <div class="bg-white text-sec_blue text-xl font-bold px-10 py-5 rounded-2xl text-center">
+                                    {{ mdl.title }}
+                                </div>
+                            </RouterLink>
                         </SplideSlide>
                     </Splide>
+                    <div class="absolute top-0 right-[34rem] text-white opacity-25 select-none">
+                        <div class="text-4xl font-bold mx-[6.5rem] px-8 py-6 rounded-t-2xl text-center outline outline-[3px]">
+                            {{ prevModuleSlide.code }}
+                        </div>
+                        <div class="text-xl font-bold px-10 py-5 rounded-2xl text-center outline outline-[3px] mt-[2.5px]">
+                            {{ prevModuleSlide.title }}
+                        </div>
+                    </div>
+                    <div class="absolute top-0 left-[34rem] text-white opacity-25 select-none">
+                        <div class="text-4xl font-bold mx-[6.5rem] px-8 py-6 rounded-t-2xl text-center outline outline-[3px]">
+                            {{ nextModuleSlide.code }}
+                        </div>
+                        <div class="text-xl font-bold px-10 py-5 rounded-2xl text-center outline outline-[3px] mt-[2.5px]">
+                            {{ nextModuleSlide.title }}
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="mt-16 mb-20">

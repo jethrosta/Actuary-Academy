@@ -1,3 +1,8 @@
+<script setup>
+import { RouterLink } from 'vue-router';
+import Footer from '@/components/Footer.vue'
+
+</script>
 <template>
     <div>
         <!-- Product introduction -->
@@ -133,7 +138,7 @@
                 <div class=" mb-5 pr-10">
                     <p class=" text-main_blue text-xl  ">Actuary Academy menyediakan Tutor Privat untuk mata kuliah aktuaria dan mata ujian PAI.</p>
                 </div>
-                <button class=" bg-sec_blue text-white font-inter font-bold text-sm rounded-lg p-2 px-8 shadow-xl">Lihat Detail</button>
+                <RouterLink to="/private-tutor" class=" bg-sec_blue text-white font-inter font-bold text-sm rounded-lg p-2 px-8 shadow-xl">Lihat Detail</RouterLink>
             </div>
         </div>
         <!-- Akademi -->
@@ -181,7 +186,7 @@
                         <p class=" text-right text-main_blue text-xl  ">Actuary Academy menyediakan video<br>pembelajaran, pembahasan soal, dan<br>pelaksanaan try out.</p>
                 </div>
                 <div class=" flex justify-end">
-                    <button class=" bg-sec_blue text-white font-inter font-bold text-sm rounded-lg p-2 px-8 shadow-xl">Lihat Detail</button>
+                    <RouterLink to="/academy" class=" bg-sec_blue text-white font-inter font-bold text-sm rounded-lg p-2 px-8 shadow-xl">Lihat Detail</RouterLink>
                 </div>
             </div>
             <!-- Blob icons -->
@@ -393,7 +398,7 @@
                 <div class=" mb-5 ">
                     <p class=" text-main_blue text-xl  ">Actuary Academy menyediakan Tutor Privat<br> pembelajaran mata ujian PAI untuk perusahaan.</p>
                 </div>
-                <button class=" bg-sec_blue text-white font-inter font-bold text-sm rounded-lg p-2 px-8 shadow-xl">Lihat Detail</button>
+                <RouterLink to="/company-training" class=" bg-sec_blue text-white font-inter font-bold text-sm rounded-lg p-2 px-8 shadow-xl">Lihat Detail</RouterLink>
             </div>
         </div>
         <!-- Akademi -->
@@ -482,7 +487,7 @@
                         <p class=" text-right text-main_blue text-xl  ">Actuary Academy menyediakan jasa yang membantu proyek-proyek seputar aktuaria.</p>
                 </div>
                 <div class=" flex justify-end">
-                    <button class=" bg-sec_blue text-white font-inter font-bold text-sm rounded-lg p-2 px-8 shadow-xl">Lihat Detail</button>
+                    <RouterLink to="/actuarial-services" class=" bg-sec_blue text-white font-inter font-bold text-sm rounded-lg p-2 px-8 shadow-xl">Lihat Detail</RouterLink>
                 </div>
             </div>
             <!-- Blob icons -->
@@ -616,10 +621,3 @@
     </div>
     <Footer></Footer>
 </template>
-
-<script setup>
-import Footer from '@/components/Footer.vue'
-
-</script>
-
-
