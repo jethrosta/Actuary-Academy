@@ -4,17 +4,25 @@ import {
   getTestimoni,
   deleteTestiById,
 } from "../db/testimonies";
+import { RequestWithJWT } from "middlewares";
+import { getUserById, getUserBySessionToken } from "../db/users";
 
-export const testimoni = async (
-  req: express.Request,
-  res: express.Response
-) => {
+export const testimoni = async (req: RequestWithJWT, res: express.Response) => {
   try {
-    const { desTestimoni, username } = req.body;
+    // const userId = req.userId;
+    // const user = await getUserBySessionToken;
+    const user = await getUserById(req.userId);
 
-    if (!desTestimoni || !username) {
-      return res.sendStatus(400);
+    if (user) {
+      return res.status(400).json({ notification: "Testimoni already filled" });
     }
+    const username = user.name;
+
+    const { desTestimoni } = req.body;
+
+    // if (!desTestimoni || !username) {
+    //   return res.sendStatus(400);
+    // }
 
     //   const existingUser = await getUserByEmail(email);
 
@@ -25,7 +33,7 @@ export const testimoni = async (
     // const salt = createSalt();
     // const sessionToken = createSessionToken();
     try {
-      const user = await createTestimoni({
+      const testi = await createTestimoni({
         desTestimoni,
         username,
         // authentication: {
@@ -38,7 +46,7 @@ export const testimoni = async (
         // },
       });
 
-      return res.status(200).json(user).end();
+      return res.status(200).json(testi).end();
     } catch (err) {
       res.json("Cannot create testimoni");
     }
