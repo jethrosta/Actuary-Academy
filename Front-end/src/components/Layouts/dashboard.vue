@@ -62,7 +62,7 @@ const accountMenu = [
         <RouterLink :to="{ name: 'Landingpage' }">
           <div class="main-logo flex flex-col mx-auto">
             <img src="/src/assets/icon/AAlogo-cropped.png" class="mx-auto lg:w-16 w-10" />
-            <div class="font-inter lg:text-md md:text-xs text-[8px] text-white md:py-1 py-0">Actuary Academy</div>
+            <div class="font-inter xl:text-lg lg:text-base md:text-xs text-[8px] text-white md:py-1 py-0">Actuary Academy</div>
           </div>
         </RouterLink>
         <langMenu class="language-button absolute right-0 my-2 mr-8 text-sm cursor-pointer" @click="toggle">

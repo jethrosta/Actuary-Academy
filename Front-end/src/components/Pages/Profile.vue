@@ -11,8 +11,8 @@ const imgUrl = ref('src/assets/testimonies/profile.png')
 
 </script>
 <template>
-    <div class="relative">
-        <div class="">
+    <div class="relative overflow-hidden">
+        <div>
             <div class="text-white bg-main_blue px-32">
                 <div class="w-3/5 pt-14 pb-16">
                     <RouterLink to="/testimonies" class="flex items-center text-lg mb-2">
@@ -38,8 +38,8 @@ const imgUrl = ref('src/assets/testimonies/profile.png')
             </div>
         </div>
         <div class="overflow-hidden">
-        <div class="absolute right-36 top-10">
-            <img class="w-[32rem]" :src="imgUrl"/>
+            <div class="absolute right-36 top-10">
+                <img class="w-[32rem]" :src="imgUrl"/>
             </div>
         </div>
     </div>
