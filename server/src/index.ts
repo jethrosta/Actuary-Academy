@@ -10,8 +10,14 @@ import router from './router';
 
 const app = express();
 
+app.set('views', 'views');
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true })); // to support URL-encoded POST body
+app.use(express.json()); // to support parsing JSON POST body
+
 app.use(cors({
-  origin:'http://localhost:5173',
+  origin: 'http://localhost:5173',
   credentials: true,
 }));
 

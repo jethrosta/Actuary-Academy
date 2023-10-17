@@ -51,7 +51,7 @@ const packages = [
                     </p> 
                 </div>
                 <div class="w-[33rem] shrink-0">
-                    <img class="rounded-[1.5rem]" src="src/assets/company-training/right.jpg">
+                    <img class="rounded-[1.5rem]" src="/src/assets/company-training/right.jpg">
                 </div>
             </div>
             <div class="flex items-stretch my-20 space-x-9">

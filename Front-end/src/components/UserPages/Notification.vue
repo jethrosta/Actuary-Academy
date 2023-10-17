@@ -25,7 +25,7 @@
 
                 <div v-for="(notifItem, index) in notifList" :key="index"
                     class="notifItem flex flex-row text-black text-md items-center bg-main_blue bg-opacity-20 border-[1.5px] border-main_blue rounded-xl px-3 py-1 my-4">
-                    <img src="src/assets/Ellipse (1).png" alt="" class="profile-pic rounded-full w-16 h-16 p-2">
+                    <img src="/src/assets/Ellipse (1).png" alt="" class="profile-pic rounded-full w-16 h-16 p-2">
                     <div class="flex flex-col font-medium">
                         <div>Actuary Academy <span class="font-bold"> {{ notifItem.status }} </span> </div>
                         <div class=" text-gray-500">{{ notifItem.page }} • {{ notifItem.time }}</div>

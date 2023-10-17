@@ -110,6 +110,11 @@ const router = createRouter({
           ]
         },
         {
+          path: 'my-payment',
+          name: 'Pembayaran Saya',
+          component: () => import('../components/UserPages/MyPayment.vue')
+        },
+        {
           path: 'materials',
           name: 'Materi',
           component: () => import('../components/Pages/Materi.vue')

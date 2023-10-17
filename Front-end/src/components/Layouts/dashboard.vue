@@ -144,8 +144,6 @@ const accountMenu = [
             </RouterLink>
           </div>
         </div>
-
-
       </nav>
     </div>
 
@@ -199,7 +197,7 @@ const accountMenu = [
           </div>
         </div>
 
-        <div v-else id="UserButton" class="flex space-x-2 py-1">
+        <div v-else id="UserButton" class="flex space-x-2 pr-3 py-1">
           <div>
             <RouterLink to="/login" class="bg-main_blue hover:bg-[#1a4ab3] border-sec_blue border rounded-md py-1 px-2">
               Masuk

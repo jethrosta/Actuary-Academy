@@ -60,10 +60,10 @@ function goBack() {
 
 </script>
 <template>
-    <body class=" w-auto flex justify-center bg-scroll bg-[#0066CC]" style="background-image: url('src/assets/Background.png');">
-        <div class=" container flex flex-row justify-center align-middle p-4 ">
-            <div class="py-10 px-8">
-                <div class="w-[30rem] font-roboto text-white">
+    <body class="font-inter py-10 bg-cover bg-main_blue" style="background-image: url('src/assets/Background.png');">
+        <div class="flex sm:px-20 md:py-10 items-center justify-center mx-auto">
+            <div class="w-full xl:max-w-2xl p-10">
+                <div class="text-white">
                     <button class="flex flex-row py-2 text-sm" @click="goBack">
                         <svg class="translate-x-[-5px]" width="20" height="20"  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" >
                             <path d="M15.7071 18.7071C16.0976 18.3166 16.0976 17.6834 15.7071 17.2929L10.4142 12L15.7071 6.70711C16.0976 6.31658 16.0976 5.68342 15.7071 5.29289C15.3166 4.90237 14.6834 4.90237 14.2929 5.29289L8.29289 11.2929C7.90237 11.6834 7.90237 12.3166 8.29289 12.7071L14.2929 18.7071C14.6834 19.0976 15.3166 19.0976 15.7071 18.7071Z"  fill="white" />
@@ -111,11 +111,11 @@ function goBack() {
                         </div>
                         <div class="flex text-xl space-x-2 " >
                             <div class=" center regBut w-1/2 h-14 space-x-2 justify-center flex hover:cursor-pointer">
-                                <img src="src/assets/icon/google-color-svgrepo-com.svg" class="py-4"/>
+                                <img src="/src/assets/icon/google-color-svgrepo-com.svg" class="py-4"/>
                                 <button class=" ">Google</button>
                             </div>
                             <div class="center regBut w-1/2 h-14 space-x-2 justify-center flex hover:cursor-pointer">
-                                <img src="src/assets/icon/facebook-svgrepo-com.svg" class="py-3"/>
+                                <img src="/src/assets/icon/facebook-svgrepo-com.svg" class="py-3"/>
                                 <button class=" ">Facebook</button>
                             </div>
                         </div>
@@ -128,7 +128,7 @@ function goBack() {
             </div>
             <div class="py-10 px-8 hidden xl:block">
                 <div class=" h-[50rem] w-[30rem] relative">
-                    <img src="src/assets/Vector 3.jpg" class=" w-full h-full object-cover rounded-[2.5rem] absolute "/>
+                    <img src="/src/assets/Vector 3.jpg" class=" w-full h-full object-cover rounded-[2.5rem] absolute "/>
                     <div  class=" absolute bottom-16 mx-16 z-20 ">
                         <p class=" text-white font-inter text-xl">Jadilah bagian Actuary Academy</p>
                         <p class=" text-5xl font-bold text-white">From Zero to Fellow</p>

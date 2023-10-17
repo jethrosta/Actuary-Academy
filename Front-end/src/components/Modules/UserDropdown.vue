@@ -2,7 +2,7 @@
   <div class="menu-item font-inter p-1" @click="toggle">
     <div class="flex flex-row items-center">
       <div class="max-w-8 max-h-8 rounded-full bg-gray-300 ">
-        <img src="src/assets/Ellipse (1).png" class="max-h-8 max-w-8">
+        <img src="@/assets/Ellipse (1).png" class="max-h-8 max-w-8">
       </div>
       <svg class="h-2 w-7 " preserve-aspect-ratio="none" viewBox="0 0 12 9" fill="none"
         xmlns="http://www.w3.org/2000/svg">

@@ -74,7 +74,7 @@ const packages = [
                 <div class="absolute top-[12rem] right-0 w-10 h-10 bg-neutral-300 rounded-[100%]"></div>
                 <div class="absolute top-[12rem] left-0 w-10 h-10 bg-neutral-300 rounded-[100%]"></div>
                 <div class="mx-auto w-[29rem]">
-                    <img src="src/assets/academy/image.png"/>
+                    <img src="/src/assets/academy/image.png"/>
                 </div>
             </div>
             <div class="bg-sec_blue px-10 py-8 rounded-2xl">

@@ -2,7 +2,7 @@
     <div class="content-area flex flex-col text-main_blue gap-y-6 w-full px-10 pt-12 pb-28 overflow-clip">
         <div class="font-bold text-3xl py-4">Edit Profil</div>
         <div class="flex flex-row gap-x-8 w-full">
-            <img src="src/assets/Ellipse (1).png" alt="" class="profile-pic rounded-full w-24 h-24">
+            <img src="/src/assets/Ellipse (1).png" alt="" class="profile-pic rounded-full w-24 h-24">
             <div class="flex flex-col gap-1 w-full">
                 <label class="text-xl">Nama</label>
                 <input type="text" v-model="userInputData.name" class="flex focus:bg-gray-200 outline-1 outline-gray-400 border-[1.5px] border-gray-400 focus:text-black focus:font-bold text-gray-600 rounded-xl px-4 py-3">

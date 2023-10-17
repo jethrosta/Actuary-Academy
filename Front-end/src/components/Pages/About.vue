@@ -4,16 +4,16 @@
         <div class="bg-scroll bg-contain bg-repeat-x bg-sec_blue" style="background-image: url('src/assets/Tentang Kami/1.png');">
             <div class=" bg-gradient-to-r from-blue-600 to-transparent bg-repeat-x">
                 <div class=" flex-col py-20 bg-scroll bg-cover bg-repeat" style="background-image: url('src/assets/Tentang Kami/vec1.png');" >
-                    <div class=" flex flex-col gap-y-5 py-16">
-                        <h1 class=" text-7xl font-bold text-center text-white">Learn Better <span class="text-main_blue bg-white px-4 rounded-xl py-1 inline-flex">Do Better</span> </h1>
-                        <h1 class=" text-5xl font-bold text-center text-white">To Shape The Future of Insurance </h1>
+                    <div class=" flex flex-col py-16 px-8">
+                        <h1 class=" text-3xl md:text-5xl lg:text-7xl font-bold text-center text-white">Learn Better <span class="text-main_blue bg-white px-4 rounded-xl py-1 inline-flex">Do Better</span> </h1>
+                        <h1 class=" text-3xl md:text-5xl lg:text-7xl font-bold text-center text-white">To Shape The Future of Insurance </h1>
                     </div>
                     <div class="flex flex-col gap-5 pt-20 items-center">
-                        <div class="graph max-w-5xl">
+                        <div class="graph max-w-5xl px-8">
                             <h1 class=" text-3xl font-bold text-center pt-5 text-white">Tingkat Penetrasi Asuransi di Indonesia</h1>
                             <p class=" text-lg font-semibold text-center text-white">Tahun 2013 hingga 2021</p>
                             <div class=" rounded-[45px] bg-white p-8 my-3">
-                                <img src="src/assets/Tentang Kami/grafik2.png" alt="">
+                                <img src="/src/assets/Tentang Kami/grafik2.png" alt="">
                             </div>
                             <div class="flex-col comment text-white ">
                                 <h1 class="font-bold">Sumber:</h1>
@@ -67,21 +67,21 @@
             <div class="flex flex-col gap-4 py-8 text-3xl">
                 <div class="flex flex-row">
                     <div class="flex flex-row flex-1 font-bold items-center">
-                        <img src="src/assets/Tentang Kami/timer1.svg" alt="" class="p-4">
+                        <img src="/src/assets/Tentang Kami/timer1.svg" alt="" class="p-4">
                         KETERBATASAN WAKTU
                     </div>
                     <div class="flex flex-row flex-1 font-bold items-center">
-                        <img src="src/assets/Tentang Kami/book1.svg" alt="" class="p-4">
+                        <img src="/src/assets/Tentang Kami/book1.svg" alt="" class="p-4">
                         KETERBATASAN BIAYA
                     </div> 
                 </div>
                 <div class="flex flex-row">
                     <div class="flex flex-row flex-1 font-bold items-center">
-                        <img src="src/assets/Tentang Kami/moneysend.svg" alt="" class="p-4">
+                        <img src="/src/assets/Tentang Kami/moneysend.svg" alt="" class="p-4">
                         MINIMNYA SUMBER BELAJAR
                     </div>
                     <div class="flex flex-row flex-1 font-bold items-center">
-                        <img src="src/assets/Tentang Kami/signature.svg" alt="" class="p-4">
+                        <img src="/src/assets/Tentang Kami/signature.svg" alt="" class="p-4">
                         SULITNYA UJIAN SERTIFIKASI AKTUARIA
                     </div> 
                 </div>
@@ -92,7 +92,7 @@
                     Sejak tahun 2021, Actuary Academy telah dipercaya untuk melayani banyak industri asuransi, serta perguruan tinggi baik di dalam dan luar negeri. Hal ini membuktikan bahwa kami dipercaya oleh berbagai golongan untuk mengembangkan ilmu aktuaria di Indonesia
                 </div>
                 <div class="flex flex-col font-bold pt-6">
-                    <div class="text-[200px] -my-8">99%</div>
+                    <div class="text-7xl lg:text-[200px]">99%</div>
                     <div class="text-4xl">Lulus Mata Ujian A10</div>
                 </div>
             </div>
@@ -104,7 +104,7 @@
             <h1 class=" text-center text-white font-bold text-4xl pt-4 pb-20">Alumni Kami Tersebar <br> di Berbagai Perusahaan dan Universitas</h1>
         </div>
         <div class="items-center flex justify-center">
-            <img src="src/assets/Alumni.png" alt="" class="w-full -mt-[18rem] -mb-[14rem]">
+            <img src="/src/assets/Alumni.png" alt="" class="w-full -mt-[18rem] -mb-[14rem]">
         </div>
     </main>
     <Footer></Footer>
