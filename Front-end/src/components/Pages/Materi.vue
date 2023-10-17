@@ -3,8 +3,8 @@ import { RouterLink } from 'vue-router';
 import Footer from '../Footer.vue';
 
 const navigations = [
-    { title: 'Akademi', url: '#' },
-    { title: 'A10: Matematika Keuangan', url: '#' },
+    { title: 'Akademi', url: '/academy' },
+    { title: 'A10: Matematika Keuangan', url: '/A10' },
     { title: 'Video dan Modul' }
 ]
 
