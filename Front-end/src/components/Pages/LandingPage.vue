@@ -66,7 +66,7 @@ const testimonies = [
     <main class="bg-main_blue h-[100%] w-[100%] overflow-hidden">
         <section id="greet" class="bg-greet bg-no-repeat bg-[100%_auto] text-center pt-48 px-4">
             <div class="center select-none">
-                <img class="w-full" src="/src/assets/Group 263.png" />
+                <img class="w-full" src="src/assets/Group 263.png" />
             </div>
             <div class="center">
                 <p class="header-1 text-white font-inter font-bold">From Zero to Fellow</p>
@@ -92,14 +92,14 @@ const testimonies = [
             <div class="w-full max-w-[1500px] mx-auto px-20 flex flex-wrap justify-center text-white font-inter mt-10">
                 <div v-for="product in products" class="p-4 md:w-1/2">
                     <div
-                        class="bg-sec_blue flex flex-row w-full h-full items-center justify-center px-4 py-6 lg:px-12 sm:p-8 md:p-10 rounded-[20px] gap-0 sm:gap-6">
+                        class="bg-sec_blue flex lg:flex-nowrap flex-wrap w-full h-full items-center px-4 py-6 lg:px-12 sm:p-8 md:p-10 rounded-[20px] gap-6">
                         <div class="flex flex-col w-[16rem] mx-auto justify-center pt-4">
-                            <img class="mx-auto mb-5 w-[50px] md:w-auto" :src="product.icon" />
+                            <img class="mx-auto mb-5" :src="product.icon" />
                             <h3 class="header-3 font-bold text-center">{{ product.name }}</h3>
                         </div>
                         <div class="flex flex-col pl-4 lg:pl-0 lg:h-full justify-between lg:py-6 gap-6">
-                            <p class=" shrink-0 text-left">{{ product.desc }}</p>
-                            <RouterLink :to="product.url" class="w-3/5 text-center detail">Lihat Detail
+                            <p class="text-left xl:text-justify">{{ product.desc }}</p>
+                            <RouterLink :to="product.url" class="w-full lg:w-fit text-center detail">Lihat Detail
                             </RouterLink>
                         </div>
                     </div>
@@ -113,7 +113,7 @@ const testimonies = [
                 </h1>
             </div>
             <div class="mt-10 center select-none">
-                <img class="w-full max-w-[1500px]" src="/src/assets/Alumni-cropped.png" />
+                <img class="w-full max-w-[1500px]" src="src/assets/Alumni-cropped.png" />
             </div>
         </section>
         <section id="snapshot" class="mt-16">
@@ -186,7 +186,7 @@ const testimonies = [
             <div class="bg-details-divider bg-no-repeat bg-[100%_auto] -mt-72">
                 <div class="flex flex-col lg:flex-row pt-96 pb-12 px-8 lg:px-20 max-w-[1500px] mx-auto">
                     <div class="mr-16">
-                        <img class="w-40 lg:w-auto" src="/src/assets/testimoni2.png" />
+                        <img class="w-40 lg:w-auto" src="src/assets/testimoni2.png" />
                     </div>
                     <div class="pt-6 font-inter">
                         <p class="header-2 mb-1 font-bold text-[#0066CC]"> Daftar Menjadi Tutor!</p>
@@ -236,7 +236,7 @@ const testimonies = [
     }
 
     .header-3 {
-        font-size: 18px;
+        font-size: 20px;
     }
 
     .text-1 {

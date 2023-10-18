@@ -33,33 +33,24 @@ const modules = [
 
 const packages = [
     {
-        price: 'IDR800,000',
+        name: 'Paket Lengkap',
+        price: 'IDR699.000',
         benefits: [
-            'Benefit 1 lorem ipsum dolor sit amet',
-            'Benefit 2 urna ut faucibus euismod',
-            'Benefit 3 amet sodales vehicula',
-            'Benefit 4 at in fermentum donec',
-            'Benefit 5 donec ut sed lacus ac'
+            'Diskusi grup, Q & A',
+            'Video materi',
+            'Video pembahasan soal ujian PAI',
+            'Kuis & try out',
+            'Kelas online sinkronus dengan tutor (125k / pertemuan @ 1 jam)'
         ]
     },
     {
-        price: 'IDR800,000',
+        name: 'Paket Pembahasan Soal',
+        price: 'IDR299.000',
         benefits: [
-            'Benefit 1 lorem ipsum dolor sit amet',
-            'Benefit 2 urna ut faucibus euismod',
-            'Benefit 3 amet sodales vehicula',
-            'Benefit 4 at in fermentum donec',
-            'Benefit 5 donec ut sed lacus ac'
-        ]
-    },
-    {
-        price: 'IDR800,000',
-        benefits: [
-            'Benefit 1 lorem ipsum dolor sit amet',
-            'Benefit 2 urna ut faucibus euismod',
-            'Benefit 3 amet sodales vehicula',
-            'Benefit 4 at in fermentum donec',
-            'Benefit 5 donec ut sed lacus ac'
+            'Diskusi grup, Q & A',
+            'Video pembahasan soal ujian PAI',
+            'Kuis & try out',
+            'Kelas online sinkronus dengan tutor (125k / pertemuan @ 1 jam)'
         ]
     }
 ]
@@ -95,7 +86,7 @@ const nextModuleSlide = computed(() => {
                 <div class="absolute top-[6rem] left-[16rem] w-10 h-10 bg-neutral-300 rounded-[100%]"></div>
                 <div class="absolute top-[12rem] right-0 w-10 h-10 bg-neutral-300 rounded-[100%]"></div>
                 <div class="absolute top-[12rem] left-0 w-10 h-10 bg-neutral-300 rounded-[100%]"></div>
-                <div class="mx-auto w-[29rem]">
+                <div class="mx-auto w-[28rem]">
                     <img src="/src/assets/academy/image.png"/>
                 </div>
             </div>
@@ -145,16 +136,15 @@ const nextModuleSlide = computed(() => {
                     </div>
                 </div>
             </div>
-            <div class="mt-16 mb-20">
-                <div class="text-4xl text-white font-bold center">Package Price</div>
+            <div class="max-w-[60rem] my-16 mx-auto">
                 <div class="flex items-stretch mt-10 space-x-9">
                     <div v-for="pkg, idx in packages" class="flex-1 flex flex-col">
-                        <div :class="idx === 1 ? 'bg-sec_blue text-white' : 'text-sec_blue bg-white shadow-lg my-11'" class="rounded-2xl p-10 grow">
-                            <div :class="idx === 1 ? 'text-4xl font-bold' : 'text-2xl'" class="font-bold">{{ pkg.price }}</div>
-                            <div :class="idx === 1 ? 'bg-white' : 'bg-sec_blue'" class="bg-opacity-40 h-[1.5px] mt-4 mb-6"></div>
-                            <div :class="idx === 1 ? 'text-[1.1rem]' : 'text-base'">
-                                <div v-if="idx === 1" class="font-bold">Benefit:</div>
-                                <div v-else>Benefit yang akan didapatkan:</div>
+                        <div :class="idx === 0 ? 'text-4xl' : 'text-3xl'" class="text-white font-bold text-center mb-5 h-10">{{ pkg.name }}</div>
+                        <div :class="idx === 0 ? 'bg-sec_blue text-white' : 'text-sec_blue bg-white'" class="rounded-2xl p-10 grow shadow-lg">
+                            <div class="text-4xl font-bold">{{ pkg.price }}</div>
+                            <div :class="idx === 0 ? 'bg-white' : 'bg-sec_blue'" class="bg-opacity-40 h-[1.5px] mt-4 mb-6"></div>
+                            <div :class="idx === 0 ? 'font-semibold' : ''" class="text-[1.1rem]">
+                                <div>Fasilitas:</div>
                                 <ul class="list-disc list-inside">
                                     <li v-for="pkgBenefit in pkg.benefits">{{ pkgBenefit }}</li>
                                 </ul>

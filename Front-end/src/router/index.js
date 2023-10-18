@@ -24,7 +24,7 @@ const router = createRouter({
         {
           path: '',
           name: 'Landingpage',
-          component: () => import('../components/Pages/landingPage.vue')
+          component: () => import('../components/Pages/LandingPage.vue')
         },
         {
           path: "/about",
@@ -34,12 +34,12 @@ const router = createRouter({
         {
           path: '/testimonies',
           name: 'Testimoni',
-          component: () => import('../components/Pages/Testimone.vue')
+          component: () => import('../components/Pages/Testimonies.vue')
         },
         {
           path: '/profile',
           name: 'profil',
-          component: () => import('../components/Pages/Profil.vue')
+          component: () => import('../components/Pages/Profile.vue')
         },
         {
           path: '/career',
@@ -49,12 +49,17 @@ const router = createRouter({
         {
           path: '/products',
           name: 'Produk',
-          component: () => import('../components/Pages/Product.vue')
+          component: () => import('../components/Pages/Products.vue')
         },
         {
           path: '/private-tutor',
           name: 'Tutor Privat',
           component: () => import('../components/Pages/PrivateTutor.vue')
+        },
+        {
+          path: '/tutors',
+          name: 'Tutors',
+          component: () => import('../components/Pages/Tutors.vue')
         },
         {
           path: '/academy',
@@ -69,7 +74,7 @@ const router = createRouter({
         {
           path: '/actuarial-services',
           name: 'Jasa Aktuaria',
-          component: () => import('../components/Pages/JasaAktuaria.vue')
+          component: () => import('../components/Pages/ActuarialServices.vue')
         },
         {
           path: '/A10',
@@ -117,7 +122,7 @@ const router = createRouter({
         {
           path: 'materials',
           name: 'Materi',
-          component: () => import('../components/Pages/Materi.vue')
+          component: () => import('../components/Pages/Materials.vue')
         },
       ]
     },
@@ -135,6 +140,7 @@ router.beforeEach((to, from, next) => {
     '/career',
     '/products',
     '/private-tutor',
+    '/tutors',
     '/academy',
     '/company-training',
     '/actuarial-services'

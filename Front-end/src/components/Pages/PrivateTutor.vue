@@ -1,4 +1,5 @@
 <script setup>
+import { RouterLink } from 'vue-router';
 import Footer from '../Footer.vue';
 import OtherProducts from '../OtherProducts.vue';
 
@@ -30,7 +31,7 @@ const packets = [
     <main class="bg-private-tutor bg-cover font-inter">
         <div class="flex flex-col py-20 px-28">
             <div class="flex">
-                <div class="w-[36rem] shrink-0">
+                <div class="ml-12 w-[36rem] shrink-0">
                     <img src="/src/assets/private-tutor/model.png">
                 </div>
                 <h2 class="grow mt-6 text-sec_blue font-bold text-[3.25rem] text-right leading-[1.5]">
@@ -69,9 +70,9 @@ const packets = [
                                 <li v-for="facility in packet.facilities">{{ facility }}</li>
                             </ul>
                         </div>
-                        <div class="inline-block rounded-lg bg-[#F26D0F] text-white font-semibold mt-5 px-3 py-2">
+                        <RouterLink :to="{ name: 'Tutors' }" class="inline-block rounded-lg bg-[#F26D0F] text-white font-semibold mt-5 px-3 py-2">
                             Berlangganan
-                        </div>
+                        </RouterLink>
                     </div>
                 </div>
             </div>
