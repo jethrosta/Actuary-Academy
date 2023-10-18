@@ -95,13 +95,8 @@ const nextModuleSlide = computed(() => {
                 <div class="absolute top-[6rem] left-[16rem] w-10 h-10 bg-neutral-300 rounded-[100%]"></div>
                 <div class="absolute top-[12rem] right-0 w-10 h-10 bg-neutral-300 rounded-[100%]"></div>
                 <div class="absolute top-[12rem] left-0 w-10 h-10 bg-neutral-300 rounded-[100%]"></div>
-<<<<<<< HEAD
                 <div class="mx-auto w-[29rem]">
                     <img src="/src/assets/academy/image.png"/>
-=======
-                <div class="mx-auto w-[28rem]">
-                    <img src="src/assets/academy/image.png"/>
->>>>>>> 1b7ccf687633e1fed730fd9ee6c8a6443e12fbc5
                 </div>
             </div>
             <div class="bg-sec_blue px-10 py-8 rounded-2xl">
