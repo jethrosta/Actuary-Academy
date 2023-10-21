@@ -97,7 +97,7 @@ const accountMenu = [
       </div>
       <!-- Navbar -->
       <nav class="flex justify-between items-center text-white font-inter font-bold mx-auto lg:px-10 px-4">
-        <div class="flex flex-row items-center pb-3">
+        <div class="flex flex-row items-center pb-3 lg:flex-1">
           <!-- Search Bar -->
           <div class="font-normal hidden lg:w-80 md:w-56 lg:flex">
             <div class="relative w-72">
@@ -132,7 +132,7 @@ const accountMenu = [
           </div>
         </div>
 
-        <div v-else id="UserButton" class="flex space-x-4 pb-3">
+        <div v-else id="UserButton" class="flex space-x-4 pb-3 lg:flex-1 lg:justify-end">
           <div>
             <RouterLink to="/login"
               class="bg-main_blue hover:bg-[#1a4ab3] border-sec_blue border rounded-md py-[0.625rem] px-[1.25rem]">Masuk
