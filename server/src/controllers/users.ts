@@ -14,7 +14,7 @@ export const getAllUsers = async (req: express.Request, res: express.Response) =
 
 export const getCurrentUser = async (req: RequestWithJWT, res: express.Response) => {
   try {
-    const user = await getUserById(req.userId);
+    const user = await getUserById(req.userId).select('-authentication');
     return res.json(user);
   } catch (err) {
     console.log(err);

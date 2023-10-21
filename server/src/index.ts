@@ -6,15 +6,19 @@ import compression from "compression";
 import cors from "cors";
 import mongoose from "mongoose";
 import router from "./router";
+import dotenv from "dotenv";
 
+dotenv.config()
 const app = express();
 
-app.use(
-  cors({
-    origin: "http://localhost:5173",
+const frontendCORS = process.env.frontend || 'http://localhost:5174';
+
+app.use(cors({
+    origin: ['http://localhost:5173', 'http://127.0.0.1:5173', frontendCORS],
     credentials: true,
-  })
-);
+  }));
+
+const PORT = parseInt(process.env.PORT) || 3000;
 
 app.use(compression());
 app.use(cookieParser());
@@ -22,18 +26,15 @@ app.use(bodyParser.json());
 
 const server = http.createServer(app);
 
-server.listen(3000, () => {
-  //sebelumnya 8080
-  console.log("Server running on http://localhost:3000");
+server.listen(PORT, process.env.HOST, () => {
+  console.log('Server running on ' + process.env.HOST + ':' + process.env.PORT);
 });
 
-// yang diubah setelah 27017
-// const MONGO_URL = "mongodb://localhost:27017/academy3";
-const MONGO_URL = "mongodb://127.0.0.1:27017/academy3";
+const MONGO_URL = 'mongodb+srv://actuary:academy@actuary-academy.mx5dl7v.mongodb.net/aa-user'
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGO_URL);
 
-mongoose.connection.on("error", (error: Error) => console.log(error));
+mongoose.connection.on('error', (error: Error) => console.log(error));
 
-app.use("/", router());
+app.use('/', router());

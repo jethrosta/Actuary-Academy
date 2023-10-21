@@ -1,4 +1,4 @@
-import { MidtransService } from "./midtrans-service";
+import { MidtransService } from "../services/midtrans";
 
 class midtransController {
     index = async (res: any) => {

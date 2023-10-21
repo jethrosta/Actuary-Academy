@@ -8,6 +8,7 @@ import jwt from 'jsonwebtoken'
 import type { JwtPayload } from 'jsonwebtoken'
 
 const SECRET: string = 'A@Academy2023-DEVELOPED-BY-JETHRO&DANDY-ZICKY-DIVALDY';
+const COOKIE_URL: string = process.env.APP_COOKIE_URL || 'http://localhost:8080';
 
 export interface RequestWithJWT extends express.Request {
   userId: string;
@@ -56,17 +57,15 @@ export const isAuthenticated = async (
     try {
       decodedJWT = jwt.verify(JWT, SECRET) as JwtPayload;
     } catch (error) {
-      console.log(error);
-      return res.sendStatus(400);
+      return res.status(204).json({ 'message': 'Expired session' });
     }
-
 
     if (!decodedJWT) {
       return res.sendStatus(400);
     }
 
     // check JWT expiration date
-    if (Date.now() > decodedJWT.exp) {
+    if (Date.now() > decodedJWT.exp) {      
       // Handle expired JWT by refreshing new JWT and use SessionToken instead
       // if the SessionToken is expired, return unauthenticated and log out from the main application
       const user = await getUserBySessionToken(sessionToken.token)
@@ -79,18 +78,19 @@ export const isAuthenticated = async (
       const newJWT = createJWT(
         user._id.toString(),
         Date.now(),
-        Date.now() + 15 * 60 * 1000
+        Date.now() + (15 * 60 * 1000)
       )
+
       res.cookie('A@ACADEMY-JWT',
         newJWT,
-        { domain: 'localhost', path: '/' });
+        { httpOnly: true, domain: COOKIE_URL, path: '/', secure: false, sameSite: 'none', maxAge: 48 * 60 * 60 * 1000 });
       decodedJWT = jwt.verify(newJWT.toString(), SECRET) as JwtPayload;
     }
 
     const existingUser = await getUserById(decodedJWT.sub);
 
     if (!existingUser) {
-      return res.status(403).json({notification: 'User does not exist'});
+      return res.status(403).json({ notification: 'User does not exist' });
     }
 
     req.userId = decodedJWT.sub

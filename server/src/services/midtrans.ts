@@ -1,6 +1,6 @@
 import { StatusCodes } from 'http-status-codes';
-import { MidtransResponse } from 'db/midtrans';
-import { apiResponse, notFoundResponse } from 'helpers/api-response';
+import { MidtransResponse } from '../db/midtrans';
+import { apiResponse, notFoundResponse } from '../helpers/api-response';
 
 class midtransService {
     index = async () => {
