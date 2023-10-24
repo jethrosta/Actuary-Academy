@@ -9,17 +9,17 @@ const router = createRouter({
     {
       path: '/login',
       name: 'masuk',
-      component: () => import('../components/Layouts/login.vue')
+      component: () => import('../components/Layouts/Login.vue')
     },
     {
       path: '/register',
       name: 'daftar',
-      component: () => import('../components/Layouts/register.vue')
+      component: () => import('../components/Layouts/Register.vue')
     },
     {
       path: '/',
       name: 'dashboard',
-      component: () => import('../components/Layouts/dashboard.vue'),
+      component: () => import('../components/Layouts/Dashboard.vue'),
       children: [
         {
           path: '',
@@ -37,9 +37,9 @@ const router = createRouter({
           component: () => import('../components/Pages/Testimonies.vue')
         },
         {
-          path: '/profile',
-          name: 'profil',
-          component: () => import('../components/Pages/Profile.vue')
+          path: '/testimonies/profile',
+          name: 'testimony-profile',
+          component: () => import('../components/Pages/TestimonyProfile.vue')
         },
         {
           path: '/career',
@@ -150,6 +150,7 @@ router.beforeEach((to, from, next) => {
     '/register',
     '/about',
     '/testimonies',
+    '/testimonies/profile',
     '/profile',
     '/career',
     '/products',

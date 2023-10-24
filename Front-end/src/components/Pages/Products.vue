@@ -1,3 +1,8 @@
+<script setup>
+import { RouterLink } from 'vue-router';
+import Footer from '@/components/Footer.vue'
+
+</script>
 <template>
     <div class="max-w-7xl mx-auto overflow-hidden">
         <div class="flex flex-col items-center justify-center">
@@ -156,8 +161,9 @@
                             aktuaria
                             dan mata ujian PAI.</p>
                     </div>
-                    <button class=" bg-sec_blue text-white font-inter font-bold text-sm rounded-lg p-2 px-8 shadow-xl">Lihat
-                        Detail</button>
+                    <RouterLink :to="{ name: 'Tutor Privat' }" class=" bg-sec_blue text-white font-inter font-bold text-sm rounded-lg p-2 px-8 shadow-xl">
+                        Lihat Detail
+                    </RouterLink>
                 </div>
             </div>
 
@@ -192,8 +198,9 @@
                         <p class=" lg:text-right text-main_blue text-xl  ">Actuary Academy menyediakan video pembelajaran,
                             pembahasan soal, dan pelaksanaan try out.</p>
                     </div>
-                    <button class=" bg-sec_blue text-white font-inter font-bold text-sm rounded-lg p-2 px-8 shadow-xl">Lihat
-                        Detail</button>
+                    <RouterLink :to="{ name: 'Akademi' }" class=" bg-sec_blue text-white font-inter font-bold text-sm rounded-lg p-2 px-8 shadow-xl">
+                        Lihat Detail
+                    </RouterLink>
                 </div>
                 <div class="flex flex-1 justify-center -my-10">
                     <svg class="w-full sm:w-max" width="680" height="" viewBox="0 0 806 683" fill="none"
@@ -447,8 +454,9 @@
                         <p class=" text-main_blue text-xl  ">Actuary Academy menyediakan Tutor Privat pembelajaran mata
                             ujian PAI untuk perusahaan.</p>
                     </div>
-                    <button class=" bg-sec_blue text-white font-inter font-bold text-sm rounded-lg p-2 px-8 shadow-xl">Lihat
-                        Detail</button>
+                    <RouterLink :to="{ name: 'Company Training' }" class=" bg-sec_blue text-white font-inter font-bold text-sm rounded-lg p-2 px-8 shadow-xl">
+                        Lihat Detail
+                    </RouterLink>
                 </div>
             </div>
 
@@ -494,8 +502,9 @@
                         <p class=" lg:text-right text-main_blue text-xl  ">Actuary Academy menyediakan jasa yang membantu
                             proyek-proyek seputar aktuaria.</p>
                     </div>
-                    <button class=" bg-sec_blue text-white font-inter font-bold text-sm rounded-lg p-2 px-8 shadow-xl">Lihat
-                        Detail</button>
+                    <RouterLink :to="{ name: 'Jasa Aktuaria' }" class=" bg-sec_blue text-white font-inter font-bold text-sm rounded-lg p-2 px-8 shadow-xl">
+                        Lihat Detail
+                    </RouterLink>
                 </div>
                 <div class="flex flex-1 justify-center -my-10">
                     <svg class="w-full sm:w-max" width="680" height="" viewBox="0 0 807 683" fill="none"
@@ -618,13 +627,7 @@
             </div>
         </div>
 
+        </div>
     </div>
-</div>
-<Footer></Footer></template>
-
-<script setup>
-import Footer from '@/components/Footer.vue'
-
-</script>
-
-
+    <Footer></Footer>
+</template>

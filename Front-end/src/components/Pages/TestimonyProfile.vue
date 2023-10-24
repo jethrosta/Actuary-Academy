@@ -7,7 +7,7 @@ const name = ref('Nama')
 const occupation = ref('Jabatan Jabatan Jabatan Jabatan Jabatan Jabatan Jabatan Jabatan')
 const comment = ref('Actuary Academy membantu saya dalam menentukan pricing dalam dunia asuransi. Materi pricing disajikan dengan video pembelajaran yang sangat mudah dipahami serta harga yang terjangkau. Saya menantikan Actuary Academy yang lebih baik untuk kedepannya')
 const stars = ref(5)
-const imgUrl = ref('src/assets/testimonies/profile.png')
+const imgUrl = ref('/src/assets/testimonies/profile.png')
 
 </script>
 <template>

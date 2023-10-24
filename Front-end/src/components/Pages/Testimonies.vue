@@ -49,7 +49,7 @@ const testimonies = [
                                 <p class="text-white font-bold font-inter text-base">{{ testi.name }}</p>
                                 <p class="text-lg text-white">Jabatan Jabatan Jabatan<br>Jabatan Jabatan</p>
                             </div>
-                            <RouterLink to="/profile" class="hover:transition-transform hover:scale-125">
+                            <RouterLink :to="{ name: 'testimony-profile' }" class="hover:transition-transform hover:scale-125">
                                 <svg class="h-full w-6" preserve-aspect-ratio="none" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M 10.667 1.667 H 5 C 3.435 1.667 2.167 2.935 2.167 4.5 V 21.5 C 2.167 23.065 3.435 24.333 5 24.333 H 22 C 23.565 24.333 24.833 23.065 24.833 21.5 V 15.833 M 12.083 14.417 L 24.833 1.667 M 24.833 1.667 V 8.75 M 24.833 1.667 H 17.75" stroke="white" stroke-width="2.83333" stroke-linecap="round" stroke-linejoin="round"></path>
                                 </svg>

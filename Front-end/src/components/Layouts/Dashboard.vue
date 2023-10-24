@@ -5,12 +5,13 @@ import NavDropdown from '../Modules/NavDropdown.vue';
 import UserDropdown from '../Modules/UserDropdown.vue';
 import NavSideMenu from '../Modules/NavSideMenu.vue';
 import { useStore } from "../../store/index.js";
+import { notifCount, purchaseCount } from '@/db';
 
 const store = useStore()
 const isLoggedIn = computed(() => store.loginState.status.loggedIn)
 const user = JSON.parse(localStorage.getItem('user'))
 
-const langSetting = ref({ long: "Bahasa Indonesia", short: "INA" })
+const langSetting = ref({ long: "Bahasa Indonesia", short: "INA" });
 
 const switchLang = (index) => {
   langSetting.value = languageList[index]
@@ -38,6 +39,11 @@ const close = (e) => {
   document.removeEventListener('click', close);
 };
 
+const isUserDropdownOpen = ref(false);
+const toggleUserDropdown = () => {
+  isUserDropdownOpen.value = !isUserDropdownOpen.value;
+};
+
 const productSubmenu = [
   { title: 'Tutor Privat', name: 'Tutor Privat' },
   { title: 'Akademi', name: 'Akademi' },
@@ -52,6 +58,8 @@ const accountMenu = [
   { title: 'Keranjang', name: 'Keranjang Saya' },
   { title: 'Pengaturan', name: 'Pengaturan' }
 ]
+
+const notifTotalCount = notifCount + purchaseCount;
 
 </script>
 <template>
@@ -125,10 +133,15 @@ const accountMenu = [
           <RouterLink :to="{ name: 'Karir' }" class="hover:text-sec_blue">Karir</RouterLink>
         </div>
 
-        <div v-if="isLoggedIn" id="userButton" class="flex items-center font-normal pb-1">
-          <div class="flex space-x-2 px-2 select-none items-center rounded-full cursor-pointer p-1">
-            <div class="pl-2">Hello, <span class="font-semibold">{{ user.username }}</span></div>
-            <UserDropdown :items="accountMenu" class="hover:text-sec_blue py-1" />
+        <div v-if="isLoggedIn" id="userButton" class="flex items-center font-normal pb-1 lg:flex-1 lg:justify-end">
+          <div class="flex space-x-2 px-2 select-none items-center rounded-full cursor-pointer p-1" @click="toggleUserDropdown">
+            <div class="pl-2 relative">
+              Hello, <span class="font-semibold">{{ user.username }}!</span>
+              <div v-if="notifTotalCount > 0" class="absolute top-[-.5rem] right-[-.75rem] bg-red-600 text-white text-[.7rem] w-4 h-4 leading-4 text-center rounded-[50%]">
+                {{ notifTotalCount }}
+              </div>
+            </div>
+            <UserDropdown :isOpen="isUserDropdownOpen" :items="accountMenu" class="hover:text-sec_blue py-1" />
           </div>
         </div>
 

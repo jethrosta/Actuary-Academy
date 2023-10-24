@@ -106,3 +106,6 @@ export const tutors = [
         img: 'src/assets/tutors/1.png'
     }
 ]
+
+export const notifCount = 2;
+export const purchaseCount = 3;
