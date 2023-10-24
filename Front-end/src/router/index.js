@@ -77,9 +77,28 @@ const router = createRouter({
           component: () => import('../components/Pages/ActuarialServices.vue')
         },
         {
-          path: '/A10',
-          name: 'A10',
-          component: () => import('../components/Pages/A10.vue')
+          path: '/modules',
+          redirect: '/academy'
+        },
+        {
+          path: '/modules/:moduleId',
+          name: 'module',
+          component: () => import('../components/Pages/Module.vue')
+        },
+        {
+          path: '/modules/:moduleId/video',
+          name: 'module-video',
+          component: () => import('../components/Pages/ModuleVideo.vue')
+        },
+        {
+          path: '/modules/:moduleId/tryout',
+          name: 'module-tryout',
+          component: () => import('../components/Pages/ModuleTryout.vue')
+        },
+        {
+          path: '/modules/:moduleId/discussion',
+          name: 'module-discussion',
+          component: () => import('../components/Pages/ModuleDiscussion.vue')
         },
         {
           path: '/user',
@@ -118,12 +137,7 @@ const router = createRouter({
           path: 'my-payment',
           name: 'Pembayaran Saya',
           component: () => import('../components/UserPages/MyPayment.vue')
-        },
-        {
-          path: 'materials',
-          name: 'Materi',
-          component: () => import('../components/Pages/Materials.vue')
-        },
+        }
       ]
     },
   ]

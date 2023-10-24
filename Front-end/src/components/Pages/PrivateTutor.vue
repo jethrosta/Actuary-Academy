@@ -2,29 +2,7 @@
 import { RouterLink } from 'vue-router';
 import Footer from '../Footer.vue';
 import OtherProducts from '../OtherProducts.vue';
-
-const packets = [
-    {
-        name: 'Paket Reguler',
-        price: 'IDR180,000',
-        tags: ['1 peserta', '1 pertemuan'],
-        facilities: [
-            'Zoom meeting dengan durasi 2 jam',
-            'Video rekaman dan materi dari tutor',
-            'Bebas memilih materi yang akan dipelajari'
-        ]
-    },
-    {
-        name: 'Paket Eksklusif',
-        price: 'IDR800,000',
-        tags: ['1 kelas', '1 pertemuan'],
-        facilities: [
-            'Zoom meeting dengan durasi 2 jam',
-            'Video rekaman dan materi dari tutor',
-            'Bebas memilih materi yang akan dipelajari'
-        ]
-    }
-]
+import { privateTutorPackages } from '@/db';
 
 </script>
 <template>
@@ -52,7 +30,7 @@ const packets = [
                 </div>
             </div>
             <div class="flex my-20 space-x-9">
-                <div v-for="packet in packets" class="flex-1 flex flex-col">
+                <div v-for="packet in privateTutorPackages" class="flex-1 flex flex-col">
                     <div class="bg-white text-sec_blue self-center text-3xl font-bold -mb-20 px-20 pt-10 pb-24 rounded-[100%]">
                         {{ packet.name }}
                     </div>

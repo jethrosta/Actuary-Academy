@@ -12,4 +12,3 @@ const pinia = createPinia()
 app.use(router).use(pinia)
 
 app.mount('#app')
-
