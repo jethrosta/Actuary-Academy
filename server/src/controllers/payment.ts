@@ -1,7 +1,7 @@
 import express, { response } from 'express';
 
 const midtransClient = require('midtrans-client');
-const SERVER_KEY = 'Pake Sandbox';
+const SERVER_KEY = 'Pake Sandbox'; //Isi server & client key akun midtrans
 const CLIENT_KEY = 'Pake Sandbox';
 
 export const makePayment = async (req: express.Request, res: express.Response) => {
@@ -10,8 +10,8 @@ export const makePayment = async (req: express.Request, res: express.Response) =
 
         let core = new midtransClient.CoreApi({
             isProduction: false,
-            serverKey: 'SB-Mid-server-BFwr3VF3lusAFn4lAAty5nIQ',
-            clientKey: 'SB-Mid-client-ZekY0nyaDfOnwd8A'
+            serverKey: SERVER_KEY,
+            clientKey: CLIENT_KEY
             
         });
 
@@ -26,6 +26,7 @@ export const makePayment = async (req: express.Request, res: express.Response) =
                 "last_name": "Amru",
                 "email": "haydaramru@example.com",
             },
+
         })
             .then((apiResponse: any) => {
                 return res.status(200).json(

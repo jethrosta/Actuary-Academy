@@ -2,7 +2,7 @@
     <div class="content-area font-inter flex flex-col text-main_blue gap-y-1 w-full px-10 pt-12 pb-28 overflow-clip">
         <div class="font-bold text-3xl py-4">Keranjang</div>
 
-        <div v-if="!toCheckout" class="w-full">
+        <div v-if="!toEditProduct" class="w-full">
             <div class="mb-4">
                 <label class="inline-flex items-center">
                     <input type="checkbox" @click="toggleCheckAll" v-model="isCheckAll" class=" h-5 w-5 mr-4">
@@ -24,16 +24,16 @@
                     class="notifItem w-full flex flex-row justify-between text-black text-xl border-[1.5px] border-main_blue rounded-2xl py-3 px-4">
                     <div class="flex flex-col gap-1 font-medium text-lg">
                         <div class="text-lg text-main_blue font-bold">
-                            {{ cartItems[index].name }}</div>
-                        <div class="">A10 Matematika Keuangan</div>
-                        <div class="">1 Bulan</div>
+                            {{ item.name }}</div>
+                        <div class="text-md">{{ item.variation }}</div>
+                        <div class="text-md">{{ item.duration }}</div>
                     </div>
                     <div class="flex flex-col gap-1 text-base justify-between ">
                         <div class=" text-right text-main_blue font-bold">
                             {{ toIDR(cartItems[index].price) }}</div>
-                        <div
+                        <button @click="toEditProduct = true, currentItemEdit = index"
                             class="flex ml-auto bg-orange-500 py-1 px-3 text-white font-semibold first-letter:text-center rounded-lg">
-                            Lihat Detail</div>
+                            Lihat Detail</button>
                     </div>
                 </div>
 
@@ -52,17 +52,17 @@
                 </div>
                 <div class="flex flex-row gap-3 items-center">
                     <div class="text-lg text-main_blue font-bold">
-                        Total (2 Items)</div>
+                        Total ({{ totalItems }} Items)</div>
                     <div class="text-lg text-main_blue font-bold">
                         {{ toIDR(totalPrice) }}</div>
-                    <div @click="toCheckout = true"
+                    <div @click="toPayment()"
                         class="flex hover:cursor-pointer ml-auto bg-sec_blue py-1 px-3 text-white font-semibold first-letter:text-center rounded-lg">
                         Checkout</div>
                 </div>
             </div>
         </div>
 
-        <div v-if="toCheckout" class="w-full border-[1.5px] border-main_blue rounded-2xl">
+        <div v-if="toEditProduct" class="w-full border-[1.5px] border-main_blue rounded-2xl">
             <div class="w-full flex flex-col justify-between text-black text-x py-3 px-4">
                 <div class="py-2">
                     <div class="text-lg text-slate-500">
@@ -70,23 +70,20 @@
                     <div class="relative">
                         <button @click="toggle(0)"
                             class="menu-button flex items-center justify-between w-4/5 bg-main_blue font-bold rounded-lg text-white px-3 py-1">
-                            Akademi
-                            <svg :class="menuProduk ? 'rotate-180' : ''" width="16" height="10" viewBox="0 0 16 10"
+                            {{ cartItems[currentItemEdit].name }}
+                            <svg :class="allMenu[0] ? 'rotate-180' : ''" width="16" height="10" viewBox="0 0 16 10"
                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M15.3198 0.999894L7.81654 8.09082L0.878023 0.999894" stroke="white"
                                     stroke-width="1.8843" />
                             </svg>
                         </button>
                         <div v-if="allMenu[0]"
-                            class="select-none absolute z-50 left-0 w-4/5 py-2 mt-2 bg-gray-300 text-gray-500 rounded-md shadow-xl">
-                            <div class="block px-4 py-2 text-sm hover:bg-gray-400 hover:text-gray-200">
-                                Dropdown List 1
-                            </div>
-                            <div class="block px-4 py-2 text-sm hover:bg-gray-400 hover:text-gray-200">
-                                Dropdown List 1
-                            </div>
-                            <div class="block px-4 py-2 text-sm hover:bg-gray-400 hover:text-gray-200">
-                                Dropdown List 1
+                            class="hover:cursor-pointer select-none absolute z-50 left-0 w-4/5 py-2 mt-2 bg-gray-300 text-gray-500 rounded-md shadow-xl">
+                            <div>
+                                <div v-for="(item, index) in cartItems" @click=" currentItemEdit = index;"
+                                    class="block px-4 py-2 text-sm hover:bg-gray-400 hover:text-gray-200">
+                                    {{ item.name }}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -97,23 +94,19 @@
                     <div class="relative">
                         <button @click="toggle(1)"
                             class="menu-button flex items-center justify-between w-4/5 bg-main_blue font-bold rounded-lg text-white px-3 py-1">
-                            Akademi
-                            <svg :class="menuProduk ? 'rotate-180' : ''" width="16" height="10" viewBox="0 0 16 10"
+                            {{ cartItems[currentItemEdit].variation }}
+                            <svg :class="allMenu[1] ? 'rotate-180' : ''" width="16" height="10" viewBox="0 0 16 10"
                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M15.3198 0.999894L7.81654 8.09082L0.878023 0.999894" stroke="white"
                                     stroke-width="1.8843" />
                             </svg>
                         </button>
                         <div v-if="allMenu[1]"
-                            class="select-none absolute z-50 left-0 w-4/5 py-2 mt-2 bg-gray-300 text-gray-500 rounded-md shadow-xl">
-                            <div class="block px-4 py-2 text-sm hover:bg-gray-400 hover:text-gray-200">
-                                Dropdown List 1
-                            </div>
-                            <div class="block px-4 py-2 text-sm hover:bg-gray-400 hover:text-gray-200">
-                                Dropdown List 1
-                            </div>
-                            <div class="block px-4 py-2 text-sm hover:bg-gray-400 hover:text-gray-200">
-                                Dropdown List 1
+                            class="hover:cursor-pointer select-none absolute z-50 left-0 w-4/5 py-2 mt-2 bg-gray-300 text-gray-500 rounded-md shadow-xl">
+                            <div v-for="(variation, index) in getCurrentItem(currentItemEdit).variationOptions"
+                                class="block px-4 py-2 text-sm hover:bg-gray-400 hover:text-gray-200"
+                                @click="setItemDetail({ option: 'variation' }, currentItemEdit, index)">
+                                {{ variation }}
                             </div>
                         </div>
                     </div>
@@ -124,23 +117,19 @@
                     <div class="relative">
                         <button @click="toggle(2)"
                             class="menu-button flex items-center justify-between w-4/5 bg-main_blue font-bold rounded-lg text-white px-3 py-1">
-                            Akademi
-                            <svg :class="menuVariasi ? 'rotate-180' : ''" width="16" height="10" viewBox="0 0 16 10"
+                            {{ cartItems[currentItemEdit].duration }}
+                            <svg :class="allMenu[2] ? 'rotate-180' : ''" width="16" height="10" viewBox="0 0 16 10"
                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M15.3198 0.999894L7.81654 8.09082L0.878023 0.999894" stroke="white"
                                     stroke-width="1.8843" />
                             </svg>
                         </button>
                         <div v-if="allMenu[2]"
-                            class="select-none absolute left-0 w-4/5 py-2 mt-2 bg-gray-300 text-gray-500 rounded-md shadow-xl">
-                            <div class="block px-4 py-2 text-sm hover:bg-gray-400 hover:text-gray-200">
-                                Dropdown List 1
-                            </div>
-                            <div class="block px-4 py-2 text-sm hover:bg-gray-400 hover:text-gray-200">
-                                Dropdown List 1
-                            </div>
-                            <div class="block px-4 py-2 text-sm hover:bg-gray-400 hover:text-gray-200">
-                                Dropdown List 1
+                            class="hover:cursor-pointer select-none absolute left-0 w-4/5 py-2 mt-2 bg-gray-300 text-gray-500 rounded-md shadow-xl">
+                            <div v-for="(duration, index) in getCurrentItem(currentItemEdit).durationOptions"
+                                class="block px-4 py-2 text-sm hover:bg-gray-400 hover:text-gray-200"
+                                @click="setItemDetail({ option: 'duration' }, currentItemEdit, index)">
+                                {{ duration }}
                             </div>
                         </div>
                     </div>
@@ -175,7 +164,7 @@
                     <div class="font-bold py-4 text-main_blue">
                         Pilih Metode Pembayaran ></div>
                 </div>
-                <div @click="makePayment"
+                <div @click="toEditProduct = false"
                     class="flex w-full hover:cursor-pointer justify-center ml-auto bg-orange-500 py-1 px-3 text-white font-semibold first-letter:text-center rounded-lg">
                     Bayar</div>
             </div>
@@ -192,10 +181,81 @@ import router from '../../router';
 import axios from 'axios';
 
 const cartItems = ref([
-    { name: 'Akademi', price: '1000000', isChecked: false },
-    { name: 'Tutor Privat', price: '900000', isChecked: false },
-    { name: 'Jasa Aktuaria', price: '1200000', isChecked: false },
+    {
+        name: 'Akademi',
+        price: '1000000',
+        variation: 'A10 Matematika Keuangan',
+        duration: '1 Bulan',
+        isChecked: false,
+        isEditing: false,
+        variationOptions: [
+            'A10 Matematika Keuangan',
+            'A11 Statistika',
+            'A12 Matematika Diskrit',
+        ],
+        durationOptions: [
+            '1 Bulan',
+            '2 Bulan',
+            '4 Bulan',
+        ]
+
+    },
+    {
+        name: 'Tutor Privat',
+        price: '900000',
+        variation: 'A Tutor 1',
+        duration: '1 Bulan',
+        isChecked: false,
+        isEditing: false,
+        variationOptions: [
+            'A Tutor 1',
+            'A Tutor 2',
+            'A Tutor 3',
+        ],
+        durationOptions: [
+            '1 Bulan',
+            '3 Bulan',
+            '6 Bulan',
+        ]
+    },
+    {
+        name: 'Jasa Aktuaria',
+        price: '1200000',
+        variation: 'A Jasa 1',
+        duration: '2 Bulan',
+        isChecked: false,
+        isEditing: false,
+        variationOptions: [
+            'A Jasa 1',
+            'A Jasa 2',
+            'A Jasa 3',
+        ],
+        durationOptions: [
+            '2 Bulan',
+            '3 Bulan',
+            '6 Bulan',
+        ]
+    },
 ])
+
+const currentItemEdit = ref(0);
+
+const getCurrentItem = (index) => {
+    return cartItems.value[index]
+}
+
+function setItemDetail(option, itemIndex, optionIndex) {
+    switch (option.option) {
+        case 'variation':
+            cartItems.value[itemIndex].variation = cartItems.value[itemIndex].variationOptions[optionIndex];
+            break;
+        case 'duration':
+            cartItems.value[itemIndex].duration = cartItems.value[itemIndex].durationOptions[optionIndex];
+            break;
+        default:
+            break;
+    }
+}
 
 function toIDR(num) {
     return 'Rp. ' + num
@@ -203,7 +263,7 @@ function toIDR(num) {
         .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
 }
 
-const toCheckout = ref(false);
+const toEditProduct = ref(false);
 
 const allMenu = ref([false, false, false])
 
@@ -214,11 +274,17 @@ function toggle(index) {
         return;
     }
     else {
-        allMenu.value[index] = true;
+        allMenu.value.forEach((item, i) => {
+            if (i !== index) {
+                allMenu.value[i] = false;
+            }
+            else {
+                allMenu.value[i] = true;
+            }
+        });
         document.addEventListener('click', close);
     }
 };
-
 const close = (e) => {
     if (e.target.closest('.menu-button')) return;
     allMenu.value[0] = false;
@@ -248,26 +314,26 @@ const selectedItems = computed(() => {
     return cartItems.value.filter(item => item.isChecked);
 })
 
+const totalItems = computed(() => { return selectedItems.value.length })
+
 const totalPrice = computed(() => {
     return selectedItems.value.reduce((acc, item) => {
         return acc + parseInt(item.price);
     }, 0);
 })
 
-const paymentData = ref(totalPrice)
+const paymentData = ref({
+    amount: totalPrice
+})
 
-async function makePayment() {
-    try {
-        const response = await axios.post('http://localhost:8080/v2/payment',
-            {amount: paymentData.value}
-        ); 
-        console.log(response.data);
-        localStorage.setItem('paymentData', JSON.stringify(response.data));
-    } catch (error) {
-        console.error(error);
-    } finally {
-        router.push({ name: "Pembayaran Saya" });
-    }
+function toPayment() {
+  localStorage.setItem('pendingPaymentData', JSON.stringify(paymentData.value));
+  router.push('/payments/payment-methods').then(() => {
+    router.go();
+  });
 }
+
+
+
 
 </script>

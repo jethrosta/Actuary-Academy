@@ -115,9 +115,31 @@ const router = createRouter({
           ]
         },
         {
-          path: 'my-payment',
-          name: 'Pembayaran Saya',
-          component: () => import('../components/UserPages/MyPayment.vue')
+          path: '/payments',
+          name: 'Pembayaran',
+          redirect: { name: 'Metode Pembayaran' },
+          children: [
+            {
+              path: 'payment-methods',
+              name: 'Metode Pembayaran',
+              component: () => import('../components/Payments/Payments.vue'),
+            },
+            {
+              path: 'make-payment',
+              name: 'Buat Pembayaran',
+              component: () => import('../components/Payments/MakePayment.vue'),
+            },
+            {
+              path: 'my-payment',
+              name: 'Pembayaran Saya',
+              component: () => import('../components/Payments/MyPayment.vue')
+            },
+            {
+              path: 'credit-card',
+              name: 'Kartu Kredit',
+              component: () => import('../components/Payments/CreditCard.vue')
+            },
+          ]
         },
         {
           path: 'materials',

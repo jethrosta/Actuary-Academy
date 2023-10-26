@@ -162,9 +162,9 @@
             </div>
 
             <!-- Akademi -->
-            <div class="mx-auto px-2 md:px-8 py-10 flex justify-center flex-col md:flex-row flex-wrap-reverse">
+            <div class="mx-auto px-2 md:px-8 py-10 flex justify-center flex-col flex-wrap md:flex-row">
                 <!-- Captions -->
-                <div class="flex items-center lg:items-end text-center lg:text-left flex-col my-auto flex-1 p-8 gap-y-5">
+                <div class="flex items-center order-last lg:order-none lg:items-end text-center lg:text-left flex-col my-auto flex-1 p-8 gap-y-5">
                     <!-- icon bulat bulat akademi -->
                     <div class="flex rounded-full h-12 w-12 space-x-5 justify-center lg:justify-end">
                         <img class=" rounded-full object-cover" src="/src/assets/Akademi/Frame 301.png" />
@@ -195,7 +195,7 @@
                     <button class=" bg-sec_blue text-white font-inter font-bold text-sm rounded-lg p-2 px-8 shadow-xl">Lihat
                         Detail</button>
                 </div>
-                <div class="flex flex-1 justify-center -my-10">
+                <div class="flex flex-1 order-first lg:order-none justify-center -my-10">
                     <svg class="w-full sm:w-max" width="680" height="" viewBox="0 0 806 683" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <g filter="url(#filter0_b_2914_13027)">
@@ -453,9 +453,9 @@
             </div>
 
             <!-- Jasa Aktuaria -->
-            <div class="mx-auto px-2 md:px-8 py-10 flex justify-center flex-col md:flex-row flex-wrap-reverse">
+            <div class="mx-auto px-2 md:px-8 py-10 flex justify-center flex-col md:flex-row flex-wrap">
                 <!-- Captions -->
-                <div class="flex items-center lg:items-end text-center lg:text-left flex-col my-auto flex-1 p-8 gap-y-5">
+                <div class="flex items-center order-last lg:order-none lg:items-end text-center lg:text-left flex-col my-auto flex-1 p-8 gap-y-5">
                     <!-- icon bulat bulat -->
                     <div class="flex rounded-full h-12 w-12 space-x-5 justify-center lg:justify-end">
                         <img class=" rounded-full object-cover" src="/src/assets/Akademi/Frame 301.png" />
@@ -497,7 +497,7 @@
                     <button class=" bg-sec_blue text-white font-inter font-bold text-sm rounded-lg p-2 px-8 shadow-xl">Lihat
                         Detail</button>
                 </div>
-                <div class="flex flex-1 justify-center -my-10">
+                <div class="flex flex-1 order-first lg:order-none justify-center -my-10">
                     <svg class="w-full sm:w-max" width="680" height="" viewBox="0 0 807 683" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <g filter="url(#filter0_b_2914_12920)">
