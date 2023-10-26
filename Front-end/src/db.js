@@ -1,0 +1,111 @@
+// TEMPORARY DATA BEFORE REAL DATABASE IS READY FOR USE
+
+export const modules = {
+    'A10': {
+        name: 'Matematika Keuangan',
+        desc: 'Deskripsi singkat tentang modul A10: Matematika Keuangan. Deskripsi singkat tentang modul A10 deskripsi singkat tentang modul A10 deskripsi singkat tentang modul A10.'
+    },
+    'A20': {
+        name: 'Probabilita dan Statistika',
+        desc: 'Deskripsi singkat tentang modul A20: Matematika Keuangan. Deskripsi singkat tentang modul A20 deskripsi singkat tentang modul A20 deskripsi singkat tentang modul A20.'
+    },
+    'A40': {
+        name: 'Akuntansi',
+        desc: 'Deskripsi singkat tentang modul A40: Matematika Keuangan. Deskripsi singkat tentang modul A40 deskripsi singkat tentang modul A40 deskripsi singkat tentang modul A40.'
+    }
+}
+
+export const privateTutorPackages = [
+    {
+        name: 'Paket Reguler',
+        price: 'IDR180,000',
+        tags: ['1 peserta', '1 pertemuan'],
+        facilities: [
+            'Zoom meeting dengan durasi 2 jam',
+            'Video rekaman dan materi dari tutor',
+            'Bebas memilih materi yang akan dipelajari'
+        ]
+    },
+    {
+        name: 'Paket Eksklusif',
+        price: 'IDR800,000',
+        tags: ['1 kelas', '1 pertemuan'],
+        facilities: [
+            'Zoom meeting dengan durasi 2 jam',
+            'Video rekaman dan materi dari tutor',
+            'Bebas memilih materi yang akan dipelajari'
+        ]
+    }
+]
+
+export const academyPackages = [
+    {
+        name: 'Paket Lengkap',
+        price: 'IDR699.000',
+        facilities: [
+            'Diskusi grup, Q & A',
+            'Video materi',
+            'Video pembahasan soal ujian PAI',
+            'Kuis & try out',
+            'Kelas online sinkronus dengan tutor (125k / pertemuan @ 1 jam)'
+        ]
+    },
+    {
+        name: 'Paket Pembahasan Soal',
+        price: 'IDR299.000',
+        facilities: [
+            'Diskusi grup, Q & A',
+            'Video pembahasan soal ujian PAI',
+            'Kuis & try out',
+            'Kelas online sinkronus dengan tutor (125k / pertemuan @ 1 jam)'
+        ]
+    }
+]
+
+export const companyTrainingPackages = [
+    {
+        name: 'Paket Privat + Akademi Lengkap',
+        price: 'IDR17,000,000',
+        tags: ['1 mata ujian', '10 pertemuan'],
+        facilities: [
+            'Zoom meeting dengan durasi 2 jam',
+            'Video rekaman dan materi dari tutor',
+            'Video pembelajaran akademi',
+            'Akses akademi 6 bulan',
+            'Try out + pembahasan (1-2 kali)',
+            'Request materi / sesuai timeline tutor',
+            'Tidak ada maksimal jumlah peserta'
+        ]
+    },
+    {
+        name: 'Paket Privat + Akademi',
+        price: 'IDR15,000,000',
+        tags: ['1 mata ujian', '10 pertemuan'],
+        facilities: [
+            'Zoom meeting dengan durasi 2 jam',
+            'Video rekaman dan materi dari tutor',
+            'Video pembelajaran akademi',
+            'Akses akademi 6 bulan',
+            'Bebas memilih materi yang dipelajari',
+            'Tidak ada maksimal jumlah peserta'
+        ]
+    }
+]
+
+export const tutors = [
+    {
+        name: 'Firstname Lastname',
+        classes: 'A10, A20, A70',
+        achievs: [
+            'Mahasiswa Ilmu Aktuaria UGM 2019',
+            'Achievement 1',
+            'Achievement 2',
+            'Achievement 3',
+            '...',
+        ],
+        img: 'src/assets/tutors/1.png'
+    }
+]
+
+export const notifCount = 2;
+export const purchaseCount = 3;

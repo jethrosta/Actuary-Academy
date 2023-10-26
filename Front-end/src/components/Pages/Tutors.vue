@@ -1,22 +1,8 @@
 <script setup>
 import Footer from '../Footer.vue';
+import { tutors } from '@/db';
 
-const tutorsProfile = [
-    {
-        name: 'Firstname Lastname',
-        classes: 'A10, A20, A70',
-        achievs: [
-            'Mahasiswa Ilmu Aktuaria UGM 2019',
-            'Achievement 1',
-            'Achievement 2',
-            'Achievement 3',
-            '...',
-        ],
-        img: 'src/assets/tutors/1.png'
-    }
-]
-
-const tutor = tutorsProfile[0] // temporary
+const tutor = tutors[0] // temporary
 
 </script>
 <template>

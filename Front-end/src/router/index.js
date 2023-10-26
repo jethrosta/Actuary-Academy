@@ -9,17 +9,17 @@ const router = createRouter({
     {
       path: '/login',
       name: 'masuk',
-      component: () => import('../components/Layouts/login.vue')
+      component: () => import('../components/Layouts/Login.vue')
     },
     {
       path: '/register',
       name: 'daftar',
-      component: () => import('../components/Layouts/register.vue')
+      component: () => import('../components/Layouts/Register.vue')
     },
     {
       path: '/',
       name: 'dashboard',
-      component: () => import('../components/Layouts/dashboard.vue'),
+      component: () => import('../components/Layouts/Dashboard.vue'),
       children: [
         {
           path: '',
@@ -37,9 +37,9 @@ const router = createRouter({
           component: () => import('../components/Pages/Testimonies.vue')
         },
         {
-          path: '/profile',
-          name: 'profil',
-          component: () => import('../components/Pages/Profile.vue')
+          path: '/testimonies/profile',
+          name: 'testimony-profile',
+          component: () => import('../components/Pages/TestimonyProfile.vue')
         },
         {
           path: '/career',
@@ -77,9 +77,28 @@ const router = createRouter({
           component: () => import('../components/Pages/ActuarialServices.vue')
         },
         {
-          path: '/A10',
-          name: 'A10',
-          component: () => import('../components/Pages/A10.vue')
+          path: '/modules',
+          redirect: '/academy'
+        },
+        {
+          path: '/modules/:moduleId',
+          name: 'module',
+          component: () => import('../components/Pages/Module.vue')
+        },
+        {
+          path: '/modules/:moduleId/video',
+          name: 'module-video',
+          component: () => import('../components/Pages/ModuleVideo.vue')
+        },
+        {
+          path: '/modules/:moduleId/tryout',
+          name: 'module-tryout',
+          component: () => import('../components/Pages/ModuleTryout.vue')
+        },
+        {
+          path: '/modules/:moduleId/discussion',
+          name: 'module-discussion',
+          component: () => import('../components/Pages/ModuleDiscussion.vue')
         },
         {
           path: '/user',
@@ -134,18 +153,10 @@ const router = createRouter({
               name: 'Pembayaran Saya',
               component: () => import('../components/Payments/MyPayment.vue')
             },
-            {
-              path: 'credit-card',
-              name: 'Kartu Kredit',
-              component: () => import('../components/Payments/CreditCard.vue')
-            },
+            
           ]
         },
-        {
-          path: 'materials',
-          name: 'Materi',
-          component: () => import('../components/Pages/Materials.vue')
-        },
+        
       ]
     },
   ]
@@ -158,6 +169,7 @@ router.beforeEach((to, from, next) => {
     '/register',
     '/about',
     '/testimonies',
+    '/testimonies/profile',
     '/profile',
     '/career',
     '/products',

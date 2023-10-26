@@ -1,32 +1,31 @@
 <script setup>
-import { RouterLink } from 'vue-router';
+import { useRoute, RouterLink } from 'vue-router';
 import Footer from '../Footer.vue';
+import { modules } from '@/db';
+
+const videos = [
+    { title: 'Mei 2023', active: true },
+    { title: 'Desember 2022' },
+    { title: 'Agustus 2022' },
+    { title: 'April 2022' },
+    { title: 'November 2021' },
+    { title: 'Juni 2021' },
+    { title: 'September 2020' },
+    { title: 'November 2019' },
+    { title: 'Agustus 2019' }
+]
+
+const route = useRoute();
+
+const moduleId = route.params.moduleId;
+const module = modules[moduleId];
+const pageTitle = `${moduleId}: ${module.name}`;
+const activeVideo = videos.find((v) => v.active)
 
 const navigations = [
     { title: 'Akademi', url: '/academy' },
-    { title: 'A10: Matematika Keuangan', url: '/A10' },
-    { title: 'Video dan Modul' }
-]
-
-const videos = [
-    { category: 'Pendahuluan', title: 'Matematika Keuangan', active: true },
-    { category: 'Single Payment Interest', title: 'Proses Pembungaan' },
-    { category: 'Single Payment Interest', title: 'Jenis Bunga 1' },
-    { category: 'Single Payment Interest', title: 'Jenis Bunga 2' },
-    { category: 'Single Payment Interest', title: 'Ekuivalensi Bunga Periodik' },
-    { category: 'Multi Payment Interest', title: 'Time Value of Money' },
-    { category: 'General Annuity', title: 'Pendahuluan' },
-    { category: 'General Annuity', title: 'Anuitas Akhir' },
-    { category: 'General Annuity', title: 'Anuitas Awal' },
-    { category: 'General Annuity', title: 'Hubungan Anuitas Awal & Akhir' },
-    { category: 'General Annuity', title: 'Perpetuitas' },
-    { category: 'General Annuity', title: 'Differing Period' },
-    { category: 'Arithmetic & Geometric Annuity', title: 'Arithmetic Annuity' },
-    { category: 'Arithmetic & Geometric Annuity', title: 'Geometric Annuity' },
-    { category: 'Deferred Annuity', title: 'Deferred Annuity' },
-    { category: 'Metode Pengembalian Utang', title: 'Pendahuluan' },
-    { category: 'Metode Pengembalian Utang', title: 'Outstanding Loan Balance' },
-    { category: 'Metode Pengembalian Utang', title: 'Ammortization' }
+    { title: pageTitle, url: `/modules/${moduleId}` },
+    { title: 'Pembahasan Soal Ujian PAI' }
 ]
 
 </script>
@@ -51,7 +50,7 @@ const videos = [
                     <div class="w-11 h-11 rounded-full bg-gray-300 mr-4">
                         <img src="">
                     </div>
-                    <div class="font-semibold text-xl">A10: Matematika Keuangan</div>
+                    <div class="font-semibold text-xl">{{ pageTitle }}</div>
                 </div>
                 <div class="bg-main_blue text-white rounded-xl p-6 pt-7">
                     <div class="bg-white rounded-xl flex items-center px-4 py-3 relative">
@@ -61,7 +60,7 @@ const videos = [
                         <div class="w-28 h-[4.5rem] bg-gray-300 rounded-xl mr-4 shrink-0">
                             <img src="">
                         </div>
-                        <div class="text-sec_blue text-lg font-bold">Pendahuluan: Matematika Keuangan</div>
+                        <div class="text-sec_blue text-lg font-bold">{{ activeVideo.title }}</div>
                     </div>
                     <div class="max-h-[32rem] mt-4 overflow-auto">
                         <div v-for="(video, index) in videos" v-show="!video.active" class="flex items-center mb-5">
@@ -71,9 +70,8 @@ const videos = [
                             <div class="w-24 h-14 bg-gray-300 rounded-xl ml-3 shrink-0">
                                 <img src="">
                             </div>
-                            <div class="ml-4">
-                                <div class="font-semibold">{{ video.category }}</div>
-                                <div>{{ video.title }}</div>
+                            <div class="ml-4 font-semibold">
+                                {{ video.title }}
                             </div>
                         </div>
                     </div>
@@ -86,7 +84,7 @@ const videos = [
                         <div class="w-4 h-4 mr-2">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 22" fill="none"><path d="M16.5005 12.1598C16.211 11.8828 15.5693 11.7372 14.5947 11.7232C13.9337 11.7185 13.1376 11.7748 12.3029 11.8875C11.9266 11.6762 11.5406 11.4462 11.2367 11.1739C10.4213 10.4321 9.74101 9.40387 9.31643 8.2724C9.34538 8.16911 9.3695 8.07521 9.3888 7.98132C9.3888 7.98132 9.84715 5.44137 9.72653 4.5822C9.71206 4.46483 9.69758 4.43196 9.66864 4.33806L9.63004 4.23947C9.5046 3.95778 9.25853 3.662 8.87738 3.67608L8.64579 3.67139C8.21639 3.67139 7.86901 3.88266 7.77734 4.20191C7.4975 5.20193 7.78699 6.69491 8.30806 8.63391L8.17297 8.94847C7.80146 9.83111 7.33346 10.7231 6.91853 11.5119L6.86546 11.6152C6.43124 12.4415 6.03561 13.141 5.67858 13.7373L5.3119 13.9251C5.28295 13.9392 4.65573 14.2631 4.50616 14.3523C3.25173 15.0847 2.41705 15.911 2.27713 16.5683C2.23371 16.7796 2.26748 17.0472 2.48942 17.1693L2.84645 17.343C3.00084 17.4181 3.16489 17.4556 3.32893 17.4556C4.2215 17.4556 5.26365 16.3711 6.6966 13.9392C8.35148 13.418 10.2283 12.9814 11.8784 12.742C13.1328 13.4321 14.6815 13.9063 15.6561 13.9063C15.8298 13.9063 15.9794 13.8922 16.1 13.8593C16.2882 13.8124 16.4426 13.7091 16.5391 13.5683C16.7272 13.2913 16.7658 12.911 16.7176 12.5166C16.6983 12.3945 16.6066 12.2537 16.5005 12.1598ZM3.13594 16.7937C3.29998 16.357 3.94649 15.5026 4.90179 14.7373C4.95969 14.6903 5.10926 14.5542 5.24435 14.4274C4.24563 15.9814 3.57499 16.5965 3.13594 16.7937ZM8.79536 4.1174C9.08484 4.1174 9.24888 4.82164 9.25853 5.48362C9.27301 6.14561 9.11379 6.6104 8.91598 6.95313C8.75194 6.44608 8.67474 5.64325 8.67474 5.11742C8.67474 5.11742 8.66027 4.11271 8.79536 4.1174C8.79536 4.11271 8.79536 4.11271 8.79536 4.1174ZM7.1067 13.1504C7.30934 12.803 7.5168 12.4321 7.72909 12.0424C8.25016 11.0847 8.57825 10.3382 8.81948 9.72313C9.30678 10.5823 9.90987 11.3147 10.6191 11.9016C10.706 11.972 10.8025 12.0471 10.8989 12.1222C9.45635 12.3992 8.20674 12.7373 7.1067 13.1504ZM16.2255 13.0706C16.1386 13.1269 15.8829 13.1551 15.7237 13.1551C15.1978 13.1551 14.5513 12.9251 13.6442 12.5448C13.9916 12.5213 14.3149 12.5072 14.5995 12.5072C15.1254 12.5072 15.2798 12.5025 15.7961 12.634C16.3075 12.756 16.3123 13.0143 16.2255 13.0706Z" fill="#0262C2"/><path d="M18.1071 4.72308C17.6343 4.09866 16.9781 3.36625 16.2593 2.66671C15.5404 1.96717 14.7877 1.32866 14.146 0.868559C13.0508 0.0892032 12.5201 0 12.2161 0H1.69819C0.762187 0 -0.00012207 0.741796 -0.00012207 1.65261V19.4792C-0.00012207 20.39 0.762187 21.1318 1.69819 21.1318H17.3014C18.2374 21.1318 18.9997 20.39 18.9997 19.4792V6.59635C19.0045 6.30057 18.9129 5.78413 18.1071 4.72308ZM15.2991 3.601C15.9505 4.23481 16.4619 4.8029 16.8382 5.27708H13.5719V2.10332C14.0592 2.46952 14.6478 2.96718 15.2991 3.601ZM17.6488 19.4698C17.6488 19.6482 17.4944 19.7984 17.311 19.7984H1.70301C1.51967 19.7984 1.36528 19.6482 1.36528 19.4698V1.64791C1.36528 1.46951 1.51967 1.31927 1.70301 1.31927C1.70301 1.31927 12.2161 1.31927 12.2209 1.31927V5.93906C12.2209 6.30527 12.5249 6.60105 12.9012 6.60105H17.6488V19.4698Z" fill="#0262C2"/></svg>
                         </div>
-                        <div class="font-semibold">Materi</div>
+                        <div class="font-semibold">Soal</div>
                     </div>
                     <div class="flex items-center">
                         <div class="w-4 h-4 mr-2">

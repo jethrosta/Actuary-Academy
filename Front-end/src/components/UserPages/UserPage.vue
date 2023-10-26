@@ -1,3 +1,23 @@
+<script setup>
+import { RouterView } from 'vue-router';
+import Footer from '../Footer.vue';
+import { useStore } from '../../store/index.js';
+import router from '../../router';
+import { notifCount, purchaseCount } from '@/db';
+
+const store = useStore();
+
+const handleLogout = async () => {
+  try {
+    await router.push({ name: 'dashboard' });
+    await store.logout();
+    router.go();
+  } catch (error) {
+    console.error('Logout failed:', error);
+  }
+};
+
+</script>
 <template>
     <div class="container items-center justify-center mx-auto">
         <div class="flex flex-row h-full items-start px-10">
@@ -29,6 +49,9 @@
                             </svg>
 
                             Notifikasi
+                            <span v-if="purchaseCount > 0" class="bg-red-500 text-white font-normal text-lg text-center rounded-[50%] w-7 h-7 leading-7">
+                                {{ purchaseCount }}
+                            </span>
                         </RouterLink>
                         <RouterLink :to="{ name: 'Kelas Saya' }"
                             exact-active-class="text-main_blue stroke-main_blue font-bold"
@@ -53,6 +76,9 @@
                             </svg>
 
                             Keranjang
+                            <span v-if="notifCount > 0" class="bg-red-500 text-white font-normal text-lg text-center rounded-[50%] w-7 h-7 leading-7">
+                                {{ notifCount }}
+                            </span>
                         </RouterLink>
                         <RouterLink :to="{ name: 'Pengaturan' }"
                             exact-active-class="text-main_blue stroke-main_blue font-bold"
@@ -94,23 +120,3 @@
 
     <Footer class="w-screen"></Footer>
 </template>
-
-<script setup>
-import { RouterView } from 'vue-router';
-import Footer from '../Footer.vue';
-import { useStore } from '../../store/index.js';
-import router from '../../router';
-
-const store = useStore();
-
-const handleLogout = async () => {
-  try {
-    await router.push({ name: 'dashboard' });
-    await store.logout();
-    router.go();
-  } catch (error) {
-    console.error('Logout failed:', error);
-  }
-};
-
-</script>

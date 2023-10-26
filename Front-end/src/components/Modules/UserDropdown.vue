@@ -1,3 +1,46 @@
+<script setup>
+import { RouterLink } from 'vue-router';
+import { defineProps } from 'vue';
+import router from '../../router';
+import { useStore } from '../../store/index.js';
+
+const props = defineProps({
+  title: String,
+  items: Array,
+  isOpen: Boolean
+});
+
+const store = useStore();
+
+const handleLogout = async () => {
+  try {
+    await router.push({ name: 'dashboard' });
+    await store.logout();
+    router.go();
+  } catch (error) {
+    console.error('Logout failed:', error);
+  }
+};
+
+const toggle = () => {
+  if (props.isOpen) {
+    props.isOpen = false;
+    document.removeEventListener('click', close);
+    return;
+  }
+  else {
+    props.isOpen = true;
+    document.addEventListener('click', close);
+  }
+};
+
+const close = (e) => {
+  if (e.target.closest('.menu-item')) return;
+  props.isOpen = false;
+  document.removeEventListener('click', close);
+};
+
+</script>
 <template>
   <div class="menu-item font-inter p-1" @click="toggle">
     <div class="flex flex-row items-center">
@@ -32,52 +75,3 @@
     </transition>
   </div>
 </template>
-
-<script setup>
-import { RouterLink } from 'vue-router';
-import { ref, defineProps } from 'vue';
-import router from '../../router';
-import { useStore } from '../../store/index.js';
-
-const props = defineProps({
-  title: String,
-  items: Array
-});
-
-const store = useStore();
-
-const isOpen = ref();
-
-const handleLogout = async () => {
-  try {
-    await router.push({ name: 'dashboard' });
-    await store.logout();
-    router.go();
-  } catch (error) {
-    console.error('Logout failed:', error);
-  }
-};
-
-const toggle = () => {
-  if (isOpen.value) {
-    isOpen.value = false;
-    document.removeEventListener('click', close);
-    return;
-  }
-  else {
-    isOpen.value = true;
-    document.addEventListener('click', close);
-  }
-};
-
-const close = (e) => {
-  if (e.target.closest('.menu-item')) return;
-  isOpen.value = false;
-  document.removeEventListener('click', close);
-};
-
-
-
-
-
-</script>

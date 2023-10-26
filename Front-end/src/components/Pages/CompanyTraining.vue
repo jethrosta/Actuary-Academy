@@ -1,36 +1,7 @@
 <script setup>
 import Footer from '../Footer.vue';
 import OtherProducts from '../OtherProducts.vue';
-
-const packages = [
-    {
-        name: 'Paket Privat + Akademi Lengkap',
-        price: 'IDR17,000,000',
-        tags: ['1 mata ujian', '10 pertemuan'],
-        facilities: [
-            'Zoom meeting dengan durasi 2 jam',
-            'Video rekaman dan materi dari tutor',
-            'Video pembelajaran akademi',
-            'Akses akademi 6 bulan',
-            'Try out + pembahasan (1-2 kali)',
-            'Request materi / sesuai timeline tutor',
-            'Tidak ada maksimal jumlah peserta'
-        ]
-    },
-    {
-        name: 'Paket Privat + Akademi',
-        price: 'IDR15,000,000',
-        tags: ['1 mata ujian', '10 pertemuan'],
-        facilities: [
-            'Zoom meeting dengan durasi 2 jam',
-            'Video rekaman dan materi dari tutor',
-            'Video pembelajaran akademi',
-            'Akses akademi 6 bulan',
-            'Bebas memilih materi yang dipelajari',
-            'Tidak ada maksimal jumlah peserta'
-        ]
-    }
-]
+import { companyTrainingPackages } from '@/db';
 
 </script>
 <template>
@@ -55,7 +26,7 @@ const packages = [
                 </div>
             </div>
             <div class="flex items-stretch my-20 space-x-9">
-                <div v-for="pkg in packages" class="flex-1 flex flex-col">
+                <div v-for="pkg in companyTrainingPackages" class="flex-1 flex flex-col">
                     <div class="bg-white text-sec_blue text-4xl font-bold self-start rounded-t-lg px-6 py-4 max-w-[60%]">
                         {{ pkg.name }}
                     </div>

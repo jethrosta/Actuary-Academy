@@ -5,6 +5,7 @@ import { RouterLink } from 'vue-router';
 import Footer from '../Footer.vue';
 import OtherProducts from '../OtherProducts.vue';
 import { ref, computed } from 'vue';
+import { modules, academyPackages } from '@/db';
 
 const splideOptions = {
     rewind: true,
@@ -16,44 +17,9 @@ const splideOptions = {
     }
 }
 
-const modules = [
-    {
-        code: 'A10',
-        title: 'Matematika Keuangan'
-    },
-    {
-        code: 'A20',
-        title: 'Probabilita dan Statistika'
-    },
-    {
-        code: 'A40',
-        title: 'Akuntansi'
-    }
-]
-
-const packages = [
-    {
-        name: 'Paket Lengkap',
-        price: 'IDR699.000',
-        benefits: [
-            'Diskusi grup, Q & A',
-            'Video materi',
-            'Video pembahasan soal ujian PAI',
-            'Kuis & try out',
-            'Kelas online sinkronus dengan tutor (125k / pertemuan @ 1 jam)'
-        ]
-    },
-    {
-        name: 'Paket Pembahasan Soal',
-        price: 'IDR299.000',
-        benefits: [
-            'Diskusi grup, Q & A',
-            'Video pembahasan soal ujian PAI',
-            'Kuis & try out',
-            'Kelas online sinkronus dengan tutor (125k / pertemuan @ 1 jam)'
-        ]
-    }
-]
+const modulesArr = Object.entries(modules).map(([id, mdl]) => {
+    return { id, ...mdl }
+})
 
 const currentSplideIndex = ref(0)
 
@@ -64,15 +30,15 @@ function onSplideMove (_, newIndex) {
 const prevModuleSlide = computed(() => {
     const prevIndex = currentSplideIndex.value > 0
         ? currentSplideIndex.value - 1
-        : modules.length - 1
-    return modules[prevIndex]
+        : modulesArr.length - 1
+    return modulesArr[prevIndex]
 })
 
 const nextModuleSlide = computed(() => {
-    const nextIndex = currentSplideIndex.value < modules.length - 1
+    const nextIndex = currentSplideIndex.value < modulesArr.length - 1
         ? currentSplideIndex.value + 1
         : 0
-    return modules[nextIndex]
+    return modulesArr[nextIndex]
 })
 
 </script>
@@ -107,38 +73,38 @@ const nextModuleSlide = computed(() => {
                 <div class="text-4xl text-white font-bold center">Modul</div>
                 <div class="w-full max-w-[33rem] mx-auto mt-10 relative">
                     <Splide :options="splideOptions" @splide:move="onSplideMove">
-                        <SplideSlide v-for="mdl in modules">
-                            <RouterLink to="/A10">
+                        <SplideSlide v-for="mdl in modulesArr">
+                            <RouterLink :to="{ name: 'module', params: { moduleId: mdl.id } }">
                                 <div class="bg-sec_blue text-white text-4xl font-bold mx-[6.5rem] px-8 py-6 rounded-t-2xl text-center">
-                                    {{ mdl.code }}
+                                    {{ mdl.id }}
                                 </div>
                                 <div class="bg-white text-sec_blue text-xl font-bold px-10 py-5 rounded-2xl text-center">
-                                    {{ mdl.title }}
+                                    {{ mdl.name }}
                                 </div>
                             </RouterLink>
                         </SplideSlide>
                     </Splide>
                     <div class="absolute top-0 right-[34rem] text-white opacity-25 select-none">
                         <div class="text-4xl font-bold mx-[6.5rem] px-8 py-6 rounded-t-2xl text-center outline outline-[3px]">
-                            {{ prevModuleSlide.code }}
+                            {{ prevModuleSlide.id }}
                         </div>
                         <div class="text-xl font-bold px-10 py-5 rounded-2xl text-center outline outline-[3px] mt-[2.5px]">
-                            {{ prevModuleSlide.title }}
+                            {{ prevModuleSlide.name }}
                         </div>
                     </div>
                     <div class="absolute top-0 left-[34rem] text-white opacity-25 select-none">
                         <div class="text-4xl font-bold mx-[6.5rem] px-8 py-6 rounded-t-2xl text-center outline outline-[3px]">
-                            {{ nextModuleSlide.code }}
+                            {{ nextModuleSlide.id }}
                         </div>
                         <div class="text-xl font-bold px-10 py-5 rounded-2xl text-center outline outline-[3px] mt-[2.5px]">
-                            {{ nextModuleSlide.title }}
+                            {{ nextModuleSlide.name }}
                         </div>
                     </div>
                 </div>
             </div>
             <div class="max-w-[60rem] my-16 mx-auto">
                 <div class="flex items-stretch mt-10 space-x-9">
-                    <div v-for="pkg, idx in packages" class="flex-1 flex flex-col">
+                    <div v-for="pkg, idx in academyPackages" class="flex-1 flex flex-col">
                         <div :class="idx === 0 ? 'text-4xl' : 'text-3xl'" class="text-white font-bold text-center mb-5 h-10">{{ pkg.name }}</div>
                         <div :class="idx === 0 ? 'bg-sec_blue text-white' : 'text-sec_blue bg-white'" class="rounded-2xl p-10 grow shadow-lg">
                             <div class="text-4xl font-bold">{{ pkg.price }}</div>
@@ -146,7 +112,7 @@ const nextModuleSlide = computed(() => {
                             <div :class="idx === 0 ? 'font-semibold' : ''" class="text-[1.1rem]">
                                 <div>Fasilitas:</div>
                                 <ul class="list-disc list-inside">
-                                    <li v-for="pkgBenefit in pkg.benefits">{{ pkgBenefit }}</li>
+                                    <li v-for="pkgFacility in pkg.facilities">{{ pkgFacility }}</li>
                                 </ul>
                             </div>
                             <div class="inline-block rounded-lg bg-[#F26D0F] text-white font-semibold mt-5 px-3 py-2 cursor-pointer">
