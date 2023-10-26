@@ -141,7 +141,7 @@ const router = createRouter({
             {
               path: 'payment-methods',
               name: 'Metode Pembayaran',
-              component: () => import('../components/Payments/Payments.vue'),
+              component: () => import('../components/Payments/PaymentMethods.vue'),
             },
             {
               path: 'make-payment',
@@ -153,7 +153,11 @@ const router = createRouter({
               name: 'Pembayaran Saya',
               component: () => import('../components/Payments/MyPayment.vue')
             },
-            
+            {
+              path: 'credit-card',
+              name: 'Kartu Kredit',
+              component: () => import('../components/Payments/CreditCard.vue')
+            },
           ]
         },
         

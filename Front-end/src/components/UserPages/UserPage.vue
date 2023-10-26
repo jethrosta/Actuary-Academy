@@ -21,7 +21,7 @@ const handleLogout = async () => {
 <template>
     <div class="container items-center justify-center mx-auto">
         <div class="flex flex-row h-full items-start px-10">
-            <aside class="hidden lg:flex left-0 sticky top-44">
+            <aside class="hidden lg:flex left-0 sticky top-44 ">
                 <div class="flex flex-row min-w-[280px] pl-10 pb-20 items-center justify-between text-xl">
                     <div class="user-menu flex flex-col pr-8 text-gray-600  gap-y-8 pl-10 ">
                         <RouterLink :to="{ name: 'Akun' }"
