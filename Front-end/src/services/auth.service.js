@@ -1,24 +1,24 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/v2/auth/';
+const API_URL = import.meta.env.VITE_API_URL + 'auth/';
 
 
 class AuthService {
-    
-  register(user) {
-    return axios.post(API_URL + 'register', {
-      username: user.name,
+
+  async register(user) {
+    return await axios.post(API_URL + 'register', {
+      name: user.name,
       email: user.email,
       password: user.password
     }, { withCredentials: true });
   }
-  
-  login(user) {
+
+  async login(user) {
     return axios
       .post(API_URL + 'login', {
         email: user.email,
         password: user.password,
-      }, {withCredentials: true})
+      }, { withCredentials: true })
       .then(response => {
         console.log(response);
         if (response.status == 200) {
@@ -27,7 +27,13 @@ class AuthService {
         }
         return response.data;
       });
-    }
+  }
+
+  async logout() {
+    return await axios.post(API_URL + 'logout', {}, {
+      withCredentials: true
+    })
+  }
 }
 
 export default new AuthService();
