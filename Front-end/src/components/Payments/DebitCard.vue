@@ -37,7 +37,7 @@
 
         <div class="py-2">
             <div class="font-bold">Metode Pembayaran: </div>
-            <div>Credit Card: {{ localPaymentData.provider }}</div>
+            <div>Direct Debit: {{ localPaymentData.provider }}</div>
         </div>
         <button @click="getCardToken" class="p-3 text-white font-bold bg-[#ff0000]">
             Buat Token
@@ -110,7 +110,7 @@ const getCardToken = () => {
 };
 
 const paymentData = ref({
-    payment_type: "credit_card",
+    payment_type: "debit_card",
     transaction_details: {
         gross_amount: 0,
         order_id: "test-transaction-54321",
@@ -146,10 +146,10 @@ async function makePayment() {
         console.log(response.data);
         localStorage.setItem('paymentResponse', JSON.stringify(response.data));
         router.push({ name: "Pembayaran Saya" });
-        localStorage.setItem('creditURL', response.data.redirect_url)
+        localStorage.setItem('debitURL', response.data.redirect_url)
     } catch (error) {
         console.log(paymentData.value)
-        localStorage.setItem('creditcardrequest', JSON.stringify(paymentData.value));
+        localStorage.setItem('debitcardrequest', JSON.stringify(paymentData.value));
         //console.error(error);
         errorMessage.value = 'Terjadi Error';
     }

@@ -198,7 +198,6 @@ const cartItems = ref([
             '2 Bulan',
             '4 Bulan',
         ]
-
     },
     {
         name: 'Tutor Privat',
@@ -323,17 +322,18 @@ const totalPrice = computed(() => {
 })
 
 const paymentData = ref({
-    amount: totalPrice
+    method: '',
+    provider: '',
+    vaNumber: '',
+    amount: totalPrice,
 })
 
 function toPayment() {
-  localStorage.setItem('pendingPaymentData', JSON.stringify(paymentData.value));
-  router.push('/payments/payment-methods').then(() => {
-    router.go();
-  });
+    localStorage.setItem('pendingPaymentData', JSON.stringify(paymentData.value));
+    router.push('/payments/payment-methods').then(() => {
+        router.go();
+    });
 }
-
-
 
 
 </script>

@@ -144,25 +144,30 @@ const router = createRouter({
               component: () => import('../components/Payments/PaymentMethods.vue'),
             },
             {
-              path: 'make-payment',
-              name: 'Buat Pembayaran',
-              component: () => import('../components/Payments/MakePayment.vue'),
-            },
-            {
               path: 'my-payment',
               name: 'Pembayaran Saya',
-              component: () => import('../components/Payments/MyPayment.vue')
-            },
-            {
-              path: 'credit-card',
-              name: 'Kartu Kredit',
-              component: () => import('../components/Payments/CreditCard.vue')
-            },
+              children: [
+                {
+                  path: 'bank-transfer',
+                  name: 'Transfer Bank',
+                  component: () => import('../components/Payments/BankTransfer.vue')
+                },
+                {
+                  path: 'debit-card',
+                  name: 'Kartu Debit',
+                  component: () => import('../components/Payments/DebitCard.vue')
+                },
+                {
+                  path: 'credit-card',
+                  name: 'Kartu Kredit',
+                  component: () => import('../components/Payments/CreditCard.vue')
+                }
+              ]
+            }
           ]
-        },
-        
+        }
       ]
-    },
+    }
   ]
 })
 
