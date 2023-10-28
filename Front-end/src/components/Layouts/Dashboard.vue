@@ -136,7 +136,7 @@ const notifTotalCount = notifCount + purchaseCount;
         <div v-if="isLoggedIn" id="userButton" class="flex items-center font-normal pb-1 lg:flex-1 lg:justify-end">
           <div class="flex space-x-2 px-2 select-none items-center rounded-full cursor-pointer p-1" @click="toggleUserDropdown">
             <div class="pl-2 relative">
-              Hello, <span class="font-semibold">{{ user.username }}!</span>
+              Hello, <span class="font-semibold">{{ user.name }}!</span>
               <div v-if="notifTotalCount > 0" class="absolute top-[-.5rem] right-[-.75rem] bg-red-600 text-white text-[.7rem] w-4 h-4 leading-4 text-center rounded-[50%]">
                 {{ notifTotalCount }}
               </div>
@@ -205,7 +205,7 @@ const notifTotalCount = notifCount + purchaseCount;
 
         <div v-if="isLoggedIn" id="userButton" class="flex items-center font-normal">
           <div class="flex space-x-2 select-none items-center rounded-full cursor-pointer">
-            <div class="hidden sm:flex px-2">Hello, <span class="font-semibold">{{ user.username }}</span></div>
+            <div class="hidden sm:flex px-2">Hello, <span class="font-semibold">{{ user.name }}</span></div>
             <UserDropdown :items="accountMenu" class="hover:text-sec_blue -my-2" />
           </div>
         </div>

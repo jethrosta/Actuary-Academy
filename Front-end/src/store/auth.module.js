@@ -48,13 +48,12 @@ export const auth = {
       );
     },
 
-    logout() {
+    async logout() {
       loginState.status.loggedIn = false;
       loginState.user = null;
-      return new Promise(resolve => {
+      return AuthService.logout().then(()=>{
         localStorage.removeItem('user');
-        resolve();
-      });
+      })
     }    
   }
 };

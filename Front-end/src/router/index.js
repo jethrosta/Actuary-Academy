@@ -1,7 +1,8 @@
+import axios from 'axios'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(import.meta.env.VITE_BASE_URL),
   scrollBehavior() {
     return { top: 0 }
   },
@@ -166,7 +167,21 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
+  let isCookiePresent = false;
+  let res;
+  try {
+    res = await axios.get(import.meta.env.VITE_API_URL + 'users/me', {
+      withCredentials: true
+    })
+    if (res.status == '204') {
+      isCookiePresent = false;
+    } else {
+      isCookiePresent = true;
+    }
+  } catch (error) {
+    isCookiePresent = false
+  }
   const publicPages = [
     '/',
     '/login',
@@ -186,7 +201,12 @@ router.beforeEach((to, from, next) => {
   const authRequired = !publicPages.includes(to.path)
   const loggedIn = localStorage.getItem('user')
 
-  if (authRequired && !loggedIn) {
+  if (!loggedIn && isCookiePresent) {
+    localStorage.setItem('user', JSON.stringify(res.data))
+    next()
+  }
+  else if (authRequired && !loggedIn || (loggedIn && !isCookiePresent)) {
+    localStorage.removeItem('user')
     next('/login')
   }
   else {
