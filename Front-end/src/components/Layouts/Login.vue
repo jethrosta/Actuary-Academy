@@ -5,6 +5,8 @@ import { RouterLink } from 'vue-router';
 import { ref, computed, onBeforeMount } from 'vue';
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup"
+import { getGoogleUrl } from "../../services/google-url.service";
+import { getFacebookUrl } from "../../services/facebook-url.service";
 
 //Validations
 const schema = yup.object().shape({
@@ -23,6 +25,8 @@ const user = ref({
 });
 
 const loginStatus = computed(() => store.loginState.status.loggedIn);
+
+const currentUrl = window.location.href;
 
 onBeforeMount(() => {
     if (loginStatus.value) {
@@ -89,15 +93,16 @@ function goBack() {
                              <hr class=" bg-main_blue w-full h-[2px]">
                          </div>
                          <div class="flex text-xl space-x-2">
-                             <div class=" center regBut w-1/2 h-14 space-x-2 justify-center flex">
-                                 <img src="/src/assets/icon/google-color-svgrepo-com.svg" class="py-4"/>
-                                 <button class=" "
-                                 >Google</button>
-                             </div>
-                             <div class="center regBut w-1/2 h-14 space-x-2 justify-center flex">
-                                 <img src="/src/assets/icon/facebook-svgrepo-com.svg" class="py-3"/>
-                                 <button class=" ">Facebook</button>
-                             </div>
+                             <a :href="getGoogleUrl(currentUrl)"
+                                 class=" center regBut w-1/2 h-14 space-x-2 justify-center flex">
+                                 <img src="/src/assets/icon/google-color-svgrepo-com.svg" class="py-4" />
+                                 <span class="self-center">Google</span>
+                             </a>
+                             <a :href="getFacebookUrl(currentUrl)"
+                                 class="center regBut w-1/2 h-14 space-x-2 justify-center flex">
+                                 <img src="/src/assets/icon/facebook-svgrepo-com.svg" class="py-3" />
+                                 <span class="self-center">Facebook</span>
+                             </a>
                          </div>
                          <div class=" center space-x-2 font-bold mt-5">
                              <p class=" text-main_blue">Belum Memiliki akun?</p>

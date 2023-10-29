@@ -51,6 +51,12 @@ const productSubmenu = [
   { title: 'Jasa Aktuaria', name: 'Jasa Aktuaria' }
 ]
 
+const materialsSubmenu = [
+  { title: 'Akademi-A10', name: 'module', params: { moduleId: 'A10' } },
+  { title: 'Akademi-A20', name: 'module', params: { moduleId: 'A20' } },
+  { title: 'Akademi-A30', name: 'module', params: { moduleId: 'A30' } }
+]
+
 const accountMenu = [
   { title: 'Akun', name: 'Akun' },
   { title: 'Notifikasi', name: 'Notifikasi' },
@@ -131,12 +137,13 @@ const notifTotalCount = notifCount + purchaseCount;
           <NavDropdown title="Produk" mainLink="Produk" :items="productSubmenu" class="hover:text-sec_blue pb-3" />
           <RouterLink :to="{ name: 'Testimoni' }" class="hover:text-sec_blue">Testimoni</RouterLink>
           <RouterLink :to="{ name: 'Karir' }" class="hover:text-sec_blue">Karir</RouterLink>
+          <NavDropdown title="Materi" :items="materialsSubmenu" class="hover:text-sec_blue pb-3" />
         </div>
 
         <div v-if="isLoggedIn" id="userButton" class="flex items-center font-normal pb-1 lg:flex-1 lg:justify-end">
           <div class="flex space-x-2 px-2 select-none items-center rounded-full cursor-pointer p-1" @click="toggleUserDropdown">
             <div class="pl-2 relative">
-              Hello, <span class="font-semibold">{{ user.username }}!</span>
+              Hello, <span class="font-semibold">{{ user.name }}!</span>
               <div v-if="notifTotalCount > 0" class="absolute top-[-.5rem] right-[-.75rem] bg-red-600 text-white text-[.7rem] w-4 h-4 leading-4 text-center rounded-[50%]">
                 {{ notifTotalCount }}
               </div>
@@ -205,7 +212,7 @@ const notifTotalCount = notifCount + purchaseCount;
 
         <div v-if="isLoggedIn" id="userButton" class="flex items-center font-normal">
           <div class="flex space-x-2 select-none items-center rounded-full cursor-pointer">
-            <div class="hidden sm:flex px-2">Hello, <span class="font-semibold">{{ user.username }}</span></div>
+            <div class="hidden sm:flex px-2">Hello, <span class="font-semibold">{{ user.name }}</span></div>
             <UserDropdown :items="accountMenu" class="hover:text-sec_blue -my-2" />
           </div>
         </div>
