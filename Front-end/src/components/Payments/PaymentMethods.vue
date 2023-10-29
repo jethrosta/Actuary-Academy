@@ -51,7 +51,7 @@ const paymentMethods = ref([
         title: 'Direct Debit',
         route: 'Direct Debit',
         isOpen: false,
-        providers: ['BCA', 'BRIVA', 'BNI', 'Mandiri'],
+        providers: ['BCA', 'BRI'],
         menuIcon: 'card',
     },
     {
@@ -60,7 +60,7 @@ const paymentMethods = ref([
         title: 'Digital Banking',
         route: 'Transfer Bank',
         isOpen: false,
-        providers: ['BCA', 'BNI', 'Mandiri', 'BRI', 'Lainnya'],
+        providers: ['BCA', 'BRIVA', 'BNI', 'Mandiri'],
         menuIcon: 'mobile',
     },
     {

@@ -3,7 +3,7 @@
         <div class="p-20 font-inter text-black max-w-[1500px] mx-auto">
             <div class="py-2">
                 <div class="font-bold">Metode Pembayaran: </div>
-                <div>Direct Debit (VA): {{ theBank }}</div>
+                <div>Direct Debit: {{ theBank }}</div>
             </div>
             <button @click="makePayment" class="p-3 text-white font-bold bg-[#ff0000]">
                 Buat Tagihan
@@ -53,7 +53,8 @@ async function makePayment() {
         const response = await axios.post('http://localhost:8080/v2/payment', paymentRequest.value);
         console.log(response.data);
         localStorage.setItem('PendingDirectDebitPayment', JSON.stringify(response.data))
-        router.push('/payments/pending-payment').then(() => {
+        let redirectUrl = await response.data.redirect_url;
+        router.push(redirectUrl).then(() => {
             router.go();
         })
     } catch (error) {
@@ -91,19 +92,28 @@ function selectRequestSchema(bankParam) {
     switch (bank) {
         case 'bca':
             paymentRequest.value = {
-                payment_type: 'bank_transfer',
+                payment_type: "bca_klikpay",
                 transaction_details: {
                     order_id: 'order-id-node-' + Math.round((new Date()).getTime() / 1000),
                     gross_amount: 0
                 },
-                bank_transfer: {
-                    bank: 'bca'
-                },
+                item_details: [
+                    {
+                        id: "1",
+                        price: 3100000,
+                        quantity: 1,
+                        name: "Mobil"
+                    }
+                ],
                 customer_details: {
-                    first_name: 'Toni',
-                    last_name: 'Dev',
-                    email: 'tonidev@example.com',
+                    first_name: "John",
+                    last_name: "Baker",
+                    email: "john.baker@email.com",
+                    phone: "08123456789"
                 },
+                bca_klikpay: {
+                    description: "Pembelian Barang"
+                }
             };
             break;
         case 'bni':
@@ -123,21 +133,27 @@ function selectRequestSchema(bankParam) {
                 },
             };
             break;
-        case 'briva':
+        case 'bri':
             paymentRequest.value = {
-                payment_type: 'bank_transfer',
+                payment_type: "bri_epay",
                 transaction_details: {
                     order_id: 'order-id-node-' + Math.round((new Date()).getTime() / 1000),
                     gross_amount: 0
                 },
-                bank_transfer: {
-                    bank: 'bri'
-                },
+                item_details: [
+                    {
+                        id: "1",
+                        price: 3100000,
+                        quantity: 1,
+                        name: "Mobil"
+                    }
+                ],
                 customer_details: {
-                    first_name: 'Toni',
-                    last_name: 'Dev',
-                    email: 'tonidev@example.com',
-                },
+                    first_name: "Andri",
+                    last_name: "Litani", // Optional
+                    email: "andri@litani.com",
+                    phone: "081122334455"
+                }
             };
             break;
         case 'mandiri':
