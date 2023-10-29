@@ -1,7 +1,8 @@
 <template>
   <div class="menu-item scrollbar-none" @mouseover="openDropdown" @mouseleave="closeDropdown">
     <div class="cursor-pointer">
-      <RouterLink :to="{ name:`${mainLink}` }">{{ title }}</RouterLink>
+      <RouterLink v-if="mainLink" :to="{ name:`${mainLink}` }">{{ title }}</RouterLink>
+      <span v-else>{{ title }}</span>
       <svg class="h-2 w-7 inline-block " preserve-aspect-ratio="none" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M 11 1 L 5.804 6.909 L 1 1" :stroke=" isOpen ? '#0D1C9F' : 'white' " stroke-width="1.57025"></path>
       </svg>
@@ -14,7 +15,7 @@
         </svg>
 
         <div class="sub-menu py-2 rounded-b-xl bg-white hover:text-sec_blue drop-shadow-lg absolute right-0 " >
-          <RouterLink :to="{ name:`${item.name}` }" v-for="(item, i) in items" :key="i" >
+          <RouterLink :to="{ name:`${item.name}`, params: item.params ?? null }" v-for="(item, i) in items" :key="i" >
             <div class="menu-item py-1 px-4 text-gray-400 bg-white hover:text-sec_blue whitespace-nowrap">
               {{ item.title }}
             </div>

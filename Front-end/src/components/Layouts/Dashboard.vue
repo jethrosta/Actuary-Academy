@@ -51,6 +51,12 @@ const productSubmenu = [
   { title: 'Jasa Aktuaria', name: 'Jasa Aktuaria' }
 ]
 
+const materialsSubmenu = [
+  { title: 'Akademi-A10', name: 'module', params: { moduleId: 'A10' } },
+  { title: 'Akademi-A20', name: 'module', params: { moduleId: 'A20' } },
+  { title: 'Akademi-A30', name: 'module', params: { moduleId: 'A30' } }
+]
+
 const accountMenu = [
   { title: 'Akun', name: 'Akun' },
   { title: 'Notifikasi', name: 'Notifikasi' },
@@ -131,6 +137,7 @@ const notifTotalCount = notifCount + purchaseCount;
           <NavDropdown title="Produk" mainLink="Produk" :items="productSubmenu" class="hover:text-sec_blue pb-3" />
           <RouterLink :to="{ name: 'Testimoni' }" class="hover:text-sec_blue">Testimoni</RouterLink>
           <RouterLink :to="{ name: 'Karir' }" class="hover:text-sec_blue">Karir</RouterLink>
+          <NavDropdown title="Materi" :items="materialsSubmenu" class="hover:text-sec_blue pb-3" />
         </div>
 
         <div v-if="isLoggedIn" id="userButton" class="flex items-center font-normal pb-1 lg:flex-1 lg:justify-end">
