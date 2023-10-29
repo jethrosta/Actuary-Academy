@@ -136,34 +136,50 @@ const router = createRouter({
         {
           path: '/payments',
           name: 'Pembayaran',
-          redirect: { name: 'Metode Pembayaran' },
+          redirect: '/payments/my-payments',
           children: [
             {
-              path: 'payment-methods',
-              name: 'Metode Pembayaran',
-              component: () => import('../components/Payments/PaymentMethods.vue'),
+              path: 'pending-payment',
+              name: 'Pembayaran Tertunda',
+              component: () => import('../components/Payments/PendingPayment.vue')
             },
             {
-              path: 'my-payment',
+              path: 'my-payments',
               name: 'Pembayaran Saya',
+              component: () => import('../components/Payments/MyPaymentMenu.vue'),
               children: [
                 {
-                  path: 'bank-transfer',
+                  path: '',
+                  name: 'Metode Pembayaran',
+                  component: () => import('../components/Payments/PaymentMethods.vue')
+                },
+                {
+                  path: 'bank-transfer/:providerName',
                   name: 'Transfer Bank',
                   component: () => import('../components/Payments/BankTransfer.vue')
                 },
                 {
-                  path: 'debit-card',
-                  name: 'Kartu Debit',
-                  component: () => import('../components/Payments/DebitCard.vue')
+                  path: 'e-wallet/:providerName',
+                  name: 'E Wallet',
+                  component: () => import('../components/Payments/EWallet.vue')
                 },
                 {
-                  path: 'credit-card',
+                  path: 'direct-debit/:providerName',
+                  name: 'Direct Debit',
+                  component: () => import('../components/Payments/DirectDebit.vue')
+                },
+                {
+                  path: 'credit-card/:providerName',
                   name: 'Kartu Kredit',
                   component: () => import('../components/Payments/CreditCard.vue')
-                }
+                },
               ]
-            }
+            },
+            {
+              path: 'payment-cards',
+              name: 'Kartu Pembayaran',
+              component: () => import('../components/Payments/PaymentCards.vue'),
+            },
           ]
         }
       ]

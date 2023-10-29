@@ -3,7 +3,7 @@
         <div class="p-20 font-inter text-black max-w-[1500px] mx-auto">
             <div class="py-2">
                 <div class="font-bold">Metode Pembayaran: </div>
-                <div>Transfer Virtual Account: {{ theBank }}</div>
+                <div>Direct Debit (VA): {{ theBank }}</div>
             </div>
             <button @click="makePayment" class="p-3 text-white font-bold bg-[#ff0000]">
                 Buat Tagihan
@@ -52,7 +52,7 @@ async function makePayment() {
     try {
         const response = await axios.post('http://localhost:8080/v2/payment', paymentRequest.value);
         console.log(response.data);
-        localStorage.setItem('PendingBankTFPayment', JSON.stringify(response.data))
+        localStorage.setItem('PendingDirectDebitPayment', JSON.stringify(response.data))
         router.push('/payments/pending-payment').then(() => {
             router.go();
         })

@@ -330,9 +330,7 @@ const paymentData = ref({
 
 function toPayment() {
     localStorage.setItem('pendingPaymentData', JSON.stringify(paymentData.value));
-    router.push('/payments/payment-methods').then(() => {
-        router.go();
-    });
+    router.push('/payments').then(() => router.go(0))
 }
 
 

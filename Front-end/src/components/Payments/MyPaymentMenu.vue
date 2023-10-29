@@ -1,113 +1,60 @@
 <template>
-    <div>
-        <div class="space-y-3 payment-menu flex-grow">
-            <div class="payment" v-for="payment in paymentMethods" :key="payment.id">
-                <button @click="togglePaymentMenu(payment.id)"
-                    class="payment-button menu-button flex items-center w-full justify-between bg-main_blue gap-x-4 px-5 py-3">
-                    <div class="flex gap-4 items-center">
-                        <div class="flex w-8">
-                            <div class="mx-auto menu-icon" :class="`menu-icon-${payment.menuIcon}`"></div>
+    <div class="p-20 font-inter text-black max-w-[1500px] mx-auto">
+        <div class="flex justify-center w-full text-white gap-x-8 py-8">
+            <RouterView class="flex w-2/3" />
+            <div class="flex w-1/3">
+                <div class="bg-main_blue min w-full px-3 pt-4 pb-20">
+                    <div class="py-2">
+                        <div>Invoice Number: 098798403485</div>
+                        <div class="flex flex-row justify-between">
+                            <div>Total Payment</div>
+                            <div>IDR 900.000</div>
                         </div>
-                        <div>{{ payment.title }}</div>
                     </div>
-                    <svg class="arrow-down" :class="payment.isOpen ? 'rotate-180' : ''" width="16" height="10"
-                        viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15.3198 0.999894L7.81654 8.09082L0.878023 0.999894" stroke="white"
-                            stroke-width="1.8843" />
-                    </svg>
-                </button>
-                <div :class="['payment-item', { open: payment.isOpen }]"
-                    class="flex flex-col text-black border-[1px] border-main_blue">
-                    <div v-for="provider in payment.providers"
-                        class="flex hover:bg-gray-200 flex-col w-full px-5 py-3">
-                        <RouterLink :to="{ name: `${payment.route}`, params: { providerName: provider } }">
-                            {{ provider }}
-                        </RouterLink>
+                    <div class="py-2">
+                        <div>Name</div>
+                        <div>J**** J****</div>
+                    </div>
+                    <div class="py-2">
+                        <div>Email</div>
+                        <div>J***@gmail.com</div>
+                    </div>
+                    <div class="py-2">
+                        <div>Phone Number</div>
+                        <div>086690746724</div>
+                    </div>
+                    <div class="py-2">
+                        <div>Summary</div>
+                        <div class="flex flex-row justify-between">
+                            <div>A10 Matematika Keuangan</div>
+                            <div>X1</div>
+                            <div>IDR 900.000</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <Footer />
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
 import router from '../../router/index.js';
-import { RouterLink, RouterView } from 'vue-router';
+import { RouterView } from 'vue-router';
+import Footer from '../Footer.vue';
 
-const paymentMethods = ref([
-    {
-        id: 0,
-        name: 'bankTransfer',
-        title: 'ATM/Bank Transfer (Virtual Account)',
-        route: 'Transfer Bank',
-        isOpen: false,
-        providers: ['BCA', 'BRIVA', 'BNI', 'Mandiri'],
-        menuIcon: 'bank',
-    },
-    {
-        id: 1,
-        name: 'directDebit',
-        title: 'Direct Debit',
-        route: 'Direct Debit',
-        isOpen: false,
-        providers: ['BCA', 'BRIVA', 'BNI', 'Mandiri'],
-        menuIcon: 'card',
-    },
-    {
-        id: 2,
-        name: 'digitalBank',
-        title: 'Digital Banking',
-        route: 'Transfer Bank',
-        isOpen: false,
-        providers: ['BCA', 'BNI', 'Mandiri', 'BRI', 'Lainnya'],
-        menuIcon: 'mobile',
-    },
-    {
-        id: 3,
-        name: 'eWallet',
-        title: 'E-Wallet',
-        route: 'E Wallet',
-        isOpen: false,
-        providers: ['Gopay', 'ShopeePay'],
-        menuIcon: 'wallet',
-    },
-    {
-        id: 4,
-        name: 'overTheCounter',
-        title: 'Over the Counter',
-        route: 'Transfer Bank',
-        isOpen: false,
-        providers: ['Alfamart', 'Indomaret', 'Lawson', 'Lainnya'],
-        menuIcon: 'bank',
-    },
-    {
-        id: 5,
-        name: 'payLater',
-        title: 'Pay Later',
-        route: 'Transfer Bank',
-        isOpen: false,
-        providers: ['Kredivo', 'Akulaku', 'Lainnya'],
-        menuIcon: 'bank',
-    },
-    {
-        id: 6,
-        name: 'creditCard',
-        title: 'Credit Card',
-        route: 'Kartu Kredit',
-        isOpen: false,
-        providers: ['BCA', 'BRIVA', 'BNI', 'Mandiri'],
-        menuIcon: 'card',
-    },
-])
+const paymentData = ref({
+    method: '',
+    provider: '',
+    vaNumber: '',
+    amount: 0,
+})
 
-const isToken = ref(false)
-const cardToken = ref('')
-
-const togglePaymentMenu = id => {
-    paymentMethods.value = paymentMethods.value.map(payment => payment.isOpen && payment.id !== id ? { ...payment, isOpen: false } : payment)
-    paymentMethods.value = paymentMethods.value.map(payment => payment.id === id ? { ...payment, isOpen: !payment.isOpen } : payment)
-}
+onMounted(() => {
+    paymentData.value.amount = JSON.parse(localStorage.getItem('pendingPaymentData')).amount
+})
 
 </script>
 
