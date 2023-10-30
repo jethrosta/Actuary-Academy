@@ -83,12 +83,12 @@ const paymentMethods = ref([
     },
     {
         id: 5,
-        name: 'payLater',
-        title: 'Pay Later',
+        name: 'cardlessCredit',
+        title: 'Cardless Credit',
         route: 'Transfer Bank',
         isOpen: false,
         providers: ['Kredivo', 'Akulaku', 'Lainnya'],
-        menuIcon: 'bank',
+        menuIcon: 'mobile',
     },
     {
         id: 6,

@@ -107,7 +107,7 @@ const notifTotalCount = notifCount + purchaseCount;
         </div>
       </div>
       <div class="-mx-4 lg:-mt-6 md:-mt-5 -mt-4 -mb-5 ">
-        <img src="/src/assets/Vector 23.svg" class="w-screen" />
+        <img src="/src/assets/Vector 23.svg" class="w-full" />
       </div>
       <!-- Navbar -->
       <nav class="flex justify-between items-center text-white font-inter font-bold mx-auto lg:px-10 px-4">

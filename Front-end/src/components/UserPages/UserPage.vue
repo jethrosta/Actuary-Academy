@@ -118,5 +118,5 @@ const handleLogout = async () => {
         </div>
     </div>
 
-    <Footer class="w-screen"></Footer>
+    <Footer />
 </template>
