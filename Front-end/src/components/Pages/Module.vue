@@ -1,12 +1,15 @@
 <script setup>
+import { computed } from 'vue';
 import { useRoute, RouterLink } from 'vue-router';
 import Footer from "../Footer.vue";
 import { modules } from '@/db';
 
 const route = useRoute();
 
-const moduleId = route.params.moduleId;
-const selectedModule = modules[moduleId] ?? null;
+const moduleId = computed(() => route.params.moduleId);
+const selectedModule = computed(() => {
+    return modules[moduleId.value] ?? null;
+});
 
 </script>
 <template>
