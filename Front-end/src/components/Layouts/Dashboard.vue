@@ -79,7 +79,7 @@ const notifTotalCount = notifCount + purchaseCount;
             <div class="font-inter xl:text-lg lg:text-base md:text-xs text-[8px] text-white md:py-1 py-0">Actuary Academy</div>
           </div>
         </RouterLink>
-        <langMenu class="language-button absolute right-0 my-2 mr-8 text-sm cursor-pointer" @click="toggle">
+        <div class="language-button absolute right-0 my-2 mr-8 text-sm cursor-pointer z-30" @click="toggle">
           <div class="flex flex-row items-center cursor-pointer" :class="langMenuOpen ? 'text-sec_blue' : 'text-white'">
             <div>{{ langSetting.long }}</div>
             <svg class="h-2 w-7 mt-1 inline-block" preserve-aspect-ratio="none" viewBox="0 0 12 9" fill="none"
@@ -104,7 +104,7 @@ const notifTotalCount = notifCount + purchaseCount;
               </div>
             </div>
           </div>
-        </langMenu>
+        </div>
       </div>
       <div class="-mx-4 lg:-mt-6 md:-mt-5 -mt-4 -mb-5 ">
         <img src="/src/assets/Vector 23.svg" class="w-screen" />
@@ -182,7 +182,7 @@ const notifTotalCount = notifCount + purchaseCount;
 
       <div class="flex flex-row flex-1 justify-end md:gap-x-2 pr- pt-3">
         <div class="flex flex-row items-center cursor-pointer py-1">
-          <langMenu class="language-button flex cursor-pointer" @click="toggle">
+          <div class="language-button flex cursor-pointer z-30" @click="toggle">
             <div class="flex flex-row items-center cursor-pointer" :class="langMenuOpen ? 'text-sec_blue' : 'text-white'">
               <div>{{ langSetting.short }}</div>
               <svg class="h-2 w-7 mt-1 inline-block" preserve-aspect-ratio="none" viewBox="0 0 12 9" fill="none"
@@ -207,7 +207,7 @@ const notifTotalCount = notifCount + purchaseCount;
                 </div>
               </div>
             </div>
-          </langMenu>
+          </div>
         </div>
 
         <div v-if="isLoggedIn" id="userButton" class="flex items-center font-normal">

@@ -137,22 +137,22 @@ const router = createRouter({
         {
           path: '/payments',
           name: 'Pembayaran',
-          redirect: '/payments/my-payments',
+          redirect: '/payments/create',
           children: [
             {
               path: 'pending-payment',
               name: 'Pembayaran Tertunda',
-              component: () => import('../components/Payments/PendingPayment.vue')
+              component: () => import('../components/Payments/Pending.vue')
             },
             {
-              path: 'my-payments',
-              name: 'Pembayaran Saya',
-              component: () => import('../components/Payments/MyPaymentMenu.vue'),
+              path: 'create',
+              name: 'Buat Pembayaran',
+              component: () => import('../components/Payments/PaymentMenu.vue'),
               children: [
                 {
                   path: '',
                   name: 'Metode Pembayaran',
-                  component: () => import('../components/Payments/PaymentMethods.vue')
+                  component: () => import('../components/Payments/Methods.vue')
                 },
                 {
                   path: 'bank-transfer/:providerName',
@@ -165,6 +165,11 @@ const router = createRouter({
                   component: () => import('../components/Payments/EWallet.vue')
                 },
                 {
+                  path: 'over-the-counter/:providerName',
+                  name: 'Over The Counter',
+                  component: () => import('../components/Payments/OverTheCounter.vue')
+                },
+                {
                   path: 'direct-debit/:providerName',
                   name: 'Direct Debit',
                   component: () => import('../components/Payments/DirectDebit.vue')
@@ -175,11 +180,6 @@ const router = createRouter({
                   component: () => import('../components/Payments/CreditCard.vue')
                 },
               ]
-            },
-            {
-              path: 'payment-cards',
-              name: 'Kartu Pembayaran',
-              component: () => import('../components/Payments/PaymentCards.vue'),
             },
           ]
         }

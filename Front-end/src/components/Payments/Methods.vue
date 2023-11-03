@@ -1,5 +1,8 @@
 <template>
-    <div>
+    <div class="font-inter text-white flex-col">
+        <div class="flex font-bold text-sec_blue text-2xl pb-4">
+            Metode Pembayaran
+        </div>
         <div class="space-y-3 payment-menu flex-grow">
             <div class="payment" v-for="payment in paymentMethods" :key="payment.id">
                 <button @click="togglePaymentMenu(payment.id)"
@@ -31,9 +34,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import router from '../../router/index.js';
-import { RouterLink, RouterView } from 'vue-router';
+import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
 
 const paymentMethods = ref([
     {
@@ -76,9 +78,9 @@ const paymentMethods = ref([
         id: 4,
         name: 'overTheCounter',
         title: 'Over the Counter',
-        route: 'Transfer Bank',
+        route: 'Over The Counter',
         isOpen: false,
-        providers: ['Alfamart', 'Indomaret', 'Lawson', 'Lainnya'],
+        providers: ['Alfamart', 'Indomaret', 'Lainnya'],
         menuIcon: 'bank',
     },
     {
@@ -100,9 +102,6 @@ const paymentMethods = ref([
         menuIcon: 'card',
     },
 ])
-
-const isToken = ref(false)
-const cardToken = ref('')
 
 const togglePaymentMenu = id => {
     paymentMethods.value = paymentMethods.value.map(payment => payment.isOpen && payment.id !== id ? { ...payment, isOpen: false } : payment)

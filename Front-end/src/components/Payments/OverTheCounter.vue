@@ -3,7 +3,7 @@
         <div class="p-20 font-inter text-black max-w-[1500px] mx-auto">
             <div class="py-2">
                 <div class="font-bold">Metode Pembayaran: </div>
-                <div>Transfer Virtual Account: {{ paymentData.providerName }}</div>
+                <div>Pembayaran Kasir Melalui: {{ paymentData.providerName }}</div>
                 <div>Jumlah: {{ toIDR(paymentData.amount) }}</div>
             </div>
             <div class="space-x-2">
@@ -35,10 +35,8 @@ const paymentData = ref({
 
 onMounted(() => {
     const itemIds = store.currentCheckout;
-    const cartItems = store.getCartItems(itemIds);
-    paymentData.value.amount = cartItems.reduce((priceSum, item) => {
-        return priceSum + parseInt(item.price)
-    }, 0);
+    const cartItems = store.getCheckoutItems
+    paymentData.value.amount = store.getCurrentPayment
 })
 
 //Payment Request

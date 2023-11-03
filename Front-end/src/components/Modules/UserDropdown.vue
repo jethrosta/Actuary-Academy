@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink } from 'vue-router';
-import { defineProps } from 'vue';
+import { defineProps, ref } from 'vue';
 import router from '../../router';
 import { useStore } from '../../store/index.js';
 
@@ -9,6 +9,8 @@ const props = defineProps({
   items: Array,
   isOpen: Boolean
 });
+
+const isOpen = ref(props.isOpen)
 
 const store = useStore();
 
@@ -23,20 +25,20 @@ const handleLogout = async () => {
 };
 
 const toggle = () => {
-  if (props.isOpen) {
-    props.isOpen = false;
+  if (isOpen.value) {
+    isOpen.value = false;
     document.removeEventListener('click', close);
     return;
   }
   else {
-    props.isOpen = true;
+    isOpen.value = true;
     document.addEventListener('click', close);
   }
 };
 
 const close = (e) => {
   if (e.target.closest('.menu-item')) return;
-  props.isOpen = false;
+  isOpen.value = false;
   document.removeEventListener('click', close);
 };
 

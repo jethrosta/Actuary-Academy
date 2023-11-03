@@ -14,9 +14,9 @@
                 </div>
                 <div class="flex flex-col gap-2 text-right text-base justify-between ">
                     <div class="text-main_blue font-bold">
-                        {{ theAmount }}
+                        {{ toIDR(paymentData.data.gross_amount) }}
                     </div>
-                    <div class="uppercase">{{ theBank }} (VA)</div>
+                    <div class="uppercase">{{ paymentData.data.va_numbers[0].bank.toUpperCase() }} (VA)</div>
                     <div class="flex flex-row gap-x-2 items-center">
                         <div>5 Juni 2023</div>
                         <div
@@ -30,7 +30,7 @@
                 <div class="font-bold">Nomor Virtual Account </div>
                 <div class="flex gap-4 font-semibold text-white justify-center">
                     <div class="flex bg-main_blue py-1 px-3 first-letter:text-center rounded-lg">
-                        {{ vaNumber }}</div>
+                        {{ paymentData.data.va_numbers[0].va_number }}</div>
                     <div class="flex bg-main_blue py-1 px-3 first-letter:text-center rounded-lg">
                         Salin</div>
                 </div>
@@ -50,71 +50,27 @@
             </div>
         </div>
     </div>
-
+    
     <Footer />
 </template>
 
 <script setup>
 import router from '../../router';
 import Footer from '../Footer.vue';
-import { onMounted, computed, ref } from 'vue';
-import axios from 'axios';
+import { computed, onBeforeMount, ref } from 'vue';
+import { usePaymentStore } from '../../store';
 
-//For Storing Local pending payment data
-let paymentData = ref({})
+const store = usePaymentStore()
 
-// Hooks
-onMounted(() => {
-    getPendingData().then(setDisplay())
-})
+//state Data
+const paymentData = computed(() => JSON.parse(localStorage.getItem('paymentData')))
 
-//data for display
-const theAmount = ref(0)
-const theBank = ref('')
-const vaNumber = ref('')
-
-function setDisplay() {
-    theAmount.value = toIDR(paymentData.value.gross_amount);
-    theBank.value = paymentData.value.va_numbers[0].bank;
-    vaNumber.value = paymentData.value.va_numbers[0].va_number;
-    paymentRequest.value.transaction_details.gross_amount = paymentData.value.amount;
-}
-
-//Payment Data for Backend
-const paymentRequest = ref({
-    payment_type: 'bank_transfer',
-    transaction_details: {
-        order_id: 'order-id-node-' + Math.round((new Date()).getTime() / 1000),
-        gross_amount: 0
-    },
-    bank_transfer: {
-        bank: 'bca'
-    },
-    customer_details: {
-        first_name: 'Toni',
-        last_name: 'Dev',
-        email: 'tonidev@example.com',
-    },
+onBeforeMount(() => {
+    const isPaymntExist = localStorage.getItem('paymentData')
+    if (!isPaymntExist) {router.go(-1)}
 })
 
 //Helpers
-async function getPendingData() {
-    let tfPayment = JSON.parse(localStorage.getItem('PendingBankTFPayment'))
-    let debitPayment = JSON.parse(localStorage.getItem('PendingBankDebitPayment'))
-    if (tfPayment) {
-        paymentData.value = tfPayment
-    } else if (debitPayment) {
-        paymentData.value = debitPayment
-    } else {
-        router.go(-1)
-    }
-
-}
-
-function setVaNumber(response) {
-    paymentData.value.vaNumber = response.va_numbers[0].va_number;
-}
-
 function toIDR(num) {
     const idr = new Intl.NumberFormat('id-ID', {
         style: 'currency',

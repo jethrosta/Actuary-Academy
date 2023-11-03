@@ -1,5 +1,42 @@
 // TEMPORARY DATA BEFORE REAL DATABASE IS READY FOR USE
 
+export const cart = [
+    {   
+        id: 'p1000',
+        name: 'Akademi',
+        price: '1000000',
+        variation: {
+            current: 'A10 Matematika Keuangan',
+            option: ['A10 Matematika Keuangan', 'A11 Statistika', 'A12 Matematika Diskrit']},
+        duration: {
+            current: '1 Bulan',
+            option: ['1 Bulan', '2 Bulan', '4 Bulan']}
+    },
+    {   
+        id: 'p1002',
+        name: 'Tutor Privat',
+        price: '900000',
+        variation: {
+            current: 'A Tutor 1',
+            option: ['A Tutor 1', 'A Tutor 2', 'A Tutor 3']},
+        duration: {
+            current: '1 Bulan',
+            option: ['1 Bulan', '3 Bulan', '6 Bulan']}
+    },
+    {   
+        id: 'p1004',
+        name: 'Jasa Aktuaria',
+        price: '1200000',
+        variation: {
+            current: 'A Jasa 1',
+            option: ['A Jasa 1', 'A Jasa 2', 'A Jasa 3']},
+        duration: {
+            current: '2 Bulan',
+            option: ['2 Bulan', '3 Bulan', '6 Bulan']}
+    }
+
+]
+
 export const modules = {
     'A10': {
         name: 'Matematika Keuangan',
