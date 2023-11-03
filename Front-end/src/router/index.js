@@ -84,21 +84,25 @@ const router = createRouter({
         {
           path: '/modules/:moduleId',
           name: 'module',
+          meta: { requiresAuth: true },
           component: () => import('../components/Pages/Module.vue')
         },
         {
           path: '/modules/:moduleId/video',
           name: 'module-video',
+          meta: { requiresAuth: true },
           component: () => import('../components/Pages/ModuleVideo.vue')
         },
         {
           path: '/modules/:moduleId/tryout',
           name: 'module-tryout',
+          meta: { requiresAuth: true },
           component: () => import('../components/Pages/ModuleTryout.vue')
         },
         {
           path: '/modules/:moduleId/discussion',
           name: 'module-discussion',
+          meta: { requiresAuth: true },
           component: () => import('../components/Pages/ModuleDiscussion.vue')
         },
         {
@@ -106,6 +110,7 @@ const router = createRouter({
           name: 'user',
           component: () => import('../components/UserPages/UserPage.vue'),
           redirect: { name: 'Akun' },
+          meta: { requiresAuth: true },
           children: [
             {
               path: 'account',
@@ -138,6 +143,7 @@ const router = createRouter({
           path: '/payments',
           name: 'Pembayaran',
           redirect: '/payments/create',
+          meta: { requiresAuth: true },
           children: [
             {
               path: 'pending-payment',
@@ -203,23 +209,8 @@ router.beforeEach(async (to, from, next) => {
   } catch (error) {
     isCookiePresent = false
   }
-  const publicPages = [
-    '/',
-    '/login',
-    '/register',
-    '/about',
-    '/testimonies',
-    '/testimonies/profile',
-    '/profile',
-    '/career',
-    '/products',
-    '/private-tutor',
-    '/tutors',
-    '/academy',
-    '/company-training',
-    '/actuarial-services'
-  ]
-  const authRequired = !publicPages.includes(to.path)
+
+  const authRequired = to.meta?.requiresAuth
   const loggedIn = localStorage.getItem('user')
 
   if (!loggedIn && isCookiePresent) {

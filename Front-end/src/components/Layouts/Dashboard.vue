@@ -54,7 +54,7 @@ const productSubmenu = [
 const materialsSubmenu = [
   { title: 'Akademi-A10', name: 'module', params: { moduleId: 'A10' } },
   { title: 'Akademi-A20', name: 'module', params: { moduleId: 'A20' } },
-  { title: 'Akademi-A30', name: 'module', params: { moduleId: 'A30' } }
+  { title: 'Akademi-A40', name: 'module', params: { moduleId: 'A40' } }
 ]
 
 const accountMenu = [
@@ -107,7 +107,7 @@ const notifTotalCount = notifCount + purchaseCount;
         </div>
       </div>
       <div class="-mx-4 lg:-mt-6 md:-mt-5 -mt-4 -mb-5 ">
-        <img src="/src/assets/Vector 23.svg" class="w-screen" />
+        <img src="/src/assets/Vector 23.svg" class="w-full" />
       </div>
       <!-- Navbar -->
       <nav class="flex justify-between items-center text-white font-inter font-bold mx-auto lg:px-10 px-4">
