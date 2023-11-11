@@ -1,16 +1,20 @@
 import mongoose from "mongoose";
 
-const cartSchema = new mongoose.Schema({
+export interface CartDocument extends mongoose.Document {
+    user: mongoose.Types.ObjectId;
+}
+
+const cartSchema = new mongoose.Schema<CartDocument>({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',    // Reference User Model
         required: true,
-    },
-    kursus: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Course',  // Reference Course Model
-        required: true,
-    },
+    }
+    // course: { 
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'Course',  // Reference Course Model
+    //     required: true,
+    // },
 });
 
-export const Cart = mongoose.model('Cart', cartSchema);
+export const CartModel = mongoose.model('Cart', cartSchema);

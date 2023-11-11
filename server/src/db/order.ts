@@ -1,6 +1,25 @@
 import mongoose from "mongoose";
 
-const orderSchema = new mongoose.Schema({
+export interface OrderDocument extends mongoose.Document {
+    user_id: mongoose.Types.ObjectId;
+    invoice: string;
+    identifier: string;
+    // course: mongoose.Types.ObjectId;
+    gross_amount: number;
+    payment_type: string;
+    channel_name: string;
+    virtual_number: string;
+    permata_va_number: string;
+    bill_key: string;
+    biller_code: string;
+    payment_code: string;
+    status: string;
+    status_code: string;
+    transaction_time: Date;
+    paid_at: Date;
+}
+
+const orderSchema = new mongoose.Schema<OrderDocument>({
     user_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',     // Ref to 'User' model
@@ -19,13 +38,10 @@ const orderSchema = new mongoose.Schema({
     bill_key: { type: String },
     biller_code: { type: String },
     payment_code: { type: String },
-    // actions: {
-    //     type: mongoose.Schema.Types.Mixed,   // Must adjust this schema as needed
-    // },
     status: { type: String, default: 'pending' },
     status_code: { type: String },
     transaction_time: { type: Date },
     paid_at: { type: Date },
 }, { timestamps: true });
 
-export const Order = mongoose.model('Order', orderSchema)
+export const OrderModel = mongoose.model('Order', orderSchema)
