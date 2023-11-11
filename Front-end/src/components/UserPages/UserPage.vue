@@ -19,7 +19,7 @@ const handleLogout = async () => {
 
 </script>
 <template>
-    <div class="container items-center justify-center mx-auto">
+    <div class="container max-w-[1500px] items-center justify-center mx-auto">
         <div class="flex flex-row h-full items-start px-10">
             <aside class="hidden lg:flex left-0 sticky top-44 ">
                 <div class="flex flex-row min-w-[280px] pl-10 pb-20 items-center justify-between text-xl">

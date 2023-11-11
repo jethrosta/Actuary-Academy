@@ -1,8 +1,9 @@
-import MidtransService from "../services/midtrans.service.js";
 import { cart } from "../db.js";
+import axios from 'axios';
+
+const API_URL = import.meta.env.VITE_API_URL + 'payment/';
 
 const cartItems = cart;
-const currentCheckout = JSON.parse(localStorage.getItem('currentcheckout'));
 const localPending = JSON.parse(localStorage.getItem('pendingPayment'));
 const pendingPayment = localPending
   ? { status: true, method: '', provider: '', data }
@@ -14,47 +15,45 @@ export const payment = {
     cartItems,
     payment: {},
     paymentResponse: {},
-    currentCheckout,
+    checkoutItems: null,
     pendingPayment,
   }),
 
   getters: {
-    getCheckoutItems: () => {
-      return currentCheckout.map(id => cartItems.find(item => item.id === id));
-    },
-
-    getCurrentPayment() {
-      return this.getCheckoutItems.reduce((priceSum, item) => { return priceSum + parseInt(item.price)}, 0);
-    },
-
+    
   },
 
   actions: {
-    async makePayment(method, provider, amount, token) {
+    async makePayment(method, channel, amount) {
       try {
-        const id = 'order-test-' + `${Math.floor(Math.random() * 1000000)}`;
-        const paymentRequest = MidtransService.selectPayment(method, provider, id, amount, token)
-        const response = await MidtransService.makePayment(paymentRequest);
-        const paymentData = { method: method, provider: provider, data: response.data };
-        localStorage.setItem('paymentData', JSON.stringify(paymentData));
+        const request = { method, channel, amount}
+        const response = await axios.post(API_URL, request);
+        localStorage.setItem('pendingPayment', JSON.stringify(response));
+        console.log(response);
         return response;
       }
       catch (error) {
+        console.log(error);
         throw new Error(error);
       }
     },
 
-    getCartItems(ids) {
-      const items = ids.map(id => cartItems.find(item => item.id === id));
-      return items;
+    getCartItems() {
+      return cartItems;
     },
 
-    setCurrentCheckout(productIds) {
-      localStorage.setItem('currentcheckout', JSON.stringify(productIds));
+    getCheckoutAmount() {
+      if (this.checkoutItems == null) { return 0 }
+      else { return this.checkoutItems.map(item => item.price).reduce((sum, price) => sum + price, 0) }
     },
 
-    clearCurrentCheckout() {
-      localStorage.removeItem('currentcheckout');
+    getCheckoutItems() {
+      return this.checkoutItems;
     },
+    
+    async setCheckoutItems(items) {
+      this.paymentState.checkoutItems = items;
+    },
+
   }
 }

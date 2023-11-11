@@ -21,10 +21,13 @@
                 </button>
                 <div :class="['payment-item', { open: payment.isOpen }]"
                     class="flex flex-col text-black border-[1px] border-main_blue">
-                    <div v-for="provider in payment.providers"
-                        class="flex hover:bg-gray-200 flex-col w-full px-5 py-3">
-                        <RouterLink :to="{ name: `${payment.route}`, params: { providerName: provider } }">
-                            {{ provider }}
+                    <div v-for="provider in payment.providers" class="flex hover:bg-gray-200 flex-col w-full px-4 py-3">
+                        <RouterLink :to="{ name: `${payment.route}`, params: { providerName: provider.name } }"
+                            class="flex">
+                            <div class="flex items-center justify-center w-[5%]">
+                                <img :src="provider.logo" alt="" class="h-4">
+                            </div>
+                            <div class="px-4 w-[95%]">{{ provider.name }}</div>
                         </RouterLink>
                     </div>
                 </div>
@@ -44,62 +47,25 @@ const paymentMethods = ref([
         title: 'ATM/Bank Transfer (Virtual Account)',
         route: 'Transfer Bank',
         isOpen: false,
-        providers: ['BCA', 'BRIVA', 'BNI', 'Mandiri'],
+        providers: [
+            { name: 'BCA', logo: '/src/assets/payments/bca.png' },
+            { name: 'BRIVA', logo: '/src/assets/payments/bri.png' },
+            { name: 'BNI', logo: '/src/assets/payments/bni.png' },
+            { name: 'Mandiri', logo: '/src/assets/payments/mandiri-full.png' }
+        ],
         menuIcon: 'bank',
     },
     {
         id: 1,
-        name: 'directDebit',
-        title: 'Direct Debit',
-        route: 'Direct Debit',
-        isOpen: false,
-        providers: ['BCA', 'BRI'],
-        menuIcon: 'card',
-    },
-    {
-        id: 2,
-        name: 'digitalBank',
-        title: 'Digital Banking',
-        route: 'Transfer Bank',
-        isOpen: false,
-        providers: ['BCA', 'BRIVA', 'BNI', 'Mandiri'],
-        menuIcon: 'mobile',
-    },
-    {
-        id: 3,
         name: 'eWallet',
         title: 'E-Wallet',
         route: 'E Wallet',
         isOpen: false,
-        providers: ['Gopay', 'ShopeePay'],
+        providers: [
+            { name: 'Gopay', logo: '/src/assets/payments/gopay-full.png' },
+            { name: 'ShopeePay', logo: '/src/assets/payments/shopeepay.png' },
+        ],
         menuIcon: 'wallet',
-    },
-    {
-        id: 4,
-        name: 'overTheCounter',
-        title: 'Over the Counter',
-        route: 'Over The Counter',
-        isOpen: false,
-        providers: ['Alfamart', 'Indomaret', 'Lainnya'],
-        menuIcon: 'bank',
-    },
-    {
-        id: 5,
-        name: 'cardlessCredit',
-        title: 'Cardless Credit',
-        route: 'Transfer Bank',
-        isOpen: false,
-        providers: ['Kredivo', 'Akulaku', 'Lainnya'],
-        menuIcon: 'mobile',
-    },
-    {
-        id: 6,
-        name: 'creditCard',
-        title: 'Credit Card',
-        route: 'Kartu Kredit',
-        isOpen: false,
-        providers: ['BCA', 'BRIVA', 'BNI', 'Mandiri'],
-        menuIcon: 'card',
     },
 ])
 

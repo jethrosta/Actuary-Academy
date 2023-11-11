@@ -4,7 +4,7 @@ export const cart = [
     {   
         id: 'p1000',
         name: 'Akademi',
-        price: '1000000',
+        price: 1000000,
         variation: {
             current: 'A10 Matematika Keuangan',
             option: ['A10 Matematika Keuangan', 'A11 Statistika', 'A12 Matematika Diskrit']},
@@ -15,7 +15,7 @@ export const cart = [
     {   
         id: 'p1002',
         name: 'Tutor Privat',
-        price: '900000',
+        price: 900000,
         variation: {
             current: 'A Tutor 1',
             option: ['A Tutor 1', 'A Tutor 2', 'A Tutor 3']},
@@ -26,7 +26,7 @@ export const cart = [
     {   
         id: 'p1004',
         name: 'Jasa Aktuaria',
-        price: '1200000',
+        price: 1200000,
         variation: {
             current: 'A Jasa 1',
             option: ['A Jasa 1', 'A Jasa 2', 'A Jasa 3']},

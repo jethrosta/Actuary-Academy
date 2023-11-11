@@ -22,10 +22,10 @@ import { computed, onMounted, ref } from 'vue';
 import router from '../../router/index.js';
 import { useRoute } from 'vue-router';
 import axios from 'axios';
-import { usePaymentStore } from '../../store';
+import { useStore } from '../../store';
 
 const route = useRoute();
-const store = usePaymentStore();
+const store = useStore();
 
 //For Storing Local pending payment data
 const paymentData = ref({
@@ -34,22 +34,26 @@ const paymentData = ref({
 })
 
 onMounted(() => {
-    const itemIds = store.currentCheckout;
-    const cartItems = store.getCartItems(itemIds);
-    paymentData.value.amount = cartItems.reduce((priceSum, item) => {
-        return priceSum + parseInt(item.price)
-    }, 0);
+    const checkoutItems = store.paymentState.checkoutItems
+    if (checkoutItems == null) {
+        router.push('/user/my-cart').then(() => router.go())
+    }
+    paymentData.value.amount = checkoutItems.map(item => item.price).reduce((sum, price) => sum + price, 0);
 })
 
 //Payment Request
 async function makePayment() {
     try {
+        store.loadingStart()
         const bank = paymentData.value.providerName.toLowerCase()
         const response = await store.makePayment('bankTransfer', bank, paymentData.value.amount)
         router.push('/payments/pending-payment').then(() => router.go(0))
     } catch (error) {
         errorMessage.value = 'Terjadi Error, Silahkan Coba Lagi'
         console.error(error)
+
+    } finally {
+        store.loadingEnd()
     }
 }
 

@@ -14,9 +14,9 @@
                 </div>
                 <div class="flex flex-col gap-2 text-right text-base justify-between ">
                     <div class="text-main_blue font-bold">
-                        {{ toIDR(paymentData.data.gross_amount) }}
+                        {{ toIDR(paymentData.gross_amount) }}
                     </div>
-                    <div class="uppercase">{{ paymentData.data.va_numbers[0].bank.toUpperCase() }} (VA)</div>
+                    <div class="uppercase">{{ paymentData.va_numbers[0].bank.toUpperCase() }} (VA)</div>
                     <div class="flex flex-row gap-x-2 items-center">
                         <div>5 Juni 2023</div>
                         <div
@@ -29,10 +29,18 @@
                 <div>Pembayaran dapat dilakukan melalui ATM BNI atau <i>internet banking</i></div>
                 <div class="font-bold">Nomor Virtual Account </div>
                 <div class="flex gap-4 font-semibold text-white justify-center">
-                    <div class="flex bg-main_blue py-1 px-3 first-letter:text-center rounded-lg">
-                        {{ paymentData.data.va_numbers[0].va_number }}</div>
-                    <div class="flex bg-main_blue py-1 px-3 first-letter:text-center rounded-lg">
-                        Salin</div>
+                    <div class="flex relative justify-center">
+                        <div class="flex bg-main_blue py-1 px-3 first-letter:text-center rounded-lg">
+                            {{ paymentData.va_numbers[0].va_number }}
+                        </div>
+                        <div v-show="vaCopied" class="absolute -bottom-7 italic text-gray-600">
+                            Nomor disalin !
+                        </div>
+                    </div>
+                    <button @click="copyVa"
+                        class="flex active:bg-sec_blue bg-main_blue py-1 px-3 first-letter:text-center rounded-lg">
+                        Salin
+                    </button>
                 </div>
             </div>
         </div>
@@ -50,7 +58,7 @@
             </div>
         </div>
     </div>
-    
+
     <Footer />
 </template>
 
@@ -58,19 +66,33 @@
 import router from '../../router';
 import Footer from '../Footer.vue';
 import { computed, onBeforeMount, ref } from 'vue';
-import { usePaymentStore } from '../../store';
+import { useStore } from '../../store';
 
-const store = usePaymentStore()
+const store = useStore()
 
 //state Data
-const paymentData = computed(() => JSON.parse(localStorage.getItem('paymentData')))
+const paymentData = computed(() => JSON.parse(localStorage.getItem('pending-payment')))
 
 onBeforeMount(() => {
-    const isPaymntExist = localStorage.getItem('paymentData')
-    if (!isPaymntExist) {router.go(-1)}
+    const isPaymentExist = localStorage.getItem('pending-payment')
+    if (!isPaymentExist) { router.go(-1) }
 })
 
+const vaCopied = ref(false)
+
 //Helpers
+const copyVa = async () => {
+    try {
+        await navigator.clipboard.writeText(paymentData.value.va_numbers[0].va_number);
+        console.log('Content copied to clipboard');
+        vaCopied.value = true
+        setTimeout(() => { vaCopied.value = false }, 2000);
+    } catch (err) {
+        console.error('Failed to copy: ', err);
+    }
+}
+
+
 function toIDR(num) {
     const idr = new Intl.NumberFormat('id-ID', {
         style: 'currency',

@@ -1,9 +1,17 @@
 <script setup>
 import {RouterView} from 'vue-router'
+import Loading from './components/Modules/Loading.vue';
+import { useStore } from '../src/store/index.js'
+import { computed } from 'vue';
+
+const store = useStore();
+
+const loading = computed(() => store.isLoading)
 
 </script>
 
 <template>
+  <Loading v-if="loading" class="fixed z-50"/>
   <RouterView/>
 </template>
 

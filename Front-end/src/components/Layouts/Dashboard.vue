@@ -8,7 +8,7 @@ import { useStore } from "../../store/index.js";
 import { notifCount, purchaseCount } from '@/db';
 
 const store = useStore()
-const isLoggedIn = computed(() => store.loginState.status.loggedIn)
+const isLoggedIn = computed(() => store.authState.loginState.status.loggedIn)
 const user = JSON.parse(localStorage.getItem('user'))
 
 const langSetting = ref({ long: "Bahasa Indonesia", short: "INA" });
@@ -34,8 +34,8 @@ const toggle = () => {
   }
 };
 const close = (e) => {
-  if (e.target.closest('.menu-item')) return;
-  isOpen.value = false;
+  if (e.target.closest('.language-button')) return;
+  langMenuOpen.value = false;
   document.removeEventListener('click', close);
 };
 

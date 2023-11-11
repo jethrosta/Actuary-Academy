@@ -27,7 +27,7 @@ const user = ref({
   password: ""
 });
 
-const loginStatus = computed(() => store.loginState.status.loggedIn);
+const loginStatus = computed(() => store.authState.loginState.status.loggedIn);
 
 const currentUrl = window.location.href;
 

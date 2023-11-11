@@ -3,16 +3,18 @@ import AuthService from '../services/auth.service';
 const user = JSON.parse(localStorage.getItem('user'));
 const loginState = user
 ? { status: { loggedIn: true }, user }
-: { status: { loggedIn: false }, user: null };
+: { status: { loggedIn: false }, user: null }
+const subscription = user.subscription ///access subscription data
 
 export const auth = {
   id: 'auth',
   state: () => ({
       loginState,
+      subscription, //subscription data for video auth
   }),
 
   getters: {
-
+    
   },
   
   actions: {

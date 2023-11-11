@@ -170,23 +170,8 @@ const router = createRouter({
                   name: 'E Wallet',
                   component: () => import('../components/Payments/EWallet.vue')
                 },
-                {
-                  path: 'over-the-counter/:providerName',
-                  name: 'Over The Counter',
-                  component: () => import('../components/Payments/OverTheCounter.vue')
-                },
-                {
-                  path: 'direct-debit/:providerName',
-                  name: 'Direct Debit',
-                  component: () => import('../components/Payments/DirectDebit.vue')
-                },
-                {
-                  path: 'credit-card/:providerName',
-                  name: 'Kartu Kredit',
-                  component: () => import('../components/Payments/CreditCard.vue')
-                },
               ]
-            },
+            }
           ]
         }
       ]

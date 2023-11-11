@@ -31,34 +31,35 @@
 
 <script setup>
 import { useRoute } from 'vue-router';
+import { useStore } from '../../store';
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import router from '../../router';
 const route = useRoute();
 
+const store = useStore()
+
 //data for display
 const errorMessage = ref('');
-const paymentData = ref({})
+const paymentData = ref(JSON.parse(localStorage.getItem('eWalletPayment')))
 const urlContent = ref(null)
-const requestSuccess = ref(false);
+const requestSuccess = ref(true);
 const provider = ref(route.params.providerName)
 
 //Payment Request
 async function makePayment() {
-    makeRequest().then((response) => {
-        console.log(response)
-    })
-}
-
-async function makeRequest() {
     try {
-        const bank = paymentData.value.providerName.toLowerCase()
-        const response = await store.makePayment('eWallet', bank, paymentData.value.amount)
+        store.loadingStart()
+        const channel = route.params.providerName.toLowerCase()
+        const response = await store.makePayment('eWallet', channel, paymentData.value.amount)
         paymentData.value = response.data;
         requestSuccess.value = true;
+        localStorage.setItem('eWalletResponseRaw', JSON.stringify(paymentData.value))
     } catch (error) {
         errorMessage.value = 'Terjadi Error, Silahkan Coba Lagi'
         console.error(error)
+    } finally {
+        store.loadingEnd()
     }
 }
 
