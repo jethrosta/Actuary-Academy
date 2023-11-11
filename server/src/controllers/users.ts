@@ -1,5 +1,6 @@
 import express from 'express';
 import { deleteUserById, getUsers, getUserById } from '../db/users';
+import { RequestWithJWT } from 'middlewares';
 
 export const getAllUsers = async (req: express.Request, res: express.Response) => {
   try {
@@ -11,10 +12,9 @@ export const getAllUsers = async (req: express.Request, res: express.Response) =
   }
 }
 
-export const getCurrentUser = async (req: express.Request, res: express.Response) => {
+export const getCurrentUser = async (req: RequestWithJWT, res: express.Response) => {
   try {
-    const { id } = req.params;
-    const user = await getUserById(id);
+    const user = await getUserById(req.userId);
     return res.json(user);
   } catch (err) {
     console.log(err);
