@@ -49,7 +49,7 @@ const paymentMethods = ref([
         isOpen: false,
         providers: [
             { name: 'BCA', logo: '/src/assets/payments/bca.png' },
-            { name: 'BRIVA', logo: '/src/assets/payments/bri.png' },
+            { name: 'BRI', logo: '/src/assets/payments/bri.png' },
             { name: 'BNI', logo: '/src/assets/payments/bni.png' },
             { name: 'Mandiri', logo: '/src/assets/payments/mandiri-full.png' }
         ],

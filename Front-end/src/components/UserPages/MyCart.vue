@@ -83,9 +83,9 @@
                         Total ({{ totalItems }} Items)</div>
                     <div class="text-lg text-main_blue font-bold">
                         {{ toIDR(totalPrice) }}</div>
-                    <div @click="cartCheckout"
-                        class="flex hover:cursor-pointer ml-auto bg-sec_blue py-1 px-3 text-white font-semibold first-letter:text-center rounded-lg">
-                        Checkout </div>
+                    <button @click="cartCheckout"
+                        class="flex ml-auto bg-sec_blue py-1 px-3 text-white font-semibold first-letter:text-center rounded-lg">
+                        Checkout </button>
 
                 </div>
             </div>
@@ -203,7 +203,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useStore } from '../../store';
 import { RouterLink, onBeforeRouteLeave } from 'vue-router';
 import router from '../../router';
@@ -303,6 +303,18 @@ const isEmpty = computed(() => {
 })
 
 //Checkout functions
+watch(selectedItems, (newItems) => {
+    store.setCheckoutItems(newItems.map(item => {
+        return {
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            duration: item.duration.current,
+            variation: item.variation.current,
+        }
+    }))
+})
+
 const cartCheckout = async () => {
     if (isEmpty.value) {
         modalError.value = true;
@@ -310,25 +322,13 @@ const cartCheckout = async () => {
     }
     else {
         modalError.value = false;
-        const items = selectedItems.value.map(item => {
-            return {
-                id: item.id,
-                name: item.name,
-                price: item.price,
-                duration: item.duration.current,
-                variation: item.variation.current,
-            }
-        })
-        store.setCheckoutItems(items).then(() => {
-            router.push({ name: 'Pembayaran' });
-        })
+        router.push({ name: 'Pembayaran' })
     }
-
 }
 
 //Helpers
 onBeforeRouteLeave((to, from, next) => {
-    next();
+    next(true);
 })
 
 function toIDR(num) {

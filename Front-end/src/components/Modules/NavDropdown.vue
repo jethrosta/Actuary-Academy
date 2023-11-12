@@ -1,9 +1,9 @@
 <template>
   <div class="menu-item scrollbar-none" @mouseover="openDropdown" @mouseleave="closeDropdown">
     <div class="cursor-pointer">
-      <RouterLink v-if="mainLink" :to="{ name:`${mainLink}` }">{{ title }}</RouterLink>
-      <span v-else>{{ title }}</span>
-      <svg class="h-2 w-7 inline-block " preserve-aspect-ratio="none" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <RouterLink v-if="mainLink" :to="{ name:`${mainLink}` }" class="pr-2">{{ title }}</RouterLink>
+      <span v-else class="pr-2">{{ title }}</span>
+      <svg class="h-2 w-3 inline-block" preserve-aspect-ratio="none" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M 11 1 L 5.804 6.909 L 1 1" :stroke=" isOpen ? '#0D1C9F' : 'white' " stroke-width="1.57025"></path>
       </svg>
     </div>

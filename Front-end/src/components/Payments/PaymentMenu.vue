@@ -1,10 +1,9 @@
 <template>
-    <div class="p-20 font-inter text-black max-w-[1500px] mx-auto">
-        <div class="flex justify-center w-full text-white gap-x-8 py-8">
-            <RouterView class="flex w-2/3" />
-
-            <div class="flex w-1/3">
-                <div class="bg-main_blue min w-full px-3 pt-4 pb-20">
+    <div class="bg-slate-200 font-inter">
+        <div class="flex px-28 py-20 flex-grow h-full flex-col lg:flex-row max-w-[1500px] mx-auto justify-center w-full text-white gap-x-8">
+            <RouterView class="flex w-full lg:w-2/3 h-min" />
+            <div class="flex w-full lg:w-1/3">
+                <div class="bg-main_blue mb-auto min w-full px-6 pt-4 pb-20 bottom-20">
                     <div class="py-2">
                         <div class="pb-4">Invoice Number: 098798403485</div>
                         <div class="flex flex-row justify-between">
@@ -37,22 +36,22 @@
                 </div>
             </div>
         </div>
+        <Footer />
     </div>
-
-    <Footer />
 </template>
 
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue';
 import router from '../../router';
-import { RouterView } from 'vue-router';
+import { RouterView, onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router';
 import Footer from '../Footer.vue';
 import { useStore } from '../../store';
+import { array } from 'yup';
 
 const store = useStore()
 
 const paymentData = ref({
-    amount: 0,
+    amount: store.checkoutAmount,
     name: store.authState.loginState.user.name,
     email: store.authState.loginState.user.email,
     phone: '123456789012',
@@ -68,15 +67,27 @@ function toIDR(num) {
     return idr;
 }
 
-const checkoutItems = ref(null)
+const checkoutItems = ref([])
 
 onMounted(() => {
-    checkoutItems.value = store.paymentState.checkoutItems;
-    if (checkoutItems.value == null) {
+    if (store.paymentState.checkoutItems.length == 0) {
         router.push('/user/my-cart').then(() => router.go())
     }
-    paymentData.value.amount = checkoutItems.value.map(item => item.price).reduce((sum, price) => sum + price, 0);
+    else {
+        checkoutItems.value = store.paymentState.checkoutItems;
+    }
 })
+
+window.onbeforeunload = function () {
+    return "Are you sure you want to leave?";
+};
+
+const modalError = ref(false);
+
+const closeModal = (e) => {
+    if (e.target.closest('.modal-card')) return;
+    else modalError.value = false;
+}
 
 </script>
 

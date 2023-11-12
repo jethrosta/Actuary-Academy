@@ -11,6 +11,11 @@ const store = useStore()
 const isLoggedIn = computed(() => store.authState.loginState.status.loggedIn)
 const user = JSON.parse(localStorage.getItem('user'))
 
+const firstName = computed(() => {
+  if (user) { return user.name.split(' ')[0] }
+  else { return '' }
+})
+
 const langSetting = ref({ long: "Bahasa Indonesia", short: "INA" });
 
 const switchLang = (index) => {
@@ -76,7 +81,8 @@ const notifTotalCount = notifCount + purchaseCount;
         <RouterLink :to="{ name: 'Landingpage' }">
           <div class="main-logo flex flex-col mx-auto">
             <img src="/src/assets/icon/AAlogo-cropped.png" class="mx-auto lg:w-16 w-10" />
-            <div class="font-inter xl:text-lg lg:text-base md:text-xs text-[8px] text-white md:py-1 py-0">Actuary Academy</div>
+            <div class="font-inter xl:text-lg lg:text-base md:text-xs text-[8px] text-white md:py-1 py-0">Actuary Academy
+            </div>
           </div>
         </RouterLink>
         <div class="language-button absolute right-0 my-2 mr-8 text-sm cursor-pointer z-30" @click="toggle">
@@ -116,7 +122,7 @@ const notifTotalCount = notifCount + purchaseCount;
           <div class="font-normal hidden lg:w-80 md:w-56 lg:flex">
             <div class="relative w-72">
               <input
-                class="text-sec_blue block w-full pl-4 py-2.5 pr-10 leading-tight bg-sec_blue bg-opacity-40 rounded-md shadow-sm focus:outline-none focus:bg-white placeholder:text-white placeholder:text-opacity-50"
+                class="text-sec_blue block w-full pl-4 py-2.5 pr-10 leading-tight bg-sec_blue bg-opacity-40 rounded-md shadow-sm focus:outline-none focus:bg-white placeholder:text-white placeholder:text-opacity-50 xl:text-base lg:text-xs"
                 type="search" placeholder="Cari di Actuary Academy">
               <div class="absolute inset-y-0 right-0 flex items-center pr-3 bg-white rounded-tr-md rounded-br-md pl-3">
                 <svg class="h-5 w-5" preserve-aspect-ratio="none" viewBox="0 0 20 18" fill="none"
@@ -132,7 +138,7 @@ const notifTotalCount = notifCount + purchaseCount;
           </div>
         </div>
         <!-- Button Navigation -->
-        <div id="navbar" class="xl:gap-x-10 lg:gap-x-5 lg:flex hidden pt-3 lg:text-base text-sm">
+        <div id="navbar" class="xl:gap-x-8 lg:gap-x-4 lg:flex hidden pt-3 xl:text-base lg:text-xs">
           <RouterLink :to="{ name: 'Tentang Kami' }" class="hover:text-sec_blue">Tentang Kami</RouterLink>
           <NavDropdown title="Produk" mainLink="Produk" :items="productSubmenu" class="hover:text-sec_blue pb-3" />
           <RouterLink :to="{ name: 'Testimoni' }" class="hover:text-sec_blue">Testimoni</RouterLink>
@@ -141,10 +147,12 @@ const notifTotalCount = notifCount + purchaseCount;
         </div>
 
         <div v-if="isLoggedIn" id="userButton" class="flex items-center font-normal pb-1 lg:flex-1 lg:justify-end">
-          <div class="flex space-x-2 px-2 select-none items-center rounded-full cursor-pointer p-1" @click="toggleUserDropdown">
+          <div class="flex space-x-2 px-2 select-none items-center rounded-full cursor-pointer p-1"
+            @click="toggleUserDropdown">
             <div class="pl-2 relative">
-              Hello, <span class="font-semibold">{{ user.name }}!</span>
-              <div v-if="notifTotalCount > 0" class="absolute top-[-.5rem] right-[-.75rem] bg-red-600 text-white text-[.7rem] w-4 h-4 leading-4 text-center rounded-[50%]">
+              <span class="xl:text-base lg:text-xs">Hello, <span class="font-semibold">{{ firstName }}!</span></span>
+              <div v-if="notifTotalCount > 0"
+                class="absolute top-[-.5rem] right-[-.75rem] bg-red-600 text-white text-[.7rem] w-4 h-4 leading-4 text-center rounded-[50%]">
                 {{ notifTotalCount }}
               </div>
             </div>
@@ -212,7 +220,12 @@ const notifTotalCount = notifCount + purchaseCount;
 
         <div v-if="isLoggedIn" id="userButton" class="flex items-center font-normal">
           <div class="flex space-x-2 select-none items-center rounded-full cursor-pointer">
-            <div class="hidden sm:flex px-2">Hello, <span class="font-semibold">{{ user.name }}</span></div>
+            <div class="hidden relative sm:flex px-2">Hello, <span class="font-semibold">{{ firstName }}</span>
+              <div v-if="notifTotalCount > 0"
+                class="absolute -right-2 -top-2 bg-red-600 text-white text-[.7rem] w-4 h-4 leading-4 text-center rounded-[50%]">
+                {{ notifTotalCount }}
+              </div>
+            </div>
             <UserDropdown :items="accountMenu" class="hover:text-sec_blue -my-2" />
           </div>
         </div>
