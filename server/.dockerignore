@@ -1,2 +1,6 @@
 node_modules
+<<<<<<< HEAD
 dist
+=======
+.gitignore
+>>>>>>> 8f4bfc9187b7a6652253c784d0651b691e3977b6

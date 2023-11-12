@@ -1,7 +1,7 @@
 import express from 'express'
 import { get, merge } from 'lodash'
 
-import { getUserBySessionToken, getUserByEmail, getUserById } from '../db/users'
+import { getUserBySessionToken, getUserByEmail, getUserById } from '../services/users'
 import { SessionToken, createJWT, isSessionTokenValid, logWithLine } from '../helpers'
 
 import jwt from 'jsonwebtoken'

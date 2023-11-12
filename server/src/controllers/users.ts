@@ -1,5 +1,5 @@
 import express from 'express';
-import { deleteUserById, getUsers, getUserById } from '../db/users';
+import { deleteUserById, getUsers, getUserById } from '../services/users';
 import { RequestWithJWT } from 'middlewares';
 
 export const getAllUsers = async (req: express.Request, res: express.Response) => {
