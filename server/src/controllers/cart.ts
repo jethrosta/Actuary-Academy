@@ -1,6 +1,8 @@
 import express from 'express';
-import { index, show, addItem, removeItem } from "services/cart";
+
 import { CartDocument } from 'db/cart';
+import { addToCart, getCarts, updateCart, removeFromCart } from 'services/cart';
+
 import { RequestWithJWT } from 'middlewares';
 
 interface CartRequest extends express.Request {
@@ -9,48 +11,48 @@ interface CartRequest extends express.Request {
     }
 }
 
-export const getAllCarts = async (req: express.Request, res: express.Response) => {
+export const addItemIntoCart = async (req: CartRequest & RequestWithJWT, res: express.Response) => {
     try {
-        const carts = await index();
-        return res.sendStatus(200).json(carts);
+        const userCart = await addToCart(req.userId);
+
+        return res.status(200).json({ message: 'Item added to cart successfully', userCart });
     } catch (err) {
         console.log(err);
-        return res.sendStatus(400);
+        return res.status(500).json({ message: 'Internal Server Error' });
     }
 }
 
-export const getCurrentUserCart = async (req: CartRequest & RequestWithJWT, res: express.Response) => {
+export const getUserCarts = async (req: CartRequest & RequestWithJWT, res: express.Response) => {
     try {
-        const cart = await show(req.userId);
-        return res.sendStatus(200).json(cart);
+        const userCart = await getCarts(req.userId);
+
+        return res.status(200).json({ message: 'Cart retrieved successfully', userCart });
     } catch (err) {
         console.log(err);
-        return res.sendStatus(400);
+        return res.status(500).json({ message: 'Internal Server Error' });
     }
 }
 
-export const addItemIntoCart = async (req: CartRequest, res: express.Response) => {
+export const updateUserCart = async (req: CartRequest & RequestWithJWT, res: express.Response) => {
     try {
-        const user: CartDocument = req.body.CartDocument
-        
-        const item = await addItem(user)
+        const cartId = req.params.id;
+        const data = req.body;
+        const updatedCart = await updateCart(cartId, data);
 
-        return res.status(200).json(item)
+        res.status(200).json({ message: 'Cart updated successfully', updatedCart });
     } catch (err) {
         console.log(err);
-        return res.sendStatus(400);
+        return res.status(500).json({ message: 'Internal Server Error' });
     }
 }
 
-// export const removeItemFromCart = async (req: CartRequest, res: express.Response) => {
-//     try {
-//         const itemId = 
+export const removeItemFromCart = async (req: CartRequest & RequestWithJWT, res: express.Response) => {
+    try {
+        const itemId = req.params.itemId;
+        const removedItem = await removeFromCart(itemId);
 
-//         await removeItem(user)
-
-//         return res.status(200)
-//     } catch (err) {
-//         console.log(err);
-//         return res.sendStatus(400);
-//     }
-// }
+        res.status(200).json({ message: 'Item removed successfully', removedItem });
+    } catch (err) {
+        console.log(err);
+    }
+}
