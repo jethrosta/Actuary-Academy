@@ -77,7 +77,7 @@ const testimonies = [
             </div>
             <div class="center mt-10">
                 <RouterLink to="register"
-                    class="bg-[#F26D0F] px-6 py-3 mb-10 rounded-md shadow-2xl text-white text-2xl font-bold">
+                    class="bg-main_orange px-6 py-3 mb-10 rounded-md shadow-2xl text-white text-2xl font-bold">
                     REGISTER NOW
                 </RouterLink>
             </div>

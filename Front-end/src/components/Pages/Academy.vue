@@ -13,7 +13,7 @@ const splideOptions = {
     padding: '6rem',
     pagination: false,
     classes: {
-        arrow : 'splide__arrow your-class-arrow !bg-white [&_svg]:!fill-main_blue !w-10 !h-10'
+        arrow : 'splide__arrow !bg-white [&_svg]:!fill-main_blue !w-10 !h-10'
     }
 }
 
@@ -115,7 +115,7 @@ const nextModuleSlide = computed(() => {
                                     <li v-for="pkgFacility in pkg.facilities">{{ pkgFacility }}</li>
                                 </ul>
                             </div>
-                            <div class="inline-block rounded-lg bg-[#F26D0F] text-white font-semibold mt-5 px-3 py-2 cursor-pointer">
+                            <div class="inline-block rounded-lg bg-main_orange text-white font-semibold mt-5 px-3 py-2 cursor-pointer">
                                 Berlangganan
                             </div>
                         </div>

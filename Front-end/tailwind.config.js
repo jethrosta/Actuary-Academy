@@ -19,7 +19,8 @@ module.exports = {
       },
       colors:{
         'main_blue': '#0066CC',
-        'sec_blue' : '#0D1C9F'
+        'sec_blue' : '#0D1C9F',
+        'main_orange': '#F26D0F'
       },
       screens:{
         'keci':{'max':'400px'},

@@ -58,7 +58,7 @@ const router = createRouter({
           component: () => import('../components/Pages/PrivateTutor.vue')
         },
         {
-          path: '/tutors',
+          path: '/private-tutor/tutors',
           name: 'Tutors',
           component: () => import('../components/Pages/Tutors.vue')
         },

@@ -16,6 +16,6 @@
         @apply flex justify-center; 
     };
     .regBut{
-        @apply bg-[#0D1C9F] text-white rounded-[10px] font-inter font-bold;
+        @apply bg-sec_blue text-white rounded-[10px] font-inter font-bold;
     }
 }

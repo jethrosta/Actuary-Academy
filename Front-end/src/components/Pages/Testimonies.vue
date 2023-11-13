@@ -9,7 +9,7 @@ const splideOptions = {
     gap: '1.25rem',
     pagination: false,
     classes: {
-        arrow : 'splide__arrow your-class-arrow !bg-main_blue !w-10 !h-10 [&_svg]:!fill-white'
+        arrow : 'splide__arrow !bg-main_blue !w-10 !h-10 [&_svg]:!fill-white'
     }
 }
 

@@ -54,24 +54,14 @@ export const modules = {
 
 export const privateTutorPackages = [
     {
-        name: 'Paket Reguler',
-        price: 'IDR180,000',
-        tags: ['1 peserta', '1 pertemuan'],
-        facilities: [
-            'Zoom meeting dengan durasi 2 jam',
-            'Video rekaman dan materi dari tutor',
-            'Bebas memilih materi yang akan dipelajari'
-        ]
+        name: 'Mahasiswa',
+        price: 'IDR225,000',
+        tags: ['1 peserta', '1 pertemuan']
     },
     {
-        name: 'Paket Eksklusif',
-        price: 'IDR800,000',
-        tags: ['1 kelas', '1 pertemuan'],
-        facilities: [
-            'Zoom meeting dengan durasi 2 jam',
-            'Video rekaman dan materi dari tutor',
-            'Bebas memilih materi yang akan dipelajari'
-        ]
+        name: 'Umum',
+        price: 'IDR300,000',
+        tags: ['1 peserta', '1 pertemuan']
     }
 ]
 
@@ -137,10 +127,31 @@ export const tutors = [
             'Mahasiswa Ilmu Aktuaria UGM 2019',
             'Achievement 1',
             'Achievement 2',
-            'Achievement 3',
-            '...',
+            'Achievement 3'
         ],
-        img: 'src/assets/tutors/1.png'
+        img: '/src/assets/tutors/1.png'
+    },
+    {
+        name: 'Firstname Lastname',
+        classes: 'A50, A60',
+        achievs: [
+            'Mahasiswa Ilmu Aktuaria UGM 2019',
+            'Achievement 1',
+            'Achievement 2',
+            'Achievement 3'
+        ],
+        img: '/src/assets/tutors/2.png'
+    },
+    {
+        name: 'Firstname Lastname',
+        classes: 'A10, A20, A70',
+        achievs: [
+            'Mahasiswa Ilmu Aktuaria UGM 2019',
+            'Achievement 1',
+            'Achievement 2',
+            'Achievement 3'
+        ],
+        img: '/src/assets/tutors/3.png'
     }
 ]
 

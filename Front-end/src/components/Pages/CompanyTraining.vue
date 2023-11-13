@@ -44,7 +44,7 @@ import { companyTrainingPackages } from '@/db';
                                 <li v-for="facility in pkg.facilities">{{ facility }}</li>
                             </ul>
                         </div>
-                        <div class="inline-block rounded-lg bg-[#F26D0F] text-white font-semibold mt-5 px-3 py-2">
+                        <div class="inline-block rounded-lg bg-main_orange text-white font-semibold mt-5 px-3 py-2">
                             Berlangganan
                         </div>
                     </div>

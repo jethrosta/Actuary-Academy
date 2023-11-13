@@ -85,7 +85,7 @@ function goBack() {
                              <ErrorMessage name="password" component="div" className="text-red-500" />
                          </label>
                          <div>
-                             <button type="submit" class="bg-[#0D1C9F] text-white font-bold w-full h-[59px] rounded-[10px] mt-6">Masuk</button>
+                             <button type="submit" class="bg-sec_blue text-white font-bold w-full h-[59px] rounded-[10px] mt-6">Masuk</button>
                          </div>
                          <div class="center my-5 items-center space-x-3">
                              <hr class=" bg-main_blue w-full h-[2px] ">
