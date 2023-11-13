@@ -1,6 +1,18 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 
+const goToEmail = () => {
+    window.open('https://mail.google.com/mail/u/0/#inbox?compose=CllgCJfpKbMsJZsCmRQgwFDStFdNQhqfmqMTTRVbcxbpFLqZrvZhhMsxJxLmFSWFfqScHktRBNB');
+}
+
+const goToWhatsapp = () => {
+    window.open('https://api.whatsapp.com/send?phone=6281217564720&text=Halo%20Actuary%20Academy%2C%20saya%20ingin%20bertanya%20tentang%20Actuary%20Academy');
+}
+
+const goToInstagram = () => {
+    window.open('https://www.instagram.com/actuary_academy/');
+}
+
 </script>
 <template>
     <section class="relative footer w-full bg-main_blue px-10 sm:px-20 py-10 shadow-top-footer">
@@ -19,16 +31,16 @@ import { RouterLink } from 'vue-router';
                 <div class="flex gap-10">
                     <div class="flex shrink-0 flex-col items-start justify-start">
                         <p class=" mb-5">Tentang Kami</p>
-                        <ul class=" font-normal text-sm">
-                            <li>Actuary Academy</li>
-                            <li>Hak Cipta</li>
-                            <li>Privacy Policy</li>
-                            <li>Syarat & Ketentuan</li>
+                        <ul class=" font-normal text-sm space-y-1">
+                            <li><button class="hover:text-sec_blue">Actuary Academy</button></li>
+                            <li><button class="hover:text-sec_blue">Hak Cipta</button></li>
+                            <li><button class="hover:text-sec_blue">Privacy Policy</button></li>
+                            <li><button class="hover:text-sec_blue">Syarat & Ketentuan</button></li>
                         </ul>
                     </div>
                     <div class="flex shrink-0 flex-col">
                         <p class=" mb-5">Produk</p>
-                        <div class="flex flex-col font-normal text-sm ">
+                        <div class="flex flex-col font-normal text-sm gap-y-1">
                             <RouterLink :to="{ name: 'Tutor Privat' }" class="hover:text-sec_blue"> Tutor Privat </RouterLink>
                             <RouterLink :to="{ name: 'Akademi' }" class="hover:text-sec_blue"> Akademi </RouterLink>
                             <RouterLink :to="{ name: 'Company Training' }" class="hover:text-sec_blue"> Company Training </RouterLink>
@@ -40,28 +52,34 @@ import { RouterLink } from 'vue-router';
                 <div class="flex gap-10">
                     <div class="flex shrink-0 flex-col">
                         <p class=" mb-5">Fitur</p>
-                        <ul class=" font-normal text-sm">
-                            <li>Fitur 1</li>
-                            <li>Fitur 2</li>
-                            <li>Fitur 3</li>
-                            <li>Fitur 4</li>
+                        <ul class="font-normal text-sm space-y-1">
+                            <li><button class="hover:text-sec_blue">Fitur 1</button></li>
+                            <li><button class="hover:text-sec_blue">Fitur 2</button></li>
+                            <li><button class="hover:text-sec_blue">Fitur 3</button></li>
+                            <li><button class="hover:text-sec_blue">Fitur 4</button></li>
                         </ul>
                     </div>
                     <div class="flex shrink-0 flex-col items-start justify-start">
                         <div class="flex mb-5">Hubungi Kami</div>
-                        <ul class=" font-normal text-sm">
-                            <div class=" flex">
-                                <img src="/src/assets/icon/WhatsApp 1.png" class=" h-full mr-2 pt-1" />
-                                <p clas>+62 812 1756 4720</p>
-                            </div>
-                            <div class=" flex">
-                                <img src="/src/assets/icon/Instagram_logo_2016.svg.png" class=" h-full mr-2 pt-1" />
-                                <p clas>actuary_academy</p>
-                            </div>
-                            <div class=" flex">
-                                <img src="/src/assets/icon/Gmail_icon_(2020).svg.png" class=" h-full mr-2 pt-1" />
-                                <p clas>actuaryacademy1st@gmail.com</p>
-                            </div>
+                        <ul class=" font-normal text-sm space-y-1">
+                            <li>
+                                <button @click="goToWhatsapp" class=" flex justify-center hover:text-sec_blue">
+                                    <img src="/src/assets/icon/WhatsApp 1.png" class=" h-full mr-2" />
+                                    <p clas>+62 812 1756 4720</p>
+                                </button>
+                            </li>
+                            <li>
+                                <button @click="goToInstagram" class=" flex justify-center hover:text-sec_blue">
+                                    <img src="/src/assets/icon/Instagram_logo_2016.svg.png" class=" h-full mr-2" />
+                                    <p clas>actuary_academy</p>
+                                </button>
+                            </li>
+                            <li>
+                                <button @click="goToEmail" class=" flex justify-center hover:text-sec_blue">
+                                    <img src="/src/assets/icon/Gmail_icon_(2020).svg.png" class=" h-full mr-2" />
+                                    <p clas>actuaryacademy1st@gmail.com</p>
+                                </button>
+                            </li>
                         </ul>
                     </div>
                 </div>

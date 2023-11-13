@@ -1,13 +1,17 @@
 import express from 'express'
 import { get, merge } from 'lodash'
 
-import { getUserBySessionToken, getUserByEmail, getUserById } from '../db/users'
+import { getUserBySessionToken, getUserByEmail, getUserById } from '../services/users'
 import { SessionToken, createJWT, isSessionTokenValid, logWithLine } from '../helpers'
 
 import jwt from 'jsonwebtoken'
 import type { JwtPayload } from 'jsonwebtoken'
 
 const SECRET: string = 'A@Academy2023-DEVELOPED-BY-JETHRO&DANDY-ZICKY-DIVALDY';
+
+export interface RequestWithJWT extends express.Request {
+  userId: string;
+}
 
 export const isOwner = async (
   req: express.Request,
@@ -40,7 +44,7 @@ export const isOwner = async (
 };
 
 export const isAuthenticated = async (
-  req: express.Request,
+  req: RequestWithJWT,
   res: express.Response,
   next: express.NextFunction) => {
   try {
@@ -86,8 +90,10 @@ export const isAuthenticated = async (
     const existingUser = await getUserById(decodedJWT.sub);
 
     if (!existingUser) {
-      return res.sendStatus(403);
+      return res.status(403).json({notification: 'User does not exist'});
     }
+
+    req.userId = decodedJWT.sub
 
     merge(req, { identity: existingUser });
 
