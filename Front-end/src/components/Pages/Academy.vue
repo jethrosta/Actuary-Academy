@@ -7,13 +7,25 @@ import OtherProducts from '../OtherProducts.vue';
 import { ref, computed } from 'vue';
 import { modules, academyPackages } from '@/db';
 
-const splideOptions = {
+const modulesSplideOptions = {
     rewind: true,
     gap: '7rem',
     padding: '6rem',
     pagination: false,
     classes: {
         arrow : 'splide__arrow !bg-white [&_svg]:!fill-main_blue !w-10 !h-10'
+    }
+}
+
+const packagesSplideOptions = {
+    perPage: 2,
+    gap: '2rem',
+    rewind: true,
+    pagination: false,
+    classes: {
+        arrow : 'splide__arrow !bg-white [&_svg]:!fill-main_blue !w-12 !h-12 [&_svg]:!w-6 [&_svg]:!h-6',
+        prev  : 'splide__arrow--prev -ml-24',
+		next  : 'splide__arrow--next -mr-24',
     }
 }
 
@@ -72,7 +84,7 @@ const nextModuleSlide = computed(() => {
             <div class="mt-16">
                 <div class="text-4xl text-white font-bold center">Modul</div>
                 <div class="w-full max-w-[33rem] mx-auto mt-10 relative">
-                    <Splide :options="splideOptions" @splide:move="onSplideMove">
+                    <Splide :options="modulesSplideOptions" @splide:move="onSplideMove">
                         <SplideSlide v-for="mdl in modulesArr">
                             <RouterLink :to="{ name: 'module', params: { moduleId: mdl.id } }">
                                 <div class="bg-sec_blue text-white text-4xl font-bold mx-[6.5rem] px-8 py-6 rounded-t-2xl text-center">
@@ -102,25 +114,29 @@ const nextModuleSlide = computed(() => {
                     </div>
                 </div>
             </div>
-            <div class="max-w-[60rem] my-16 mx-auto">
-                <div class="flex items-stretch mt-10 space-x-9">
-                    <div v-for="pkg, idx in academyPackages" class="flex-1 flex flex-col">
-                        <div :class="idx === 0 ? 'text-4xl' : 'text-3xl'" class="text-white font-bold text-center mb-5 h-10">{{ pkg.name }}</div>
-                        <div :class="idx === 0 ? 'bg-sec_blue text-white' : 'text-sec_blue bg-white'" class="rounded-2xl p-10 grow shadow-lg">
-                            <div class="text-4xl font-bold">{{ pkg.price }}</div>
-                            <div :class="idx === 0 ? 'bg-white' : 'bg-sec_blue'" class="bg-opacity-40 h-[1.5px] mt-4 mb-6"></div>
-                            <div :class="idx === 0 ? 'font-semibold' : ''" class="text-[1.1rem]">
-                                <div>Fasilitas:</div>
-                                <ul class="list-disc list-inside">
-                                    <li v-for="pkgFacility in pkg.facilities">{{ pkgFacility }}</li>
-                                </ul>
-                            </div>
-                            <div class="inline-block rounded-lg bg-main_orange text-white font-semibold mt-5 px-3 py-2 cursor-pointer">
-                                Berlangganan
+            <div class="max-w-[60rem] mt-20 mb-20 mx-auto">
+                <Splide :options="packagesSplideOptions">
+                    <SplideSlide v-for="pkg in academyPackages">
+                        <div class="flex-1 flex flex-col">
+                            <div :class="pkg.theme === 'blue' ? 'text-4xl' : 'text-3xl'" class="text-white font-bold text-center mb-4 h-10">{{ pkg.type }}</div>
+                            <div :class="pkg.theme === 'blue' ? 'bg-sec_blue text-white' : 'text-sec_blue bg-white'" class="flex flex-col rounded-2xl px-10 py-8 grow shadow-lg">
+                                <div class="text-lg font-bold text-center line-through mb-1.5">{{ pkg.originalPrice }}</div>
+                                <div class="text-4xl font-bold text-center">{{ pkg.price }}</div>
+                                <div :class="pkg.theme === 'blue' ? 'bg-white' : 'bg-sec_blue'" class="bg-opacity-40 h-[1.5px] mx-2 my-3"></div>
+                                <div class="text-xl font-bold text-center mb-5">{{ pkg.period }}</div>
+                                <div :class="pkg.theme === 'blue' ? 'font-semibold' : ''" class="text-[1.1rem]">
+                                    <div>Fasilitas:</div>
+                                    <ul class="list-disc list-inside">
+                                        <li v-for="pkgFacility in pkg.facilities">{{ pkgFacility }}</li>
+                                    </ul>
+                                </div>
+                                <div class="inline-block rounded-lg bg-main_orange text-white font-semibold mt-6 px-3 py-2 cursor-pointer self-start">
+                                    Berlangganan
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </SplideSlide>
+                </Splide>
             </div>
             <OtherProducts exclude="academy" />
         </div>

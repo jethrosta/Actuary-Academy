@@ -1,7 +1,6 @@
 <script setup>
 import Footer from '../Footer.vue';
 import OtherProducts from '../OtherProducts.vue';
-import { companyTrainingPackages } from '@/db';
 
 </script>
 <template>
@@ -25,29 +24,24 @@ import { companyTrainingPackages } from '@/db';
                     <img class="rounded-[1.5rem]" src="/src/assets/company-training/right.jpg">
                 </div>
             </div>
-            <div class="flex items-stretch my-20 space-x-9">
-                <div v-for="pkg in companyTrainingPackages" class="flex-1 flex flex-col">
-                    <div class="bg-white text-sec_blue text-4xl font-bold self-start rounded-t-lg px-6 py-4 max-w-[60%]">
-                        {{ pkg.name }}
-                    </div>
-                    <div class="bg-sec_blue rounded-xl rounded-tl-none text-white p-10 grow">
-                        <div class="text-4xl font-semibold mb-3">{{ pkg.price }}</div>
-                        <div class="flex font-semibold space-x-3">
-                            <div v-for="pkgTag in pkg.tags" class="rounded-full px-4 py-1 bg-white text-main_blue">
-                                {{ pkgTag }}
-                            </div>
-                        </div>
-                        <div class="bg-white bg-opacity-40 h-px my-6"></div>
-                        <div>
-                            <div class="font-bold">Fasilitas</div>
-                            <ul class="list-disc list-inside">
-                                <li v-for="facility in pkg.facilities">{{ facility }}</li>
-                            </ul>
-                        </div>
-                        <div class="inline-block rounded-lg bg-main_orange text-white font-semibold mt-5 px-3 py-2">
-                            Berlangganan
-                        </div>
-                    </div>
+            <div class="text-white mt-12 mx-12">
+                <div class="text-xl font-bold mb-2">Fasilitas</div>
+                <ul class="text-lg list-disc list-inside space-y-1">
+                    <li>Zoom meeting dengan durasi 2 jam</li>
+                    <li>Video rekaman dan materi dari tutor</li>
+                    <li>Video pembelajaran akademi</li>
+                    <li>Akses akademi <b>6 bulan</b></li>
+                    <li>Try out + pembahasan (1-2 kali)</li>
+                    <li><i>Request</i> materi / sesuai <i>timeline</i> tutor</li>
+                    <li>Tidak ada maksimal jumlah peserta</li>
+                </ul>
+            </div>
+            <div class="bg-sec_blue text-white p-8 mx-12 mt-12 mb-20 rounded-xl flex flex-col">
+                <div class="text-4xl text-center mt-3">Start from</div>
+                <div class="text-[3.6rem] font-bold text-center mt-4">IDR 15,000,000</div>
+                <div class="bg-main_orange rounded-lg text-white py-3 px-7 mt-7 mx-auto flex items-center cursor-pointer">
+                    <img class="w-8 h-8 mr-2" src="/src/assets/whatsapp.png" alt="WhatsApp Icon" />
+                    <div class="text-3xl underline underline-offset-[5px] font-semibold">JOIN US NOW!</div>
                 </div>
             </div>
             <OtherProducts exclude="company-training" />

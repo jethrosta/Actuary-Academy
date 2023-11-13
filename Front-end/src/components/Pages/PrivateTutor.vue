@@ -6,7 +6,7 @@ import Footer from '../Footer.vue';
 import OtherProducts from '../OtherProducts.vue';
 import { privateTutorPackages, tutors } from '@/db';
 
-const splideOptions = {
+const tutorsSplideOptions = {
     perPage: 1,
     pagination: false,
     rewind: true,
@@ -52,7 +52,7 @@ const splideOptions = {
                 Meet Our Tutors!
             </div>
             <div class="mt-2">
-                <Splide :options="splideOptions">
+                <Splide :options="tutorsSplideOptions">
                     <SplideSlide v-for="tutor in tutors">
                         <div class="relative py-28">
                             <div class="absolute left-28 top-10 tutor-img-bg">

@@ -67,7 +67,35 @@ export const privateTutorPackages = [
 
 export const academyPackages = [
     {
-        name: 'Paket Lengkap',
+        type: 'Paket Pembahasan Soal',
+        period: '6 Bulan',
+        originalPrice: 'IDR599.000',
+        price: 'IDR299.000',
+        facilities: [
+            'Diskusi grup, Q & A',
+            'Video pembahasan soal ujian PAI',
+            'Kuis & try out',
+            'Kelas online sinkronus dengan tutor (125k / pertemuan @ 1 jam)'
+        ],
+        theme: 'white'
+    },
+    {
+        type: 'Paket Pembahasan Soal',
+        period: 'Lifetime',
+        originalPrice: 'IDR2.000.000',
+        price: 'IDR599.000',
+        facilities: [
+            'Diskusi grup, Q & A',
+            'Video pembahasan soal ujian PAI',
+            'Kuis & try out',
+            'Kelas online sinkronus dengan tutor (125k / pertemuan @ 1 jam)'
+        ],
+        theme: 'white'
+    },
+    {
+        type: 'Paket Lengkap',
+        period: '6 Bulan',
+        originalPrice: 'IDR1.000.000',
         price: 'IDR699.000',
         facilities: [
             'Diskusi grup, Q & A',
@@ -75,47 +103,22 @@ export const academyPackages = [
             'Video pembahasan soal ujian PAI',
             'Kuis & try out',
             'Kelas online sinkronus dengan tutor (125k / pertemuan @ 1 jam)'
-        ]
+        ],
+        theme: 'blue'
     },
     {
-        name: 'Paket Pembahasan Soal',
-        price: 'IDR299.000',
+        type: 'Paket Lengkap',
+        period: 'Lifetime',
+        originalPrice: 'IDR4.000.000',
+        price: 'IDR999.000',
         facilities: [
             'Diskusi grup, Q & A',
+            'Video materi',
             'Video pembahasan soal ujian PAI',
             'Kuis & try out',
             'Kelas online sinkronus dengan tutor (125k / pertemuan @ 1 jam)'
-        ]
-    }
-]
-
-export const companyTrainingPackages = [
-    {
-        name: 'Paket Privat + Akademi Lengkap',
-        price: 'IDR17,000,000',
-        tags: ['1 mata ujian', '10 pertemuan'],
-        facilities: [
-            'Zoom meeting dengan durasi 2 jam',
-            'Video rekaman dan materi dari tutor',
-            'Video pembelajaran akademi',
-            'Akses akademi 6 bulan',
-            'Try out + pembahasan (1-2 kali)',
-            'Request materi / sesuai timeline tutor',
-            'Tidak ada maksimal jumlah peserta'
-        ]
-    },
-    {
-        name: 'Paket Privat + Akademi',
-        price: 'IDR15,000,000',
-        tags: ['1 mata ujian', '10 pertemuan'],
-        facilities: [
-            'Zoom meeting dengan durasi 2 jam',
-            'Video rekaman dan materi dari tutor',
-            'Video pembelajaran akademi',
-            'Akses akademi 6 bulan',
-            'Bebas memilih materi yang dipelajari',
-            'Tidak ada maksimal jumlah peserta'
-        ]
+        ],
+        theme: 'blue'
     }
 ]
 

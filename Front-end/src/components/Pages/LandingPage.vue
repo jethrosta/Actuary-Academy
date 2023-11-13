@@ -4,10 +4,13 @@ import { SplideSlide } from '@splidejs/vue-splide'
 import { RouterLink } from 'vue-router';
 import Footer from '../Footer.vue'
 
-const splideOptions = {
+const testiSplideOptions = {
     rewind: true,
     gap: '5rem',
     padding: '4rem',
+    classes: {
+        arrow : 'splide__arrow !bg-white [&_svg]:!fill-main_blue'
+    }
 }
 
 const products = [
@@ -134,7 +137,7 @@ const testimonies = [
                 <h1>Testimoni</h1>
             </div>
             <div class="w-full md:w-4/5 lg:w-2/3 mx-auto mt-10 max-w-[1200px]">
-                <Splide :options="splideOptions">
+                <Splide :options="testiSplideOptions">
                     <SplideSlide v-for="testi in testimonies">
                         <div
                             class="shadow-xl flex md:block flex-col flex-wrap md:flex-nowrap bg-sec_blue h-fit w-fit p-8 md:p-14 rounded-3xl text-white font-inter">
