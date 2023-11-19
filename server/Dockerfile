@@ -1,15 +1,33 @@
-FROM node:17
+# FROM node:17
+
+# # Working Dir
+# WORKDIR ./usr/src/app
+
+# # Copy Package
+# COPY Package*.json .
+
+# # Install npm
+# RUN npm install
+
+# # Copy Source Files
+# COPY . .
+
+# CMD ["node", "app.js"]
+
+
+FROM node:18-alpine
 
 # Working Dir
-WORKDIR ./usr/src/app
+WORKDIR /app
 
 # Copy Package
-COPY Package*.json .
+COPY package*.json .
 
-# Install npm
-RUN npm install
+# Install
+RUN npm i
 
 # Copy Source Files
 COPY . .
 
-CMD ["node", "app.js"]
+CMD ["node", "index.js"]
+
