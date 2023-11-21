@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 interface SessionTokenDocument extends mongoose.Document {
   token: string;
@@ -22,16 +22,20 @@ const AuthenticationSchema = new mongoose.Schema<AuthenticationDocument>({
   sessionToken: { type: SessionTokenSchema },
 });
 
-interface UserDocument extends mongoose.Document {
+export interface UserDocument extends mongoose.Document {
   name: string;
   email: string;
   authentication: AuthenticationDocument;
+  cart: Array<{ course: string; }>;
+  courses: Array<string>;
 }
 
 const UserSchema = new mongoose.Schema<UserDocument>({
   name: { type: String, required: true },
   email: { type: String, required: true },
   authentication: { type: AuthenticationSchema, required: true },
+  cart: [{ course: { type: Schema.Types.ObjectId, ref: 'Course' }}],
+  courses: [{ type: Schema.Types.ObjectId, ref: 'Course' }],
 });
 
 export const UserModel = mongoose.model("User", UserSchema);

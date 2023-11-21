@@ -19,7 +19,7 @@ const VideoSchema = new mongoose.Schema<VideoDocument>({
 }, { _id: false })
 
 interface SubscriberDocument extends mongoose.Document {
-    userId: string;
+    user: mongoose.Types.ObjectId;
 }
 
 interface SubmateriDocument extends mongoose.Document {
@@ -29,8 +29,12 @@ interface SubmateriDocument extends mongoose.Document {
 }
 
 const SubscriberSchema = new mongoose.Schema<SubscriberDocument>({
-    userId: { type: String, required: true },
-}, { _id: false })
+    user: { 
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',    // Reference User Model
+        required: true,
+    },
+})
 
 const SubmateriSchema = new mongoose.Schema<SubmateriDocument>({
     title: { type: String, required: true },
@@ -39,21 +43,21 @@ const SubmateriSchema = new mongoose.Schema<SubmateriDocument>({
 }, { _id: false })
 
 export interface CourseDocument extends mongoose.Document {
+    subscribers: [SubscriberDocument];
     title: string;
-    subscribedBy: [SubscriberDocument];
     submateri: [SubmateriDocument];
-    // user: [UserDocument];
+    price: number;
+    discount_price: number;
+    is_discount: boolean;
 }
 
 const CourseSchema = new mongoose.Schema<CourseDocument>({
+    subscribers: [SubscriberSchema],
     title: { type: String, required: true },
-    subscribedBy: [SubscriberSchema],
     submateri: [SubmateriSchema],
-    // user: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'User',    // Reference User Model
-    //     required: true,
-    // },
+    price: { type: Number, required: true },
+    discount_price: { type: Number },
+    is_discount: { type: Boolean, default: false },
 });
 
 export const CourseModel = mongoose.model('Course', CourseSchema);
