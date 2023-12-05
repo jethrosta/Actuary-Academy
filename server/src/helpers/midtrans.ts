@@ -1,4 +1,55 @@
-import { badRequestResponse } from "../api-response";
+// const placeOrder = async (userId, cartId) => {
+//     const session = await mongoose.startSession();
+  
+//     try {
+//       await session.withTransaction(async () => {
+//         // Retrieve user and cart
+//         const user = await UserModel.findById(userId).session(session);
+//         const cart = await CartModel.findById(cartId).populate('courses').session(session);
+  
+//         if (!user || !cart) {
+//           throw new Error('User or cart not found');
+//         }
+  
+//         // Calculate order total
+//         const orderTotal = cart.courses.reduce((total, course) => total + course.price, 0);
+  
+//         // Create an order
+//         const order = await OrderModel.create(
+//           {
+//             userId: user._id,
+//             courses: cart.courses.map(course => course._id),
+//             total: orderTotal,
+//           },
+//           { session }
+//         );
+  
+//         // Simulate a payment (you can replace this with your actual payment gateway integration)
+//         const payment = await PaymentModel.create(
+//           {
+//             orderId: order._id,
+//             amount: orderTotal,
+//             status: 'success', // Simulating a successful payment
+//           },
+//           { session }
+//         );
+  
+//         // Clear the user's cart after a successful order
+//         await CartModel.findByIdAndDelete(cartId).session(session);
+  
+//         console.log('Order placed successfully!');
+//       });
+  
+//       console.log('Transaction was successful!');
+//     } catch (error) {
+//       console.error('Transaction failed:', error.message);
+//     } finally {
+//       await session.endSession();
+//     }
+// };
+  
+
+import { badRequestResponse } from "./api-response";
 
 const requestBRIBCABNI = (channel: string) => ({
     bank_transfer: {

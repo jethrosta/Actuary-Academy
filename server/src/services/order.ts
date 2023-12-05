@@ -4,14 +4,18 @@ import moment from 'moment';
 import crypto from 'crypto'
 
 import { OrderModel } from "db/order";
-import { UserModel } from 'db/users';
 import { CartModel } from 'db/cart';
+import { UserModel } from 'db/users';
+import { CourseModel } from 'db/courses';
+
+import { RequestWithJWT } from 'middlewares';
 
 import { CoreAPI, MidtransResponse } from "db/midtrans";
-import { paymentRequestPayloads } from 'helpers/utils/midtrans';
-import { channels } from 'helpers/midtransChannels';
+import { paymentRequestPayloads } from 'helpers/midtrans';
+import { channels } from 'helpers/midtrans-channels';
 
-import { CartSummaryUtils } from 'helpers/utils/cart';
+import { CartRequest } from 'controllers/cart';
+import { CartSummary } from 'helpers/cart';
 
 import { StatusCodes } from 'http-status-codes';
 import { apiResponse, badRequestResponse, notFoundResponse } from 'helpers/api-response';
@@ -25,7 +29,7 @@ interface CourseRequest extends express.Request {
     }
 }
 
-const updateOrderFixInTheNameOfGod = async (order: any, response: any, t: any) => {
+const updateOrder = async (order: any, response: any, t: any) => {
     let channelName = null;
     let virtualNumber = null;
     let actions = null;
@@ -90,10 +94,11 @@ const midtransResponse = async (data: any, t: any) => {
 };
 
 // get courseId based on './courses' sama nambahin courses yang udah dibeli ke 'User' collection (mongoDB)
-const successPurchaseCourse = async (req: CourseRequest, user: any) => {
+// user: RequestWithJWT (?)
+const successPurchaseCourse = async (req: CourseRequest, user: RequestWithJWT) => {
     try {
         const courseId = await CourseById(req.params.id)
-        await UserModel.findByIdAndUpdate(user._id, { 
+        await UserModel.findByIdAndUpdate(user.userId, { 
             $addToSet: {
                 courses: {
                     $each: courseId
@@ -158,21 +163,7 @@ const orderStatusHandling = async (order: any, user: any, notification: any) => 
     }
 }
 
-// di UserModel belum ada { carts: { course } }
-const getCartsForUser = async (userId: string) => {
-    try {
-        const user = await UserModel.findById(userId).populate('carts.course');
-        if (!user) {
-          throw new Error('User not found');
-        }
-    
-        // return user.carts;
-    } catch (err) {
-        console.error(err);
-    }
-}
-
-export const invoice = async (req: any, res: express.Response) => {
+export const invoiceService = async (req: any, res: express.Response) => {
     try {
         const { identifier } = req.params
         const { user } = req
@@ -185,64 +176,57 @@ export const invoice = async (req: any, res: express.Response) => {
     }
 }
 
-export const order = async (req: any, res: express.Response) => {   
+export const orderService = async (req: RequestWithJWT & express.Request, res: express.Response) => {
     const session = await mongoose.startSession();
-    session.startTransaction();
-
+    
     try {
-        const { id } = req.user;
-        const channel = req.body.payment_channel.toLowerCase();
-        if (!channels(channel)) throw res.json({ 'message': 'Unsupported payment channel :(' })
+        await session.withTransaction(async () => {
+            const channel = req.body.payment_channel.toLowerCase()
+            if (!channels(channel)) throw res.json({ 'message': 'Unsupported payment channel' })
 
-        const user = await UserModel.findById(id);
-        if (!user) throw res.json({ 'message': 'not found user' })
+            // Retrieve user and cart
+            const user = await UserModel.findById(req.userId).session(session);
+            const cart = await CartModel.findOne({ user: req.userId }).populate('course').session(session);
 
-        getCartsForUser(user._id)       // still error
-            .then((carts) => {
-                console.log('Carts for user:', carts);
-            })
-            .catch((error) => {
-                console.error('Error:', error.message);
-            });
+            if (!user || !cart) {
+                throw new Error('User or cart not found');
+            }
 
-        const cartSummary = CartSummaryUtils(cart);
-        // get cartCourse
-        const cartCourse = carts.map((cart: any) => CourseCartTransformer(cart.series));
-        const payloadItemsDetails = cartCourse.map((series: any) => ({
-            id: series.id,
-            price: series.is_discount ? series.discount_price.raw : series.price.raw,
-            quantity: 1,
-            name: series.title,
-        }));
+            // Course to be purchased
+            const courseIds: mongoose.Types.ObjectId[] = Array.isArray(cart.course) ? cart.course : [cart.course];
+            const cartItems: CourseDocument[] = await CourseModel.find({ _id: { $in: courseIds } }).session(session);
 
-        const invoice = `${moment().format('YYMMDD')}${moment().format('HHmmss')}${Math.floor(Math.random() * 1000)}`;
-        const identifier = crypto.randomBytes(20).toString('hex');
-        const payload = paymentRequestPayloads(channel, invoice, cartSummary, user, payloadItemsDetails);
+            // Calculate total items to be purchased
+            const cartSummary = CartSummary(cartItems)
+            
+            const invoice = `${moment().format('YYMMDD')}${moment().format('HHmmss')}${Math.floor(Math.random() * 1000)}`;
+            const identifier = crypto.randomBytes(20).toString('hex');
+            const payload = paymentRequestPayloads(channel, invoice, cartSummary, user, cartItems);
+            
+            // Charge to Midtrans
+            const response = await CoreAPI.charge(payload);
 
-        const order = await OrderModel.create({
-            invoice,
-            identifier,
-            course: cartCourse,
-            gross_amount: cartSummary.sub_total.raw,
-        }, { session });
+            const order = await OrderModel.create({
+                invoice,
+                identifier,
+                course: cartItems,
+                gross_amount: cartSummary.sub_total.raw,
+            }, { session });
 
-        const response = await CoreAPI.charge(payload);
-
-        await updateOrderFixInTheNameOfGod(order, response, session);
-        await midtransResponse(response, session);
-        await CartModel.deleteMany({ user_id: user.id }).session(session);
-        await session.commitTransaction();
-
-        return apiResponse(StatusCodes.OK, 'OK', 'Success create an order', {
-            response,
-            redirect: `/api/orders/invoice/${identifier}`,
-        });
+            await updateOrder(order, response, session);
+            await midtransResponse(response, session);
+            await CartModel.deleteMany({ user_id: user.id }).session(session);
+            await session.commitTransaction();
+        })
     } catch (err) {
         console.log(err);
+        res.status(500).json("Internal Server Error");
+    } finally {
+        session.endSession();
     }
 }
 
-export const notificationHandler = async (req: express.Request, res: express.Response) => {
+export const notificationHandlerService = async (req: express.Request, res: express.Response) => {
     try {
         const notification = await CoreAPI.transaction.notification(req.body)
         console.log(notification);

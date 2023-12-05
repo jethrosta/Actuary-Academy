@@ -5,7 +5,7 @@ import { addToCart, getCarts, updateCart, removeFromCart } from 'services/cart';
 
 import { RequestWithJWT } from 'middlewares';
 
-interface CartRequest extends express.Request {
+export interface CartRequest extends express.Request {
     body: {
         CartDocument: CartDocument
     }

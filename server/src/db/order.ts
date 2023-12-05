@@ -30,7 +30,7 @@ const orderSchema = new mongoose.Schema<OrderDocument>({
     // course: {                                // Ref to 'Course' model
     //     type: mongoose.Schema.Types.Mixed,   // Must be adjust this schema as needed
     // },
-    gross_amount: { type: Number, unsigned: true },
+    gross_amount: { type: Number, min: 0, unsigned: true },
     payment_type: { type: String },
     channel_name: { type: String },
     virtual_number: { type: String },

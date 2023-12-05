@@ -47,12 +47,12 @@ export const getCourseBySubscriberId = async (req: CourseRequest & RequestWithJW
 
 export const postCourse = async (req: CourseRequest, res: express.Response) => {
     try {
-        const { title, subscribedBy, submateri }: CourseDocument = req.body.CourseDocument
+        const { title, submateri, price }: CourseDocument = req.body.CourseDocument
 
         const courses = await createCourse({
             title,
-            subscribedBy,
-            submateri
+            submateri,
+            price,
         });
 
         return res.status(200).json(courses);
@@ -65,7 +65,7 @@ export const updateNewCourseSubscriber = async (req: RequestWithJWT & CourseRequ
     try {
         const id = req.userId
 
-        const update = await subscribeToCourse(req.params.id, req.userId)
+        const update = await subscribeToCourse(req.userId, req.params.id)
 
         console.log(update);
 
