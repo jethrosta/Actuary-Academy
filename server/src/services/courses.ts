@@ -1,4 +1,4 @@
-import { CourseModel } from "db/courses";
+import { CourseModel } from "../db/courses";
 
 export const Courses = () => CourseModel.find();
 

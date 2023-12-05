@@ -1,6 +1,6 @@
 import express from 'express';
-import { invoice, order, notificationHandler } from 'controllers/order';
-import { isAuthenticated } from "middlewares"
+import { invoice, order, notificationHandler } from '../controllers/order';
+import { isAuthenticated } from "../middlewares/index"
 
 export default (router: express.Router) => {
     router.post('/', isAuthenticated, order)

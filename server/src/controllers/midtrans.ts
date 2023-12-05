@@ -1,6 +1,6 @@
 import express from 'express';
-import { index, show } from "services/midtrans";
-import { RequestWithJWT } from 'middlewares';
+import { index, show } from "../services/midtrans";
+import { RequestWithJWT } from '../middlewares/index';
 
 export const getAllPayments = async (req: express.Request, res: express.Response) => {
     try {

@@ -3,25 +3,25 @@ import mongoose from 'mongoose';
 import moment from 'moment';
 import crypto from 'crypto'
 
-import { OrderModel } from "db/order";
-import { CartModel } from 'db/cart';
-import { UserModel } from 'db/users';
-import { CourseModel } from 'db/courses';
+import { OrderModel } from '../db/order';
+import { CartModel } from '../db/cart';
+import { UserModel } from '../db/users';
+import { CourseModel } from '../db/courses';
 
-import { RequestWithJWT } from 'middlewares';
+import { RequestWithJWT } from '../middlewares/index';
 
-import { CoreAPI, MidtransResponse } from "db/midtrans";
-import { paymentRequestPayloads } from 'helpers/midtrans';
-import { channels } from 'helpers/midtrans-channels';
+import { CoreAPI, MidtransResponse } from "../db/midtrans";
+import { paymentRequestPayloads } from '../helpers/midtrans';
+import { channels } from '../helpers/midtrans-channels';
 
-import { CartRequest } from 'controllers/cart';
-import { CartSummary } from 'helpers/cart';
+import { CartRequest } from '../controllers/cart';
+import { CartSummary } from '../helpers/cart';
 
 import { StatusCodes } from 'http-status-codes';
-import { apiResponse, badRequestResponse, notFoundResponse } from 'helpers/api-response';
+import { apiResponse, badRequestResponse, notFoundResponse } from '../helpers/api-response';
 
 import { CourseById } from './courses';
-import { CourseDocument } from 'db/courses';
+import { CourseDocument } from '../db/courses';
 
 interface CourseRequest extends express.Request {
     body: {

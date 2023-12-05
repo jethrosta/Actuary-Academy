@@ -5,7 +5,7 @@ import {
   deleteTestiById,
 } from "../db/testimonies";
 import { RequestWithJWT } from "middlewares";
-import { getUserById, getUserBySessionToken } from "../db/users";
+import { getUserById, getUserBySessionToken } from "../services/users";
 import { getUserByName } from "../db/testimonies";
 
 export const testimoni = async (req: RequestWithJWT, res: express.Response) => {

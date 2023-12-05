@@ -1,6 +1,6 @@
 import express from 'express';
-import { isAuthenticated } from 'middlewares';
-import { addItemIntoCart, getUserCarts, updateUserCart, removeItemFromCart } from 'controllers/cart';
+import { isAuthenticated } from '../middlewares/index';
+import { addItemIntoCart, getUserCarts, updateUserCart, removeItemFromCart } from '../controllers/cart';
 
 export default (router: express.Router) => {
     router.post('/v2/cart/:id', isAuthenticated, addItemIntoCart);

@@ -1,5 +1,5 @@
-import { CartModel } from "db/cart";
-import { UserModel } from "db/users";
+import { CartModel } from "../db/cart";
+import { UserModel } from "../db/users";
 
 export const addToCart = async (userId: string) => {
     try {

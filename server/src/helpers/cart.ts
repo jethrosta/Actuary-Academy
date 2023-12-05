@@ -1,5 +1,5 @@
 import { rupiahFormat } from "./castings";
-import { CourseDocument } from "db/courses";
+import { CourseDocument } from "../db/courses";
 
 interface CartSummaryResult {
     price: {
