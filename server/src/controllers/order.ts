@@ -1,7 +1,7 @@
 import express from 'express';
-import { OrderDocument } from 'db/order';
-import { invoiceService, orderService, notificationHandlerService } from 'services/order';
-import { RequestWithJWT } from 'middlewares';
+import { OrderDocument } from '../db/order';
+import { invoiceService, orderService, notificationHandlerService } from '../services/order';
+import { RequestWithJWT } from '../middlewares/index';
 
 // interface OrderRequest extends express.Request {
 //     body: {

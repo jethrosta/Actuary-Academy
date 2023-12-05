@@ -6,7 +6,7 @@ import {
   createSalt,
   createSessionToken,
   createJWT,
-} from "../helpers";
+} from "../helpers/index";
 
 export const content = async (req: express.Request, res: express.Response) => {
   try {

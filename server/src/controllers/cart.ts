@@ -1,9 +1,9 @@
 import express from 'express';
 
-import { CartDocument } from 'db/cart';
-import { addToCart, getCarts, updateCart, removeFromCart } from 'services/cart';
+import { CartDocument } from '../db/cart';
+import { addToCart, getCarts, updateCart, removeFromCart } from '../services/cart';
 
-import { RequestWithJWT } from 'middlewares';
+import { RequestWithJWT } from '../middlewares/index';
 
 export interface CartRequest extends express.Request {
     body: {

@@ -1,6 +1,6 @@
 import express from 'express';
 import { getAllCourses, getCourse, getCourseBySubscriberId, getPdf, postCourse, updateNewCourseSubscriber } from '../controllers/courses';
-import { isAuthenticated } from 'middlewares';
+import { isAuthenticated } from '../middlewares/index';
 
 export default (router: express.Router) => {
     router.get('/v2/courses', isAuthenticated, getAllCourses);
