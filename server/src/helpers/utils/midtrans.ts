@@ -1,4 +1,4 @@
-import { badRequestResponse } from "./api-response";
+import { badRequestResponse } from "../api-response";
 
 const requestBRIBCABNI = (channel: string) => ({
     bank_transfer: {

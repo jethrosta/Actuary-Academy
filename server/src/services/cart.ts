@@ -1,41 +1,56 @@
-import express from "express";
-import { StatusCodes } from "http-status-codes";
-import { getUserById } from "db/users";
-import { RequestWithJWT } from "middlewares";
-import { CourseModel } from "db/course";
-import { apiResponse, notFoundResponse, badRequestResponse } from "helpers/api-response";
-// import course and video (not finished)
+import { CartModel } from "db/cart";
+import { UserModel } from "db/users";
 
-class cartService {
-    index = async (req: RequestWithJWT) => {
-        try {
-            const user = await getUserById(req.userId);
-            if (!user) {
-                throw notFoundResponse('User');
-            }
+export const addToCart = async (userId: string) => {
+    try {
+        const user = await UserModel.findById({ _id: userId }).exec();
 
-            /**
-             * (not finished)
-             * (create based on what courses each user purchased)
-             * const cartSummary
-             * const cartIds
-             * const cartCourse
-             */
+        const courseId = 'A1 Matematika Keuangan';     // Should be adjusted as needed
+        const cartItem = { course: courseId }         
 
-            return apiResponse(StatusCodes.OK, 'OK', 'Success get carts', {
-                // cart_summary: cartSummary,
-                // cart_ids: cartIds,
-                // cart_course: cartCourse,
-            });
-        } catch (error) {
-            console.log(error);
-        }
+        user.cart.push(cartItem);
+        await user.save();
+    } catch (err) {
+        console.log(err);
     }
+}
 
-    // addOrRemove = async (req: ) => {
-    //     try {
-    //         const courseId = 
-    //         const course = await CourseModel.findById(courseId)
-    //     }
-    // }
+export const getCarts = async (userId: string) => {
+    try {
+        const user = await UserModel.findById({ _id: userId }).exec();
+
+        if (!user) {
+            console.error('User not found');
+            return 'User not found';
+        }
+
+        const userCart = user.cart;
+
+        return userCart;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export const updateCart = async (id: string, data: any) => {
+    const cartUpdated = await CartModel.findByIdAndUpdate({_id: id}, data, {new: true});
+
+    if (!cartUpdated) return "Cart not available"
+
+    return cartUpdated;
+}
+
+export const removeFromCart = async (itemId: string) => {
+    try {
+        const removedItem = await CartModel.findByIdAndRemove(itemId);
+
+        if (!removedItem) {
+          return 'Item not found';
+        }
+    
+        return 'Item removed successfully';
+    } catch (err) {
+        console.log(err);
+        return 'Error removing item';
+    }
 }
