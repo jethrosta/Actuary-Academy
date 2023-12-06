@@ -1,32 +1,43 @@
-import express from 'express';
-import { createUser, getUsers, getUserById, updateUserbyId, deleteUserById } from '../services/users';
-import { userSchemaValidate } from '../db/users';
-import { RequestWithJWT } from '../middlewares/index';
+import express from "express";
+import {
+  createUser,
+  getUsers,
+  getUserById,
+  updateUserbyId,
+  deleteUserById,
+} from "../services/users";
+import { userSchemaValidate } from "../db/users";
+import { RequestWithJWT } from "../middlewares/index";
 
-export const registerUser = async (req: express.Request, res: express.Response) => {
+export const registerUser = async (
+  req: express.Request,
+  res: express.Response
+) => {
   try {
     const data = {
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
-    }
+    };
 
-    const {error, value} = userSchemaValidate.validate(data)
+    const { error, value } = userSchemaValidate.validate(data);
 
     if (error) {
       res.send(error.message);
     } else {
-      const user = await createUser(value)
-      res.status(201).send(user)
+      const user = await createUser(value);
+      res.status(201).send(user);
     }
-
   } catch (err) {
     console.log(err);
     return res.sendStatus(400);
   }
-}
+};
 
-export const getAllUsers = async (req: express.Request, res: express.Response) => {
+export const getAllUsers = async (
+  req: express.Request,
+  res: express.Response
+) => {
   try {
     const users = await getUsers();
     return res.status(200).json(users);
@@ -34,9 +45,12 @@ export const getAllUsers = async (req: express.Request, res: express.Response) =
     console.log(err);
     return res.sendStatus(400);
   }
-}
+};
 
-export const getCurrentUser = async (req: RequestWithJWT, res: express.Response) => {
+export const getCurrentUser = async (
+  req: RequestWithJWT,
+  res: express.Response
+) => {
   try {
     const user = await getUserById(req.userId);
     return res.json(user);
@@ -44,9 +58,12 @@ export const getCurrentUser = async (req: RequestWithJWT, res: express.Response)
     console.log(err);
     return res.sendStatus(400);
   }
-}
+};
 
-export const updateCurrentUser =async (req: RequestWithJWT & express.Request, res: express.Response) => {
+export const updateCurrentUser = async (
+  req: RequestWithJWT & express.Request,
+  res: express.Response
+) => {
   try {
     const user = await updateUserbyId(req.userId, req.body);
     res.send(user);
@@ -54,9 +71,12 @@ export const updateCurrentUser =async (req: RequestWithJWT & express.Request, re
     console.log(err);
     return res.sendStatus(400);
   }
-}
+};
 
-export const deleteUser = async (req: express.Request, res: express.Response) => {
+export const deleteUser = async (
+  req: express.Request,
+  res: express.Response
+) => {
   try {
     const { id } = req.params;
     const deletedUser = await deleteUserById(id);
@@ -65,4 +85,4 @@ export const deleteUser = async (req: express.Request, res: express.Response) =>
     console.log(err);
     return res.sendStatus(400);
   }
-}
+};
