@@ -1,6 +1,6 @@
 import express from "express";
-import { isAuthenticated } from "middlewares";
-import { getAllPayments, getCurrentUserPayment } from "controllers/midtrans";
+import { isAuthenticated } from "../middlewares/index";
+import { getAllPayments, getCurrentUserPayment } from "../controllers/midtrans";
 
 export default (router: express.Router) => {
     router.get('/v2/payment', isAuthenticated, getAllPayments);

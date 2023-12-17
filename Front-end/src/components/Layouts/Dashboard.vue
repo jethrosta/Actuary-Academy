@@ -4,11 +4,11 @@ import { RouterLink, RouterView } from 'vue-router';
 import NavDropdown from '../Modules/NavDropdown.vue';
 import UserDropdown from '../Modules/UserDropdown.vue';
 import NavSideMenu from '../Modules/NavSideMenu.vue';
-import { useStore } from "../../store/index.js";
+import { useAuthStore } from "../../store";
 import { notifCount, purchaseCount } from '@/db';
 
-const store = useStore()
-const isLoggedIn = computed(() => store.authState.loginState.status.loggedIn)
+const store = useAuthStore()
+const isLoggedIn = computed(() => store.loginState.status.loggedIn)
 const user = JSON.parse(localStorage.getItem('user'))
 
 const firstName = computed(() => {

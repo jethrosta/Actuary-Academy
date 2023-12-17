@@ -54,7 +54,7 @@
 import { RouterLink } from 'vue-router';
 import { ref, defineProps } from 'vue';
 import router from '../../router';
-import { useStore } from '../../store/index.js';
+import { useAuthStore } from '../../store';
 import NavDropdown from './NavDropdown.vue';
 
 const props = defineProps({
@@ -62,7 +62,7 @@ const props = defineProps({
   items: Array
 });
 
-const store = useStore();
+const store = useAuthStore();
 
 const isOpen = ref(false);
 

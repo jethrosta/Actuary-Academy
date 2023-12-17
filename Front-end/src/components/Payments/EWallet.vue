@@ -66,13 +66,13 @@
 
 <script setup>
 import { useRoute } from 'vue-router';
-import { useStore } from '../../store';
+import { useAuthStore } from '../../store';
 import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 import router from '../../router';
 const route = useRoute();
 
-const store = useStore()
+const store = useAuthStore()
 
 //data for display
 const errorMessage = ref('');

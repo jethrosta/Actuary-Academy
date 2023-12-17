@@ -1,5 +1,5 @@
 <script setup>
-import { useStore } from "../../store/index.js";
+import { useAuthStore } from "../../store";
 import router from "../../router/index.js";
 import { RouterLink } from 'vue-router';
 import { ref, computed, onBeforeMount } from 'vue';
@@ -15,7 +15,7 @@ const schema = yup.object().shape({
 });
 
 //Constants
-const store = useStore()
+const store = useAuthStore()
 const loading = ref(false)
 const message = ref("")
 
@@ -24,7 +24,7 @@ const user = ref({
   password: ""
 });
 
-const loginStatus = computed(() => store.authState.loginState.status.loggedIn);
+const loginStatus = computed(() => store.loginState.status.loggedIn);
 
 const currentUrl = window.location.href;
 

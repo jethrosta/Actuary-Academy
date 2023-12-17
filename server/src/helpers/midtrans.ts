@@ -1,9 +1,8 @@
-import { badRequestResponse } from "../api-response";
+import { badRequestResponse } from "./api-response";
 
 const requestBRIBCABNI = (channel: string) => ({
     bank_transfer: {
         bank: channel,
-        va_number: '',
     },
 });
 
@@ -26,7 +25,7 @@ const requestPermata = (user: any) => ({
 const requestGopay = () => ({
     gopay: {
         enable_callback: true,
-        callback_url: 'https://www.midtrans.com',   // domain web Actuary Academy (?)
+        callback_url: 'https://www.actuaryacademy.com',
     },
 });
 
@@ -36,6 +35,14 @@ const requestIndoAlfa = (channel: string) => ({
         message: 'Purchasing Actuary Academy online courses.'
     },
 });
+
+const summarizeItems = (items: any) => {
+    return items.map((item: any) => ({
+        name: 'asdasdasd',
+        price: 900000,
+        quantity: 1,
+    }));
+}
 
 const payloads = (type: string, invoice: string, summary: any, user: any, items: any, requestChannel: any) => ({
     payment_type: type,

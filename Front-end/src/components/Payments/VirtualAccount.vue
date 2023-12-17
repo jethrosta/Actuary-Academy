@@ -66,9 +66,9 @@
 import router from '../../router';
 import Footer from '../Footer.vue';
 import { computed, onBeforeMount, ref } from 'vue';
-import { useStore } from '../../store';
+import { useAuthStore } from '../../store';
 
-const store = useStore()
+const store = useAuthStore()
 
 //state Data
 const paymentData = computed(() => JSON.parse(localStorage.getItem('pending-payment')))

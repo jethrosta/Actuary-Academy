@@ -17,6 +17,7 @@ export interface OrderDocument extends mongoose.Document {
     status_code: string;
     transaction_time: Date;
     paid_at: Date;
+    course: any;
 }
 
 const orderSchema = new mongoose.Schema<OrderDocument>({
@@ -30,7 +31,7 @@ const orderSchema = new mongoose.Schema<OrderDocument>({
     // course: {                                // Ref to 'Course' model
     //     type: mongoose.Schema.Types.Mixed,   // Must be adjust this schema as needed
     // },
-    gross_amount: { type: Number, unsigned: true },
+    gross_amount: { type: Number, min: 0, unsigned: true },
     payment_type: { type: String },
     channel_name: { type: String },
     virtual_number: { type: String },
@@ -42,6 +43,7 @@ const orderSchema = new mongoose.Schema<OrderDocument>({
     status_code: { type: String },
     transaction_time: { type: Date },
     paid_at: { type: Date },
+    course: { type: Array },
 }, { timestamps: true });
 
 export const OrderModel = mongoose.model('Order', orderSchema)

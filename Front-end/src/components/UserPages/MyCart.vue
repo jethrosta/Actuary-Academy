@@ -55,7 +55,7 @@
                     class="notifItem w-full flex flex-row justify-between text-black text-xl border-[1.5px] border-main_blue rounded-2xl py-3 px-4">
                     <div class="flex flex-col gap-1 font-medium text-lg">
                         <div class="text-lg text-main_blue font-bold">
-                            {{ item.data.name }}</div>
+                            {{ item.data.category }}</div>
                         <div class="text-md">{{ item.data.variation.current }}</div>
                         <div class="text-md">{{ item.data.duration.current }}</div>
                     </div>
@@ -83,9 +83,9 @@
                         Total ({{ totalItems }} Items)</div>
                     <div class="text-lg text-main_blue font-bold">
                         {{ toIDR(totalPrice) }}</div>
-                    <button @click="cartCheckout"
-                        class="flex ml-auto bg-sec_blue py-1 px-3 text-white font-semibold first-letter:text-center rounded-lg">
-                        Checkout </button>
+                    <div @click="cartCheckout"
+                        class="flex hover:cursor-pointer ml-auto bg-sec_blue py-1 px-3 text-white font-semibold first-letter:text-center rounded-lg">
+                        Checkout </div>
 
                 </div>
             </div>
@@ -100,7 +100,7 @@
                     <div class="relative">
                         <button @click="toggle(0)"
                             class="menu-button flex items-center justify-between w-4/5 bg-main_blue font-bold rounded-lg text-white px-3 py-1">
-                            {{ cartItems[currentItemEdit].data.name }}
+                            {{ cartItems[currentItemEdit].data.title }}
                             <svg :class="allMenu[0] ? 'rotate-180' : ''" width="16" height="10" viewBox="0 0 16 10"
                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M15.3198 0.999894L7.81654 8.09082L0.878023 0.999894" stroke="white"
@@ -133,9 +133,9 @@
                         </button>
                         <div v-if="allMenu[1]"
                             class="hover:cursor-pointer select-none absolute z-50 left-0 w-4/5 py-2 mt-2 bg-gray-300 text-gray-500 rounded-md shadow-xl">
-                            <div v-for="(variation, option) in cartItems[currentItemEdit].data.variation.option"
+                            <div v-for="(variation, options) in cartItems[currentItemEdit].data.variation.options"
                                 class="block px-4 py-2 text-sm hover:bg-gray-400 hover:text-gray-200"
-                                @click="setItemDetail('variation', option)">
+                                @click="setItemDetail('variation', options)">
                                 {{ variation }}
                             </div>
                         </div>
@@ -156,9 +156,9 @@
                         </button>
                         <div v-if="allMenu[2]"
                             class="hover:cursor-pointer select-none absolute left-0 w-4/5 py-2 mt-2 bg-gray-300 text-gray-500 rounded-md shadow-xl">
-                            <div v-for="(duration, option) in cartItems[currentItemEdit].data.duration.option"
+                            <div v-for="(duration, options) in cartItems[currentItemEdit].data.duration.options"
                                 class="block px-4 py-2 text-sm hover:bg-gray-400 hover:text-gray-200"
-                                @click="setItemDetail('duration', option)">
+                                @click="setItemDetail('duration', options)">
                                 {{ duration }}
                             </div>
                         </div>
@@ -203,20 +203,26 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue';
-import { useStore } from '../../store';
+import { computed, onMounted, ref } from 'vue';
+import { usePaymentStore } from '../../store';
 import { RouterLink, onBeforeRouteLeave } from 'vue-router';
 import router from '../../router';
 
-const store = useStore();
+const store = usePaymentStore();
 
 //Cart
-const cartItems = ref(store.getCartItems().map(item => {
-    return {
-        isChecked: false,
-        data: item
-    }
-}))
+const cartItems = ref([])
+
+onMounted(() => {
+    store.getCart().then(() =>
+        cartItems.value = store.cartItems.userCart.map(item => {
+            return {
+                isChecked: false,
+                data: item
+            }
+        })
+    )
+})
 
 const selectedItems = computed(() => {
     return cartItems.value.filter(item => item.isChecked).map(item => item.data);
@@ -233,15 +239,13 @@ const totalPrice = computed(() => {
 //Cart edit functions
 const currentItemEdit = ref(0);
 
-const getCurrentItem = ref(cartItems.value[currentItemEdit.value].data);
-
-function setItemDetail(option, optionIndex) {
-    switch (option) {
+function setItemDetail(options, optionsIndex) {
+    switch (options) {
         case 'variation':
-            cartItems.value[currentItemEdit.value].data.variation.current = cartItems.value[currentItemEdit.value].data.variation.option[optionIndex];
+            cartItems.value[currentItemEdit.value].data.variation.current = cartItems.value[currentItemEdit.value].data.variation.options[optionsIndex];
             break;
         case 'duration':
-            cartItems.value[currentItemEdit.value].data.duration.current = cartItems.value[currentItemEdit.value].data.duration.option[optionIndex];
+            cartItems.value[currentItemEdit.value].data.duration.current = cartItems.value[currentItemEdit.value].data.duration.options[optionsIndex];
             break;
         default:
             break;
@@ -303,32 +307,21 @@ const isEmpty = computed(() => {
 })
 
 //Checkout functions
-watch(selectedItems, (newItems) => {
-    store.setCheckoutItems(newItems.map(item => {
-        return {
-            id: item.id,
-            name: item.name,
-            price: item.price,
-            duration: item.duration.current,
-            variation: item.variation.current,
-        }
-    }))
-})
-
-const cartCheckout = async () => {
+const cartCheckout = () => {
     if (isEmpty.value) {
         modalError.value = true;
         console.log('No item selected');
     }
     else {
         modalError.value = false;
-        router.push({ name: 'Pembayaran' })
+        const items = selectedItems.value.map(item => item._id);
+        router.push({ name: 'Buat Pembayaran', query: { items: items } });
     }
 }
 
 //Helpers
 onBeforeRouteLeave((to, from, next) => {
-    next(true);
+    next();
 })
 
 function toIDR(num) {

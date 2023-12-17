@@ -1,7 +1,7 @@
 import express from 'express';
 
-import { getUserByEmail, createUser } from '../db/users';
-import { authentication, createSalt, createSessionToken, createJWT } from '../helpers';
+import { getUserByEmail, createUser } from '../services/users';
+import { authentication, createSalt, createSessionToken, createJWT } from '../helpers/index';
 
 export const register = async (req: express.Request, res: express.Response) => {
   try {

@@ -2,24 +2,23 @@ import AuthService from '../services/auth.service';
 
 const user = JSON.parse(localStorage.getItem('user'));
 const loginState = user
-? { status: { loggedIn: true }, user }
-: { status: { loggedIn: false }, user: null }
+  ? { status: { loggedIn: true }, user }
+  : { status: { loggedIn: false }, user: null }
 
 export const auth = {
   id: 'auth',
   state: () => ({
-      loginState,
+    loginState,
   }),
 
   getters: {
-    
-  },
-  
-  actions: {
-    getUser() {
-      return loginState.user;
+    getUser: (state) => {
+      return state.loginState.user;
     },
-    
+  },
+
+  actions: {
+
     register(user) {
       return AuthService.register(user).then(
         response => {
@@ -39,14 +38,14 @@ export const auth = {
       return AuthService.login(user).then(
         user => {
           console.log('auth module login success');
-          loginState.status.loggedIn = true;
           loginState.user = user;
+          loginState.status.loggedIn = true;
           return Promise.resolve(user);
         },
         error => {
           console.log('auth module login fail');
-          loginState.status.loggedIn = false;
           loginState.user = null;
+          loginState.status.loggedIn = false;
           return Promise.reject(error);
         }
       );
@@ -55,9 +54,10 @@ export const auth = {
     async logout() {
       loginState.status.loggedIn = false;
       loginState.user = null;
-      return AuthService.logout().then(()=>{
+      return AuthService.logout().then(() => {
         localStorage.removeItem('user');
       })
-    }    
+    }
+    
   }
 };

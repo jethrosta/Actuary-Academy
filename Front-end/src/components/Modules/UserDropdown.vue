@@ -2,7 +2,7 @@
 import { RouterLink } from 'vue-router';
 import { defineProps, ref } from 'vue';
 import router from '../../router';
-import { useStore } from '../../store/index.js';
+import { useAuthStore } from '../../store';
 
 const props = defineProps({
   title: String,
@@ -12,7 +12,7 @@ const props = defineProps({
 
 const isOpen = ref(props.isOpen)
 
-const store = useStore();
+const store = useAuthStore();
 
 const handleLogout = async () => {
   try {

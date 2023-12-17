@@ -21,13 +21,13 @@
                 </button>
                 <div :class="['payment-item', { open: payment.isOpen }]"
                     class="flex flex-col text-black border-[1px] border-main_blue">
-                    <div v-for="provider in payment.providers" class="flex hover:bg-gray-200 flex-col w-full px-4 py-3">
-                        <RouterLink :to="{ name: `${payment.route}`, params: { providerName: provider.name } }"
+                    <div v-for="channel in payment.channels" class="flex hover:bg-gray-200 flex-col w-full px-4 py-3">
+                        <RouterLink :to="{ name: payment.route, params: { channel: channel.name }, query: { items: items }}"
                             class="flex">
                             <div class="flex items-center justify-center w-[5%]">
-                                <img :src="provider.logo" alt="" class="h-4">
+                                <img :src="channel.logo" alt="" class="h-4">
                             </div>
-                            <div class="px-4 w-[95%]">{{ provider.name }}</div>
+                            <div class="px-4 w-[95%]">{{ channel.name }}</div>
                         </RouterLink>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRoute } from 'vue-router';
 
 const paymentMethods = ref([
     {
@@ -47,7 +47,7 @@ const paymentMethods = ref([
         title: 'ATM/Bank Transfer (Virtual Account)',
         route: 'Transfer Bank',
         isOpen: false,
-        providers: [
+        channels: [
             { name: 'BCA', logo: '/src/assets/payments/bca.png' },
             { name: 'BRI', logo: '/src/assets/payments/bri.png' },
             { name: 'BNI', logo: '/src/assets/payments/bni.png' },
@@ -61,7 +61,7 @@ const paymentMethods = ref([
         title: 'E-Wallet',
         route: 'E Wallet',
         isOpen: false,
-        providers: [
+        channels: [
             { name: 'Gopay', logo: '/src/assets/payments/gopay-full.png' },
             { name: 'ShopeePay', logo: '/src/assets/payments/shopeepay.png' },
         ],
@@ -73,6 +73,8 @@ const togglePaymentMenu = id => {
     paymentMethods.value = paymentMethods.value.map(payment => payment.isOpen && payment.id !== id ? { ...payment, isOpen: false } : payment)
     paymentMethods.value = paymentMethods.value.map(payment => payment.id === id ? { ...payment, isOpen: !payment.isOpen } : payment)
 }
+
+const items = ref(useRoute().query.items)
 
 </script>
 

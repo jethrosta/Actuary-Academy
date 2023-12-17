@@ -28,8 +28,12 @@ server.listen(3000, () => {
 });
 
 // yang diubah setelah 27017
-// const MONGO_URL = "mongodb://localhost:27017/academy3";
-const MONGO_URL = "mongodb://127.0.0.1:27017/academy3";
+// const MONGO_URL = "mongodb://127.0.0.1:27017/academy3";
+// const MONGO_URL = "mongodb://db:27017/demo";
+const MONGO_URL =
+// "mongodb+srv://actuary:academy@actuary-academy.mx5dl7v.mongodb.net/aa-user";
+"mongodb+srv://tonisyd:0pplMhQIB4hWbvoA@aacluster1.vxyg1tc.mongodb.net/?retryWrites=true&w=majority";
+// "mongodb+srv://admin-haydar:Test123@cluster0.85fxdxq.mongodb.net/aa-dev";
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGO_URL);

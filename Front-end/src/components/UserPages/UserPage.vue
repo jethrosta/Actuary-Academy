@@ -1,11 +1,11 @@
 <script setup>
 import { RouterView } from 'vue-router';
 import Footer from '../Footer.vue';
-import { useStore } from '../../store/index.js';
+import { useAuthStore } from '../../store/';
 import router from '../../router';
 import { notifCount, purchaseCount } from '@/db';
 
-const store = useStore();
+const store = useAuthStore();
 
 const handleLogout = async () => {
   try {

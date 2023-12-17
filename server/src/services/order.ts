@@ -1,23 +1,27 @@
 import express from 'express';
-import mongoose from 'mongoose';
+import mongoose, { ObjectId } from 'mongoose';
 import moment from 'moment';
 import crypto from 'crypto'
 
-import { OrderModel } from "db/order";
-import { UserModel } from 'db/users';
-import { CartModel } from 'db/cart';
+import { OrderModel } from '../db/order';
+import { CartModel } from '../db/cart';
+import { UserDocument, UserModel } from '../db/users';
+import { CourseModel } from '../db/courses';
 
-import { CoreAPI, MidtransResponse } from "db/midtrans";
-import { paymentRequestPayloads } from 'helpers/utils/midtrans';
-import { channels } from 'helpers/midtransChannels';
+import { RequestWithJWT } from '../middlewares/index';
 
-import { CartSummaryUtils } from 'helpers/utils/cart';
+import { CoreAPI, MidtransResponse } from "../db/midtrans";
+import { paymentRequestPayloads } from '../helpers/midtrans';
+import { channels } from '../helpers/midtrans-channels';
+
+import { CartRequest } from '../controllers/cart';
+import { CartSummary } from '../helpers/cart';
 
 import { StatusCodes } from 'http-status-codes';
-import { apiResponse, badRequestResponse, notFoundResponse } from 'helpers/api-response';
+import { apiResponse, badRequestResponse, notFoundResponse } from '../helpers/api-response';
 
 import { CourseById } from './courses';
-import { CourseDocument } from 'db/courses';
+import { CourseDocument } from '../db/courses';
 
 interface CourseRequest extends express.Request {
     body: {
@@ -25,7 +29,16 @@ interface CourseRequest extends express.Request {
     }
 }
 
-const updateOrderFixInTheNameOfGod = async (order: any, response: any, t: any) => {
+export const orderItems = async (ids: any) => {
+    try {
+        const items = await CourseModel.find({ _id: { $in: ids } }).exec();
+        return items;
+    } catch (error) {
+        return 'items not found';
+    }
+};
+
+const updateOrder = async (invoice: any, response: any, items: any, summary: any, id: any, user: any, session: any) => {
     let channelName = null;
     let virtualNumber = null;
     let actions = null;
@@ -34,19 +47,24 @@ const updateOrderFixInTheNameOfGod = async (order: any, response: any, t: any) =
         channelName = response.va_numbers[0].bank;
         virtualNumber = response.va_numbers[0].va_number;
     }
-    
+
     if (response.bill_key) channelName = 'mandiri';             // mandiri
-    
+
     if (response.permata_va_number) channelName = 'permata';    // permata bank
-    
+
     if (response.actions) {                                     // gopay
         channelName = 'gopay';
         actions = response.actions;
     }
-    
+
     if (response.store) channelName = response.store;        // over the counter
 
-    await OrderModel.findByIdAndUpdate(order._id, {
+    const orderData = {
+        user_id: user._id,
+        invoice,
+        identifier: id,
+        course: items,
+        gross_amount: summary.sub_total.raw,
         payment_type: response.payment_type,
         channel_name: channelName,
         virtual_number: virtualNumber,
@@ -57,11 +75,14 @@ const updateOrderFixInTheNameOfGod = async (order: any, response: any, t: any) =
         payment_code: response.payment_code ?? null,
         status_code: response.status_code,
         transaction_time: response.transaction_time,
-    }, { transaction: t })
+    };
+
+    const order = await OrderModel.create([orderData], { session });
+    return order;
 };
 
 const midtransResponse = async (data: any, t: any) => {
-    await MidtransResponse.create({     
+    return await MidtransResponse.create({
         order_id: data.order_id,
         bank: data.va_numbers ? data.va_numbers[0].bank : null,
         va_number: data.va_numbers ? data.va_numbers[0].va_number : null,
@@ -90,10 +111,11 @@ const midtransResponse = async (data: any, t: any) => {
 };
 
 // get courseId based on './courses' sama nambahin courses yang udah dibeli ke 'User' collection (mongoDB)
-const successPurchaseCourse = async (req: CourseRequest, user: any) => {
+// user: RequestWithJWT (?)
+const successPurchaseCourse = async (req: CourseRequest, user: RequestWithJWT) => {
     try {
         const courseId = await CourseById(req.params.id)
-        await UserModel.findByIdAndUpdate(user._id, { 
+        await UserModel.findByIdAndUpdate(user.userId, {
             $addToSet: {
                 courses: {
                     $each: courseId
@@ -113,7 +135,7 @@ const orderStatusHandling = async (order: any, user: any, notification: any) => 
                     status: 'challenge',
                     status_code: notification.status_code,
                 })
-            } 
+            }
             else if (notification.fraud_status === 'accept') {
                 await successPurchaseCourse(order, user)
                 await OrderModel.findByIdAndUpdate(order._id, {
@@ -121,7 +143,7 @@ const orderStatusHandling = async (order: any, user: any, notification: any) => 
                     status_code: notification.status_code,
                     paid_at: notification.settlement_time,
                 });
-    
+
                 // send email (belum)
             }
             else if (notification.transaction_status === 'settlement') {
@@ -131,7 +153,7 @@ const orderStatusHandling = async (order: any, user: any, notification: any) => 
                     status_code: notification.status_code,
                     paid_at: notification.settlement_time,
                 });
-    
+
                 // send email jg (belum)
             }
             else if (notification.transaction_status === 'deny') {
@@ -141,15 +163,15 @@ const orderStatusHandling = async (order: any, user: any, notification: any) => 
                 });
             }
             else if (notification.transaction_status === 'cancel' || notification.transaction_status === 'expire') {
-                await OrderModel.findByIdAndUpdate(order._id, { 
-                    status: 'canceled', 
-                    status_code: notification.status_code 
+                await OrderModel.findByIdAndUpdate(order._id, {
+                    status: 'canceled',
+                    status_code: notification.status_code
                 });
             }
             else if (notification.transaction_status === 'pending') {
-                await OrderModel.findByIdAndUpdate(order._id, { 
-                    status: 'pending', 
-                    status_code: notification.status_code 
+                await OrderModel.findByIdAndUpdate(order._id, {
+                    status: 'pending',
+                    status_code: notification.status_code
                 });
             }
         }
@@ -158,21 +180,7 @@ const orderStatusHandling = async (order: any, user: any, notification: any) => 
     }
 }
 
-// di UserModel belum ada { carts: { course } }
-const getCartsForUser = async (userId: string) => {
-    try {
-        const user = await UserModel.findById(userId).populate('carts.course');
-        if (!user) {
-          throw new Error('User not found');
-        }
-    
-        // return user.carts;
-    } catch (err) {
-        console.error(err);
-    }
-}
-
-export const invoice = async (req: any, res: express.Response) => {
+export const invoiceService = async (req: any, res: express.Response) => {
     try {
         const { identifier } = req.params
         const { user } = req
@@ -185,68 +193,62 @@ export const invoice = async (req: any, res: express.Response) => {
     }
 }
 
-export const order = async (req: any, res: express.Response) => {   
+export const orderService = async (req: RequestWithJWT & express.Request, res: express.Response) => {
     const session = await mongoose.startSession();
-    session.startTransaction();
 
     try {
-        const { id } = req.user;
-        const channel = req.body.payment_channel.toLowerCase();
-        if (!channels(channel)) throw res.json({ 'message': 'Unsupported payment channel :(' })
+        await session.withTransaction(async () => {
+            const channel = req.body.payment_channel.toLowerCase()
+            if (!channels(channel)) throw res.json({ 'message': 'Unsupported payment channel' })
 
-        const user = await UserModel.findById(id);
-        if (!user) throw res.json({ 'message': 'not found user' })
+            // Retrieve items, user, and cart
+            const user = await UserModel.findById(req.body.userId).session(session);
+            const cart = user.cart.map(item => item.course);
 
-        getCartsForUser(user._id)       // still error
-            .then((carts) => {
-                console.log('Carts for user:', carts);
-            })
-            .catch((error) => {
-                console.error('Error:', error.message);
-            });
+            if (!user || !cart) {
+                throw new Error('User or cart not found');
+            }
 
-        const cartSummary = CartSummaryUtils(cart);
-        // get cartCourse
-        const cartCourse = carts.map((cart: any) => CourseCartTransformer(cart.series));
-        const payloadItemsDetails = cartCourse.map((series: any) => ({
-            id: series.id,
-            price: series.is_discount ? series.discount_price.raw : series.price.raw,
-            quantity: 1,
-            name: series.title,
-        }));
+            // Course to be purchased
+            const courseIds: mongoose.Types.ObjectId[] = Array.isArray(req.body.items_ids) ? req.body.items_ids : [req.body.items_ids];
+            const cartItems: CourseDocument[] = await CourseModel.find({ _id: { $in: courseIds } }).session(session).exec();
 
-        const invoice = `${moment().format('YYMMDD')}${moment().format('HHmmss')}${Math.floor(Math.random() * 1000)}`;
-        const identifier = crypto.randomBytes(20).toString('hex');
-        const payload = paymentRequestPayloads(channel, invoice, cartSummary, user, payloadItemsDetails);
+            // Calculate total items to be purchased
+            const cartSummary = CartSummary(cartItems)
+            const ItemDetails = cartItems.map((item: any) => ({
+                name: item.title,
+                price: item.discount_price,
+                quantity: 1,
+                duration: item.duration.current
+            }));
 
-        const order = await OrderModel.create({
-            invoice,
-            identifier,
-            course: cartCourse,
-            gross_amount: cartSummary.sub_total.raw,
-        }, { session });
+            const invoice = `${moment().format('YYMMDD')}${moment().format('HHmmss')}${Math.floor(Math.random() * 1000)}`;
+            const identifier = crypto.randomBytes(20).toString('hex');
+            const payload = paymentRequestPayloads(channel, invoice, cartSummary, user, ItemDetails);
 
-        const response = await CoreAPI.charge(payload);
+            // Charge to Midtrans
+            const response = await CoreAPI.charge(payload);
 
-        await updateOrderFixInTheNameOfGod(order, response, session);
-        await midtransResponse(response, session);
-        await CartModel.deleteMany({ user_id: user.id }).session(session);
-        await session.commitTransaction();
+            const order = await updateOrder(invoice, response, ItemDetails, cartSummary, identifier, user, session);
+            const midtransRes = await midtransResponse(response, session);
+            // await CartModel.deleteMany({ user_id: user.id }).session(session);
 
-        return apiResponse(StatusCodes.OK, 'OK', 'Success create an order', {
-            response,
-            redirect: `/api/orders/invoice/${identifier}`,
-        });
+            await session.commitTransaction();
+            return res.status(200).json(order[0]);
+        })
     } catch (err) {
         console.log(err);
+        res.status(500).json("Internal Server Error");
+    } finally {
+        session.endSession();
     }
 }
 
-export const notificationHandler = async (req: express.Request, res: express.Response) => {
+export const notificationHandlerService = async (req: express.Request, res: express.Response) => {
     try {
         const notification = await CoreAPI.transaction.notification(req.body)
         console.log(notification);
-        
+
         const order = await OrderModel.findOne({ invoice: notification.order_id })
         if (!order) return notFoundResponse('Order not found')
 
