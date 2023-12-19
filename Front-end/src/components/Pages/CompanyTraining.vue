@@ -24,7 +24,7 @@ import OtherProducts from '../OtherProducts.vue';
                     <img class="rounded-[1.5rem]" src="/src/assets/company-training/right.jpg">
                 </div>
             </div>
-            <div class="text-white mt-12 mx-12">
+            <div class="text-white mt-12 mx-12 [text-shadow:_2px_1px_2px_#0066cc]">
                 <div class="text-xl font-bold mb-2">Fasilitas</div>
                 <ul class="text-lg list-disc list-inside space-y-1">
                     <li>Zoom meeting dengan durasi 2 jam</li>

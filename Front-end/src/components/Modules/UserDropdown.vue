@@ -3,6 +3,7 @@ import { RouterLink } from 'vue-router';
 import { defineProps, ref } from 'vue';
 import router from '../../router';
 import { useAuthStore } from '../../store';
+import { notifCount, purchaseCount } from '@/db';
 
 const props = defineProps({
   title: String,
@@ -67,6 +68,12 @@ const close = (e) => {
           <RouterLink :to="{ name: `${item.name}` }" v-for="(item, i) in items" :key="i">
             <div class="menu-item py-1 px-4 text-gray-400 bg-white hover:text-sec_blue whitespace-nowrap">
               {{ item.title }}
+              <span v-if="item.name === 'Notifikasi' && notifCount > 0" class="inline-block w-4 h-4 align-text-top bg-red-600 text-white text-[.7rem] leading-4 text-center rounded-[50%]">
+                {{ notifCount }}
+              </span>
+              <span v-if="item.name === 'Keranjang Saya' && purchaseCount > 0" class="inline-block w-4 h-4 align-text-top bg-red-600 text-white text-[.7rem] leading-4 text-center rounded-[50%]">
+                {{ purchaseCount }}
+              </span>
             </div>
           </RouterLink>
           <div class="menu-item py-1 px-4 text-gray-400 bg-white hover:text-sec_blue whitespace-nowrap">

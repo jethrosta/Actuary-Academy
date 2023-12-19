@@ -49,8 +49,8 @@ const handleLogout = async () => {
                             </svg>
 
                             Notifikasi
-                            <span v-if="purchaseCount > 0" class="bg-red-500 text-white font-normal text-lg text-center rounded-[50%] w-7 h-7 leading-7">
-                                {{ purchaseCount }}
+                            <span v-if="notifCount > 0" class="bg-red-500 text-white font-normal text-lg text-center rounded-[50%] w-7 h-7 leading-7">
+                                {{ notifCount }}
                             </span>
                         </RouterLink>
                         <RouterLink :to="{ name: 'Kelas Saya' }"
@@ -76,8 +76,8 @@ const handleLogout = async () => {
                             </svg>
 
                             Keranjang
-                            <span v-if="notifCount > 0" class="bg-red-500 text-white font-normal text-lg text-center rounded-[50%] w-7 h-7 leading-7">
-                                {{ notifCount }}
+                            <span v-if="purchaseCount > 0" class="bg-red-500 text-white font-normal text-lg text-center rounded-[50%] w-7 h-7 leading-7">
+                                {{ purchaseCount }}
                             </span>
                         </RouterLink>
                         <RouterLink :to="{ name: 'Pengaturan' }"

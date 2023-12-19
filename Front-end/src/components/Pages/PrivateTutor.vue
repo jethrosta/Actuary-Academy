@@ -66,15 +66,12 @@ const tutorsSplideOptions = {
                                 <ul class="list-disc list-inside text-lg">
                                     <li v-for="achievement in tutor.achievs">{{ achievement }}</li>
                                 </ul>
-                                <RouterLink :to="{ name: 'Tutors' }" class="inline-block rounded-lg bg-main_orange text-white font-semibold mt-5 px-5 py-2 cursor-pointer self-end shadow-xl">
-                                    Berlangganan
-                                </RouterLink>
                             </div>
                         </div>
                     </SplideSlide>
                 </Splide>
             </div>
-            <div class="flex space-x-9 mt-14">
+            <div class="flex space-x-9 mt-16">
                 <div v-for="packet in privateTutorPackages" class="flex-1 flex flex-col">
                     <div class="bg-sec_blue rounded-xl text-white p-10 grow">
                         <div class="text-3xl font-semibold mb-3 text-center">{{ packet.name }}</div>
