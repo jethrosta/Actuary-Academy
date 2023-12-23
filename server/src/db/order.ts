@@ -16,6 +16,7 @@ export interface OrderDocument extends mongoose.Document {
     status: string;
     status_code: string;
     transaction_time: Date;
+    expiry_time: Date;
     paid_at: Date;
     course: any;
 }
@@ -42,6 +43,7 @@ const orderSchema = new mongoose.Schema<OrderDocument>({
     status: { type: String, default: 'pending' },
     status_code: { type: String },
     transaction_time: { type: Date },
+    expiry_time: { type: Date },
     paid_at: { type: Date },
     course: { type: Array },
 }, { timestamps: true });

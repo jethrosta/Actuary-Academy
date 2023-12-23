@@ -2,8 +2,9 @@ import express from 'express';
 import mongoose, { ObjectId } from 'mongoose';
 import moment from 'moment';
 import crypto from 'crypto'
+import { isDateExpired } from '../helpers/castings'
 
-import { OrderModel } from '../db/order';
+import { OrderDocument, OrderModel } from '../db/order';
 import { CartModel } from '../db/cart';
 import { UserDocument, UserModel } from '../db/users';
 import { CourseModel } from '../db/courses';
@@ -29,15 +30,6 @@ interface CourseRequest extends express.Request {
     }
 }
 
-export const orderItems = async (ids: any) => {
-    try {
-        const items = await CourseModel.find({ _id: { $in: ids } }).exec();
-        return items;
-    } catch (error) {
-        return 'items not found';
-    }
-};
-
 const updateOrder = async (invoice: any, response: any, items: any, summary: any, id: any, user: any, session: any) => {
     let channelName = null;
     let virtualNumber = null;
@@ -59,7 +51,7 @@ const updateOrder = async (invoice: any, response: any, items: any, summary: any
 
     if (response.store) channelName = response.store;        // over the counter
 
-    const orderData = {
+    return await OrderModel.create([{
         user_id: user._id,
         invoice,
         identifier: id,
@@ -75,10 +67,8 @@ const updateOrder = async (invoice: any, response: any, items: any, summary: any
         payment_code: response.payment_code ?? null,
         status_code: response.status_code,
         transaction_time: response.transaction_time,
-    };
-
-    const order = await OrderModel.create([orderData], { session });
-    return order;
+        expiry_time: response.expiry_time,
+    }], { session });
 };
 
 const midtransResponse = async (data: any, t: any) => {
@@ -107,6 +97,7 @@ const midtransResponse = async (data: any, t: any) => {
         approval_code: data.approval_code ?? null,
         actions: data.actions ?? null,
         response_body: data,
+        expiry_time: data.expiry_time ?? null,
     }, { transaction: t });
 };
 
@@ -183,15 +174,37 @@ const orderStatusHandling = async (order: any, user: any, notification: any) => 
 export const invoiceService = async (req: any, res: express.Response) => {
     try {
         const { identifier } = req.params
-        const { user } = req
+        const { userId } = req.body
 
-        const invoice = await OrderModel.findOne({ where: { identifier } });
+        const invoice = await OrderModel.findOne({ identifier }).exec()
         if (!invoice) return res.sendStatus(400)
-        if (invoice.user_id !== user.id) throw res.sendStatus(403).json({ 'message': 'FORBIDDEN: You are not allowed to access this invoice' })
+        if (invoice.user_id != userId) throw res.sendStatus(403).json({ 'message': 'FORBIDDEN: You are not allowed to access this invoice' })
+        return invoice
     } catch (err) {
         console.log(err);
     }
 }
+
+export const pendingPaymentService = async (req: any, res: express.Response) => {
+    try {
+        const { userId } = req.body;
+        const pendingData = await OrderModel.findOne({ user_id: userId, status: 'pending' }).exec();
+
+        if (!pendingData) { return { status: false, message: 'not found', data: null } }
+        else return { status: true, message: 'found', data: pendingData }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const orderItemsService = async (req: any, res: express.Response) => {
+    try {
+        const items = await CourseModel.find({ _id: { $in: req.body.itemIds } }).exec();
+        return items;
+    } catch (error) {
+        return 'items not found';
+    }
+};
 
 export const orderService = async (req: RequestWithJWT & express.Request, res: express.Response) => {
     const session = await mongoose.startSession();
@@ -204,20 +217,25 @@ export const orderService = async (req: RequestWithJWT & express.Request, res: e
             // Retrieve items, user, and cart
             const user = await UserModel.findById(req.body.userId).session(session);
             const cart = user.cart.map(item => item.course);
-
             if (!user || !cart) {
                 throw new Error('User or cart not found');
             }
 
+            // const pending = await OrderModel.find({ status: 'pending' }).exec();
+            // if (pending.length > 0) {
+            //     throw new Error('You have pending payment');
+            // }
+
+
             // Course to be purchased
             const courseIds: mongoose.Types.ObjectId[] = Array.isArray(req.body.items_ids) ? req.body.items_ids : [req.body.items_ids];
             const cartItems: CourseDocument[] = await CourseModel.find({ _id: { $in: courseIds } }).session(session).exec();
-
+            
             // Calculate total items to be purchased
             const cartSummary = CartSummary(cartItems)
             const ItemDetails = cartItems.map((item: any) => ({
                 name: item.title,
-                price: item.discount_price,
+                price: item.is_discount ? item.discount_price : item.price,
                 quantity: 1,
                 duration: item.duration.current
             }));
@@ -228,13 +246,13 @@ export const orderService = async (req: RequestWithJWT & express.Request, res: e
 
             // Charge to Midtrans
             const response = await CoreAPI.charge(payload);
+            await updateOrder(invoice, response, ItemDetails, cartSummary, identifier, user, session);
+            await midtransResponse(response, session);
 
-            const order = await updateOrder(invoice, response, ItemDetails, cartSummary, identifier, user, session);
-            const midtransRes = await midtransResponse(response, session);
             // await CartModel.deleteMany({ user_id: user.id }).session(session);
-
+            
             await session.commitTransaction();
-            return res.status(200).json(order[0]);
+            return { order_status: 'OK', message: 'Order Successfully Created' };
         })
     } catch (err) {
         console.log(err);
@@ -263,3 +281,20 @@ export const notificationHandlerService = async (req: express.Request, res: expr
         return res.sendStatus(404)
     }
 }
+
+export const allPaymentService = async (req: any, res: express.Response) => {
+    try {
+        const orders: OrderDocument[] = await OrderModel.find({ user_id: req.body.userId }).exec();
+
+        orders.forEach((order: any) => { 
+            if (isDateExpired(order.expiry_time)) {
+                order.status = 'expire';
+                order.save();
+            }
+        })
+
+        return orders;
+    } catch (error) {
+        console.log(error)
+    }
+};

@@ -130,12 +130,17 @@ const router = createRouter({
             {
               path: 'my-cart',
               name: 'Keranjang Saya',
-              component: () => import('../components/UserPages/MyCart.vue')
+              component: () => import('../components/UserPages/MyCart.vue'),
             },
             {
               path: 'settings',
               name: 'Pengaturan',
               component: () => import('../components/UserPages/Settings.vue')
+            },
+            {
+              path: 'payment-history',
+              name: 'Riwayat Pembayaran',
+              component: () => import('../components/UserPages/PaymentHistory.vue')
             },
           ]
         },
@@ -148,39 +153,18 @@ const router = createRouter({
             {
               path: 'create/:items*',
               name: 'Buat Pembayaran',
-              component: () => import('../components/Payments/PaymentMenu.vue'),
+              component: () => import('../components/Payments/Create.vue'),
               props: true,
-              children: [
-                {
-                  path: '',
-                  name: 'Metode Pembayaran',
-                  component: () => import('../components/Payments/Methods.vue'),
-                  props: true,
-                },
-                {
-                  path: 'bank/:channel',
-                  name: 'Transfer Bank',
-                  component: () => import('../components/Payments/BankTransfer.vue'),
-                  props: true,
-                },
-                {
-                  path: 'ewallet/:channel',
-                  name: 'E Wallet',
-                  component: () => import('../components/Payments/EWallet.vue'),
-                  props: true,
-                },
-              ]
             },
             {
               path: 'pending-payment',
               name: 'Pembayaran Tertunda',
-              component: () => import('../components/Payments/PendingPayment.vue'),
-              props: true,
+              component: () => import('../components/Payments/Pending.vue'),
             },
             {
-              path: 'view-virtual-account',
-              name: 'Lihat Nomor VA',
-              component: () => import('../components/Payments/VirtualAccount.vue'),
+              path: 'view/:id',
+              name: 'Detail Pembayaran',
+              component: () => import('../components/Payments/ViewById.vue'),
               props: true,
             },
           ]

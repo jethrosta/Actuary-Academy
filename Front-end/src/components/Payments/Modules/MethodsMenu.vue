@@ -21,14 +21,14 @@
                 </button>
                 <div :class="['payment-item', { open: payment.isOpen }]"
                     class="flex flex-col text-black border-[1px] border-main_blue">
-                    <div v-for="channel in payment.channels" class="flex hover:bg-gray-200 flex-col w-full px-4 py-3">
-                        <RouterLink :to="{ name: payment.route, params: { channel: channel.name }, query: { items: items }}"
-                            class="flex">
-                            <div class="flex items-center justify-center w-[5%]">
-                                <img :src="channel.logo" alt="" class="h-4">
+                    <div v-for="channel in payment.channels" class="flex hover:bg-gray-200 flex-col w-full px-4">
+                        <button @click="selectMethod(channel.name.toLowerCase())"
+                            class="grid grid-cols-[1fr,19fr] py-3 items-center justify-center ">
+                            <div class="">
+                                <img :src="channel.logo" alt="" class="h-6">
                             </div>
-                            <div class="px-4 w-[95%]">{{ channel.name }}</div>
-                        </RouterLink>
+                            <div class="px-4 mr-auto">{{ channel.name }}</div>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -40,12 +40,17 @@
 import { ref } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
 
+const emit = defineEmits(['selectMethod'])
+
+function selectMethod(channel) {
+    emit('selectMethod', channel)
+}
+
 const paymentMethods = ref([
     {
         id: 0,
         name: 'bankTransfer',
         title: 'ATM/Bank Transfer (Virtual Account)',
-        route: 'Transfer Bank',
         isOpen: false,
         channels: [
             { name: 'BCA', logo: '/src/assets/payments/bca.png' },
@@ -59,10 +64,9 @@ const paymentMethods = ref([
         id: 1,
         name: 'eWallet',
         title: 'E-Wallet',
-        route: 'E Wallet',
         isOpen: false,
         channels: [
-            { name: 'Gopay', logo: '/src/assets/payments/gopay-full.png' },
+            { name: 'Gopay', logo: '/src/assets/payments/gopay.png' },
             { name: 'ShopeePay', logo: '/src/assets/payments/shopeepay.png' },
         ],
         menuIcon: 'wallet',

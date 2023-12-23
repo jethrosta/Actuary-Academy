@@ -2,12 +2,8 @@ import { cart } from "../db.js";
 import { toRaw } from 'vue';
 import axios from 'axios';
 import PaymentService from '../services/payment.service.js';
-import { useAuthStore } from './';
 
-const localPending = JSON.parse(localStorage.getItem('pending-payment'));
-const pendingPayment = localPending
-  ? { status: true, data: localPending }
-  : { status: false, data: null }
+const user = JSON.parse(localStorage.getItem('user'));
 
 export const payment = {
   id: 'payment',
@@ -15,39 +11,58 @@ export const payment = {
     cartItems: null,
     payment: {},
     paymentResponse: {},
-    checkoutItems: [],
-    pendingPayment,
+    orderItems: null,
+    pendingPayment: { status: false, message: null, data: null },
     pendingPaymentSuccess: false,
+    allPayment: null,
+    paymentById: null,
+    paymentMethod: null,
   }),
 
   getters: {
-    // checkoutAmount: (state) => {
-    //   if (state.paymentState.checkoutItems.length == 0) { return 0; }
-    //   else { return state.paymentState.checkoutItems.map(item => item.price).reduce((sum, price) => sum + price, 0) }
-    // },
-    getCheckoutItems: (state) => {
-      return state.checkoutItems;
+    getOrderItems: (state) => {
+      return state.orderItems;
     },
     getPendingPayment: (state) => {
       return state.pendingPayment;
     },
     getPaymentStatus: (state) => {
       return state.pendingPaymentSuccess;
+    },
+    getAllPayment: (state) => {
+      return state.allPayment;
+    },
+    getCart: (state) => {
+      return state.cartItems;
+    },
+    getPaymentById: (state) => {
+      return state.paymentById;
+    },
+    getPaymentMethod: (state) => {
+      return state.paymentMethod;
     }
   },
 
   actions: {
-    async createOrder(channel) {
+
+    async setCart() {
       try {
-        const user = useAuthStore().getUser;
+        const res = await PaymentService.getCart();
+        this.cartItems = res.data.userCart;
+        console.log(res.data.message);
+      } catch (err) {
+        this.cartItems = null;
+        console.log(err);
+      }
+    },
+
+    async setOrder(channel) {
+      try {
         const ids = this.checkoutItems.map(item => item._id);
         const req = { userId: user._id, payment_channel: channel, items_ids: ids }
-        const res = await PaymentService.createOrder(req);
-        localStorage.setItem('pending-payment', JSON.stringify(res.data));
+        const res = await PaymentService.makeOrder(req);
         console.log(res);
-        this.pendingPayment.data = res.data;
-        this.pendingPayment.status = true;
-        return res.data;
+        this.pendingPayment.status = true
       }
       catch (error) {
         console.log(error);
@@ -55,39 +70,58 @@ export const payment = {
       }
     },
 
-    async getCart() {
+    async setOrderItems(ids) {
       try {
-        const res = await PaymentService.getCart();
-        this.cartItems = res;
-        console.log(res);
-      } catch (err) {
-        this.cartItems = null;
-        console.log(err);
+        const res = await PaymentService.getOrderItems(ids);
+        this.orderItems = Array.isArray(res) ? res : [res];
+      } catch (error) {
+        this.orderItems = [];
+        console.log(error);
       }
     },
 
-    async getOrderItems(ids) {
+    async setPendingPayment() {
       try {
-        const res = await PaymentService.getOrderItems(ids);
-        this.checkoutItems = res;
+        const res = await PaymentService.getPendingPayment();
+        this.pendingPayment.status = res.data.status;
+        this.pendingPayment.message = res.data.message;
+        this.pendingPayment.data = res.data.data;
+        console.log(res);
       } catch (error) {
-        this.checkoutItems = [];
+        throw new Error(error);
+      }
+    },
+
+    async setAllPayment() {
+      try {
+        const res = await PaymentService.getAllPayment();
+        this.allPayment = res.data;
+        console.log(res);
+      } catch (error) {
+        this.allPayment = null;
         console.log(error);
       }
+    },
+
+    async setPaymentById(id) {
+      try {
+        const res = await PaymentService.getPaymentById(id);
+        console.log(res);
+        this.paymentById = res.data;
+      } catch (error) {
+        this.paymentById = null;
+        console.log(error);
+      }
+    },
+
+    setPaymentMethod(channel) {
+      this.paymentMethod = channel;
     },
 
     async updatePaymentStatus() {
       console.log('it works')
     },
 
-    async getCurrentPayment() {
-      try {
-        const res = await PaymentService.getCurrentPaymentData();
-        console.log(res);
-      } catch (error) {
-        throw new Error(error);
-      }
-    }
 
   }
 };

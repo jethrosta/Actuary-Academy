@@ -54,6 +54,10 @@ const payloads = (type: string, invoice: string, summary: any, user: any, items:
         first_name: user.name,
         email: user.email,
     },
+    custom_expiry: { 
+        expiry_duration: 24,
+        unit: 'hour'
+    },
     item_details: items,
     ...requestChannel,
 });

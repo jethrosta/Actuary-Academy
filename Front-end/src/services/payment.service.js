@@ -9,10 +9,20 @@ class PaymentService {
     async getCart() {
         try {
             const res = await axios.get(API_URL + 'cart/' + user._id, { withCredentials: true });
-            return res.data;
+            return res;
         }
         catch (error) {
             console.log('failed to get cart items')
+            throw new Error(error);
+        }
+    }
+
+    async makeOrder(req) {
+        try {
+            const res = await axios.post(API_URL + 'ordercreate', req, { withCredentials: true });
+            return res;
+        }
+        catch (error) {
             throw new Error(error);
         }
     }
@@ -27,20 +37,27 @@ class PaymentService {
         }
     }
 
-    async createOrder(req) {
+    async getPendingPayment() {
         try {
-            const res = await axios.post(API_URL + 'createorder', req, { withCredentials: true });
+            const res = await axios.post(API_URL + 'pendingpayment', { userId: user._id }, { withCredentials: true });
             return res;
-        }
-        catch (error) {
+        } catch (error) {
             throw new Error(error);
         }
-    } 
-    
-    async getCurrentPaymentData() {
+    }
+
+    async getAllPayment() {
         try {
-            const paymentId = JSON.parse(localStorage.getItem('pending-payment')).identifier;
-            const res = await axios.get(API_URL + 'invoice/' + paymentId, { withCredentials: true });
+            const res = await axios.post(API_URL + 'allPayment', { userId: user._id }, { withCredentials: true });
+            return res;
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+
+    async getPaymentById(id) {
+        try {
+            const res = await axios.post(API_URL + 'invoice/' + id, { userId: user._id }, { withCredentials: true });
             return res;
         } catch (error) {
             throw new Error(error);

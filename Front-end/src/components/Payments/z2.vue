@@ -62,6 +62,21 @@
             </div>
         </div>
     </div>
+    <div v-if="paymentSuccess" class="absolute flex flex-col top-0 left-0 h-full w-full bg-green-300 bg-opacity-70">
+            <div class="flex flex-col m-auto justify-self-center self-center items-center justify-center text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="120" height="120" fill="#4CAF50"
+                    class="m-4">
+                    <circle cx="12" cy="12" r="10" fill="#4CAF50" />
+                    <path d="M8 12L10 15L16 9" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                <h1 class="text-4xl font-bold text-green-900">Pembayaran Berhasil</h1>
+            </div>
+            <RouterLink :to="{ name: 'Keranjang Saya' }"
+                class="flex p-4 m-6 items-center justify-center text-white bg-green-900 font-bold rounded-xl">
+                Kembali Ke Keranjang
+            </RouterLink>
+        </div>
 </template>
 
 <script setup>
@@ -83,7 +98,7 @@ const provider = ref(route.params.providerName)
 const amount = ref(store.checkoutAmount)
 
 const paymentData = ref({
-    items: ref(store.paymentState.checkoutItems),
+    items: ref(store.paymentState.orderItems),
 })
 
 const eWalletLogoSource = computed(() => {

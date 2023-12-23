@@ -18,6 +18,15 @@ export const auth = {
   },
 
   actions: {
+    async getUpdatedUser(user) {
+      try {
+        const res = AuthService.getUpdatedUser(user)
+        this.loginState.user = res.data;
+        localStorage.setItem('user', JSON.stringify(res.data));
+      } catch (error) {
+        throw error;
+      }
+    },
 
     register(user) {
       return AuthService.register(user).then(

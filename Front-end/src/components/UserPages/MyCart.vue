@@ -20,7 +20,7 @@
                                 d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
                         <h3 class="mb-5 font-normal text-gray-500 dark:text-gray-400">
-                            tidak ada item yang dipilih!
+                            {{ erroMessage }}
                         </h3>
                         <button @click="modalError = false"
                             class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
@@ -31,9 +31,18 @@
                 </div>
             </div>
         </div>
-        <div class="font-bold text-3xl py-4">Keranjang</div>
-
-        <!-- Cart Items List -->
+        <div class="flex content-between justify-between items-center w-full py-4">
+            <div class="w-min font-bold text-3xl">Keranjang</div>
+            <RouterLink :to="{ name: 'Riwayat Pembayaran' }"
+                class="flex items-center font-semibold text-lg text-main_blue hover:text-blue-400">
+                <u>Riwayat Pembayaran</u>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="rotate-180">
+                    <path d="M19 12H6M12 5l-7 7 7 7"></path>
+                </svg>
+            </RouterLink>
+        </div>
         <div v-if="!toEditProduct" class="w-full">
             <div class="mb-4">
                 <label class="inline-flex items-center">
@@ -61,7 +70,7 @@
                     </div>
                     <div class="flex flex-col gap-1 text-base justify-between ">
                         <div class=" text-right text-main_blue font-bold">
-                            {{ toIDR(cartItems[index].data.price) }}</div>
+                            {{ toIDR(priceTotal[index]) }}</div>
                         <button @click="toEditProduct = true, currentItemEdit = index"
                             class="flex ml-auto bg-orange-500 py-1 px-3 text-white font-semibold first-letter:text-center rounded-lg">
                             Lihat Detail</button>
@@ -76,7 +85,7 @@
                         <input type="checkbox" @click="toggleCheckAll" :checked="isCheckAll" class=" h-5 w-5">
                     </label>
                     <div class="text-lg text-main_blue font-bold">
-                        Select All ({{ cartItems.length }})</div>
+                        Select All ({{ cartItems ? cartItems.length : 0 }})</div>
                 </div>
                 <div class="flex flex-row gap-3 items-center">
                     <div class="text-lg text-main_blue font-bold">
@@ -171,19 +180,19 @@
                         <div class="">
                             Harga</div>
                         <div class="">
-                            Rp 1.000.000</div>
+                            {{ toIDR(priceInitial[currentItemEdit]) }}</div>
                     </div>
-                    <div class="flex gap-1 text-base justify-between ">
+                    <div v-if="isDiscount[currentItemEdit]" class="flex gap-1 text-base justify-between ">
                         <div class="">
-                            Diskon 10%</div>
+                            Diskon {{ discountPercent[currentItemEdit] }}%</div>
                         <div class="">
-                            - Rp 100.000</div>
+                            - {{ toIDR(discountPrice[currentItemEdit]) }}</div>
                     </div>
                     <div class="flex gap-1 text-base justify-between ">
                         <div class="text-main_blue font-bold">
                             Total Pembayaran</div>
                         <div class="text-main_blue font-bold">
-                            Rp 900.000</div>
+                            {{ toIDR(priceTotal[currentItemEdit]) }}</div>
                     </div>
                 </div>
                 <div class="space-y-3">
@@ -196,9 +205,6 @@
                 </div>
             </div>
         </div>
-
-
-
     </div>
 </template>
 
@@ -211,28 +217,57 @@ import router from '../../router';
 const store = usePaymentStore();
 
 //Cart
-const cartItems = ref([])
+const cartItems = ref(null)
+const isDiscount = computed(() => cartItems.value ? cartItems.value.map(item => item.data.is_discount) : [false])
+const priceInitial = computed(() => cartItems.value ? cartItems.value.map(item => item.data.price) : [0])
+const priceTotal = computed(() => cartItems.value ? cartItems.value.map(item => item.data.is_discount ? item.data.discount_price : item.data.price) : [0])
+const discountPrice = computed(() => cartItems.value ? cartItems.value.map(item => item.data.is_discount ? item.data.price - item.data.discount_price : 0) : [0])
+const discountPercent = computed(() => cartItems.value ? cartItems.value.map(item =>
+    item.data.is_discount ? Math.round((item.data.price - item.data.discount_price) / item.data.price * 100) : 0) : [0])
+
+
+//Checkout functions
+const cartCheckout = () => {
+    if (isEmpty.value) {
+        errorMessage.value = 'Tidak ada item yang dipilih';
+        modalError.value = true;
+    }
+    else {
+        modalError.value = false;
+        
+        if (store.getPendingPayment.status) {
+            errorMessage.value = 'Anda memiliki pembayaran yang belum diselesaikan, lihat Riwayat Pembayaran';
+            modalError.value = true;
+        }
+
+        const items = selectedItems.value.map(item => item._id);
+        router.push({ name: 'Buat Pembayaran', query: { items: items } }).then(() => {
+            router.go(0);
+        })
+    }
+}
 
 onMounted(() => {
-    store.getCart().then(() =>
-        cartItems.value = store.cartItems.userCart.map(item => {
+    store.setCart().then(() =>
+        cartItems.value = store.getCart.map(item => {
             return {
                 isChecked: false,
                 data: item
             }
         })
     )
+    store.setPendingPayment();
 })
 
 const selectedItems = computed(() => {
-    return cartItems.value.filter(item => item.isChecked).map(item => item.data);
+    return cartItems.value ? cartItems.value.filter(item => item.isChecked).map(item => item.data) : [];
 })
 const totalItems = computed(() => {
     return selectedItems.value.length;
 })
 const totalPrice = computed(() => {
     return selectedItems.value.reduce((priceSum, item) => {
-        return priceSum + parseInt(item.price);
+        return priceSum + parseInt(item.is_discount ? item.discount_price : item.price);
     }, 0);
 })
 
@@ -279,7 +314,7 @@ const close = (e) => {
 };
 
 const isCheckAll = computed(() => {
-    return cartItems.value.every(items => items.isChecked === true);
+    return cartItems.value ? cartItems.value.every(items => items.isChecked === true) : false;
 })
 
 const toggleCheckAll = () => {
@@ -296,7 +331,7 @@ const toggleCheckAll = () => {
 }
 
 const modalError = ref(false);
-
+const errorMessage = ref('');
 const closeModal = (e) => {
     if (e.target.closest('.modal-card')) return;
     else modalError.value = false;
@@ -306,24 +341,8 @@ const isEmpty = computed(() => {
     return selectedItems.value.length === 0 ? true : false;
 })
 
-//Checkout functions
-const cartCheckout = () => {
-    if (isEmpty.value) {
-        modalError.value = true;
-        console.log('No item selected');
-    }
-    else {
-        modalError.value = false;
-        const items = selectedItems.value.map(item => item._id);
-        router.push({ name: 'Buat Pembayaran', query: { items: items } });
-    }
-}
 
 //Helpers
-onBeforeRouteLeave((to, from, next) => {
-    next();
-})
-
 function toIDR(num) {
     const idr = new Intl.NumberFormat('id-ID', {
         style: 'currency',
