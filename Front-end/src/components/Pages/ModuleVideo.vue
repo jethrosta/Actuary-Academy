@@ -1,40 +1,33 @@
 <script setup>
+import { ref, computed, watchEffect } from 'vue';
 import { useRoute, RouterLink } from 'vue-router';
 import Footer from '../Footer.vue';
 import { modules } from '@/db';
 
-const videos = [
-    { category: 'Pendahuluan', title: 'Matematika Keuangan', active: true },
-    { category: 'Single Payment Interest', title: 'Proses Pembungaan' },
-    { category: 'Single Payment Interest', title: 'Jenis Bunga 1' },
-    { category: 'Single Payment Interest', title: 'Jenis Bunga 2' },
-    { category: 'Single Payment Interest', title: 'Ekuivalensi Bunga Periodik' },
-    { category: 'Multi Payment Interest', title: 'Time Value of Money' },
-    { category: 'General Annuity', title: 'Pendahuluan' },
-    { category: 'General Annuity', title: 'Anuitas Akhir' },
-    { category: 'General Annuity', title: 'Anuitas Awal' },
-    { category: 'General Annuity', title: 'Hubungan Anuitas Awal & Akhir' },
-    { category: 'General Annuity', title: 'Perpetuitas' },
-    { category: 'General Annuity', title: 'Differing Period' },
-    { category: 'Arithmetic & Geometric Annuity', title: 'Arithmetic Annuity' },
-    { category: 'Arithmetic & Geometric Annuity', title: 'Geometric Annuity' },
-    { category: 'Deferred Annuity', title: 'Deferred Annuity' },
-    { category: 'Metode Pengembalian Utang', title: 'Pendahuluan' },
-    { category: 'Metode Pengembalian Utang', title: 'Outstanding Loan Balance' },
-    { category: 'Metode Pengembalian Utang', title: 'Ammortization' }
-]
-
 const route = useRoute();
 
-const moduleId = route.params.moduleId;
-const module = modules[moduleId];
-const pageTitle = `${moduleId}: ${module.name}`;
+const moduleIdParam = computed(() => route.params.moduleId);
+const videoIdParam = computed(() => route.params.videoId);
 
-const navigations = [
-    { title: 'Akademi', url: '/academy' },
-    { title: pageTitle, url: `/modules/${moduleId}` },
-    { title: 'Video dan Modul' }
-]
+const currentModule = ref(null);
+const currentModuleVideoList = ref(null);
+const currentModuleName = ref(null);
+const currentVideo = ref(null);
+const navigations = ref(null);
+
+watchEffect(() => {
+    currentModule.value = modules[moduleIdParam.value] ?? null;
+    currentModuleVideoList.value = currentModule.value?.videos ?? [];
+    currentModuleName.value = `${moduleIdParam.value}: ${currentModule.value?.name}`;
+    currentVideo.value = videoIdParam.value
+        ? currentModuleVideoList.value.find((v) => v.videoId === videoIdParam.value)
+        : currentModuleVideoList.value[0];
+    navigations.value = [
+        { title: 'Akademi', url: '/academy' },
+        { title: currentModuleName.value, url: `/modules/${moduleIdParam.value}` },
+        { title: 'Video dan Modul' }
+    ];
+});
 
 </script>
 <template>
@@ -58,36 +51,44 @@ const navigations = [
                     <div class="w-11 h-11 rounded-full bg-gray-300 mr-4">
                         <img src="">
                     </div>
-                    <div class="font-semibold text-xl">{{ pageTitle }}</div>
+                    <div class="font-semibold text-xl">{{ currentModuleName }}</div>
                 </div>
-                <div class="bg-main_blue text-white rounded-xl p-6 pt-7">
-                    <div class="bg-white rounded-xl flex items-center px-4 py-3 relative">
-                        <div class="absolute -top-5 left-1/2 -translate-x-1/2 flex items-center bg-sec_blue rounded-full p-3 font-bold w-8 h-8">
-                            1
-                        </div>
-                        <div class="w-28 h-[4.5rem] bg-gray-300 rounded-xl mr-4 shrink-0">
-                            <img src="">
-                        </div>
-                        <div class="text-sec_blue text-lg font-bold">Pendahuluan: Matematika Keuangan</div>
-                    </div>
-                    <div class="max-h-[32rem] mt-4 overflow-auto">
-                        <div v-for="(video, index) in videos" v-show="!video.active" class="flex items-center mb-5">
-                            <div class="bg-white text-sec_blue flex items-center justify-center text-xs font-bold w-6 h-6 rounded-full p-2">
-                                {{ index + 1 }}
-                            </div>
-                            <div class="w-24 h-14 bg-gray-300 rounded-xl ml-3 shrink-0">
-                                <img src="">
-                            </div>
-                            <div class="ml-4">
-                                <div class="font-semibold">{{ video.category }}</div>
-                                <div>{{ video.title }}</div>
-                            </div>
-                        </div>
+                <div class="bg-main_blue text-white rounded-xl">
+                    <div class="flex flex-col max-h-[40rem] p-6 overflow-auto custom-scrollbar">
+                        <RouterLink
+                            v-for="(video, index) in currentModuleVideoList"
+                            :to="{ name: 'module-video', params: { moduleId: moduleIdParam, videoId: video.videoId } }"
+                            class="flex items-center mb-5"
+                            :class="video.videoId === currentVideo.videoId && 'bg-white rounded-xl px-4 py-3 mt-4 relative'"
+                        >
+                            <template v-if="video.videoId === currentVideo.videoId">
+                                <div class="absolute -top-5 left-1/2 -translate-x-1/2 flex items-center bg-sec_blue rounded-full p-3 font-bold h-8">
+                                    {{ index + 1 }}
+                                </div>
+                                <div class="text-sec_blue text-lg">
+                                    <div class="font-semibold">{{ video.category }}</div>
+                                    <div>{{ video.title }}</div>
+                                </div>
+                            </template>
+                            <template v-else>
+                                <div class="bg-white text-sec_blue flex items-center justify-center text-xs font-bold w-6 h-6 rounded-full p-2">
+                                    {{ index + 1 }}
+                                </div>
+                                <img
+                                    class="w-24 h-14 rounded-lg bg-gray-300 ml-3 shrink-0"
+                                    :src="`https://vz-0e8f7475-071.b-cdn.net/${video.videoId}/thumbnail.jpg`"
+                                >
+                                <div class="ml-4">
+                                    <div class="font-semibold">{{ video.category }}</div>
+                                    <div>{{ video.title }}</div>
+                                </div>
+                            </template>
+                        </RouterLink>
                     </div>
                 </div>
             </div>
-            <div>
-                <h1 class="text-[2.5rem] font-bold mb-3">Pendahuluan: Matematika Keuangan</h1>
+            <div v-if="currentVideo">
+                <h1 class="text-[2.5rem] font-bold mb-3">{{ currentVideo.category }}: {{ currentVideo.title }}</h1>
                 <div class="flex gap-x-4 text-main_blue mb-3">
                     <div class="flex items-center">
                         <div class="w-4 h-4 mr-2">
@@ -102,11 +103,14 @@ const navigations = [
                         <div class="font-semibold">Diskusi</div>
                     </div>
                 </div>
-                <div class="">
-                    <video class="rounded-xl" width="850" height="480" controls>
-                        <source src="" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+                <div class="relative w-[850px] h-[480px]">
+                    <iframe
+                        class="border-0 absolute top-0 w-full h-full rounded-xl"
+                        :src="`https://iframe.mediadelivery.net/embed/186628/${currentVideo.videoId}?autoplay=false&loop=false&muted=false&preload=true&responsive=true`"
+                        loading="lazy"
+                        allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;"
+                        allowfullscreen="true"
+                    ></iframe>
                 </div>
                 <div class="mt-5">
                     <div class="text-sec_blue flex justify-between items-center text-lg font-bold border-b-2">
@@ -130,3 +134,30 @@ const navigations = [
     </div>
     <Footer></Footer>
 </template>
+<style scoped>
+/* Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(13, 28, 159, 0.7) transparent;
+}
+
+/* Chrome, Edge and Safari */
+.custom-scrollbar::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: transparent;
+  margin: 0.5rem 0;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: rgba(13, 28, 159, 0.7);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(13, 28, 159);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:active {
+  background-color: rgb(13, 28, 159);
+}
+</style>

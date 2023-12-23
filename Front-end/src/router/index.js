@@ -88,7 +88,7 @@ const router = createRouter({
           component: () => import('../components/Pages/Module.vue')
         },
         {
-          path: '/modules/:moduleId/video',
+          path: '/modules/:moduleId/video/:videoId?',
           name: 'module-video',
           meta: { requiresAuth: true },
           component: () => import('../components/Pages/ModuleVideo.vue')
