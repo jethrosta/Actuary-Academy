@@ -10,6 +10,14 @@
                     <div class="font-bold"> Metode Pembayaran</div>
                     <div>{{ channel.toUpperCase() }} Virtual Account</div>
                 </div>
+                <div class="py-2 text-gray-800 space-y-1">
+                    <div class="font-bold"> Status Pembayaran</div>
+                    <div>{{ statusBahasa }}</div>
+                </div>
+                <div class="py-2 text-gray-800 space-y-1">
+                    <div class="font-bold"> Waktu Pembayaran</div>
+                    <div>{{ time ? time.paid ? isoToDate(time.paid) : isoToDate(time.expired) : 'memuat...'  }}</div>
+                </div>
             </div>
             <div
                 class="flex border-[1px] p-4 justify-between text-gray-800 text-2xl font-semibold border-main_blue bg-blue-100">
@@ -20,10 +28,7 @@
                 errorMessage }}</div>
         </div>
         <div class="flex w-full space-x-3 p-4">
-            <button @click="makePayment" type="submit"
-                class="flex flex-1 justify-center items-center p-3 bg-sec_blue hover:bg-[#2c2cc7] text-white font-bold rounded-xl">
-                Buat Tagihan</button>
-            <button @click="cancelMethod" type="reset"
+            <button @click="router.go(-1)"
                 class="flex flex-1 justify-center items-center p-3 border-2 hover: border-sec_blue text-sec_blue rounded-xl">Kembali</button>
         </div>
     </div>
@@ -32,20 +37,31 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue';
 import router from '@/router/';
-import { usePaymentStore, useAuthStore } from '@/store';
-
-const authStore = useAuthStore();
-const paymentStore = usePaymentStore();
-const requestSuccess = ref(false);
 
 const props = defineProps({
     channel: String,
     amount: Number,
+    time: Object,
+    status: String
 })
 
 //Display Data
 const amount = computed(() => props.amount ? props.amount : 0)
 const channel = computed(() => props.channel ? props.channel : 'memuat...')
+const time = computed(() => props.time ? props.time : null)
+const status = computed(() => props.status ? props.status : 'not found')
+const statusBahasa = computed(() => {
+    switch (status.value.toLowerCase()) {
+        case 'pending':
+           return 'Pembayaran Tertunda'
+        case 'canceled':
+            return 'Pembayaran Dibatalkan'
+        case 'success':
+            return 'Pembayaran Berhasil'
+        default:
+            return 'memuat...'
+    }
+})
 
 const errorMessage = ref('');
 const logo = computed(() => {
@@ -67,6 +83,8 @@ const logo = computed(() => {
     }
 })
 
+
+
 onMounted(() => {
 
 })
@@ -79,6 +97,24 @@ function toIDR(num) {
         minimumFractionDigits: 0, // Set to 0 to remove decimal places
     }).format(num);
     return idr;
+}
+
+function isoToDate(isoDate) {
+    const date = new Date(isoDate);
+
+    const months = [
+        'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun',
+        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Des'
+    ];
+
+    const day = date.getDate();
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+    const hours = ('0' + date.getHours()).slice(-2);
+    const minutes = ('0' + date.getMinutes()).slice(-2);
+
+    const customFormat = `${day} ${month} ${year} - ${hours}:${minutes}`;
+    return customFormat;
 }
 
 </script>

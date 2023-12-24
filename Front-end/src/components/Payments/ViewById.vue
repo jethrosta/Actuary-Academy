@@ -2,10 +2,10 @@
     <div class="bg-slate-200 font-inter">
         <div class="grid grid-cols-5 px-28 py-20 flex-grow h-full flex-col lg:flex-row max-w-[1500px] mx-auto justify-center w-full text-white gap-x-8">
             <div class="col-span-3 h-min">
-                <PaymentDetails :channel="channel" :amount="amount"/>
+                <PaymentDetails :channel="channel" :amount="amount" :time="time" :status="status" />
             </div>
             <div class="col-span-2 text-base">
-                <CheckoutDetails :items="items" :amount="amount" :userData="userData" />
+                <CheckoutDetails :invoice="invoice" :amount="amount" :items="items" :userData="userData"/>
             </div>
         </div>
         <Footer />
@@ -31,6 +31,15 @@ const userData = computed(() => authStore.getUser)
 const amount = computed(() => paymentData.value ? paymentData.value.gross_amount : 0)
 const items = computed(() => paymentData.value ? paymentData.value.course : null)
 const channel = computed(() => paymentData.value ? paymentData.value.channel_name : null)
+const invoice = computed(() => paymentData.value ? paymentData.value.invoice : null)
+const status =  computed(() => paymentData.value ? paymentData.value.status : null)
+const time = computed(() => {
+    return {
+        created: paymentData.value ? paymentData.value.transaction_time : null,
+        expired: paymentData.value ? paymentData.value.expiry_time : null,
+        paid: paymentData.value ? paymentData.value.paid_at : null,
+    }
+})
 
 onMounted(() => {
     paymentStore.setPaymentById(route.params.id)

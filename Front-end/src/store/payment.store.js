@@ -58,7 +58,7 @@ export const payment = {
 
     async setOrder(channel) {
       try {
-        const ids = this.checkoutItems.map(item => item._id);
+        const ids = this.orderItems.map(item => item._id);
         const req = { userId: user._id, payment_channel: channel, items_ids: ids }
         const res = await PaymentService.makeOrder(req);
         console.log(res);

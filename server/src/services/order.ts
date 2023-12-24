@@ -45,7 +45,7 @@ const updateOrder = async (invoice: any, response: any, items: any, summary: any
     if (response.permata_va_number) channelName = 'permata';    // permata bank
 
     if (response.actions) {                                     // gopay
-        channelName = 'gopay';
+        channelName = response.payment_type ;
         actions = response.actions;
     }
 
@@ -63,7 +63,7 @@ const updateOrder = async (invoice: any, response: any, items: any, summary: any
         permata_va_number: response.permata_va_number ?? null,
         bill_key: response.bill_key ?? null,
         biller_code: response.biller_code ?? null,
-        actions,
+        actions: actions ?? null,
         payment_code: response.payment_code ?? null,
         status_code: response.status_code,
         transaction_time: response.transaction_time,

@@ -34,24 +34,36 @@
                 </div>
                 <div class="flex justify-between items-center">
                     <div class="text-gray-600 font-medium">Waktu</div>
-                    <div class="flex justify-center items-center gap-2">
+                    <div v-if="item.status == 'pending'" class="grid grid-cols-2 justify-center items-center gap-2">
                         <p>{{ isoToDate(item.expiry) }}</p>
                         <div
-                            class="border-2 border-red-400 text-red-400 py-1 px-3 font-semibold first-letter:text-center rounded-lg">
-                            {{ countdownCounter(item.expiry) }}
+                            class="border-2 border-red-400 text-center text-red-400 py-1 px-3 font-semibold first-letter:text-center rounded-lg">
+                            {{ counters[index] ? counters[index].counter : '00:00:00' }}
                         </div>
+                    </div>
+                    <div v-else class="flex justify-center items-center gap-2">
+                        <p>Selesai Pada : </p>
+                        <p>{{ isoToDate(item.paid_at) }}</p>
                     </div>
                 </div>
                 <div class="flex justify-end gap-2 pt-6 text-white font-semibold">
                     <RouterLink :to="{ name: 'Pembayaran Tertunda' }"
+                        v-if="item.status == 'pending'"
                         class=" col-span-1 text-lg bg-orange-500 py-1 px-4 first-letter:text-center rounded-lg">
                         Bayar
                     </RouterLink>
                     <button @click="checkPaymentStatus(item.identifier)"
+                        v-if="item.status == 'pending'"
                         class="col-span-1 text-lg bg-sec_blue py-1 px-4 first-letter:text-center rounded-lg">
                         Cek Status
                     </button>
-                    <button @click="router.push({ name: 'Detail Pembayaran', params: { id: item.identifier }})" 
+                    <button @click="router.push({ name: 'Detail Pembayaran', params: { id: item.identifier } })"
+                        v-if="item.status == 'pending'"
+                        class=" col-span-1 text-lg bg-sec_blue py-1 px-4 first-letter:text-center rounded-lg">
+                        Detail
+                    </button>
+                    <button @click="router.push({ name: 'Pembayaran Tertunda' })"
+                        v-else
                         class=" col-span-1 text-lg bg-sec_blue py-1 px-4 first-letter:text-center rounded-lg">
                         Detail
                     </button>
@@ -65,7 +77,7 @@
 <script setup>
 import router from '@/router/index.js';
 import { usePaymentStore } from '../../store';
-import { computed, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 
 const paymentStore = usePaymentStore();
 
@@ -83,6 +95,7 @@ const data = computed(() => {
                 channel: item.channel_name,
                 expiry: item.expiry_time,
                 identifier: item.identifier,
+                paid_at: item.paid_at,
             }
         }) : [{
             _id: 'memuat...',
@@ -92,6 +105,7 @@ const data = computed(() => {
             channel: 'memuat...',
             expiry: 'memuat...',
             identifier: 'not found',
+            paid_at: 'memuat...',
         }]
 });
 
@@ -109,18 +123,14 @@ const getStatus = (status) => {
     switch (status) {
         case 'pending':
             return 'Menunggu Pembayaran';
-        case 'settlement':
+        case 'success':
             return 'Pembayaran Berhasil';
-        case 'expire':
-            return 'Lewat Batas Pembayaran';
-        case 'cancel':
+        case 'canceled':
             return 'Pembayaran Dibatalkan';
         case 'deny':
             return 'Pembayaran Ditolak';
-        case 'refund':
-            return 'Full Refund';
-        case 'partial_refund':
-            return 'Refund Sebagian';
+        case 'challenge':
+            return 'Payment Challenged';
         default:
             return 'memuat...';
     }
@@ -137,9 +147,9 @@ const getMethod = (channel) => {
         case 'bca':
             return 'Transfer BCA VA';
         case 'gopay':
-            return 'Aplikasi Gopay';
+            return 'Gopay';
         case 'shopeepay':
-            return 'Aplikasi Shopeepay';
+            return 'Shopeepay';
         default:
             return 'memuat...';
     }
@@ -149,25 +159,46 @@ const statusLabelClass = (status) => {
     switch (status) {
         case 'pending':
             return 'bg-yellow-200 border-yellow-600 text-yellow-700';
-        case 'settlement':
+        case 'success':
             return 'bg-green-200 border-green-600 text-green-600';
-        case 'expire':
-            return 'bg-gray-200 border-gray-600 text-gray-600';
-        case 'cancel':
+        case 'canceled' || 'challenge':
             return 'bg-gray-200 border-gray-600 text-gray-600';
         case 'deny':
             return 'bg-red-200 border-red-600 text-red-600';
-        case 'refund':
-            return 'bg-green-200 border-green-600 text-green-600';
-        case 'partial_refund':
-            return 'bg-green-200 border-green-600 text-green-600';
         default:
             return 'bg-gray-200 border-gray-600 text-gray-600';
     }
 }
 
+const counters = computed(() => data.value ? counterFunction.value : ['00:00:00']);
+
+const counterFunction = ref(['00:00:00']);
+
+const countdownCounter = (targetDate) => {
+    const targetDateTime = new Date(targetDate).getTime();
+    const currentDateTime = new Date().getTime();
+    const remainingTime = targetDateTime - currentDateTime;
+
+    if (remainingTime <= 0) {
+        return '00:00:00';
+    }
+
+    const hours = Math.floor(remainingTime / (1000 * 60 * 60));
+    const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+    return `${hours}:${minutes}:${seconds}`;
+}
+
 onMounted(() => {
     paymentStore.setAllPayment();
+    setInterval(() => {
+        counterFunction.value = data.value.map((item) => {
+            return {
+                counter: countdownCounter(item.expiry)
+            }
+        })
+    }, 1000)
 })
 
 //Helpers
@@ -180,32 +211,12 @@ function toIDR(num) {
     return idr;
 }
 
-const countdownCounter = (targetDate) => {
-    const targetDateTime = new Date(targetDate).getTime();
-
-    const countdownInterval = setInterval(() => {
-        const currentDateTime = new Date().getTime();
-        const remainingTime = targetDateTime - currentDateTime;
-
-        if (remainingTime <= 0) {
-            clearInterval(countdownInterval);
-            return '00:00:00';
-        }
-
-        const hours = Math.floor(remainingTime / (1000 * 60 * 60));
-        const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-
-        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }, 1000);
-}
-
 function isoToDate(isoDate) {
     const date = new Date(isoDate);
-    
+
     const months = [
-        'jan', 'feb', 'mar', 'apr', 'may', 'jun',
-        'jul', 'aug', 'sep', 'oct', 'nov', 'dec'
+        'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun',
+        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Des'
     ];
 
     const day = date.getDate();

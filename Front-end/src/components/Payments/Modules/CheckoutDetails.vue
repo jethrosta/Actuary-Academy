@@ -1,7 +1,7 @@
 <template>
     <div class="bg-main_blue mb-auto min w-full px-6 pt-4 pb-20 bottom-20">
         <div class="py-3">
-            <div class="pb-4">Invoice Number: 098798403485</div>
+            <div class="pb-4">Invoice Number: {{ invoice }}</div>
             <div class="flex flex-row justify-between">
                 <div class="font-bold">Total Payment</div>
                 <div>{{ toIDR(amount) }}</div>
@@ -36,10 +36,13 @@
 import { computed, onMounted, ref, watch, watchEffect } from 'vue';
 
 const props = defineProps({
-    items: Array,
+    invoice: String,
     amount: Number,
+    items: Array,
     userData: Object,
 })
+
+const invoice = computed(() => props.invoice ? props.invoice : 'Belum dibuat')
 
 const items = computed(() => props.items ? props.items : [{name: 'memuat...', price: 0, quantity: 0}] )
 

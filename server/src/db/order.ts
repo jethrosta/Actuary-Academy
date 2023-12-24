@@ -19,6 +19,7 @@ export interface OrderDocument extends mongoose.Document {
     expiry_time: Date;
     paid_at: Date;
     course: any;
+    actions: any;
 }
 
 const orderSchema = new mongoose.Schema<OrderDocument>({
@@ -46,6 +47,7 @@ const orderSchema = new mongoose.Schema<OrderDocument>({
     expiry_time: { type: Date },
     paid_at: { type: Date },
     course: { type: Array },
+    actions: { type: Array },
 }, { timestamps: true });
 
 export const OrderModel = mongoose.model('Order', orderSchema)

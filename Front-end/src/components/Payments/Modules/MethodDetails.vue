@@ -8,7 +8,8 @@
             <div class="py-3">
                 <div class="py-2 text-gray-800 space-y-1">
                     <div class="font-bold"> Metode Pembayaran</div>
-                    <div>{{ channel.toUpperCase() }} Virtual Account</div>
+                    <div v-if="isWallet">{{ channel.toUpperCase() }}</div>
+                    <div v-else>{{ channel.toUpperCase() }} Virtual Account</div>
                 </div>
             </div>
             <div
@@ -48,6 +49,7 @@ const emit = defineEmits(['cancelMethod', 'makePayment'])
 const data = ref(props.paymentData)
 const channel = ref(props.channel)
 const amount = computed(() => data.value ? data.value.reduce((acc, item) => acc + (item.is_discount ? item.discount_price : item.price), 0) : 0)
+const isWallet = computed(() => channel.value ? ['gopay', 'shopeepay'].includes(channel.value.toLowerCase()) : false)
 
 //Payment Request
 const cancelMethod = () => {

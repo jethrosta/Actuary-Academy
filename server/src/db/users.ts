@@ -29,16 +29,6 @@ export const userSchemaValidate = Joi.object({
   // authentication: Joi.
 });
 
-interface PendingPaymentDocument extends mongoose.Document {
-  status: boolean;
-  id: string;
-}
-
-const pendingPaymentSchema = new mongoose.Schema({
-  status: { type: Boolean, required: true },
-  id: { type: String, required: false }
-})
-
 export interface UserDocument extends mongoose.Document {
   name: string;
   email: string;
@@ -50,7 +40,6 @@ export interface UserDocument extends mongoose.Document {
   authentication: AuthenticationDocument;
   cart: Array<{ course: string }>;
   courses: Array<string>;
-  payment: PendingPaymentDocument;
 }
 
 const UserSchema = new mongoose.Schema<UserDocument>({
@@ -64,7 +53,6 @@ const UserSchema = new mongoose.Schema<UserDocument>({
   authentication: { type: AuthenticationSchema, required: true },
   cart: [{ course: { type: mongoose.Schema.Types.ObjectId, ref: "Course" } }],
   courses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Course" }],
-  payment: pendingPaymentSchema
 });
 
 export const UserModel = mongoose.model("User", UserSchema);

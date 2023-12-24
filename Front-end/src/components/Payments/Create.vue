@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-slate-200 font-inter">
+    <div class=" font-inter">
         <div class="grid grid-cols-5 px-28 py-20 flex-grow h-full flex-col lg:flex-row max-w-[1500px] mx-auto justify-center w-full text-white gap-x-8">
             <div class="col-span-3 h-min">
                 <MethodsMenu v-if="!isMethod"
@@ -7,7 +7,7 @@
                 <MethodDetails v-if="isMethod"
                     @make-payment="makePayment"
                     @cancel-method="channel = null"
-                    :paymentData="paymentData"
+                    :paymentData="items"
                     :channel="channel"/>
             </div>
             <div class="col-span-2 text-base">

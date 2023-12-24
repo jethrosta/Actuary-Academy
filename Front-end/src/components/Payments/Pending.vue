@@ -5,7 +5,7 @@
                 Pembayaran
             </div>
             <RouterLink :to="{ name: 'Riwayat Pembayaran' }"
-                class="flex items-center font-semibold text-lg text-main_blue hover:text-blue-400">
+                class="flex items-center font-semibold text-main_blue hover:text-blue-400">
                 <u>Lihat Semua Pembayaran</u>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -16,23 +16,23 @@
         </div>
         <div class="grid grid-cols-2 py-5 space-x-1">
             <!-- Left Side Grid -->
-            <div class="left-side">
-                <div class="notifItem text-black text-xl border-[1.5px] border-main_blue rounded-2xl py-3 px-4">
-                    <div class="grid grid-rows-3 space-y-1 font-medium text-lg">
+            <div class="left-side text-sm">
+                <div class="notifItem text-black border-[1.5px] border-main_blue rounded-2xl py-3 px-4">
+                    <div class="grid grid-rows-3 space-y-1">
                         <div class="grid grid-cols-2 justify-between w-full items-center text-main_blue font-bold">
                             Total Pembayaran
                             <div class="ml-auto justify-end text-main_blue font-bold">
                                 {{ toIDR(amount) }}
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 w-full items-center">
+                        <div class="flex w-full justify-between items-center">
                             <div class="font-bold">Metode Pembayaran</div>
                             <div class="flex items-center justify-end space-x-2 ">
                                 <img :src="logo" alt="" class="max-w-[80px] m-1">
-                                <div class="uppercase text-right">{{ channel }} (VA)</div>
+                                <div class="text-sec_blue text-right">{{ method }}</div>
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 w-full items-center">
+                        <div class="grid grid-cols-[2fr,3fr] w-full items-center">
                             Waktu Pembayaran
                             <div class="flex space-x-2 justify-end items-center">
                                 <div class="">{{ expiry ? isoToDate(expiry) : 'memuat...' }}</div>
@@ -58,9 +58,9 @@
                 </div>
             </div>
             <!-- Right Side Grid -->
-            <div class="right-side grid grid-rows-2 p-4">
-                <div class="text-center space-y-2">
-                    <div>Pembayaran dapat dilakukan melalui ATM BNI atau <i>internet banking</i></div>
+            <div class="right-side grid grid-rows-2 p-4 text-sm">
+                <div v-if="!isWallet" class="text-center space-y-2">
+                    <div>Pembayaran dapat dilakukan melalui ATM {{ channel }} atau <i>internet banking</i></div>
                     <div class="font-bold">Nomor Virtual Account </div>
                     <div class="flex gap-4 font-semibold text-white justify-center">
                         <div class="flex relative justify-center">
@@ -77,9 +77,22 @@
                         </button>
                     </div>
                 </div>
+                <div v-if="isWallet" class="text-center space-y-2">
+                    <div class=" font-bold">
+                        <h3 class="text-lg">Scan QR menggunakan aplikasi {{ channel }}</h3>
+                        <div class="max-w-[400px] mx-auto">
+                            <img :src="data.actions[0].url" alt="QR Code">
+                        </div>
+                        <h3 class="text-lg pb-2">atau</h3>
+                        <button @click="toApp" class="text-white p-3 m-2 items-center justify-center rounded-xl"
+                            :class="channel.toLowerCase() == 'gopay' ? 'bg-green-600 hover:bg-green-700' : 'bg-orange-600 hover:bg-orange-700'">
+                            Ke Aplikasi {{ channel.toLowerCase() == 'gopay' ? 'Gojek' : 'Shopee' }}
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="flex mt-auto justify-end items-end gap-3">
+        <div class="flex mt-auto justify-end items-end gap-3 text-sm">
             <button @click="checkPaymentStatus"
                 class="py-2 px-4 justify-center items-center bg-sec_blue hover:bg-[#2c2cc7] text-white font-bold rounded-xl">
                 Cek Status Pembayaran
@@ -88,6 +101,35 @@
                 class="py-2 px-4 items-center justify-center text-white bg-red-600 hover:bg-red-500 font-bold rounded-xl">
                 Batalkan Pembayaran
             </button>
+        </div>
+    </div>
+    <div v-if="modalError" tabindex="-1" @click="closeModal"
+        class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+        <div class="relative w-full max-w-md max-h-full">
+            <div class="modal-card relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <button @click="modalError = false"
+                    class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                </button>
+                <div class="p-6 text-center">
+                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                    <h3 class="mb-5 font-normal text-gray-500 dark:text-gray-400">
+                        {{ modalMessage }}
+                    </h3>
+                    <button @click="modalError = false"
+                        class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                        Tutup
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -107,6 +149,9 @@ const authStore = useAuthStore();
 
 //Payment States
 const paymentSuccess = ref(false)
+const toApp = () => {
+    window.open(data.value.actions[1].url, '_blank')
+}
 
 //Payment Data
 const data = computed(() => paymentStore.getPendingPayment.data)
@@ -114,8 +159,8 @@ const identifier = computed(() => data.value ? data.value.identifier : null)
 const amount = computed(() => data.value ? data.value.gross_amount : 0)
 const channel = computed(() => data.value ? data.value.channel_name : 'loading...')
 const vaNumber = computed(() => data.value ? data.value.bill_key || data.value.virtual_number : 0)
-const billType = computed(() => data.value && data.value.channel == 'mandiri' ? 'bill' : null)
 const expiry = computed(() => data.value ? data.value.expiry_time : null)
+const isWallet = computed(() => data.value ? data.value.channel_name ? ['gopay', 'shopeepay'].includes(data.value.channel_name.toLowerCase()) : false : false)
 
 const items = computed(() => {
     return paymentStore.getPendingPayment.data ?
@@ -129,14 +174,39 @@ const checkPaymentStatus = () => {
             paymentSuccess.value = true
             router.push({ name: 'Riwayat Pembayaran' }).then(router.forward())
         } else {
-            console.log('belum dibayar')
+            modalError.value = true
+            modalMessage.value = 'Pembayaran belum berhasil, silahkan coba beberapa saat lagi'
         }
     })
 }
 
 //data for display
-const errorMessage = ref('');
-const countdown = computed(() => countdownCounter(data.value.expiry_time))
+const modalError = ref(false)
+const modalMessage = ref('');
+const closeModal = (e) => {
+    if (e.target.closest('.modal-card')) return;
+    else modalError.value = false;
+}
+
+const method = computed(() => {
+    switch (channel.value.toLowerCase()) {
+        case 'bca':
+            return 'BCA (VA)'
+        case 'bni':
+            return 'BNI (VA)'
+        case 'bri':
+            return 'BRI (VA)'
+        case 'mandiri':
+            return 'Mandiri (VA)'
+        case 'gopay':
+            return 'Gopay'
+        case 'shopeepay':
+            return 'Shopeepay'
+        default:
+            return 'memuat...'
+    }
+})
+
 const logo = computed(() => {
     switch (channel.value.toLowerCase()) {
         case 'bca':
@@ -158,12 +228,30 @@ const logo = computed(() => {
 
 const isExpired = ref(false)
 
+//Countdown Functions
+const countdown = ref('00:00:00');
+const countdownCounter = (targetDate) => {
+    const targetDateTime = new Date(targetDate).getTime();
+    const currentDateTime = new Date().getTime();
+    const remainingTime = targetDateTime - currentDateTime;
+
+    if (remainingTime <= 0) {
+        return '00:00:00';
+    }
+
+    const hours = Math.floor(remainingTime / (1000 * 60 * 60));
+    const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+    return `${hours}:${minutes}:${seconds}`;
+}
+
 onMounted(() => {
     paymentStore.setPendingPayment().then(() => {
         if (paymentStore.getPendingPayment.status == false && paymentStore.getPendingPayment.message == 'not found') {
             router.push({ name: 'Riwayat Pembayaran' }).then(router.forward())
         }
     })
+    setInterval(() => { countdown.value = countdownCounter(expiry.value) }, 1000)
 })
 
 //Helpers
@@ -188,33 +276,12 @@ function toIDR(num) {
     return idr;
 }
 
-const countdownCounter = (targetDate) => {
-    const targetDateTime = new Date(targetDate).getTime();
-
-    const countdownInterval = setInterval(() => {
-        const currentDateTime = new Date().getTime();
-        const remainingTime = targetDateTime - currentDateTime;
-
-        if (remainingTime <= 0) {
-            clearInterval(countdownInterval);
-            isExpired.value = true;
-            router.push({ name: 'Riwayat Pembayaran' }).then(router.forward())
-        }
-
-        const hours = Math.floor(remainingTime / (1000 * 60 * 60));
-        const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-
-        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }, 1000);
-}
-
 function isoToDate(isoDate) {
     const date = new Date(isoDate);
-    
+
     const months = [
-        'jan', 'feb', 'mar', 'apr', 'may', 'jun',
-        'jul', 'aug', 'sep', 'oct', 'nov', 'dec'
+        'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun',
+        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Des'
     ];
 
     const day = date.getDate();
