@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useRoute, RouterLink } from 'vue-router';
+import Icon from '../Modules/Icon.vue';
 import Footer from "../Footer.vue";
 import { modules } from '@/db';
 
@@ -37,30 +38,15 @@ const selectedModule = computed(() => {
             </div>
             <div v-if="selectedModule" class="flex flex-row flex-wrap justify-center text-main_blue p-10 gap-8 mt-[13rem]">
                 <RouterLink :to="{ name: 'module-video', params: { moduleId } }" class="flex flex-row hover:bg-main_blue stroke-main_blue hover:stroke-white hover:cursor-pointer hover:text-white items-center border-main_blue border-2 rounded-2xl px-10  py-8 space-x-8">
-                    <svg class=" stroke-current" width="90" height="100" viewBox="0 0 90 100" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M25 5H65M15 25H75M40 62.5V77.5L55 70L40 62.5ZM15 95H75C80.5228 95 85 90.5228 85 85V55C85 49.4772 80.5228 45 75 45H15C9.47715 45 5 49.4772 5 55V85C5 90.5228 9.47715 95 15 95Z"
-                            stroke="" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
+                    <Icon name="video" size="90" />
                     <div class="font-bold text-4xl">Video dan Modul</div>
                 </RouterLink>
                 <RouterLink :to="{ name: 'module-tryout', params: { moduleId } }" class="flex flex-row hover:bg-main_blue stroke-main_blue hover:stroke-white hover:cursor-pointer hover:text-white items-center border-main_blue border-2 rounded-2xl px-10 py-8 space-x-8">
-                    <svg class="stroke-current" width="80" height="100" viewBox="0 0 80 100" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M45 5H15C9.47715 5 5 9.47715 5 15V85C5 90.5228 9.47715 95 15 95H65C70.5228 95 75 90.5228 75 85V35M45 5L75 35M45 5V30C45 32.7614 47.2386 35 50 35H75M25 55H55M25 75H55"
-                            stroke="" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
+                    <Icon name="file" size="90" />
                     <div class="font-bold text-4xl">Soal Try Out dan Pembahasan</div>
                 </RouterLink>
                 <RouterLink :to="{ name: 'module-discussion', params: { moduleId } }" class="flex flex-row hover:bg-main_blue stroke-main_blue hover:stroke-white hover:cursor-pointer hover:text-white items-center border-main_blue border-2 rounded-2xl px-10 py-8 space-x-8">
-                    <svg class="stroke-current" width="80" height="100" viewBox="0 0 80 100" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M45 5H15C9.47715 5 5 9.47715 5 15V85C5 90.5228 9.47715 95 15 95H65C70.5228 95 75 90.5228 75 85V35M45 5L75 35M45 5V30C45 32.7614 47.2386 35 50 35H75M25 55H55M25 75H55"
-                            stroke="" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
+                    <Icon name="file" size="90" />
                     <div class="font-bold text-4xl">Pembahasan Soal Ujian PAI</div>
                 </RouterLink>
             </div>

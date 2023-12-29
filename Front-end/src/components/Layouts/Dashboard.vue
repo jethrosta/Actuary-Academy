@@ -62,14 +62,6 @@ const materialsSubmenu = [
   { title: 'Akademi-A40', name: 'module', params: { moduleId: 'A40' } }
 ]
 
-const accountMenu = [
-  { title: 'Akun', name: 'Akun' },
-  { title: 'Notifikasi', name: 'Notifikasi' },
-  { title: 'Kelas Saya', name: 'Kelas Saya' },
-  { title: 'Keranjang', name: 'Keranjang Saya' },
-  { title: 'Pengaturan', name: 'Pengaturan' }
-]
-
 const notifTotalCount = notifCount + purchaseCount;
 
 </script>
@@ -156,7 +148,7 @@ const notifTotalCount = notifCount + purchaseCount;
                 {{ notifTotalCount }}
               </div>
             </div>
-            <UserDropdown :isOpen="isUserDropdownOpen" :items="accountMenu" class="hover:text-sec_blue py-1" />
+            <UserDropdown :isOpen="isUserDropdownOpen" class="hover:text-sec_blue py-1" />
           </div>
         </div>
 
@@ -226,7 +218,7 @@ const notifTotalCount = notifCount + purchaseCount;
                 {{ notifTotalCount }}
               </div>
             </div>
-            <UserDropdown :items="accountMenu" class="hover:text-sec_blue -my-2" />
+            <UserDropdown class="hover:text-sec_blue -my-2" />
           </div>
         </div>
 

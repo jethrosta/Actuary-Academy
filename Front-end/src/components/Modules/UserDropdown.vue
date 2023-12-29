@@ -1,13 +1,21 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import { defineProps, ref } from 'vue';
+import Icon from './Icon.vue';
 import router from '../../router';
 import { useAuthStore } from '../../store';
 import { notifCount, purchaseCount } from '@/db';
 
+const menuItems = [
+  { title: 'Akun', name: 'Akun', icon: 'account' },
+  { title: 'Notifikasi', name: 'Notifikasi', icon: 'notif' },
+  { title: 'Kelas Saya', name: 'Kelas Saya', icon: 'my-class' },
+  { title: 'Keranjang', name: 'Keranjang Saya', icon: 'purchase' },
+  { title: 'Pengaturan', name: 'Pengaturan', icon: 'settings' }
+]
+
 const props = defineProps({
   title: String,
-  items: Array,
   isOpen: Boolean
 });
 
@@ -65,19 +73,25 @@ const close = (e) => {
         </svg>
 
         <div class="sub-menu py-2 rounded-b-xl bg-white hover:text-sec_blue drop-shadow-lg absolute right-0 ">
-          <RouterLink :to="{ name: `${item.name}` }" v-for="(item, i) in items" :key="i">
-            <div class="menu-item py-1 px-4 text-gray-400 bg-white hover:text-sec_blue whitespace-nowrap">
+          <RouterLink :to="{ name: `${item.name}` }" v-for="(item, i) in menuItems" :key="i">
+            <div class="flex items-center menu-item py-1 px-4 text-gray-400 bg-white hover:text-sec_blue whitespace-nowrap">
+              <div class="mr-3">
+                <Icon :name="item.icon" size="18" />
+              </div>
               {{ item.title }}
-              <span v-if="item.name === 'Notifikasi' && notifCount > 0" class="inline-block w-4 h-4 align-text-top bg-red-600 text-white text-[.7rem] leading-4 text-center rounded-[50%]">
+              <div v-if="item.name === 'Notifikasi' && notifCount > 0" class="ml-1.5 w-4 h-4 align-text-top bg-red-600 text-white text-[.7rem] leading-4 text-center rounded-[50%]">
                 {{ notifCount }}
-              </span>
-              <span v-if="item.name === 'Keranjang Saya' && purchaseCount > 0" class="inline-block w-4 h-4 align-text-top bg-red-600 text-white text-[.7rem] leading-4 text-center rounded-[50%]">
+              </div>
+              <div v-if="item.name === 'Keranjang Saya' && purchaseCount > 0" class="ml-1.5 w-4 h-4 align-text-top bg-red-600 text-white text-[.7rem] leading-4 text-center rounded-[50%]">
                 {{ purchaseCount }}
-              </span>
+              </div>
             </div>
           </RouterLink>
-          <div class="menu-item py-1 px-4 text-gray-400 bg-white hover:text-sec_blue whitespace-nowrap">
-            <button class="w-full text-left" @click="handleLogout">Logout</button>
+          <div class="flex items-center menu-item py-1 px-4 text-gray-400 bg-white hover:text-sec_blue whitespace-nowrap" @click="handleLogout">
+            <div class="mr-3">
+              <Icon name="logout" size="18" />
+            </div>
+            Logout
           </div>
         </div>
       </div>
