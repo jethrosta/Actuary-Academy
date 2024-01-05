@@ -2,9 +2,11 @@ import mongoose from 'mongoose';
 import { MidtransClient } from "midtrans-node-client";
 
 export const CoreAPI = new MidtransClient.CoreApi({
-    isProduction: process.env.MIDTRANS_IS_PRODUCTION === 'true',
-    serverKey: process.env.MIDTRANS_SERVER_KEY,
-    clientKey: process.env.MIDTRANS_CLIENT_KEY,
+    isProduction: false,
+    // serverKey: process.env.MIDTRANS_SERVER_KEY,
+    // clientKey: process.env.MIDTRANS_CLIENT_KEY,
+    serverKey: 'SB-Mid-server-BFwr3VF3lusAFn4lAAty5nIQ',
+    clientKey: 'SB-Mid-client-ZekY0nyaDfOnwd8A',
 })
 
 const midtransResponseSchema = new mongoose.Schema({

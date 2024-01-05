@@ -14,7 +14,7 @@ export const register = async (req: express.Request, res: express.Response) => {
     const existingUser = await getUserByEmail(email);
 
     if (existingUser) {
-      return res.status(400).json({notification: "Email already registered"});
+      return res.status(400).json({ notification: "Email already registered" });
     }
 
 
@@ -126,5 +126,19 @@ export const login = async (req: express.Request, res: express.Response) => {
   } catch (err) {
     console.log(err);
     return res.sendStatus(400);
+  }
+};
+
+export const logout = (req: express.Request, res: express.Response) => {
+  try {
+    // Clear cookies
+    res.clearCookie('A@ACADEMY-JWT', { domain: 'localhost', path: '/' });
+    res.clearCookie('A@ACADEMY-SESSION', { domain: 'localhost', path: '/' });
+
+    // Send a response indicating successful logout
+    return res.status(200).json({ message: 'Logout successful' }).end();
+  } catch (err) {
+    console.log(err);
+    return res.sendStatus(500);
   }
 };

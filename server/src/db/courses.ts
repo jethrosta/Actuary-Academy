@@ -1,3 +1,4 @@
+import { Duration } from "moment";
 import mongoose from "mongoose";
 
 interface PdfDocument extends Document {
@@ -28,6 +29,16 @@ interface SubmateriDocument extends mongoose.Document {
     video: [VideoDocument]
 }
 
+interface VariationDocument extends mongoose.Document {
+    current: string;
+    options: [string];
+}
+
+interface DurationDocument extends mongoose.Document {
+    current: string;
+    options: [string];
+}
+
 const SubscriberSchema = new mongoose.Schema<SubscriberDocument>({
     user: { 
         type: mongoose.Schema.Types.ObjectId,
@@ -42,6 +53,16 @@ const SubmateriSchema = new mongoose.Schema<SubmateriDocument>({
     video: [VideoSchema]
 }, { _id: false })
 
+const VariationSchema = new mongoose.Schema<VariationDocument>({
+    current: { type: String, required: true},
+    options: [String]
+}, { _id: false})
+
+const DurationSchema = new mongoose.Schema<DurationDocument>({
+    current: { type: String, required: true },
+    options: [String]
+}, { _id: false })
+
 export interface CourseDocument extends mongoose.Document {
     subscribers: [SubscriberDocument];
     title: string;
@@ -49,6 +70,9 @@ export interface CourseDocument extends mongoose.Document {
     price: number;
     discount_price: number;
     is_discount: boolean;
+    category: string;
+    variation: VariationDocument;
+    duration: DurationDocument;
 }
 
 const CourseSchema = new mongoose.Schema<CourseDocument>({
@@ -58,6 +82,9 @@ const CourseSchema = new mongoose.Schema<CourseDocument>({
     price: { type: Number, required: true },
     discount_price: { type: Number },
     is_discount: { type: Boolean, default: false },
+    category: { type: String, required: true },
+    variation: VariationSchema,
+    duration: DurationSchema   
 });
 
 export const CourseModel = mongoose.model('Course', CourseSchema);
