@@ -17,9 +17,7 @@ const store = useAuthStore();
 
 const handleLogout = async () => {
   try {
-    await router.push({ name: 'dashboard' });
-    await store.logout();
-    router.go();
+    await store.logout().then(router.push('/')).then(router.go(0))
   } catch (error) {
     console.error('Logout failed:', error);
   }

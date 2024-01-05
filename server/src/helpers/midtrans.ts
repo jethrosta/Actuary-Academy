@@ -29,6 +29,13 @@ const requestGopay = () => ({
     },
 });
 
+const requestShopee = () => ({
+    shopeepay: {
+        enable_callback: true,
+        callback_url: 'https://www.actuaryacademy.com',
+    },
+});
+
 const requestIndoAlfa = (channel: string) => ({
     cstore: {
         store: channel,
@@ -76,8 +83,8 @@ export const paymentRequestPayloads = (channel: string, invoice: string, summary
             return payloads('bank_transfer', invoice, summary, user, items, requestPermata(user));
         case 'gopay':
             return payloads('gopay', invoice, summary, user, items, requestGopay());
-        case 'alfamart':
-            return payloads('cstore', invoice, summary, user, items, requestIndoAlfa(channel));
+        case 'shopeepay':
+            return payloads('shopeepay', invoice, summary, user, items, requestShopee());
         case 'indomaret':
             return payloads('cstore', invoice, summary, user, items, requestIndoAlfa(channel));
         default:

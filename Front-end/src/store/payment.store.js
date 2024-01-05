@@ -16,7 +16,7 @@ export const payment = {
     pendingPaymentSuccess: false,
     allPayment: null,
     paymentById: null,
-    paymentMethod: null,
+    cancelStatus: false,
   }),
 
   getters: {
@@ -38,8 +38,8 @@ export const payment = {
     getPaymentById: (state) => {
       return state.paymentById;
     },
-    getPaymentMethod: (state) => {
-      return state.paymentMethod;
+    getCancelStatus: (state) => {
+      return state.cancelStatus;
     }
   },
 
@@ -92,6 +92,16 @@ export const payment = {
       }
     },
 
+    async cancelPayment(inv) {
+      try {
+        const res = await PaymentService.cancelPayment(inv);
+        console.log(res);
+        this.cancelStatus = true;
+      } catch (error) {
+        this.cancelStatus = false;
+      }
+    },
+
     async setAllPayment() {
       try {
         const res = await PaymentService.getAllPayment();
@@ -112,10 +122,6 @@ export const payment = {
         this.paymentById = null;
         console.log(error);
       }
-    },
-
-    setPaymentMethod(channel) {
-      this.paymentMethod = channel;
     },
 
     async updatePaymentStatus() {

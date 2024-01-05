@@ -8,7 +8,8 @@
                     @make-payment="makePayment"
                     @cancel-method="channel = null"
                     :paymentData="items"
-                    :channel="channel"/>
+                    :channel="channel"
+                    :errorModal="errorModal"/>
             </div>
             <div class="col-span-2 text-base">
                 <CheckoutDetails :items="items" :amount="amount" :userData="userData" />
@@ -47,7 +48,8 @@ const makePayment = async () => {
         const res = await paymentStore.setOrder(channel.value)
         console.log(res)
     } catch (error) {
-        errorMessage.value = 'Terjadi Error, Silahkan Coba Lagi Nanti'
+        errorModal.value.status = true
+        errorModal.value.message = 'Terjadi Error, Silahkan Coba Lagi Nanti'
         throw error
     }
 }
@@ -68,10 +70,14 @@ onMounted(() => {
 })
 
 //Helpers
-const modalError = ref(false);
+const errorModal = ref({
+    status: false,
+    message: ''
+
+})
 const closeModal = (e) => {
     if (e.target.closest('.modal-card')) return;
-    else modalError.value = false;
+    else errorModal.value.status = false;
 }
 
 function toIDR(num) {

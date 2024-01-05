@@ -2,7 +2,7 @@
     <div class="flex flex-col w-full text-gray-900 font-inter bg-white p-6 justify-between">
         <div class="w-full font-inter text-black mx-auto space-y-4 p-4">
             <h1 class="text-lg font-bold">
-                Pembayaran Transfer Bank
+                Pembayaran {{ method }}
             </h1>
             <img :src="logo" alt="" class="max-w-[200px]">
             <div class="py-3">
@@ -50,6 +50,7 @@ const amount = computed(() => props.amount ? props.amount : 0)
 const channel = computed(() => props.channel ? props.channel : 'memuat...')
 const time = computed(() => props.time ? props.time : null)
 const status = computed(() => props.status ? props.status : 'not found')
+const method = computed(() => channel.value.toLocaleLowerCase() === 'gopay' ? 'E-Wallet' : 'Transfer Bank')
 const statusBahasa = computed(() => {
     switch (status.value.toLowerCase()) {
         case 'pending':

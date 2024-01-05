@@ -1,4 +1,27 @@
 <template>
+    <div v-if="paymentSuccess" tabindex="-1" @click="closeModal"
+        class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+        <div class="relative w-full max-w-md max-h-full">
+            <div class="modal-card relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="p-6 text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="120" height="120" fill="#4CAF50"
+                        class="mx-auto w-[80px]">
+                        <circle cx="12" cy="12" r="10" fill="#4CAF50" />
+                        <path d="M8 12L10 15L16 9" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    <h3 class="mb-5 font-normal text-gray-500 dark:text-gray-400">
+                        Pembayaran Berhasil !
+                    </h3>
+                    <RouterLink :to="{ name: 'Riwayat Pembayaran' }"
+                        class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                        Lanjutkan
+                    </RouterLink>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div class="p-20 font-inter text-black max-w-[1500px] mx-auto">
         <div class="flex justify-between">
             <div class="font-bold text-main_blue text-3xl py-2">
@@ -79,14 +102,14 @@
                 </div>
                 <div v-if="isWallet" class="text-center space-y-2">
                     <div class=" font-bold">
-                        <h3 class="text-lg">Scan QR menggunakan aplikasi {{ channel }}</h3>
-                        <div class="max-w-[400px] mx-auto">
+                        <h3 v-if="channel == 'gopay'" class="text-lg">Scan QR menggunakan aplikasi {{ channel }}</h3>
+                        <div v-if="channel == 'gopay'" class="max-w-[400px] mx-auto">
                             <img :src="data.actions[0].url" alt="QR Code">
                         </div>
-                        <h3 class="text-lg pb-2">atau</h3>
+                        <h3 v-if="channel == 'gopay'" class="text-lg pb-2">atau</h3>
                         <button @click="toApp" class="text-white p-3 m-2 items-center justify-center rounded-xl"
                             :class="channel.toLowerCase() == 'gopay' ? 'bg-green-600 hover:bg-green-700' : 'bg-orange-600 hover:bg-orange-700'">
-                            Ke Aplikasi {{ channel.toLowerCase() == 'gopay' ? 'Gojek' : 'Shopee' }}
+                            Ke Aplikasi {{ channel == 'gopay' ? 'Gojek' : 'Shopee' }}
                         </button>
                     </div>
                 </div>
@@ -97,7 +120,7 @@
                 class="py-2 px-4 justify-center items-center bg-sec_blue hover:bg-[#2c2cc7] text-white font-bold rounded-xl">
                 Cek Status Pembayaran
             </button>
-            <button @click=""
+            <button @click="cancelPayment"
                 class="py-2 px-4 items-center justify-center text-white bg-red-600 hover:bg-red-500 font-bold rounded-xl">
                 Batalkan Pembayaran
             </button>
@@ -150,14 +173,19 @@ const authStore = useAuthStore();
 //Payment States
 const paymentSuccess = ref(false)
 const toApp = () => {
-    window.open(data.value.actions[1].url, '_blank')
+    if (channel.value == 'gopay') {
+        window.open(data.value.actions[1].url, '_blank')
+    } else if (channel.value == 'shopeepay') {
+        window.open(data.value.actions[0].url, '_blank')
+    }
 }
 
 //Payment Data
 const data = computed(() => paymentStore.getPendingPayment.data)
+const invoice = computed(() => data.value ? data.value.invoice : null)
 const identifier = computed(() => data.value ? data.value.identifier : null)
 const amount = computed(() => data.value ? data.value.gross_amount : 0)
-const channel = computed(() => data.value ? data.value.channel_name : 'loading...')
+const channel = computed(() => data.value ? data.value.channel_name.toLowerCase() : 'loading...')
 const vaNumber = computed(() => data.value ? data.value.bill_key || data.value.virtual_number : 0)
 const expiry = computed(() => data.value ? data.value.expiry_time : null)
 const isWallet = computed(() => data.value ? data.value.channel_name ? ['gopay', 'shopeepay'].includes(data.value.channel_name.toLowerCase()) : false : false)
@@ -170,14 +198,17 @@ const items = computed(() => {
 
 const checkPaymentStatus = () => {
     paymentStore.setPaymentById(identifier.value).then(() => {
-        if (paymentStore.getPaymentById.status == 'settlement') {
+        if (paymentStore.getPaymentById.status == 'success') {
             paymentSuccess.value = true
-            router.push({ name: 'Riwayat Pembayaran' }).then(router.forward())
         } else {
             modalError.value = true
             modalMessage.value = 'Pembayaran belum berhasil, silahkan coba beberapa saat lagi'
         }
     })
+}
+
+const cancelPayment = () => {
+    paymentStore.cancelPayment(invoice.value)
 }
 
 //data for display
@@ -252,6 +283,15 @@ onMounted(() => {
         }
     })
     setInterval(() => { countdown.value = countdownCounter(expiry.value) }, 1000)
+})
+
+const cancelStatus = computed(() => paymentStore.getCancelStatus)
+
+watch(cancelStatus, (value) => {
+    if (value) {
+        router.go(0)
+        // router.push({ name: 'Riwayat Pembayaran' }).then(router.go(0))
+    }
 })
 
 //Helpers
