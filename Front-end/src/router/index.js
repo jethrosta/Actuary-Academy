@@ -100,7 +100,7 @@ const router = createRouter({
           component: () => import('../components/Pages/ModuleTryout.vue')
         },
         {
-          path: '/modules/:moduleId/discussion',
+          path: '/modules/:moduleId/discussion/:videoId?',
           name: 'module-discussion',
           meta: { requiresAuth: true },
           component: () => import('../components/Pages/ModuleDiscussion.vue')

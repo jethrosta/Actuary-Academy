@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watchEffect } from 'vue';
+import { ref, computed, watchEffect, onMounted } from 'vue';
 import { useRoute, RouterLink } from 'vue-router';
 import Footer from '../Footer.vue';
 import { modules } from '@/db';
@@ -13,11 +13,12 @@ const currentModule = ref(null);
 const currentModuleVideoList = ref(null);
 const currentModuleName = ref(null);
 const currentVideo = ref(null);
+const videosEl = ref(null);
 const navigations = ref(null);
 
 watchEffect(() => {
     currentModule.value = modules[moduleIdParam.value] ?? null;
-    currentModuleVideoList.value = currentModule.value?.videos ?? [];
+    currentModuleVideoList.value = currentModule.value?.materialVideos ?? [];
     currentModuleName.value = `${moduleIdParam.value}: ${currentModule.value?.name}`;
     currentVideo.value = videoIdParam.value
         ? currentModuleVideoList.value.find((v) => v.videoId === videoIdParam.value)
@@ -27,6 +28,15 @@ watchEffect(() => {
         { title: currentModuleName.value, url: `/modules/${moduleIdParam.value}` },
         { title: 'Video dan Modul' }
     ];
+});
+
+
+onMounted(() => {
+    // scroll to current video view in video list sidebar
+    const currentVideoIndex = currentModuleVideoList.value?.indexOf(currentVideo.value) ?? null;
+    if (currentVideoIndex !== null && currentVideoIndex > 1) {
+        videosEl.value[currentVideoIndex - 1].$el.scrollIntoView();
+    }
 });
 
 </script>
@@ -60,14 +70,19 @@ watchEffect(() => {
                             :to="{ name: 'module-video', params: { moduleId: moduleIdParam, videoId: video.videoId } }"
                             class="flex items-center mb-5"
                             :class="video.videoId === currentVideo.videoId && 'bg-white rounded-xl px-4 py-3 mt-4 relative'"
+                            ref="videosEl"
                         >
                             <template v-if="video.videoId === currentVideo.videoId">
                                 <div class="absolute -top-5 left-1/2 -translate-x-1/2 flex items-center bg-sec_blue rounded-full p-3 font-bold h-8">
                                     {{ index + 1 }}
                                 </div>
-                                <div class="text-sec_blue text-lg">
-                                    <div class="font-semibold">{{ video.category }}</div>
-                                    <div>{{ video.title }}</div>
+                                <img
+                                    class="w-28 h-16 rounded-lg bg-gray-300 shrink-0"
+                                    :src="`https://vz-0e8f7475-071.b-cdn.net/${video.videoId}/thumbnail.jpg`"
+                                >
+                                <div class="ml-4 text-sec_blue font-semibold">
+                                    <div>{{ video.title }}:</div>
+                                    <div>{{ video.subtitle }}</div>
                                 </div>
                             </template>
                             <template v-else>
@@ -79,8 +94,8 @@ watchEffect(() => {
                                     :src="`https://vz-0e8f7475-071.b-cdn.net/${video.videoId}/thumbnail.jpg`"
                                 >
                                 <div class="ml-4">
-                                    <div class="font-semibold">{{ video.category }}</div>
-                                    <div>{{ video.title }}</div>
+                                    <div class="font-semibold">{{ video.title }}</div>
+                                    <div>{{ video.subtitle }}</div>
                                 </div>
                             </template>
                         </RouterLink>
@@ -88,7 +103,7 @@ watchEffect(() => {
                 </div>
             </div>
             <div v-if="currentVideo">
-                <h1 class="text-[2.5rem] font-bold mb-3">{{ currentVideo.category }}: {{ currentVideo.title }}</h1>
+                <h1 class="text-[2.5rem] font-bold mb-3">{{ currentVideo.title }}: {{ currentVideo.subtitle }}</h1>
                 <div class="flex gap-x-4 text-main_blue mb-3">
                     <div class="flex items-center">
                         <div class="w-4 h-4 mr-2">
