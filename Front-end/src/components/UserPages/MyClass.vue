@@ -20,11 +20,10 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
+import useUserStore from '../../store';
 
 const myClasses = [
-    {name:'1'},
-    {name:'1'},
-    {name:'1'},
     {name:'1'},
 ]
 

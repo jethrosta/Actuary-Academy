@@ -43,7 +43,7 @@
                     </div>
                     <div v-else class="flex justify-center items-center gap-2">
                         <p>Selesai Pada : </p>
-                        <p>{{ isoToDate(item.paid_at) }}</p>
+                        <p>{{ isoToDate(item.paid_at ? item.paid_at : item.expiry) }}</p>
                     </div>
                 </div>
                 <div class="flex justify-end gap-2 pt-6 text-white font-semibold">
@@ -57,12 +57,12 @@
                         class="col-span-1 text-lg bg-sec_blue py-1 px-4 first-letter:text-center rounded-lg">
                         Cek Status
                     </button>
-                    <button @click="router.push({ name: 'Detail Pembayaran', params: { id: item.identifier } })"
+                    <button @click="router.push({ name: 'Pembayaran Tertunda' })"
                         v-if="item.status == 'pending'"
                         class=" col-span-1 text-lg bg-sec_blue py-1 px-4 first-letter:text-center rounded-lg">
                         Detail
                     </button>
-                    <button @click="router.push({ name: 'Pembayaran Tertunda' })"
+                    <button @click="router.push({ name: 'Detail Pembayaran', params: { id: item.identifier } })"
                         v-else
                         class=" col-span-1 text-lg bg-sec_blue py-1 px-4 first-letter:text-center rounded-lg">
                         Detail
@@ -84,9 +84,11 @@ const paymentStore = usePaymentStore();
 //Payments Data
 const getData = computed(() => paymentStore.getAllPayment);
 
+const array = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+
 const data = computed(() => {
     return getData.value ?
-        getData.value.map((item) => {
+        getData.value.slice(0).reverse().map((item) => {
             return {
                 _id: item._id,
                 status: item.status,

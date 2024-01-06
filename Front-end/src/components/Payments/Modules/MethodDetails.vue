@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col w-full text-gray-900 font-inter bg-white p-6 justify-between">
+    <div class="flex flex-col w-full text-gray-900 font-inter bg-white p-6 justify-between border-[1px] border-main_blue">
         <div class="w-full font-inter text-black mx-auto space-y-4 p-4">
             <h1 class="text-lg font-bold">
                 Pembayaran Transfer Bank
@@ -17,7 +17,7 @@
                 <div class="">Total Pembayaran</div>
                 <div class="">{{ toIDR(amount) }}</div>
             </div>
-            <div v-if="errorMessage != ''" class="text-red-500 border-[1px] border-red-500 bg-red-100 py-4 px-4">{{
+            <div v-if="error" class="text-red-500 border-[1px] border-red-500 bg-red-100 py-4 px-4">{{
                 errorMessage }}</div>
         </div>
         <div class="flex w-full space-x-3 p-4">
@@ -42,6 +42,7 @@ const requestSuccess = ref(false);
 const props = defineProps({
     channel: String,
     paymentData: Object,
+    errorModal: Object
 })
 
 const emit = defineEmits(['cancelMethod', 'makePayment'])
@@ -50,6 +51,9 @@ const data = ref(props.paymentData)
 const channel = ref(props.channel)
 const amount = computed(() => data.value ? data.value.reduce((acc, item) => acc + (item.is_discount ? item.discount_price : item.price), 0) : 0)
 const isWallet = computed(() => channel.value ? ['gopay', 'shopeepay'].includes(channel.value.toLowerCase()) : false)
+const error = computed(() => props.errorModal.status)
+const errorMessage = computed(() => props.errorModal.message)
+
 
 //Payment Request
 const cancelMethod = () => {
@@ -60,7 +64,6 @@ const makePayment = () => {
 }
 
 //data for display
-const errorMessage = ref('');
 const logo = computed(() => {
     switch (channel.value.toLowerCase()) {
         case 'bca':

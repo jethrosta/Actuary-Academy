@@ -44,7 +44,7 @@ function handleRegister() {
     store.register(user.value)
         .then(() => {
             loading.value = false;
-            router.push({name:"login"}).then(() => {
+            router.push({name:"masuk"}).then(() => {
                 router.go(0);
             });
         })

@@ -46,6 +46,15 @@ class PaymentService {
         }
     }
 
+    async cancelPayment(inv) {
+        try {
+            const res = await axios.post(API_URL + 'ordercancel', { invoice: inv }, { withCredentials: true });
+            return res;
+        } catch (error) {
+            throw new Error(error);    
+        }
+    }
+
     async getAllPayment() {
         try {
             const res = await axios.post(API_URL + 'allPayment', { userId: user._id }, { withCredentials: true });

@@ -61,11 +61,14 @@ export const auth = {
     },
 
     async logout() {
-      loginState.status.loggedIn = false;
-      loginState.user = null;
-      return AuthService.logout().then(() => {
+      try {
+        await AuthService.logout();
         localStorage.removeItem('user');
-      })
+        this.loginState.user = null;
+        this.loginState.status.loggedIn = false;
+      } catch (error) {
+        throw error;
+      }
     }
     
   }

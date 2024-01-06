@@ -22,6 +22,25 @@ class UserService {
   deleteStudent(id) {
     return axios.delete(API_URL + 'users/' + id, {withCredentials: true });
   }
+
+  async getAllCourses(id) {
+    try {
+      const res = await axios.get(API_URL + 'courses', { userId: id }, { withCredentials: true }); //URL Belum fix
+      return res;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getNotifications(id) {
+    try {
+      const res = await axios.get(API_URL + 'notifications', { userId: id }, { withCredentials: true }); //URL Belum fix
+      return res;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 }
 
 export default new UserService();

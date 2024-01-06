@@ -2,7 +2,7 @@
 import { useAuthStore } from "../../store";
 import router from "../../router/index.js";
 import { RouterLink } from 'vue-router';
-import { ref, computed, onBeforeMount } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup"
 import { getGoogleUrl } from "../../services/google-url.service";
@@ -28,7 +28,7 @@ const loginStatus = computed(() => store.loginState.status.loggedIn);
 
 const currentUrl = window.location.href;
 
-onBeforeMount(() => {
+onMounted(() => {
     if (loginStatus.value) {
         router.push("/");
     }

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API_URL = import.meta.env.VITE_API_URL + 'auth/';
-
+const userLocal = JSON.parse(localStorage.getItem('user'));
 
 class AuthService {
 
@@ -40,7 +40,7 @@ class AuthService {
   }
 
   async logout() {
-    return await axios.post(API_URL + 'logout', {}, {
+    return await axios.post(API_URL + 'logout', { email: userLocal.email }, {
       withCredentials: true
     })
   }
