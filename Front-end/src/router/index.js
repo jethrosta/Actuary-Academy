@@ -10,72 +10,72 @@ const router = createRouter({
     {
       path: '/login',
       name: 'masuk',
-      component: () => import('../components/Layouts/Login.vue')
+      component: () => import('@/pages/Login.vue')
     },
     {
       path: '/register',
       name: 'daftar',
-      component: () => import('../components/Layouts/Register.vue')
+      component: () => import('@/pages/Register.vue')
     },
     {
       path: '/',
       name: 'dashboard',
-      component: () => import('../components/Layouts/Dashboard.vue'),
+      component: () => import('@/components/MainLayout.vue'),
       children: [
         {
           path: '',
           name: 'Landingpage',
-          component: () => import('../components/Pages/LandingPage.vue')
+          component: () => import('@/pages/LandingPage.vue')
         },
         {
           path: "/about",
           name: 'Tentang Kami',
-          component: () => import('../components/Pages/About.vue')
+          component: () => import('@/pages/About.vue')
         },
         {
           path: '/testimonies',
           name: 'Testimoni',
-          component: () => import('../components/Pages/Testimonies.vue')
+          component: () => import('@/pages/Testimonies.vue')
         },
         {
           path: '/testimonies/profile',
           name: 'testimony-profile',
-          component: () => import('../components/Pages/TestimonyProfile.vue')
+          component: () => import('@/pages/TestimonyProfile.vue')
         },
         {
           path: '/career',
           name: 'Karir',
-          component: () => import('../components/Pages/Career.vue')
+          component: () => import('@/pages/Career.vue')
         },
         {
           path: '/products',
           name: 'Produk',
-          component: () => import('../components/Pages/Products.vue')
+          component: () => import('@/pages/Products.vue')
         },
         {
           path: '/private-tutor',
           name: 'Tutor Privat',
-          component: () => import('../components/Pages/PrivateTutor.vue')
+          component: () => import('@/pages/PrivateTutor.vue')
         },
         {
           path: '/private-tutor/tutors',
           name: 'Tutors',
-          component: () => import('../components/Pages/Tutors.vue')
+          component: () => import('@/pages/Tutors.vue')
         },
         {
           path: '/academy',
           name: 'Akademi',
-          component: () => import('../components/Pages/Academy.vue')
+          component: () => import('@/pages/Academy.vue')
         },
         {
           path: '/company-training',
           name: 'Company Training',
-          component: () => import('../components/Pages/CompanyTraining.vue')
+          component: () => import('@/pages/CompanyTraining.vue')
         },
         {
           path: '/actuarial-services',
           name: 'Jasa Aktuaria',
-          component: () => import('../components/Pages/ActuarialServices.vue')
+          component: () => import('@/pages/ActuarialServices.vue')
         },
         {
           path: '/modules',
@@ -85,62 +85,62 @@ const router = createRouter({
           path: '/modules/:moduleId',
           name: 'module',
           meta: { requiresAuth: true },
-          component: () => import('../components/Pages/Module.vue')
+          component: () => import('@/pages/Module.vue')
         },
         {
-          path: '/modules/:moduleId/video/:videoId?',
-          name: 'module-video',
+          path: '/modules/:moduleId/material/:videoId?',
+          name: 'module-material',
           meta: { requiresAuth: true },
-          component: () => import('../components/Pages/ModuleVideo.vue')
+          component: () => import('@/pages/ModuleMaterial.vue')
         },
         {
           path: '/modules/:moduleId/tryout',
           name: 'module-tryout',
           meta: { requiresAuth: true },
-          component: () => import('../components/Pages/ModuleTryout.vue')
+          component: () => import('@/pages/ModuleTryout.vue')
         },
         {
           path: '/modules/:moduleId/discussion/:videoId?',
           name: 'module-discussion',
           meta: { requiresAuth: true },
-          component: () => import('../components/Pages/ModuleDiscussion.vue')
+          component: () => import('@/pages/ModuleDiscussion.vue')
         },
         {
           path: '/user',
           name: 'user',
-          component: () => import('../components/UserPages/UserPage.vue'),
+          component: () => import('@/components/UserPageLayout.vue'),
           redirect: { name: 'Akun' },
           meta: { requiresAuth: true },
           children: [
             {
               path: 'account',
               name: 'Akun',
-              component: () => import('../components/UserPages/Account.vue')
+              component: () => import('@/pages/user/Account.vue')
             },
             {
               path: 'notification',
               name: 'Notifikasi',
-              component: () => import('../components/UserPages/Notification.vue')
+              component: () => import('@/pages/user/Notification.vue')
             },
             {
               path: 'my-class',
               name: 'Kelas Saya',
-              component: () => import('../components/UserPages/MyClass.vue')
+              component: () => import('@/pages/user/MyClass.vue')
             },
             {
               path: 'my-cart',
               name: 'Keranjang Saya',
-              component: () => import('../components/UserPages/MyCart.vue'),
+              component: () => import('@/pages/user/MyCart.vue'),
             },
             {
               path: 'settings',
               name: 'Pengaturan',
-              component: () => import('../components/UserPages/Settings.vue')
+              component: () => import('@/pages/user/Settings.vue')
             },
             {
               path: 'payment-history',
               name: 'Riwayat Pembayaran',
-              component: () => import('../components/UserPages/PaymentHistory.vue')
+              component: () => import('@/pages/user/PaymentHistory.vue')
             },
           ]
         },
@@ -153,18 +153,18 @@ const router = createRouter({
             {
               path: 'create/:items*',
               name: 'Buat Pembayaran',
-              component: () => import('../components/Payments/Create.vue'),
+              component: () => import('@/components/Payments/Create.vue'),
               props: true,
             },
             {
               path: 'pending-payment',
               name: 'Pembayaran Tertunda',
-              component: () => import('../components/Payments/Pending.vue'),
+              component: () => import('@/components/Payments/Pending.vue'),
             },
             {
               path: 'view/:id',
               name: 'Detail Pembayaran',
-              component: () => import('../components/Payments/ViewById.vue'),
+              component: () => import('@/components/Payments/ViewById.vue'),
               props: true,
             },
           ]

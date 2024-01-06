@@ -155,12 +155,9 @@
             </div>
         </div>
     </div>
-
-    <Footer />
 </template>
 
 <script setup>
-import Footer from '../Footer.vue';
 import { usePaymentStore, useAuthStore } from '../../store';
 import { computed, onMounted, ref, watch, watchEffect } from 'vue';
 import router from '../../router/index.js';

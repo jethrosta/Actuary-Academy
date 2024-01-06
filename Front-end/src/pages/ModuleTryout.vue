@@ -1,6 +1,5 @@
 <script setup>
 import { useRoute, RouterLink } from 'vue-router';
-import Footer from '../Footer.vue';
 import { modules } from '@/db';
 
 const route = useRoute();
@@ -59,7 +58,6 @@ const navigations = [
             </div>
         </div>
     </div>
-    <Footer></Footer>
 </template>
 <style scoped>
     .bg-module-tryout {

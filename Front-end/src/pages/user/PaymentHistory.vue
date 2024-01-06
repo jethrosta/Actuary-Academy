@@ -75,9 +75,9 @@
 </template>
 
 <script setup>
-import router from '@/router/index.js';
-import { usePaymentStore } from '../../store';
 import { ref, computed, onMounted } from 'vue';
+import router from '@/router/index.js';
+import { usePaymentStore } from '@/store';
 
 const paymentStore = usePaymentStore();
 

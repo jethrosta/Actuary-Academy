@@ -1,6 +1,5 @@
 <script setup>
 import { RouterLink } from 'vue-router';
-import Footer from '../Footer.vue';
 
 </script>
 <template>
@@ -22,7 +21,6 @@ import Footer from '../Footer.vue';
             </RouterLink>
         </div>
     </main>
-    <Footer></Footer>
 </template>
 <style>
     .bg-career {

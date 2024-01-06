@@ -1,9 +1,7 @@
 <script setup>
 import { Splide } from '@splidejs/vue-splide'
 import { SplideSlide } from '@splidejs/vue-splide'
-import { RouterLink } from 'vue-router';
-import Footer from '../Footer.vue';
-import OtherProducts from '../OtherProducts.vue';
+import OtherProducts from '@/components/OtherProducts.vue';
 import { privateTutorPackages, tutors } from '@/db';
 
 const tutorsSplideOptions = {
@@ -100,7 +98,6 @@ const tutorsSplideOptions = {
             <OtherProducts exclude="private-tutor" />
         </div>
     </main>
-    <Footer></Footer>
 </template>
 <style>
     .bg-private-tutor {

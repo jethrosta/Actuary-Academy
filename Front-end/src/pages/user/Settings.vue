@@ -1,3 +1,6 @@
+<script setup>
+</script>
+
 <template>
     <div class="content-area font-inter flex flex-col gap-y-1 w-full px-10 pt-12 pb-28 overflow-clip">
         <div class="flex flex-col w gap-y-5">
@@ -13,8 +16,3 @@
 
     </div>
 </template>
-
-<script setup>
-
-
-</script>

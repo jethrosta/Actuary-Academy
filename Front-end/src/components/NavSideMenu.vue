@@ -53,9 +53,7 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import { ref, defineProps } from 'vue';
-import router from '../../router';
-import { useAuthStore } from '../../store';
-import NavDropdown from './NavDropdown.vue';
+import { useAuthStore } from '@/store';
 
 const props = defineProps({
   title: String,

@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
-import Footer from '../Footer.vue';
 
 const name = ref('Nama')
 const occupation = ref('Jabatan Jabatan Jabatan Jabatan Jabatan Jabatan Jabatan Jabatan')
@@ -43,5 +42,4 @@ const imgUrl = ref('/src/assets/testimonies/profile.png')
             </div>
         </div>
     </div>
-    <Footer></Footer>
 </template>

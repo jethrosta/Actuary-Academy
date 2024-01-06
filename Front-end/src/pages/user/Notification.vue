@@ -40,8 +40,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-
 const notifList = [
     { status: 'mengunggah video baru!', page: 'Tutor Privat', time: '1 jam yang lalu' },
     { status: 'mengupdate video !', page: 'Company Training', time: '3 jam yang lalu' },

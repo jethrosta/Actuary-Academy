@@ -15,7 +15,6 @@
                 <CheckoutDetails :items="items" :amount="amount" :userData="userData" />
             </div>
         </div>
-        <Footer />
     </div>
 </template>
 
@@ -23,7 +22,6 @@
 import { ref, onMounted, computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import router from '../../router';
-import Footer from '../Footer.vue';
 import { usePaymentStore, useAuthStore } from '../../store';
 import CheckoutDetails from './Modules/CheckoutDetails.vue';
 import MethodDetails from './Modules/MethodDetails.vue';

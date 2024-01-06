@@ -1,8 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useRoute, RouterLink } from 'vue-router';
-import Icon from '../Modules/Icon.vue';
-import Footer from "../Footer.vue";
+import Icon from '@/components/Icon.vue';
 import { modules } from '@/db';
 
 const route = useRoute();
@@ -37,7 +36,7 @@ const selectedModule = computed(() => {
                 </template>
             </div>
             <div v-if="selectedModule" class="flex flex-row flex-wrap justify-center text-main_blue p-10 gap-8 mt-[13rem]">
-                <RouterLink :to="{ name: 'module-video', params: { moduleId } }" class="flex flex-row hover:bg-main_blue stroke-main_blue hover:stroke-white hover:cursor-pointer hover:text-white items-center border-main_blue border-2 rounded-2xl px-10  py-8 space-x-8">
+                <RouterLink :to="{ name: 'module-material', params: { moduleId } }" class="flex flex-row hover:bg-main_blue stroke-main_blue hover:stroke-white hover:cursor-pointer hover:text-white items-center border-main_blue border-2 rounded-2xl px-10  py-8 space-x-8">
                     <Icon name="video" size="90" />
                     <div class="font-bold text-4xl">Video dan Modul</div>
                 </RouterLink>
@@ -52,7 +51,6 @@ const selectedModule = computed(() => {
             </div>
         </div>
     </main>
-    <Footer></Footer>
 </template>
 <style scoped>
 .bg-module {

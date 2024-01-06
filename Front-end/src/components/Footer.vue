@@ -15,7 +15,7 @@ const goToInstagram = () => {
 
 </script>
 <template>
-    <section class="relative footer w-full bg-main_blue px-10 sm:px-20 py-10 shadow-top-footer">
+    <section class="relative footer w-full bg-main_blue px-10 sm:px-20 py-3 shadow-top-footer">
         <div class="container max-w-[1400px] mx-auto divide-y divide-gray-300">
             <div class="flex gap-10 flex-wrap lg:justify-center justify-start items-center text-white font-inter font-bold py-10">
                 <div class="flex flex-col font-normal items-start">

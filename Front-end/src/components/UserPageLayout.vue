@@ -1,9 +1,8 @@
 <script setup>
 import { RouterView } from 'vue-router';
-import Footer from '../Footer.vue';
-import Icon from '../Modules/Icon.vue';
-import { useAuthStore } from '../../store/';
-import router from '../../router';
+import Icon from './Icon.vue';
+import { useAuthStore } from '@/store';
+import router from '@/router';
 import { notifCount, purchaseCount } from '@/db';
 
 const store = useAuthStore();
@@ -78,6 +77,4 @@ const handleLogout = async () => {
             <RouterView class="pr-20 pl-16"></RouterView>
         </div>
     </div>
-
-    <Footer />
 </template>

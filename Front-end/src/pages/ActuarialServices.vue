@@ -1,6 +1,4 @@
 <script setup>
-import Footer from "../Footer.vue";
-
 </script>
 <template>
     <main class="bg-jasa-aktuaria font-inter items-center justify-center object-center">
@@ -102,7 +100,6 @@ import Footer from "../Footer.vue";
             </div>
         </div>
     </main>
-    <Footer></Footer>
 </template>
 <style scoped>
 .bg-jasa-aktuaria {

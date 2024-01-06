@@ -2,8 +2,8 @@
 import { RouterLink } from 'vue-router';
 import { defineProps, ref } from 'vue';
 import Icon from './Icon.vue';
-import router from '../../router';
-import { useAuthStore } from '../../store';
+import router from '@/router';
+import { useAuthStore } from '@/store';
 import { notifCount, purchaseCount } from '@/db';
 
 const menuItems = [

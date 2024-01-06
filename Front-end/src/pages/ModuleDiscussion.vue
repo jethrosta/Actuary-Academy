@@ -1,7 +1,6 @@
 <script setup>
 import { ref, computed, watchEffect, onMounted } from 'vue';
 import { useRoute, RouterLink } from 'vue-router';
-import Footer from '../Footer.vue';
 import { modules } from '@/db';
 
 const route = useRoute();
@@ -9,23 +8,23 @@ const route = useRoute();
 const moduleIdParam = computed(() => route.params.moduleId);
 const videoIdParam = computed(() => route.params.videoId);
 
-const currentModule = ref(null);
-const currentModuleVideoList = ref(null);
-const currentModuleName = ref(null);
+const currentMod = ref(null);
+const currentModVidList = ref(null);
+const currentModName = ref(null);
 const currentVideo = ref(null);
 const videosEl = ref(null);
 const navigations = ref(null);
 
 watchEffect(() => {
-    currentModule.value = modules[moduleIdParam.value] ?? null;
-    currentModuleVideoList.value = currentModule.value?.discussionVideos ?? [];
-    currentModuleName.value = `${moduleIdParam.value}: ${currentModule.value?.name}`;
+    currentMod.value = modules[moduleIdParam.value] ?? null;
+    currentModVidList.value = currentMod.value?.discussionVideos ?? [];
+    currentModName.value = `${moduleIdParam.value}: ${currentMod.value?.name}`;
     currentVideo.value = videoIdParam.value
-        ? currentModuleVideoList.value.find((v) => v.videoId === videoIdParam.value)
-        : currentModuleVideoList.value[0];
+        ? currentModVidList.value.find((v) => v.videoId === videoIdParam.value)
+        : currentModVidList.value[0];
     navigations.value = [
         { title: 'Akademi', url: '/academy' },
-        { title: currentModuleName.value, url: `/modules/${moduleIdParam.value}` },
+        { title: currentModName.value, url: `/modules/${moduleIdParam.value}` },
         { title: 'Pembahasan Soal Ujian PAI' }
     ];
 });
@@ -33,7 +32,7 @@ watchEffect(() => {
 
 onMounted(() => {
     // scroll to current video view in video list sidebar
-    const currentVideoIndex = currentModuleVideoList.value?.indexOf(currentVideo.value) ?? null;
+    const currentVideoIndex = currentModVidList.value?.indexOf(currentVideo.value) ?? null;
     if (currentVideoIndex !== null && currentVideoIndex > 1) {
         videosEl.value[currentVideoIndex - 1].$el.scrollIntoView();
     }
@@ -61,12 +60,12 @@ onMounted(() => {
                     <div class="w-11 h-11 rounded-full bg-gray-300 mr-4">
                         <img src="">
                     </div>
-                    <div class="font-semibold text-xl">{{ currentModuleName }}</div>
+                    <div class="font-semibold text-xl">{{ currentModName }}</div>
                 </div>
                 <div class="bg-main_blue text-white rounded-xl">
                     <div class="flex flex-col max-h-[40rem] p-6 overflow-auto custom-scrollbar">
                         <RouterLink
-                            v-for="(video, index) in currentModuleVideoList"
+                            v-for="(video, index) in currentModVidList"
                             :to="{ name: 'module-discussion', params: { moduleId: moduleIdParam, videoId: video.videoId } }"
                             class="flex items-center mb-5"
                             :class="video.videoId === currentVideo.videoId && 'bg-white rounded-xl px-4 py-3 mt-4 relative'"
@@ -147,7 +146,6 @@ onMounted(() => {
             </div>
         </div>
     </div>
-    <Footer></Footer>
 </template>
 <style scoped>
 /* Firefox */

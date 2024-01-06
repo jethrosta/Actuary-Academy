@@ -8,12 +8,10 @@
                 <CheckoutDetails :invoice="invoice" :amount="amount" :items="items" :userData="userData"/>
             </div>
         </div>
-        <Footer />
     </div>
 </template>
 
 <script setup>
-import Footer from '../Footer.vue';
 import PaymentDetails from './Modules/PaymentDetails.vue';
 import CheckoutDetails from './Modules/CheckoutDetails.vue';
 import { ref, onMounted, computed, watch } from 'vue';

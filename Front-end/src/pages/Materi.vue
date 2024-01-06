@@ -1,6 +1,5 @@
 <script setup>
 import { RouterLink } from 'vue-router';
-import Footer from '../Footer.vue';
 import { onMounted, ref } from 'vue';
 import axios from 'axios';
 
@@ -205,4 +204,4 @@ onMounted(async () => {
             </div>
         </div>
     </div>
-    <Footer></Footer></template>
+</template>

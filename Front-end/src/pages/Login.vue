@@ -1,12 +1,12 @@
 <script setup>
-import { useAuthStore } from "../../store";
-import router from "../../router/index.js";
-import { RouterLink } from 'vue-router';
 import { ref, computed, onMounted } from 'vue';
+import { RouterLink } from 'vue-router';
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup"
-import { getGoogleUrl } from "../../services/google-url.service";
-import { getFacebookUrl } from "../../services/facebook-url.service";
+import { useAuthStore } from "@/store";
+import router from "@/router/index.js";
+import { getGoogleUrl } from "@/services/google-url.service";
+import { getFacebookUrl } from "@/services/facebook-url.service";
 
 //Validations
 const schema = yup.object().shape({

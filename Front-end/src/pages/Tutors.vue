@@ -1,7 +1,6 @@
 <script setup>
 import { Splide } from '@splidejs/vue-splide'
 import { SplideSlide } from '@splidejs/vue-splide'
-import Footer from '../Footer.vue';
 import { tutors } from '@/db';
 
 const splideOptions = {
@@ -38,5 +37,4 @@ const splideOptions = {
             </SplideSlide>
         </Splide>
     </div>
-    <Footer></Footer>
 </template>

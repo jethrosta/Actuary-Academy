@@ -1,3 +1,5 @@
+<script setup>
+</script>
 <template>
     <main class=" w-full content-center items-center font-inter">
         
@@ -107,10 +109,4 @@
             <img src="/src/assets/Alumni.png" alt="" class="w-full -mt-[18rem] -mb-[14rem]">
         </div>
     </main>
-    <Footer></Footer>
 </template>
-
-<script setup>
-    import Footer from '../Footer.vue';
-
-</script>

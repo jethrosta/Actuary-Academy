@@ -1,10 +1,10 @@
 <script setup>
 import { ref, computed } from 'vue';
-import { RouterLink, RouterView } from 'vue-router';
-import NavDropdown from '../Modules/NavDropdown.vue';
-import UserDropdown from '../Modules/UserDropdown.vue';
-import NavSideMenu from '../Modules/NavSideMenu.vue';
-import { useAuthStore } from "../../store";
+import { RouterLink } from 'vue-router';
+import NavDropdown from './NavDropdown.vue';
+import UserDropdown from './UserDropdown.vue';
+import NavSideMenu from './NavSideMenu.vue';
+import { useAuthStore } from "@/store";
 import { notifCount, purchaseCount } from '@/db';
 
 const store = useAuthStore()
@@ -234,17 +234,10 @@ const notifTotalCount = notifCount + purchaseCount;
             </RouterLink>
           </div>
         </div>
-
-
-
+        
       </div>
-
     </div>
-
   </header>
-
-
-  <RouterView></RouterView>
 </template>
 
 <style>
@@ -253,4 +246,5 @@ const notifTotalCount = notifCount + purchaseCount;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-}</style>
+}
+</style>

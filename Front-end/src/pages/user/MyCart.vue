@@ -209,9 +209,9 @@
 
 <script setup>
 import { computed, onMounted, ref } from 'vue';
-import { usePaymentStore } from '../../store';
-import { RouterLink, onBeforeRouteLeave } from 'vue-router';
-import router from '../../router';
+import { RouterLink } from 'vue-router';
+import { usePaymentStore } from '@/store';
+import router from '@/router';
 
 const store = usePaymentStore();
 

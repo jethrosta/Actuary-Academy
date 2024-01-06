@@ -1,6 +1,5 @@
 <script setup>
-import Footer from '../Footer.vue';
-import OtherProducts from '../OtherProducts.vue';
+import OtherProducts from '@/components/OtherProducts.vue';
 
 </script>
 <template>
@@ -47,7 +46,6 @@ import OtherProducts from '../OtherProducts.vue';
             <OtherProducts exclude="company-training" />
         </div>
     </main>
-    <Footer></Footer>
 </template>
 <style>
 .bg-company-training {

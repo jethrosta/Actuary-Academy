@@ -1,7 +1,6 @@
 <script setup>
 import { Splide } from '@splidejs/vue-splide'
 import { SplideSlide } from '@splidejs/vue-splide'
-import Footer from '../Footer.vue';
 import { RouterLink } from 'vue-router';
 
 const splideOptions = {
@@ -60,5 +59,4 @@ const testimonies = [
             </Splide>
         </div>
     </div>
-    <Footer></Footer>
 </template>

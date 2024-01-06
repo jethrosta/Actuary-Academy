@@ -2,7 +2,6 @@
 import { Splide } from '@splidejs/vue-splide'
 import { SplideSlide } from '@splidejs/vue-splide'
 import { RouterLink } from 'vue-router';
-import Footer from '../Footer.vue'
 
 const testiSplideOptions = {
     rewind: true,
@@ -206,7 +205,6 @@ const testimonies = [
                 </div>
             </div>
         </section>
-        <Footer></Footer>
     </main>
 </template>
 
