@@ -10,15 +10,16 @@ import {
 
 export const content = async (req: express.Request, res: express.Response) => {
   try {
-    const { contentLink } = req.body;
+    const { link, title } = req.body;
 
-    if (!contentLink) {
+    if (!link && !title) {
       return res.sendStatus(400);
     }
 
     try {
       const user = await createContent({
-        contentLink,
+        link,
+        title,
       });
 
       return res.status(200).json(user).end();
@@ -27,7 +28,7 @@ export const content = async (req: express.Request, res: express.Response) => {
     }
   } catch (err) {
     console.log(err);
-    return res.sendStatus(400).json("Cannot access testimoni function");
+    return res.sendStatus(400).json("Cannot access content create function");
   }
 };
 
