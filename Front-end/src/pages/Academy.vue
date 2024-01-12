@@ -77,7 +77,7 @@ const nextModuleSlide = computed(() => {
                     <div>Akademi</div>
                 </div>
                 <div class="text-white">
-                    Ini isinya deskripsi tentang akademi. Ini isinya deskripsi tentang akademi. Ini isinya deskripsi tentang akademi. Ini isinya deskripsi tentang akademi. Ini isinya deskripsi tentang akademi. Ini isinya deskripsi tentang akademi. Ini isinya deskripsi tentang akademi. Ini isinya deskripsi tentang akademi. Ini isinya deskripsi tentang akademi. Ini isinya deskripsi tentang akademi. Ini isinya deskripsi tentang akademi.
+                    Akademi menyediakan media belajar online berbasis website berdasarkan kurikulum PAI terbaru untuk menambah ilmu mengenai Aktuaria dan mempersiapkan ujian PAI.
                 </div>
             </div>
             <div class="mt-16">

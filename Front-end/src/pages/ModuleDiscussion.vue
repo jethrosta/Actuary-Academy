@@ -140,7 +140,7 @@ onMounted(() => {
                         </div>
                     </div>
                     <div class="text-lg mt-4">
-                        A brief description of what the video will discuss
+                        {{ currentVideo.desc || 'Tidak ada deskripsi' }}
                     </div>
                 </div>
             </div>
