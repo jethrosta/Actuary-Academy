@@ -54,9 +54,9 @@ const SubmateriSchema = new mongoose.Schema<SubmateriDocument>({
 }, { _id: false })
 
 const VariationSchema = new mongoose.Schema<VariationDocument>({
-    current: { type: String, required: true },
+    current: { type: String, required: true},
     options: [String]
-}, { _id: false })
+}, { _id: false})
 
 const DurationSchema = new mongoose.Schema<DurationDocument>({
     current: { type: String, required: true },
@@ -84,7 +84,7 @@ const CourseSchema = new mongoose.Schema<CourseDocument>({
     is_discount: { type: Boolean, default: false },
     category: { type: String, required: true },
     variation: VariationSchema,
-    duration: DurationSchema
+    duration: DurationSchema   
 });
 
 export const CourseModel = mongoose.model('Course', CourseSchema);

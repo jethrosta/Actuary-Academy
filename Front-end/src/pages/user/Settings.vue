@@ -2,9 +2,9 @@
 </script>
 
 <template>
-    <div class="content-area font-inter flex flex-col gap-y-1 w-full px-10 pt-12 pb-28 overflow-clip">
-        <div class="flex flex-col w gap-y-5">
-            <div class="font-bold text-main_blue text-3xl pt-4">Pengaturan</div>
+    <div class="content-area font-inter flex flex-col gap-y-1">
+        <div class="header pb-4 w-full bg-white font-bold text-main_blue text-2xl pt-4">Pengaturan</div>
+        <div class="flex flex-col gap-y-5">
             <div class="">Pemberitahuan Otomatis</div>
             <div class="">Bahasa</div>
             <div class="">Privasi dan Keamanan</div>

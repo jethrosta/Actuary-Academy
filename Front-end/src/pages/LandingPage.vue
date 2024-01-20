@@ -44,21 +44,24 @@ const testimonies = [
         name: 'Lilis Hermawanti',
         occupation: 'Dosen Statistika - Universitas Harapan',
         image: 'src/assets/testimonies/lilis.jpg',
-        stars: 5,
+        rating: 98,
+        product: 'A10',
         text: 'Sebuah testimoni yang menggambarkan apa yang dipikirkan orang tersebut tentang layanan, produk, atau startup ini secara umum. Sebuah testimoni yang menggambarkan pendapat orang',
     },
     {
         name: 'Iqbal Andriansyah',
         occupation: 'Mahasiswa Ilmu Aktuaria - Universitas Ujung Negeri',
         image: 'src/assets/testimonies/iqbal.jpg',
-        stars: 5,
+        rating: 90,
+        product: 'A12',
         text: 'Sebuah testimoni yang menggambarkan apa yang dipikirkan orang tersebut tentang layanan, produk, atau startup ini secara umum. Sebuah testimoni yang menggambarkan pendapat orang',
     },
     {
         name: 'Diki Prasetya',
         occupation: 'Manajer Perusahaan Manajemen Aset',
         image: 'src/assets/testimonies/diki.jpg',
-        stars: 5,
+        rating: 95,
+        product: 'A11',
         text: 'Sebuah testimoni yang menggambarkan apa yang dipikirkan orang tersebut tentang layanan, produk, atau startup ini secara umum. Sebuah testimoni yang menggambarkan pendapat orang',
     }
 ]
@@ -144,34 +147,18 @@ const testimonies = [
                             <p class="my-4 underline underline-offset-4 font-bold text-slate-400 md:mb-10">
                                 Baca selengkapnya
                             </p>
-                            <div class="flex flex-wrap md:items-center justify-center sm:justify-start gap-x-8 gap-y-4 p-4 md:p-1">
+                            <div class="flex flex-wrap md:items-center justify-center sm:justify-start gap-x-8 gap-y-4 py-3">
                                 <img :src="testi.image"
-                                class="w-16 h-16 lg:w-24 lg:h-24 object-cover object-top rounded-full" />
+                                class="w-18 h-18 lg:w-24 lg:h-24 object-cover object-top rounded-full" />
                                 <div class="flex flex-col text-center sm:text-left">
                                     <div class="flex space-x-2 mx-auto sm:mx-0">
-                                        <span v-for="_ in testi.stars">
-                                            <svg class="h-5 lg:h-7 justify-self-center-center " version="1.1" id="_x32_"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512.00 512.00"
-                                                xml:space="preserve" fill="#FBBC05">
-                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke="#CCCCCC" stroke-width="11.264"></g>
-                                                <g id="SVGRepo_iconCarrier">
-                                                    <g>
-                                                        <path class="st0"
-                                                            d="M510.698,196.593c-3.61-11.2-14.034-18.795-25.794-18.795H329.21L281.791,30.155 c-3.599-11.2-14.018-18.808-25.791-18.808c-11.772,0-22.192,7.608-25.791,18.808l-47.418,147.642H27.097 c-11.761,0-22.185,7.594-25.795,18.795c-3.599,11.2,0.436,23.449,9.999,30.302l126.246,90.643l-48.598,147.54 c-3.694,11.193,0.278,23.47,9.801,30.398c9.529,6.926,22.44,6.897,31.94-0.058L256,403.594l125.312,91.824 c9.5,6.956,22.411,6.985,31.941,0.058c9.522-6.927,13.494-19.205,9.811-30.398l-48.61-147.54L500.7,226.895 C510.262,220.042,514.298,207.792,510.698,196.593z">
-                                                        </path>
-                                                    </g>
-                                                </g>
-                                            </svg>
-                                        </span>
                                     </div>
-                                    <div class="mt-2 font-inter font-bold text-md lg:text-xl">
+                                    <div class="mt-2 font-inter font-bold text-2xl lg:text-4xl">
                                         {{ testi.name }}
                                     </div>
-                                    <div class="text-zinc-400 text-sm lg:text-lg">
-                                        {{ testi.occupation }}
+                                    <div class="py-2 flex gap-4 font-semibold text-lg">
+                                        <div class="py-2 px-3 bg-main_blue rounded-lg">{{ testi.product }}</div>
+                                        <div class="py-2 px-3 bg-main_blue rounded-lg">Nilai: {{ testi.rating }}</div>
                                     </div>
                                 </div>
                             </div>

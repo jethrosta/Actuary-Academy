@@ -65,8 +65,8 @@ export const updateCurrentUser = async (
   res: express.Response
 ) => {
   try {
-    const user = await updateUserbyId(req.userId, req.body);
-    res.send(user);
+    const user = await updateUserbyId(req.params.id, req.body);
+    return res.json({message: "success", userData: user})
   } catch (err) {
     console.log(err);
     return res.sendStatus(400);

@@ -8,6 +8,7 @@ import courses from "./courses";
 import cart from "./cart";
 import order from "./order";
 import midtrans from "./midtrans";
+import subscription from "./subscription";
 
 const router = express.Router();
 
@@ -20,5 +21,6 @@ export default (): express.Router => {
   cart(router);
   order(router);
   midtrans(router);
+  subscription(router)
   return router;
 };

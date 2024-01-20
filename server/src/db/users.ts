@@ -36,7 +36,7 @@ export interface UserDocument extends mongoose.Document {
   city: string;
   province: string;
   gender: string;
-  dateOfBirth: string;
+  dateOfBirth: Date;
   authentication: AuthenticationDocument;
   cart: Array<{ course: string }>;
   courses: Array<string>;
@@ -49,7 +49,7 @@ const UserSchema = new mongoose.Schema<UserDocument>({
   city: { type: String, required: false },
   province: { type: String, required: false },
   gender: { type: String, required: false },
-  dateOfBirth: { type: String, required: false },
+  dateOfBirth: { type: Date, required: false },
   authentication: { type: AuthenticationSchema, required: true },
   cart: [{ course: { type: mongoose.Schema.Types.ObjectId, ref: "Course" } }],
   courses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Course" }],

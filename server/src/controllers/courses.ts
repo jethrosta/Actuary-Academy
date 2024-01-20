@@ -1,7 +1,8 @@
 import express from 'express';
 import { createCourse, Courses, CourseById, CourseBySubscriberId, subscribeToCourse } from '../services/courses';
-import { CourseDocument } from '../db/courses';
+import { CourseDocument, CourseModel } from '../db/courses';
 import type { RequestWithJWT } from '../middlewares/index';
+import { UserModel } from 'db/users';
 
 interface CourseRequest extends express.Request {
     body: {
@@ -31,7 +32,7 @@ export const getCourse = async (req: CourseRequest, res: express.Response) => {
 
 export const getCourseBySubscriberId = async (req: CourseRequest & RequestWithJWT, res: express.Response) => {
     try {
-        const courses = await CourseBySubscriberId(req.userId)
+        const courses = await CourseBySubscriberId(req.userId);
 
         if (courses === undefined) {
             console.error('Failed to retrieve courses');

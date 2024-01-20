@@ -44,6 +44,14 @@ export const payment = {
   },
 
   actions: {
+    async addToCart(ids) {
+      try {
+        const res = await PaymentService.addToCart(ids);
+        console.log('berhasil menambahkan ke keranjang!');
+      } catch (error) {
+        console.log(error);        
+      }
+    },
 
     async setCart() {
       try {

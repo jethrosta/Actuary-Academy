@@ -25,7 +25,7 @@ class UserService {
 
   async getAllCourses(id) {
     try {
-      const res = await axios.get(API_URL + 'courses', { userId: id }, { withCredentials: true }); //URL Belum fix
+      const res = await axios.post(API_URL + 'courses/me', { userId: id }, { withCredentials: true }); //URL Belum fix
       return res;
     } catch (error) {
       console.log(error);
@@ -35,6 +35,15 @@ class UserService {
   async getNotifications(id) {
     try {
       const res = await axios.get(API_URL + 'notifications', { userId: id }, { withCredentials: true }); //URL Belum fix
+      return res;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async updateProfile(id, values) {
+    try {
+      const res = await axios.put(API_URL + 'users/update/' + id, values , { withCredentials: true });
       return res;
     } catch (error) {
       console.log(error);

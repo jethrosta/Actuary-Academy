@@ -10,7 +10,7 @@ export const userStore = {
     state: () => ({
         allCourses: null,
         notifications: null,
-        
+
     }),
 
     getters: {
@@ -43,5 +43,15 @@ export const userStore = {
             }
         },
 
+        async updateProfile(values) {
+            try {
+                const res = await UserService.updateProfile(user._id, values);
+                if (res.data.message == 'success') {
+                    localStorage.setItem('user', JSON.stringify(res.data.userData));
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
     }
 };

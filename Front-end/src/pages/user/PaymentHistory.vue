@@ -1,7 +1,7 @@
 <template>
-    <div class="content-area font-inter flex flex-col text-main_blue gap-y-1 w-full px-10 pt-12 pb-28 overflow-clip">
-        <div class="flex content-between justify-between items-center w-full py-4">
-            <div class="w-min font-bold text-3xl">Riwayat Pembayaran</div>
+    <div class="content-area font-inter flex flex-col text-main_blue gap-y-1">
+        <div class="header sticky top-0 bg-white w-full flex content-between justify-between items-center py-4">
+            <div class="w-min font-bold text-2xl">Riwayat Pembayaran</div>
             <button @click="router.go(-1)" class="flex items-center font-semibold text-lg hover:text-blue-400">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

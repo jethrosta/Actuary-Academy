@@ -13,19 +13,19 @@
         </div>
         <div class="py-3">
             <div class="font-bold">Email</div>
-            <div>{{ 'userData.email' }}</div>
+            <div>{{ userData.email }}</div>
         </div>
         <div class="py-3">
             <div class="font-bold">Nomor Telepon</div>
-            <div>{{ 'userData.phone' }}</div>
+            <div>{{ userData.phoneNumber ? userData.phoneNumber : 'Tidak Ada' }}</div>
         </div>
         <div class="space-y-2 py-3">
             <div class="font-bold">Detail Pembelian</div>
             <div class="space-y-2">
                 <div v-for="item in items" class="flex flex-row justify-between">
-                    <div class="w-1/3">{{ item.name }}</div>
-                    <div class="w-1/3 text-center">x {{ item.quantity }}</div>
-                    <div class="w-1/3">{{ toIDR(item.price) }}</div>
+                    <div class="w-1/3">{{ item.title }}</div>
+                    <div class="w-1/3 text-center">x 1</div>
+                    <div class="w-1/3">{{ toIDR(item.is_discount ? item.discount_price : item.price) }}</div>
                 </div>
             </div>
         </div>

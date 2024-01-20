@@ -1,6 +1,5 @@
 <template>
-    <div
-        class="content-area max-w-[1500px] font-inter flex flex-col text-main_blue gap-y-1 w-full px-10 pt-12 pb-28 overflow-clip">
+    <div class="content-area max-w-[1500px] font-inter flex flex-col text-main_blue gap-y-1">
         <div v-if="modalError" tabindex="-1" @click="closeModal"
             class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
             <div class="relative w-full max-w-md max-h-full">
@@ -30,8 +29,9 @@
                 </div>
             </div>
         </div>
-        <div class="flex content-between justify-between items-center w-full py-4">
-            <div class="w-min font-bold text-3xl">Keranjang</div>
+
+        <div class="header top-0 sticky bg-white  flex content-between justify-between items-center w-full py-4">
+            <div class="font-bold text-2xl">Keranjang</div>
             <RouterLink :to="{ name: 'Riwayat Pembayaran' }"
                 class="flex items-center font-semibold text-lg text-main_blue hover:text-blue-400">
                 <u>Riwayat Pembayaran</u>
@@ -42,6 +42,7 @@
                 </svg>
             </RouterLink>
         </div>
+
         <div v-if="!toEditProduct" class="w-full">
             <div class="mb-4">
                 <label class="inline-flex items-center">
@@ -204,6 +205,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 
