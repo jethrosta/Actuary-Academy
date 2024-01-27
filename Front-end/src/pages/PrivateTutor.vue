@@ -112,9 +112,9 @@ const tutorsSplideOptions = {
         background-repeat: no-repeat;
     }
     .tutor-img-bg {
-        background-image: url('data:image/svg+xml,<svg width="557" height="341" viewBox="0 0 557 341" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 278.5C0 124.689 124.689 0 278.5 0C432.311 0 557 124.689 557 278.5V320.882C557 331.515 548.38 340.135 537.747 340.135H19.2529C8.61982 340.135 0 331.515 0 320.882V278.5Z" fill="%230066CC"/></svg>');
+        background-image: url('data:image/svg+xml,<svg width="413" height="543" viewBox="0 0 413 543" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 206.5C0 92.4532 92.4532 0 206.5 0C320.547 0 413 92.4532 413 206.5V520.172C413 532.78 402.78 543 390.172 543H22.8279C10.2204 543 0 532.78 0 520.172V206.5Z" fill="%230066CC"/></svg>');
         background-size: contain;
-        background-position: bottom 0px left 0px;
+        background-position: bottom center;
         background-repeat: no-repeat;
     }
 </style>

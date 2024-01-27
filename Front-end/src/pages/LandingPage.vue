@@ -1,10 +1,12 @@
 <script setup>
 import { Splide } from '@splidejs/vue-splide'
 import { SplideSlide } from '@splidejs/vue-splide'
-import { RouterLink } from 'vue-router';
+import { RouterLink } from 'vue-router'
+import { testimonies } from '@/db'
 
 const testiSplideOptions = {
     rewind: true,
+    pagination: false,
     gap: '5rem',
     padding: '4rem',
     classes: {
@@ -36,33 +38,6 @@ const products = [
         url: '/actuarial-services',
         desc: 'Actuary Academy menyediakan jasa yang membantu proyek-proyek seputar aktuaria.',
         icon: 'src/assets/Presentation.png'
-    }
-]
-
-const testimonies = [
-    {
-        name: 'Lilis Hermawanti',
-        occupation: 'Dosen Statistika - Universitas Harapan',
-        image: 'src/assets/testimonies/lilis.jpg',
-        rating: 98,
-        product: 'A10',
-        text: 'Sebuah testimoni yang menggambarkan apa yang dipikirkan orang tersebut tentang layanan, produk, atau startup ini secara umum. Sebuah testimoni yang menggambarkan pendapat orang',
-    },
-    {
-        name: 'Iqbal Andriansyah',
-        occupation: 'Mahasiswa Ilmu Aktuaria - Universitas Ujung Negeri',
-        image: 'src/assets/testimonies/iqbal.jpg',
-        rating: 90,
-        product: 'A12',
-        text: 'Sebuah testimoni yang menggambarkan apa yang dipikirkan orang tersebut tentang layanan, produk, atau startup ini secara umum. Sebuah testimoni yang menggambarkan pendapat orang',
-    },
-    {
-        name: 'Diki Prasetya',
-        occupation: 'Manajer Perusahaan Manajemen Aset',
-        image: 'src/assets/testimonies/diki.jpg',
-        rating: 95,
-        product: 'A11',
-        text: 'Sebuah testimoni yang menggambarkan apa yang dipikirkan orang tersebut tentang layanan, produk, atau startup ini secara umum. Sebuah testimoni yang menggambarkan pendapat orang',
     }
 ]
 
@@ -143,13 +118,11 @@ const testimonies = [
                     <SplideSlide v-for="testi in testimonies">
                         <div
                             class="shadow-xl flex md:block flex-col flex-wrap md:flex-nowrap bg-sec_blue h-fit w-fit p-8 md:p-14 rounded-3xl text-white font-inter">
-                            <p class="lg:text-xl">“{{ testi.text }}”</p>
-                            <p class="my-4 underline underline-offset-4 font-bold text-slate-400 md:mb-10">
-                                Baca selengkapnya
-                            </p>
+                            <p class="lg:text-xl mb-4">“{{ testi.text }}”</p>
                             <div class="flex flex-wrap md:items-center justify-center sm:justify-start gap-x-8 gap-y-4 py-3">
-                                <img :src="testi.image"
-                                class="w-18 h-18 lg:w-24 lg:h-24 object-cover object-top rounded-full" />
+                                <img
+                                    :src="testi.image || 'src/assets/testimonies/default-male.png'"
+                                    class="w-18 h-18 lg:w-24 lg:h-24 object-cover object-top bg-[#D9D9D9] rounded-full" />
                                 <div class="flex flex-col text-center sm:text-left">
                                     <div class="flex space-x-2 mx-auto sm:mx-0">
                                     </div>
@@ -157,8 +130,8 @@ const testimonies = [
                                         {{ testi.name }}
                                     </div>
                                     <div class="py-2 flex gap-4 font-semibold text-lg">
-                                        <div class="py-2 px-3 bg-main_blue rounded-lg">{{ testi.product }}</div>
-                                        <div class="py-2 px-3 bg-main_blue rounded-lg">Nilai: {{ testi.rating }}</div>
+                                        <div v-show="testi.product" class="py-2 px-3 bg-main_blue rounded-lg">{{ testi.product }}</div>
+                                        <div v-show="testi.grade" class="py-2 px-3 bg-main_blue rounded-lg">Nilai: {{ testi.grade }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -166,7 +139,7 @@ const testimonies = [
                     </SplideSlide>
                 </Splide>
             </div>
-            <div class="flex justify-center mt-6">
+            <div class="flex justify-center mt-8">
                 <RouterLink to="/testimonies" class="text-sec_blue lg:text-white font-inter font-bold text-2xl">Testimoni Lainnya
                 </RouterLink>
             </div>

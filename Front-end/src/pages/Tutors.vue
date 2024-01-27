@@ -29,9 +29,9 @@ const splideOptions = {
                         <ul class="list-disc list-inside">
                             <li v-for="achievement in tutor.achievs">{{ achievement }}</li>
                         </ul>
-                        <div class="inline-block rounded-lg bg-main_orange text-white font-semibold mt-5 px-5 py-2 cursor-pointer self-end shadow-xl">
+                        <!-- <div class="inline-block rounded-lg bg-main_orange text-white font-semibold mt-5 px-5 py-2 cursor-pointer self-end shadow-xl">
                             Berlangganan
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </SplideSlide>

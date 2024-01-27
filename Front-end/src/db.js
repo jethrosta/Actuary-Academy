@@ -1,4 +1,6 @@
-// TEMPORARY DATA BEFORE REAL DATABASE IS READY FOR USE
+/*
+    TEMPORARY FILE BEFORE THE DATABASE (BACKEND) IS READY TO USE
+*/
 
 export const cart = [
     {   
@@ -302,39 +304,86 @@ export const academyPackages = [
     }
 ]
 
+export const testimonies = [
+    {
+        name: 'Jessica Wahjudi',
+        product: 'A10',
+        grade: 93.33,
+        image: '/src/assets/testimonies/default-female.png',
+        text: 'Soal-soal latihan & review materi dari Actuary Academy sangat membantu saya untuk mempersiapkan diri mengambil ujian A10. Semangat terus Actuary Academy! Semoga  sukses selalu!',
+    },
+    {
+        name: 'Atika Elsadining',
+        product: 'A10',
+        grade: 93.33,
+        image: '/src/assets/testimonies/default-female.png',
+        text: 'Materi yang disampaikan lengkap. Mentor sangat jelas dalam menjelaskan. Memang butuh waktu & fokus untuk belajar. Semoga si ujian berikutnya bisa lulus memuaskan & banyak waktu belajar!',
+    },
+    {
+        name: 'Muhammad Rizki',
+        product: 'A10',
+        grade: 90,
+        image: '/src/assets/testimonies/default-male.png',
+        text: 'Mas Fabian mengajar dengan baik. Video pembelajarannya pun dapat dimengerti, mempermudah kita belajar untuk ujian Aktuaris & Alhamdulillah mendapatkan nilai yang memuaskan.',
+    },
+    {
+        name: 'Grace Kurniawan',
+        product: 'A20',
+        grade: 90,
+        image: '/src/assets/testimonies/default-female.png',
+        text: 'Penjelasannya Kak Fabian mudah dimengerti di videonya & jadi dapat cara baru”untuk menyelesaikan soalnya.',
+    },
+    {
+        name: 'Ratih Binadari',
+        image: '/src/assets/testimonies/default-female.png',
+        text: 'Kelasnya Mas Fabian asik. Penjelasan dari video mudah dimengerti. Insyaallah modul berikutnya ikut kelas Mas Fabian',
+    },
+    {
+        name: 'Arif Kusharyadi',
+        product: 'A10',
+        grade: 96.67,
+        image: '/src/assets/testimonies/default-male.png',
+        text: 'Materinya yang diberikan sangat ringkas & bisa dipelajari dalam waktu singkat',
+    },
+    {
+        name: 'Fildzah Fakhrana',
+        image: '/src/assets/testimonies/default-female.png',
+        text: 'Tiga kali tutor (PMAJ, Matematika Keuangan, Probabilitas Statistika) sama Kak Fabian mudah banget buat dimengerti, penjelasannya sangat membantu. Kalo ada setiap pertanyaan juga dijelasin secara menditail sampe kita bener2 paham & gapelit buat berbagi ilmu. Thank u kak Fabian, next pasti belajar di Actuary Academy lagi!',
+    },
+    {
+        name: 'Astrid M.S.',
+        image: '/src/assets/testimonies/default-female.png',
+        text: 'Fabian merupakan pengajar yang sabar & sangat terperinci. Selain itu, materi yang diajarkannya pun dikupas tuntas. Di sela-sela pengajaran, Fabian juga menanyakan apakah sudah mengerti/masih ada yang dibingungkan.',
+    },
+    {
+        name: 'Kharisma',
+        image: '/src/assets/testimonies/default-female.png',
+        text: 'Tutor sama kak Fabian santai banget tapi hal yang diajarkan itu bikin paham. Kak Fabian juga mengajarkannya step-by-step jadi lebih mudah untuk dipahami',
+    }
+]
+
 export const tutors = [
     {
-        name: 'Firstname Lastname',
-        classes: 'A10, A20, A70',
+        name: 'Kezya Fabian Ramadhan',
+        classes: 'A10, A20, A50, A60, A70',
         achievs: [
-            'Mahasiswa Ilmu Aktuaria UGM 2019',
-            'Achievement 1',
-            'Achievement 2',
-            'Achievement 3'
+            'Founder & Director Actuary Academy',
+            'Local & Reinsurance Actuary Intern AXA Financial Indonesia',
+            'Mempunyai 7 sertifikasi ujian PAI (A10, A20, A30, A40, A50, A60, dan A70)',
+            'Mahasiswa Ilmu Aktuaria UGM 2019'
         ],
-        img: '/src/assets/tutors/1.png'
+        img: '/src/assets/tutors/fabian.png'
     },
     {
-        name: 'Firstname Lastname',
-        classes: 'A50, A60',
+        name: 'William Kosasih',
+        classes: 'A10, A20',
         achievs: [
-            'Mahasiswa Ilmu Aktuaria UGM 2019',
-            'Achievement 1',
-            'Achievement 2',
-            'Achievement 3'
+            'General Banking Program Intern Bank Mandiri',
+            'Mempunyai 2 sertifikasi ujian PAI (A10 dan A20)',
+            'Peraih Medali Perak ONMIPA Bidang Matematika 2022',
+            'Mahasiswa Matematika UGM 2020'
         ],
-        img: '/src/assets/tutors/2.png'
-    },
-    {
-        name: 'Firstname Lastname',
-        classes: 'A10, A20, A70',
-        achievs: [
-            'Mahasiswa Ilmu Aktuaria UGM 2019',
-            'Achievement 1',
-            'Achievement 2',
-            'Achievement 3'
-        ],
-        img: '/src/assets/tutors/3.png'
+        img: '/src/assets/tutors/william.png'
     }
 ]
 
