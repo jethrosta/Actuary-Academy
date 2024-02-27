@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import Joi from "joi";
 
+import { CartDocument } from "./cart";
+
 interface SessionTokenDocument extends mongoose.Document {
   token: string;
   expiresAt: Date;
@@ -38,9 +40,21 @@ export interface UserDocument extends mongoose.Document {
   gender: string;
   dateOfBirth: string;
   authentication: AuthenticationDocument;
-  cart: Array<{ course: string }>;
-  courses: Array<string>;
-}
+  // cart: Array<{ course: string }>;
+  cart: CartDocument[];
+  // courses: Array<string>;
+  tutor_packages: string;
+  academy_packages: string;
+  endDate: Date;
+};
+
+const tutorPackages = ['mahasiswa', 'umum', 'none'];
+const academyPackages = ['Paket Pembahasan Soal 6 Bulan',
+                         'Paket Pembahasan Soal Lifetime',
+                         'Paket Lengkap 6 Bulan',
+                         'Paket Lengkap Lifetime',
+                         'none'
+                        ];
 
 const UserSchema = new mongoose.Schema<UserDocument>({
   name: { type: String, required: true },
@@ -51,8 +65,18 @@ const UserSchema = new mongoose.Schema<UserDocument>({
   gender: { type: String, required: false },
   dateOfBirth: { type: String, required: false },
   authentication: { type: AuthenticationSchema, required: true },
-  cart: [{ course: { type: mongoose.Schema.Types.ObjectId, ref: "Course" } }],
-  courses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Course" }],
+  cart: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Cart' }],
+  tutor_packages: { 
+    type: String,
+    enum: tutorPackages,
+    default: 'none',
+  },
+  academy_packages: {
+    type: String,
+    enum: academyPackages,
+    default: 'none',
+  },
+  endDate: { type: Date, default: null }
 });
 
 export const UserModel = mongoose.model("User", UserSchema);

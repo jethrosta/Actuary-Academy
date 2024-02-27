@@ -371,3 +371,50 @@ const updateAllPayments = async (userId: any) => {
         console.log(error)
     }
 }
+
+
+// ================================================================================= //
+
+export const CreateOrder = async (values: Record<string, any>) => {
+    try {
+        const newOrder = new OrderModel(values);
+        const savedOrder = await newOrder.save();
+
+        return savedOrder.toObject();
+    } catch (err) {
+        console.error('Error creating order:', err);
+        throw err;
+    }
+};
+
+// export const getOrderByUser = (userId: string) => OrderModel.find({ userId }).populate('item_details');
+
+// orderId from mongoDB (_id)
+export const getOrderWithDetails = async (orderId: string) => {
+    try {
+        const orderWithDetails = await OrderModel.findById(orderId)
+            .populate('customer_details', 'name email phoneNumber')
+            .populate('item_details', 'name price')
+            .exec();
+        
+            return orderWithDetails ? orderWithDetails.toObject() : null;
+    } catch (err) {
+        console.error('Error retrieving order with details', err);
+        throw err;
+    }
+};
+
+// orderId from mongoDB (_id)
+export const updateTransactionStatus = async (orderId: string, transaction_status: string) => {
+    try {
+        const order = await OrderModel.findByIdAndUpdate(orderId, { transaction_status }, { new: true })
+            .populate('customer_details', 'name email phoneNumber')
+            .populate('item_details', 'name price')
+            .exec();
+
+        return order.toObject();
+    } catch (err) {
+        console.error('Error updating transaction status:', err);
+        throw err;
+    }
+};

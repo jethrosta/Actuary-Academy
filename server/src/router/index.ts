@@ -9,6 +9,7 @@ import cart from "./cart";
 import order from "./order";
 import midtrans from "./midtrans";
 import subscription from "./subscription";
+import purchases from "./purchases";
 
 const router = express.Router();
 
@@ -21,6 +22,7 @@ export default (): express.Router => {
   cart(router);
   order(router);
   midtrans(router);
-  subscription(router)
+  subscription(router);
+  purchases(router);
   return router;
 };

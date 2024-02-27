@@ -1,8 +1,14 @@
 import express from "express";
-import { isAuthenticated } from "../middlewares/index";
-import { getAllPayments, getCurrentUserPayment } from "../controllers/midtrans";
+import { addMidtransResponse, 
+         getAllMidtransResponse, 
+         getSingleMidtransResponse, 
+         putMidtransResponse, 
+         delMidtransResponse } from "../controllers/midtrans";
 
 export default (router: express.Router) => {
-    router.get('/v2/payment', isAuthenticated, getAllPayments);
-    router.get('/v2/payment/:order_id', isAuthenticated, getCurrentUserPayment);
+    router.post('/v2/midtrans', addMidtransResponse);
+    router.get('/v2/midtrans', getAllMidtransResponse);
+    router.get('/v2/midtrans/:id', getSingleMidtransResponse);
+    router.put('/v2/midtrans/:id', putMidtransResponse);
+    router.delete('/v2/midtrans/:id', delMidtransResponse);
 };

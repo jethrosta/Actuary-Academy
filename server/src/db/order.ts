@@ -1,53 +1,46 @@
 import mongoose from "mongoose";
 
 export interface OrderDocument extends mongoose.Document {
-    user_id: mongoose.Types.ObjectId;
-    invoice: string;
-    identifier: string;
-    // course: mongoose.Types.ObjectId;
-    gross_amount: number;
     payment_type: string;
-    channel_name: string;
-    virtual_number: string;
-    permata_va_number: string;
-    bill_key: string;
-    biller_code: string;
-    payment_code: string;
-    status: string;
-    status_code: string;
-    transaction_time: Date;
-    expiry_time: Date;
-    paid_at: Date;
-    course: any;
-    actions: any;
-}
+    transaction_details: {
+        gross_amount: number;
+        orderId: string;
+    },
+    customer_details: mongoose.Types.ObjectId;
+    item_details: mongoose.Types.ObjectId[];
+    bank_transfer: {
+        bank: string;
+    },
+    transaction_status: string;
+};
+
+const transactionStatus = ['settlement', 'pending', 'expire', 'cancel', 'deny'];
 
 const orderSchema = new mongoose.Schema<OrderDocument>({
-    user_id: {
+    payment_type: { type: String, required: true },
+    transaction_details: {
+        gross_amount: { type: Number, required: true },
+        orderId: { type: String, required: true },
+    },
+    customer_details: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',     // Ref to 'User' model
+        ref: 'User',
         required: true,
     },
-    invoice: { type: String, unique: true },
-    identifier: { type: String, unique: true },
-    // course: {                                // Ref to 'Course' model
-    //     type: mongoose.Schema.Types.Mixed,   // Must be adjust this schema as needed
-    // },
-    gross_amount: { type: Number, min: 0, unsigned: true },
-    payment_type: { type: String },
-    channel_name: { type: String },
-    virtual_number: { type: String },
-    permata_va_number: { type: String },
-    bill_key: { type: String },
-    biller_code: { type: String },
-    payment_code: { type: String },
-    status: { type: String, default: 'pending' },
-    status_code: { type: String },
-    transaction_time: { type: Date },
-    expiry_time: { type: Date },
-    paid_at: { type: Date },
-    course: { type: Array },
-    actions: { type: Array },
+    item_details: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Purchase',
+        required: true,
+    }],
+    bank_transfer: {
+        bank: { type: String, required: true },
+    },
+    transaction_status: {
+        type: String,
+        enum: transactionStatus,
+        required: true,
+        default: 'pending',
+    },
 }, { timestamps: true });
 
-export const OrderModel = mongoose.model('Order', orderSchema)
+export const OrderModel = mongoose.model('Order', orderSchema);
