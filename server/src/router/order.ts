@@ -1,13 +1,11 @@
 import express from 'express';
-import { invoice, order, cancel, notificationHandler, orderItems, pendingPayment, allPayment } from '../controllers/order';
+import { createOrder, getOrders, getOrderByOrderCode, updateOrderStatus, orderNotification } from '../controllers/order';
 import { isAuthenticated } from "../middlewares/index"
 
 export default (router: express.Router) => {
-    router.post('/v2/ordercreate', isAuthenticated, order)
-    router.post('/v2/ordercancel', isAuthenticated, cancel)
-    router.post('/v2/notification', notificationHandler)
-    router.post('/v2/invoice/:identifier', isAuthenticated, invoice)
-    router.post('/v2/pendingpayment', isAuthenticated, pendingPayment)
-    router.post('/v2/orderitems', orderItems);
-    router.post('/v2/allpayment', allPayment);
+    router.post('/v2/order', isAuthenticated, createOrder);
+    router.get('/v2/order', isAuthenticated, getOrders);
+    router.get('/v2/order/:order_id', isAuthenticated, getOrderByOrderCode);
+    router.put('/v2/order/:order_id', isAuthenticated, updateOrderStatus);
+    router.put('/v2/order/notification', isAuthenticated, orderNotification);
 }

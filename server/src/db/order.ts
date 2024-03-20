@@ -1,46 +1,76 @@
 import mongoose from "mongoose";
 
 export interface OrderDocument extends mongoose.Document {
-    payment_type: string;
-    transaction_details: {
-        gross_amount: number;
-        orderId: string;
-    },
-    customer_details: mongoose.Types.ObjectId;
-    item_details: mongoose.Types.ObjectId[];
-    bank_transfer: {
-        bank: string;
-    },
-    transaction_status: string;
+    _id: mongoose.Schema.Types.ObjectId;
+    order_id: string;
+    total: number;
+    payment_method: string;
+    order_status: string;
+    customer_email: mongoose.Schema.Types.String;
+    snap_token: string;
+    snap_redirect_url: string;
 };
 
-const transactionStatus = ['settlement', 'pending', 'expire', 'cancel', 'deny'];
+export interface OrderItemDocument extends mongoose.Document {
+    _id: mongoose.Schema.Types.ObjectId;
+    order_id: mongoose.Schema.Types.String;
+    product_details: mongoose.Schema.Types.ObjectId;
+};
+
+const orderStatus = ['PENDING_PAYMENT', 'PAID', 'CANCELLED'];
 
 const orderSchema = new mongoose.Schema<OrderDocument>({
-    payment_type: { type: String, required: true },
-    transaction_details: {
-        gross_amount: { type: Number, required: true },
-        orderId: { type: String, required: true },
-    },
-    customer_details: {
+    _id: {
         type: mongoose.Schema.Types.ObjectId,
+        required: true
+    },
+    order_id: {
+        type: String,
+        required: true
+    },
+    total: { 
+        type: Number, 
+        required: true 
+    },
+    payment_method: {
+        type: String,
+    },
+    order_status: { 
+        type: String, 
+        enum: orderStatus, 
+        required: true 
+    },
+    customer_email: {
+        type: mongoose.Schema.Types.String,
         ref: 'User',
         required: true,
     },
-    item_details: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Purchase',
-        required: true,
-    }],
-    bank_transfer: {
-        bank: { type: String, required: true },
-    },
-    transaction_status: {
+    snap_token: {
         type: String,
-        enum: transactionStatus,
         required: true,
-        default: 'pending',
+    },
+    snap_redirect_url: {
+        type: String,
+        required: true,
+    },
+}, { timestamps: true });
+
+const orderItemSchema = new mongoose.Schema<OrderItemDocument>({
+    _id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+    },
+    order_id: {
+        type: mongoose.Schema.Types.String,
+        ref: 'Transaction',
+        required: true,
+    },
+    product_details: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
+        required: true,
     },
 }, { timestamps: true });
 
 export const OrderModel = mongoose.model('Order', orderSchema);
+export const OrderItemModel = mongoose.model('OrderItem', orderItemSchema);
