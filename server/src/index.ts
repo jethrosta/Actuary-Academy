@@ -6,6 +6,7 @@ import compression from "compression";
 import cors from "cors";
 import mongoose from "mongoose";
 import router from "./router";
+import { PORT, DATABASE_URL } from "./helpers/constant";
 
 const app = express();
 
@@ -22,15 +23,11 @@ app.use(bodyParser.json());
 
 const server = http.createServer(app);
 
-server.listen(3000, () => {
-  //sebelumnya 8080
-  console.log("Server running on http://localhost:3000");
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
 
-const MONGO_URL = "mongodb+srv://admin-haydar:Test123@cluster0.85fxdxq.mongodb.net/aa-dev"
-// const MONGO_URL = "mongodb+srv://actuary:academy@actuary-academy.mx5dl7v.mongodb.net/aa-user";
-// const MONGO_URL = "mongodb+srv://tonisyd:0pplMhQIB4hWbvoA@aacluster1.vxyg1tc.mongodb.net/?retryWrites=true&w=majority";
-
+const MONGO_URL = DATABASE_URL;
 mongoose.Promise = Promise;
 mongoose.connect(MONGO_URL);
 

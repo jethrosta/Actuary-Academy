@@ -1,15 +1,14 @@
 import mongoose from "mongoose";
 import { OrderModel, OrderItemModel } from "../db/order";
-import { ProductModel } from "../db/academyPackages";
 import { UserModel } from "../db/users";
 import { PENDING_PAYMENT } from "../helpers/constant";
 
 class orderService {
-    async CreateOrder(grossAmount: number, 
-                            email: string,
-                            orderCode: string,
-                            snap_token: string = null,
-                            snap_redirect_url: string = null) {
+    async CreateOrder(orderId: string,
+                      grossAmount: number, 
+                      email: string,
+                      snap_token: string = null,
+                      snap_redirect_url: string = null) {
         const session = await mongoose.startSession();
         session.startTransaction();
         
@@ -17,11 +16,10 @@ class orderService {
             const user = await UserModel.findOne({ email });
 
             const order = await OrderModel.create([{
-                _id: new mongoose.Types.ObjectId(),
-                order_id: orderCode,
+                _id: orderId,
                 total: grossAmount,
                 order_status: PENDING_PAYMENT,
-                customer_email: user.email,
+                customer_details: user.email,
                 snap_token: null,
                 snap_redirect_url: null,
             },], { session });
@@ -79,9 +77,9 @@ class orderService {
         }
     }
 
-    async GetOrderByOrderCode(orderCode: string) {
+    async GetOrderById(orderId: string) {
         try {
-            const order = await OrderModel.findOne({ order_id: orderCode }).populate('customer_email');
+            const order = await OrderModel.findById(orderId).populate('customer_details');
 
             return order;
         } catch (err) {
@@ -90,9 +88,22 @@ class orderService {
         }
     }
 
-    async GetOrderItemById(orderItemId: string) {
+    async GetUserIdByOrderId(orderId: string) {
         try {
-            const orderItem = (await OrderItemModel.findById({ _id: orderItemId })).populate('product_details');
+            const order = await OrderModel.findById(orderId).populate('customer_details');
+
+            return order.customer_details;
+        } catch (err) {
+            console.error("Error at service/order: ", err);
+            throw err;
+        }
+    }
+
+    async GetOrderItemByOrderId(orderId: string) {
+        try {
+            const orderItem = await OrderItemModel.findOne({ 
+                order_id: orderId
+            })
 
             return orderItem;
         } catch (err) {
@@ -101,9 +112,9 @@ class orderService {
         }
     }
 
-    async UpdateOrderStatus(orderCode: string, orderStatus: string, paymentMethod: string = null) {
+    async UpdateOrderStatus(orderId: string, orderStatus: string, paymentMethod: string = null) {
         try {
-            const order = await OrderModel.findOneAndUpdate({ order_id: orderCode }, { order_status: orderStatus, payment_method: paymentMethod }, { new: true });
+            const order = await OrderModel.findOneAndUpdate({ order_id: orderId }, { order_status: orderStatus, payment_method: paymentMethod }, { new: true });
 
             if(!order) return "Order not found."
 

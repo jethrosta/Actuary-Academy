@@ -8,7 +8,7 @@ export const productSchemaValidate = Joi.object({
     quantity: Joi.number(),
 })
 
-interface ProductDocument extends mongoose.Document {
+export interface ProductDocument extends mongoose.Document {
     _id: mongoose.Schema.Types.ObjectId;
     name: string;
     originalPrice: number;
@@ -16,15 +16,23 @@ interface ProductDocument extends mongoose.Document {
     quantity: number;
 }
 
+const academyPackages = ['Paket Pembahasan Soal 6 Bulan', 'Paket Lengkap 6 Bulan',
+                         'Paket Pembahasan Soal Lifetime', 'Paket Lengkap Lifetime'];
+
 const ProductSchema = new mongoose.Schema<ProductDocument>({
     _id: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
-    name: { type: String, required: true },
+    name: { 
+        type: String, 
+        required: true,
+        enum: academyPackages,
+        unique: true
+    },
     originalPrice: { type: Number },
     price: { type: Number, required: true },
-    quantity: { type: Number, required: true, default: 1 },    // requirements from midtrans
-}, { timestamps: true })
+    quantity: { type: Number, required: true, default: 1 }    // requirements from midtrans
+}, { timestamps: true });
 
 export const ProductModel = mongoose.model("Product", ProductSchema)

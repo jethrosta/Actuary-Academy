@@ -14,7 +14,6 @@ class productService {
             await product.save();
         } catch (err) {
             console.error("Error at services/products: ", err);
-            process.exit(1);
         }
     }
 
@@ -25,7 +24,6 @@ class productService {
             return products;
         } catch (err) {
             console.error("Error at services/products: ", err);
-            process.exit(1);
         }
     }
 
@@ -38,7 +36,22 @@ class productService {
             return product;
         } catch (err) {
             console.error("Error at services/products: ", err);
-            process.exit(1);
+        }
+    }
+
+    async GetProductByName(productName: string[]) {
+        try {
+            const product = await ProductModel.find({ 
+                name: { 
+                    $in: productName
+                } 
+            });
+
+            if (!product) return "Product not found | Error at products/GetProductByName";
+
+            return product;
+        } catch (err) {
+            console.error("Error at services/products: ", err);
         }
     }
 
@@ -51,7 +64,6 @@ class productService {
             return product;
         } catch (err) {
             console.error("Error at services/products: ", err);
-            process.exit(1);
         }
     }
 
@@ -64,7 +76,6 @@ class productService {
             return "Product deleted succesfully";
         } catch (err) {
             console.error("Error at services/products: ", err);
-            process.exit(1);
         } 
     }
 }

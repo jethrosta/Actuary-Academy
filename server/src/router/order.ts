@@ -1,11 +1,11 @@
 import express from 'express';
-import { createOrder, getOrders, getOrderByOrderCode, updateOrderStatus, orderNotification } from '../controllers/order';
+import { createOrder, getOrders, getOrderById, updateOrderStatus, orderNotification } from '../controllers/order';
 import { isAuthenticated } from "../middlewares/index"
 
 export default (router: express.Router) => {
     router.post('/v2/order', isAuthenticated, createOrder);
     router.get('/v2/order', isAuthenticated, getOrders);
-    router.get('/v2/order/:order_id', isAuthenticated, getOrderByOrderCode);
+    router.get('/v2/order/:order_id', isAuthenticated, getOrderById);
     router.put('/v2/order/:order_id', isAuthenticated, updateOrderStatus);
-    router.put('/v2/order/notification', isAuthenticated, orderNotification);
+    router.post('/v2/order/notification', isAuthenticated, orderNotification);
 }

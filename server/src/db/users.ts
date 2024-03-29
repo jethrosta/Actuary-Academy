@@ -1,5 +1,3 @@
-// TODO: Refactor user models
-
 import mongoose from "mongoose";
 import Joi from "joi";
 
@@ -33,18 +31,18 @@ export const userSchemaValidate = Joi.object({
 export interface UserDocument extends mongoose.Document {
   	name: string;
   	email: string;
-  	phoneNumber: string;
+  	phone_number: string;
   	city: string;
   	province: string;
   	gender: string;
-  	dateOfBirth: string;
+  	date_of_birth: string;
   	authentication: AuthenticationDocument;
-  	tutor_packages: string;
-  	academy_packages: string;
-  	endDate: Date;
+  	academy_plan: string;
+	is_subscribed: boolean;
+  	end_date: Date;
 };
 
-const tutorPackages = ['mahasiswa', 'umum', 'none'];
+// const tutorPackages = ['mahasiswa', 'umum', 'none'];
 const academyPackages = ['Paket Pembahasan Soal 6 Bulan',
                          'Paket Pembahasan Soal Lifetime',
                          'Paket Lengkap 6 Bulan',
@@ -62,27 +60,29 @@ const UserSchema = new mongoose.Schema<UserDocument>({
 		required: true,
 		unique: true 
 	},
-  	phoneNumber: { type: String },
+	authentication: { 
+		type: AuthenticationSchema, 
+	  	required: true 
+  	},
+  	is_subscribed: { 
+		type: Boolean, 
+	  	default: false 
+	},
+  	academy_plan: {
+		type: String,
+	  	required: true,
+	  	enum: academyPackages,
+	  	default: 'none',
+  	},
+	end_date: { 
+		type: Date, 
+	  	default: null,
+  	},
+  	phone_number: { type: String },
   	city: { type: String },
   	province: { type: String },
   	gender: { type: String },
-  	dateOfBirth: { type: String },
-  	authentication: { 
-		type: AuthenticationSchema, 
-		required: true },
-  	tutor_packages: { 
-		type: String,
-		enum: tutorPackages,
-		default: 'none',
-	},
-  	academy_packages: {
-    	type: String,
-    	enum: academyPackages,
-    	default: 'none',
-  	},
-  	endDate: { 
-		type: Date, 
-		default: null }
+  	date_of_birth: { type: String },
 });
 
 export const UserModel = mongoose.model("User", UserSchema);
