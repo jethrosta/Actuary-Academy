@@ -9,7 +9,7 @@ const tutorsSplideOptions = {
     pagination: false,
     rewind: true,
     classes: {
-        arrow : 'splide__arrow !bg-transparent [&_svg]:!w-7 [&_svg]:!h-7 [&_svg]:!fill-main_blue'
+        arrow: 'splide__arrow !bg-white !p-3 !w-12 !h-12 [&_svg]:!w-10 [&_svg]:!h-10 [&_svg]:!fill-main_blue'
     }
 }
 
@@ -17,11 +17,11 @@ const tutorsSplideOptions = {
 <template>
     <main class="bg-private-tutor bg-cover font-inter">
         <div class="flex flex-col py-20 px-28">
-            <div class="flex">
-                <div class="ml-12 w-[36rem] shrink-0">
-                    <img src="/src/assets/private-tutor/model.png">
+            <div class="flex flex-col md:flex-row">
+                <div class="ml-12 md:w-[36%] shrink-0 self-center md:self-end mb-4 md:mb-0">
+                    <img class="model-mask" src="/src/assets/private-tutor/model.png">
                 </div>
-                <h2 class="grow mt-6 text-sec_blue font-bold text-[3.25rem] text-right leading-[1.5]">
+                <h2 class="mt-6 mb-10 text-sec_blue font-bold text-[2rem] md:text-[2rem] lg:text-[3rem] text-center md:text-right leading-[1.5]">
                     Elevate your educational performance with expert private tutors at Actuary Academy!
                 </h2>
             </div>
@@ -38,7 +38,7 @@ const tutorsSplideOptions = {
                     <span class="font-bold">Tutor Privat Perkuliahan</span> menyediakan pembelajaran privat secara sinkronus dengan tutor berkompeten untuk berbagai mata kuliah yang berhubungan dengan keilmuan pada studi ilmu aktuaria, statistika, dan matematika.
                 </div>
             </div>
-            <div class="text-white text-center mt-12">
+            <div class="text-main_blue xl:text-white text-center mt-12">
                 <div class="text-3xl font-bold mb-4">Fasilitas</div>
                 <ul class="text-xl list-disc list-inside space-y-1">
                     <li>Zoom meeting dengan durasi 2 jam</li>
@@ -49,27 +49,29 @@ const tutorsSplideOptions = {
             <div class="bg-sec_blue text-white text-center text-2xl font-bold px-6 py-3 mt-14 rounded-xl">
                 Meet Our Tutors!
             </div>
-            <div class="mt-2">
+            <div class="mt-4">
                 <Splide :options="tutorsSplideOptions">
                     <SplideSlide v-for="tutor in tutors">
-                        <div class="relative py-28">
-                            <div class="absolute left-28 top-10 tutor-img-bg">
-                                <img class="w-[30rem]" :src="tutor.img"/>
+                        <div class="flex flex-col md:flex-row items-center justify-center relative py-16">
+                            <div class="self-center relative">
+                                <img class="w-[16rem] md:w-[21rem]" :src="tutor.img"/>
                             </div>
-                            <div class="text-main_blue ml-[50%] mr-20">
-                                <h1 class="text-[48px] font-bold">{{ tutor.name }}</h1>
-                                <h2 class="text-[40px] font-bold">{{ tutor.classes }}</h2>
-                            </div>
-                            <div class="text-sec_blue ml-[50%] mt-12 mr-20 flex flex-col items-start">
-                                <ul class="list-disc list-inside text-lg">
-                                    <li v-for="achievement in tutor.achievs">{{ achievement }}</li>
-                                </ul>
+                            <div class="ml-16 mt-14">
+                                <div class="text-main_blue mr-20">
+                                    <h1 class="text-[36px] md:text-[48px] font-bold">{{ tutor.name }}</h1>
+                                    <h2 class="text-[24px] md:text-[40px] font-bold">{{ tutor.classes }}</h2>
+                                </div>
+                                <div class="text-sec_blue mt-8 mr-20 flex flex-col items-start">
+                                    <ul class="list-disc list-inside text-lg">
+                                        <li v-for="achievement in tutor.achievs">{{ achievement }}</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </SplideSlide>
                 </Splide>
             </div>
-            <div class="flex space-x-9 mt-16">
+            <div class="flex space-y-6 md:space-y-0 md:space-x-9 mt-12 flex-col md:flex-row">
                 <div v-for="packet in privateTutorPackages" class="flex-1 flex flex-col">
                     <div class="bg-sec_blue rounded-xl text-white p-10 grow">
                         <div class="text-3xl font-semibold mb-3 text-center">{{ packet.name }}</div>
@@ -101,20 +103,18 @@ const tutorsSplideOptions = {
 </template>
 <style>
     .bg-private-tutor {
-        background-image:
-            url('data:image/svg+xml,<svg width="1440" height="670" viewBox="0 0 1440 670" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(%23clip0_45_627)"><rect width="1440" height="670" fill="white"/><path opacity="0.2" d="M316 819.804C316 819.804 795.69 579.495 1036 819.804C1276.31 1060.11 1756 819.804 1756 819.804V1986.1H316V819.804Z" fill="%230066CC"/><path opacity="0.2" d="M316 297.804C316 297.804 795.69 57.4946 1036 297.804C1276.31 538.114 1756 297.804 1756 297.804V1464.1H316V297.804Z" fill="%230066CC"/><path opacity="0.5" d="M2791 870.944C2791 870.944 2092.23 445.82 1610 870.944C1127.77 1296.07 429 870.944 429 870.944V2784H2791V870.944Z" fill="%230066CC"/><path opacity="0.5" d="M2791 348.944C2791 348.944 2092.23 -76.18 1610 348.944C1127.77 774.068 429 348.944 429 348.944V2262H2791V348.944Z" fill="%230066CC"/><path d="M-402 961.944C-402 961.944 296.775 536.82 779 961.944C1261.23 1387.07 1960 961.944 1960 961.944V5020.5H-402V961.944Z" fill="%230066CC"/><path d="M-402 439.944C-402 439.944 296.775 14.82 779 439.944C1261.23 865.068 1960 439.944 1960 439.944V4498.5H-402V439.944Z" fill="%230066CC"/></g><defs><clipPath id="clip0_45_627"><rect width="1440" height="670" fill="white"/></clipPath></defs></svg>'),
-            url('data:image/svg+xml,<svg width="1440" height="710" viewBox="0 0 1440 710" fill="none" style="background-color:%230066CC" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(%23clip0_46_881)"><path d="M2203.08 350.957C2203.08 350.957 1466.15 -15.6963 1022.08 350.957C578 717.61 -158.925 350.957 -158.925 350.957V2942.51H2203.08V350.957Z" fill="white"/><path opacity="0.2" d="M1600.12 437.028C1600.12 437.028 950 708.663 443.934 196.225C-62.1327 -316.214 -575.667 657.166 -575.667 657.166L-575.667 2642.67L1071.71 2974.14L1600.12 437.028Z" fill="white"/><path opacity="0.5" d="M-589.515 356.205C-589.515 356.205 123.706 72.2383 588.809 435.663C1053.91 799.087 1812.06 553.6 1812.06 553.6L1592.77 3072.67L-763.875 2913.75L-589.515 356.205Z" fill="white"/></g><defs><clipPath id="clip0_46_881"><rect width="1440" height="710" fill="white"/></clipPath></defs></svg>');
+        background-image: url('data:image/svg+xml,<svg width="1440" height="1200" viewBox="0 0 1440 1200" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(%23clip0_16_1335)"><rect width="1440" height="1200" fill="white"/><path opacity="0.2" d="M316 179.804C316 179.804 795.69 -60.5054 1036 179.804C1276.31 420.114 1756 179.804 1756 179.804V1346.1H316V179.804Z" fill="%230066CC"/><path opacity="0.5" d="M2791 230.944C2791 230.944 2092.23 -194.18 1610 230.944C1127.77 656.068 429 230.944 429 230.944V2144H2791V230.944Z" fill="%230066CC"/><path d="M-402 321.944C-402 321.944 296.775 -103.18 779 321.944C1261.23 747.068 1960 321.944 1960 321.944V4380.5H-402V321.944Z" fill="%230066CC"/><path d="M2198.08 933.957C2198.08 933.957 1461.15 567.304 1017.08 933.957C573.003 1300.61 -163.922 933.957 -163.922 933.957V3525.51H2198.08V933.957Z" fill="white"/><path opacity="0.2" d="M1595.12 1020.03C1595.12 1020.03 944.999 1291.66 438.933 779.225C-67.1337 266.786 -580.668 1240.17 -580.668 1240.17L-580.668 3225.67L1066.71 3557.14L1595.12 1020.03Z" fill="white"/><path opacity="0.5" d="M-594.516 939.205C-594.516 939.205 118.705 655.238 583.808 1018.66C1048.91 1382.09 1807.06 1136.6 1807.06 1136.6L1587.77 3655.67L-768.875 3496.75L-594.516 939.205Z" fill="white"/></g><defs><clipPath id="clip0_16_1335"><rect width="1440" height="1200" fill="white"/></clipPath></defs></svg>');
         background-color: white;
         background-size: 100% auto;
-        background-position:
-            top 0px left 0px,
-            top 700px left 0px;
+        background-position: top 0px left 0px;
         background-repeat: no-repeat;
     }
-    .tutor-img-bg {
-        background-image: url('data:image/svg+xml,<svg width="413" height="543" viewBox="0 0 413 543" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 206.5C0 92.4532 92.4532 0 206.5 0C320.547 0 413 92.4532 413 206.5V520.172C413 532.78 402.78 543 390.172 543H22.8279C10.2204 543 0 532.78 0 520.172V206.5Z" fill="%230066CC"/></svg>');
-        background-size: contain;
-        background-position: bottom center;
-        background-repeat: no-repeat;
+    .model-mask {
+        mask: linear-gradient(to bottom, rgba(0,0,0,1) 0, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 95%, rgba(0,0,0,0) 0) 100% 50% / 100% 100% repeat-x;
+    }
+    @media (min-width: 768px) {
+        .model-mask {
+           mask: initial;
+        }   
     }
 </style>

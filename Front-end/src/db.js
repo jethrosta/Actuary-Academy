@@ -251,7 +251,7 @@ export const academyPackages = [
     {
         type: 'Paket Pembahasan Soal',
         period: '6 Bulan',
-        originalPrice: 'IDR599.000',
+        originalPrice: 'IDR500.000',
         price: 'IDR299.000',
         facilities: [
             'Diskusi grup, Q & A',
