@@ -1,20 +1,20 @@
 import express from 'express';
 
-import { getUserByEmail, createUser } from '../db/users';
-import { authentication, createSalt, createSessionToken, createJWT } from '../helpers';
+import { getUserByEmail, createUser } from '../services/users';
+import { authentication, createSalt, createSessionToken, createJWT } from '../helpers/index';
 
 export const register = async (req: express.Request, res: express.Response) => {
   try {
-    const { email, password, username } = req.body;
+    const { email, password, name } = req.body;
 
-    if (!email || !password || !username) {
+    if (!email || !password || !name) {
       return res.sendStatus(400);
     }
 
     const existingUser = await getUserByEmail(email);
 
     if (existingUser) {
-      return res.sendStatus(400);
+      return res.status(400).json({ notification: "Email already registered" });
     }
 
 
@@ -24,7 +24,7 @@ export const register = async (req: express.Request, res: express.Response) => {
 
     const user = await createUser({
       email,
-      username,
+      name,
       authentication: {
         salt: salt,
         password: authentication(salt, password),
@@ -126,5 +126,19 @@ export const login = async (req: express.Request, res: express.Response) => {
   } catch (err) {
     console.log(err);
     return res.sendStatus(400);
+  }
+};
+
+export const logout = (req: express.Request, res: express.Response) => {
+  try {
+    // Clear cookies
+    res.clearCookie('A@ACADEMY-JWT', { domain: 'localhost', path: '/' });
+    res.clearCookie('A@ACADEMY-SESSION', { domain: 'localhost', path: '/' });
+
+    // Send a response indicating successful logout
+    return res.status(200).json({ message: 'Logout successful' }).end();
+  } catch (err) {
+    console.log(err);
+    return res.sendStatus(500);
   }
 };

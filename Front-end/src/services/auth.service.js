@@ -25,10 +25,18 @@ class AuthService {
 
   register(user) {
     return axios.post(API_URL + 'register', {
-      username: user.username,
+      name: user.name,
       email: user.email,
       password: user.password
-    }, {withCredentials: true});
+    }, {withCredentials: true})
+    .then(response => {
+      console.log(response);
+      if (response.status == 200) {
+        console.log('Register successful');
+        localStorage.setItem('user', JSON.stringify(response.data))
+      }
+      return response.data;
+    });
   }
 }
 
